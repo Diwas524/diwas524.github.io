@@ -117,17 +117,24 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .services-bg{background:var(--forest);position:relative;overflow:hidden}
 .services-bg::before{content:'';position:absolute;top:-180px;right:-180px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,.12) 0%,transparent 70%);pointer-events:none}
 .services-bg::after{content:'';position:absolute;bottom:-160px;left:-160px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(200,230,201,.08) 0%,transparent 70%);pointer-events:none}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;position:relative}
-.svc{background:var(--mint-pale);padding:36px 28px 32px;border-radius:18px;position:relative;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s;overflow:hidden}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;position:relative;align-items:start}
+.svc{background:var(--mint-pale);border-radius:18px;position:relative;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s;overflow:hidden}
 .svc:nth-child(3n+2){background:var(--white)}
 .svc:nth-child(3n+3){background:var(--gold-pale)}
-.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--moss));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--moss));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1);z-index:2}
 .svc:hover{transform:translateY(-7px);box-shadow:0 24px 48px rgba(0,0,0,.32)}
 .svc:hover::before{transform:scaleX(1)}
 .svc-num{font-family:var(--fd);font-style:italic;font-size:.85rem;font-weight:700;color:var(--moss);opacity:.55;letter-spacing:.06em;margin-bottom:18px}
-.svc-icon{width:54px;height:54px;background:var(--forest);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 10px 22px rgba(30,58,47,.28);transition:transform .3s;font-size:24px;line-height:1}
+.svc-icon{width:44px;height:44px;background:var(--forest);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(30,58,47,.28);transition:transform .3s;font-size:20px;line-height:1;flex-shrink:0}
 .svc:hover .svc-icon{transform:scale(1.08) rotate(-4deg)}
-.svc h3{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.3}
+.svc h3{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.3;margin:0}
+.svc-toggle{width:100%;display:flex;align-items:center;gap:14px;padding:20px 24px;background:none;border:none;cursor:pointer;text-align:left;font:inherit}
+.svc-toggle-text{flex:1;min-width:0}
+.svc-chevron{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s cubic-bezier(.4,0,.2,1),background .2s,border-color .2s;font-size:13px;color:var(--moss)}
+.svc.open .svc-chevron{transform:rotate(45deg);background:var(--forest);border-color:var(--forest);color:#fff}
+.svc-panel{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.svc-panel p{padding:0 24px 24px 82px;font-size:.88rem}
+.svc.open .svc-panel{max-height:200px}
 .svc p{font-size:.85rem;color:var(--sub);line-height:1.75}
 
 /* ── GALLERY ── */
@@ -353,7 +360,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
 
 /* ── FAQ ── */
 .faq-bg{background:var(--blush)}
-.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px;align-items:start}
 .faq-item{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:border-color .2s}
 .faq-item.open{border-color:var(--moss)}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink);user-select:none}
@@ -521,88 +528,88 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
       <h2 class="h2 h2-wh">Care Tailored to Every <i style="color:var(--mint)">Individual</i></h2>
       <p class="lead lead-wh" style="margin:0 auto">Each resident receives a plan built around their exact needs, rhythms, and preferences. Care that fits — not care that's convenient.</p>
     </div>
-    ```html
+    
 <div class="svc-grid rv">
 
   <div class="svc">
-    <div class="svc-num">01</div>
-    <div class="svc-icon">👩‍⚕️</div>
-    <div class="svc-body">
-      <h3>24/7 Certified Caregivers</h3>
-      <p>Dedicated, certified caregivers are available around the clock, providing attentive support, safety monitoring, and compassionate care day and night.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">👩‍⚕️</div>
+      <div class="svc-toggle-text"><h3>24/7 Certified Caregivers</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Dedicated, certified caregivers are available around the clock, providing attentive support, safety monitoring, and compassionate care day and night.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">02</div>
-    <div class="svc-icon">📋</div>
-    <div class="svc-body">
-      <h3>Individualized Care Plans</h3>
-      <p>Every resident receives a personalized care plan tailored to their medical needs, daily routines, preferences, and goals.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">📋</div>
+      <div class="svc-toggle-text"><h3>Individualized Care Plans</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Every resident receives a personalized care plan tailored to their medical needs, daily routines, preferences, and goals.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">03</div>
-    <div class="svc-icon">🩷</div>
-    <div class="svc-body">
-      <h3>Assisted Daily Living</h3>
-      <p>Compassionate assistance with bathing, dressing, grooming, toileting, transfers, and mobility while promoting independence and dignity.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🩷</div>
+      <div class="svc-toggle-text"><h3>Assisted Daily Living</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Compassionate assistance with bathing, dressing, grooming, toileting, transfers, and mobility while promoting independence and dignity.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">04</div>
-    <div class="svc-icon">🧠</div>
-    <div class="svc-body">
-      <h3>Memory Care</h3>
-      <p>Specialized support for residents living with Alzheimer's disease and other forms of dementia in a calm, familiar, and secure environment.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🧠</div>
+      <div class="svc-toggle-text"><h3>Memory Care</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Specialized support for residents living with Alzheimer's disease and other forms of dementia in a calm, familiar, and secure environment.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">05</div>
-    <div class="svc-icon">🩹</div>
-    <div class="svc-body">
-      <h3>Wound Care</h3>
-      <p>Professional wound monitoring and care focused on healing, infection prevention, comfort, and physician-directed treatment plans.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🩹</div>
+      <div class="svc-toggle-text"><h3>Wound Care</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Professional wound monitoring and care focused on healing, infection prevention, comfort, and physician-directed treatment plans.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">06</div>
-    <div class="svc-icon">⚕️</div>
-    <div class="svc-body">
-      <h3>Catheter Care</h3>
-      <p>Respectful catheter management and monitoring to support hygiene, comfort, and overall well-being.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">⚕️</div>
+      <div class="svc-toggle-text"><h3>Catheter Care</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Respectful catheter management and monitoring to support hygiene, comfort, and overall well-being.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">07</div>
-    <div class="svc-icon">🍲</div>
-    <div class="svc-body">
-      <h3>Home-Cooked Meals</h3>
-      <p>Freshly prepared meals and snacks served daily, with accommodations for dietary restrictions and personal preferences.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🍲</div>
+      <div class="svc-toggle-text"><h3>Home-Cooked Meals</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Freshly prepared meals and snacks served daily, with accommodations for dietary restrictions and personal preferences.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">08</div>
-    <div class="svc-icon">🎨</div>
-    <div class="svc-body">
-      <h3>Activities & Enrichment</h3>
-      <p>Meaningful daily activities including music, crafts, games, gardening, exercise, and social engagement.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🎨</div>
+      <div class="svc-toggle-text"><h3>Activities & Enrichment</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Meaningful daily activities including music, crafts, games, gardening, exercise, and social engagement.</p></div>
   </div>
 
   <div class="svc">
-    <div class="svc-num">09</div>
-    <div class="svc-icon">🕊️</div>
-    <div class="svc-body">
-      <h3>Respite & Hospice Care</h3>
-      <p>Short-term respite stays and compassionate hospice support focused on comfort, dignity, and peace of mind for families.</p>
-    </div>
+    <button class="svc-toggle" onclick="toggleSvc(this)">
+      <div class="svc-icon">🕊️</div>
+      <div class="svc-toggle-text"><h3>Respite & Hospice Care</h3></div>
+      <div class="svc-chevron">+</div>
+    </button>
+    <div class="svc-panel"><p>Short-term respite stays and compassionate hospice support focused on comfort, dignity, and peace of mind for families.</p></div>
   </div>
 
 </div>
@@ -1090,6 +1097,19 @@ function toggleFaq(el){
 const ham=document.getElementById('ham'),ov=document.getElementById('ov'),dr=document.getElementById('drawer');
 ham.addEventListener('click',()=>{ov.classList.add('open');dr.classList.add('open');document.body.style.overflow='hidden'});
 function closeMob(){ov.classList.remove('open');dr.classList.remove('open');document.body.style.overflow=''}
+
+function toggleSvc(btn){
+  var card=btn.closest('.svc');
+  var wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.svc.open').forEach(function(c){
+    c.classList.remove('open');
+    c.querySelector('.svc-chevron').textContent='+';
+  });
+  if(!wasOpen){
+    card.classList.add('open');
+    card.querySelector('.svc-chevron').textContent='+';
+  }
+}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
