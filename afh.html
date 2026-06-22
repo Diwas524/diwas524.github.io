@@ -142,32 +142,55 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .gtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
 .gtab{background:#fff;border:1.5px solid var(--border);border-radius:100px;padding:8px 20px;font-family:var(--fb);font-size:.8rem;font-weight:600;color:var(--sub);cursor:pointer;transition:all .2s;letter-spacing:.02em}
 .gtab:hover,.gtab.active{background:var(--forest);border-color:var(--forest);color:#fff}
-.gal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:220px 220px;gap:12px}
+
+/* ── DESKTOP GALLERY: 2 rows × 4 columns ── */
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:14px}
 .gi{border-radius:14px;overflow:hidden;position:relative;cursor:pointer;background:#ddd}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .gi:hover img{transform:scale(1.07)}
-.gi .gl{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,27,20,.8) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.gi .gl{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,27,20,.85) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
 .gi:hover .gl{opacity:1}
 .gl-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:3px}
 .gl-sub{font-size:.72rem;color:rgba(255,255,255,.65)}
-/* grid placement */
-.gi:nth-child(1){grid-column:span 5;grid-row:span 2}
-.gi:nth-child(2){grid-column:span 4}
-.gi:nth-child(3){grid-column:span 3}
-.gi:nth-child(4){grid-column:span 3}
-.gi:nth-child(5){grid-column:span 4}
-.gi:nth-child(6){grid-column:span 5}
-.gi:nth-child(7){display:none}
-.gi:nth-child(8){display:none}
+
+/* ── MOBILE SLIDER ── */
+.gal-slider-wrap{display:none;position:relative;overflow:hidden;border-radius:18px;touch-action:pan-y}
+.gal-slider-track{display:flex;transition:transform .42s cubic-bezier(.4,0,.2,1);will-change:transform}
+.gal-slide{flex:0 0 100%;position:relative;height:320px;cursor:pointer;overflow:hidden;border-radius:18px}
+.gal-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gal-slide .gl{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,27,20,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.gal-slide .gl-title{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:4px}
+.gal-slide .gl-sub{font-size:.75rem;color:rgba(255,255,255,.7)}
+/* slide nav arrows */
+.gal-arr{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.35);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:background .2s}
+.gal-arr:hover{background:rgba(255,255,255,.35)}
+.gal-arr-prev{left:12px}
+.gal-arr-next{right:12px}
+/* dots */
+.gal-dots{display:flex;gap:7px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.gal-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.gal-dot.active{background:var(--forest);transform:scale(1.35)}
+/* slide counter badge */
+.gal-counter{position:absolute;top:14px;right:14px;background:rgba(17,27,20,.6);color:#fff;font-size:.7rem;font-weight:600;padding:4px 10px;border-radius:100px;letter-spacing:.04em;z-index:5}
 
 /* LIGHTBOX */
-.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center}
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:999;align-items:center;justify-content:center;flex-direction:column;padding:24px}
 .lb.open{display:flex}
-.lb-box{position:relative;max-width:90vw;text-align:center}
-.lb-box img{max-height:82vh;max-width:90vw;border-radius:12px;object-fit:contain;display:block}
-.lb-cap{color:rgba(255,255,255,.75);font-size:.875rem;margin-top:12px}
-.lb-x{position:absolute;top:-44px;right:0;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.1rem;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.lb-x:hover{background:rgba(255,255,255,.25)}
+.lb-box{position:relative;max-width:860px;width:100%;text-align:center}
+.lb-box img{max-height:75vh;max-width:100%;border-radius:14px;object-fit:contain;display:block;margin:0 auto}
+.lb-cap{color:rgba(255,255,255,.8);font-size:.95rem;margin-top:14px;font-weight:500}
+.lb-sub{color:rgba(255,255,255,.5);font-size:.78rem;margin-top:4px}
+.lb-x{position:absolute;top:-48px;right:0;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.1rem;cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-x:hover{background:rgba(255,255,255,.28)}
+.lb-detail{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.lb-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:100px}
+
+@media(max-width:700px){
+  .gal-grid{display:none}
+  .gal-slider-wrap{display:block}
+  .gtabs{gap:6px}
+  .gtab{padding:7px 14px;font-size:.75rem}
+}
 
 /* ── TESTIMONIALS ── */
 .testi-split{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;margin-top:52px;border-radius:24px;overflow:hidden;box-shadow:0 24px 64px rgba(30,58,47,.14)}
@@ -632,40 +655,93 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
         <button class="gtab" onclick="filterG('event',this)">Celebrations</button>
         <button class="gtab" onclick="filterG('outdoor',this)">Outdoors</button>
       </div>
+
+      <!-- DESKTOP: 2 rows × 4 columns -->
       <div class="gal-grid" id="gg">
-        <div class="gi" data-cat="care" data-title="Compassionate Daily Care" data-sub="Our caregivers with residents" onclick="lb(this)">
+        <div class="gi" data-cat="care" data-title="Compassionate Daily Care" data-sub="Our caregivers with residents" data-detail="care" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1576765608866-5b51046452be?w=900&q=80" alt="Caregiver holding hands with senior resident" loading="lazy"/>
           <div class="gl"><div class="gl-title">Compassionate Daily Care</div><div class="gl-sub">Our caregivers with residents</div></div>
         </div>
-        <div class="gi" data-cat="activity" data-title="Art & Creativity Sessions" data-sub="Weekly creative activities" onclick="lb(this)">
+        <div class="gi" data-cat="activity" data-title="Art & Creativity Sessions" data-sub="Weekly creative activities" data-detail="activity" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=80" alt="Seniors doing art together" loading="lazy"/>
           <div class="gl"><div class="gl-title">Art & Creativity</div><div class="gl-sub">Weekly creative activities</div></div>
         </div>
-        <div class="gi" data-cat="event" data-title="Birthday Celebrations" data-sub="Every birthday is a party here" onclick="lb(this)">
+        <div class="gi" data-cat="event" data-title="Birthday Celebrations" data-sub="Every birthday is a party here" data-detail="event" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=700&q=80" alt="Birthday celebration" loading="lazy"/>
           <div class="gl"><div class="gl-title">Birthday Celebrations</div><div class="gl-sub">Every birthday is special here</div></div>
         </div>
-        <div class="gi" data-cat="care" data-title="Health & Wellness Checks" data-sub="Licensed daily monitoring" onclick="lb(this)">
+        <div class="gi" data-cat="care" data-title="Health & Wellness Checks" data-sub="Licensed daily monitoring" data-detail="care" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1559839914-17aae19cec71?w=700&q=80" alt="Nurse checking on resident" loading="lazy"/>
           <div class="gl"><div class="gl-title">Health Monitoring</div><div class="gl-sub">Licensed daily checks</div></div>
         </div>
-        <div class="gi" data-cat="activity" data-title="Music & Social Afternoons" data-sub="Live music and group gatherings" onclick="lb(this)">
+        <div class="gi" data-cat="activity" data-title="Music & Social Afternoons" data-sub="Live music and group gatherings" data-detail="activity" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Social afternoon gathering" loading="lazy"/>
           <div class="gl"><div class="gl-title">Music & Social Time</div><div class="gl-sub">Group gatherings & live music</div></div>
         </div>
-        <div class="gi" data-cat="outdoor" data-title="Garden Mornings" data-sub="Daily outdoor time in our garden" onclick="lb(this)">
+        <div class="gi" data-cat="outdoor" data-title="Garden Mornings" data-sub="Daily outdoor time in our garden" data-detail="outdoor" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&q=80" alt="Garden morning walk" loading="lazy"/>
           <div class="gl"><div class="gl-title">Garden Mornings</div><div class="gl-sub">Daily outdoor time & fresh air</div></div>
         </div>
-        <div class="gi" data-cat="event" data-title="Holiday Festivities" data-sub="Decorating, feasts & family visits" onclick="lb(this)" style="display:none">
+        <div class="gi" data-cat="event" data-title="Holiday Festivities" data-sub="Decorating, feasts & family visits" data-detail="event" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1543637005-4d639a4e16de?w=700&q=80" alt="Holiday celebration" loading="lazy"/>
           <div class="gl"><div class="gl-title">Holiday Festivities</div><div class="gl-sub">Feasts, decorating & family</div></div>
         </div>
-        <div class="gi" data-cat="outdoor" data-title="Morning Walks" data-sub="Guided walks around the neighborhood" onclick="lb(this)" style="display:none">
+        <div class="gi" data-cat="outdoor" data-title="Morning Walks" data-sub="Guided walks around the neighborhood" data-detail="outdoor" onclick="lb(this)">
           <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Senior outdoor walk" loading="lazy"/>
           <div class="gl"><div class="gl-title">Morning Walks</div><div class="gl-sub">Neighborhood strolls daily</div></div>
         </div>
       </div>
+
+      <!-- MOBILE: full-width slider with 10 slides -->
+      <div class="gal-slider-wrap" id="galSlider">
+        <div class="gal-slider-track" id="galTrack">
+          <div class="gal-slide" data-title="Compassionate Daily Care" data-sub="Our caregivers with residents" data-cat="care" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1576765608866-5b51046452be?w=800&q=80" alt="Caregiver holding hands with senior resident" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Compassionate Daily Care</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Art & Creativity Sessions" data-sub="Weekly creative activities" data-cat="activity" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=80" alt="Seniors doing art together" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Art & Creativity</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Birthday Celebrations" data-sub="Every birthday is a party here" data-cat="event" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=700&q=80" alt="Birthday celebration" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Birthday Celebrations</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Health & Wellness Checks" data-sub="Licensed daily monitoring" data-cat="care" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1559839914-17aae19cec71?w=700&q=80" alt="Nurse checking on resident" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Health Monitoring</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Music & Social Afternoons" data-sub="Live music and group gatherings" data-cat="activity" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Social afternoon gathering" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Music & Social Time</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Garden Mornings" data-sub="Daily outdoor time in our garden" data-cat="outdoor" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&q=80" alt="Garden morning walk" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Garden Mornings</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Holiday Festivities" data-sub="Decorating, feasts & family visits" data-cat="event" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1543637005-4d639a4e16de?w=700&q=80" alt="Holiday celebration" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Holiday Festivities</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Morning Walks" data-sub="Guided walks around the neighborhood" data-cat="outdoor" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Senior outdoor walk" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Morning Walks</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Peaceful Home Environment" data-sub="Our warm, welcoming home in Bonney Lake" data-cat="care" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Peaceful home interior" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Peaceful Home Environment</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+          <div class="gal-slide" data-title="Family Visits & Connection" data-sub="Families are always welcome" data-cat="event" onclick="lbSlide(this)">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80" alt="Family visiting" loading="lazy"/>
+            <div class="gl"><div class="gl-title">Family Visits & Connection</div><div class="gl-sub">Tap to learn more</div></div>
+          </div>
+        </div>
+        <button class="gal-arr gal-arr-prev" id="galPrev" aria-label="Previous slide">‹</button>
+        <button class="gal-arr gal-arr-next" id="galNext" aria-label="Next slide">›</button>
+        <div class="gal-counter" id="galCounter">1 / 10</div>
+      </div>
+      <div class="gal-dots" id="galDots" style="display:none"></div>
+
     </div>
   </div>
 </section>
@@ -676,6 +752,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
     <button class="lb-x" onclick="closeLb()">✕</button>
     <img id="lbimg" src="" alt=""/>
     <div class="lb-cap" id="lbcap"></div>
+    <div class="lb-sub" id="lbsub"></div>
+    <div class="lb-detail" id="lbdetail"></div>
   </div>
 </div>
 
@@ -909,7 +987,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
               {id:'ln', err:'err-ln'},
               {id:'ph', err:'err-ph'},
               {id:'em', err:'err-em'},
-              {id:'svc', err:'err-svc'},
               {id:'msg', err:'err-msg'}
             ];
 
@@ -1044,7 +1121,7 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.1});
 document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
 
-// Gallery filter — show/hide, no layout changes
+// Gallery filter (desktop)
 const allItems=[...document.querySelectorAll('.gi')];
 function filterG(cat,btn){
   document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('active'));
@@ -1053,18 +1130,114 @@ function filterG(cat,btn){
     const show=cat==='all'||i.dataset.cat===cat;
     i.style.display=show?'':'none';
   });
+  // also filter mobile slider
+  filterSlider(cat);
 }
 
-// Lightbox
-function lb(el){
-  document.getElementById('lbimg').src=el.querySelector('img').src;
-  document.getElementById('lbimg').alt=el.querySelector('img').alt;
-  document.getElementById('lbcap').textContent=el.dataset.title+(el.dataset.sub?' — '+el.dataset.sub:'');
+// Lightbox detail map
+const detailMap={
+  care:{badge:'🩷 Care',desc:'Our dedicated caregivers provide round-the-clock, personalized care in a warm, home-like setting.'},
+  activity:{badge:'🎨 Activity',desc:'Enriching daily activities designed to engage body and mind — from art to music to garden therapy.'},
+  event:{badge:'🎉 Celebration',desc:'Every milestone matters. We celebrate birthdays, holidays, and everyday moments with residents and families.'},
+  outdoor:{badge:'🌿 Outdoors',desc:'Fresh air and nature are part of daily life. Morning walks and garden time support both mood and wellness.'},
+};
+
+function openLightbox(img,title,sub,cat){
+  document.getElementById('lbimg').src=img.src;
+  document.getElementById('lbimg').alt=img.alt;
+  document.getElementById('lbcap').textContent=title;
+  document.getElementById('lbsub').textContent=sub||'';
+  const d=detailMap[cat]||detailMap['care'];
+  document.getElementById('lbdetail').innerHTML=
+    '<span class="lb-badge">'+d.badge+'</span>'+
+    '<span class="lb-badge">✨ Peace Park</span>';
+  // add description below
+  let descEl=document.getElementById('lb-desc');
+  if(!descEl){descEl=document.createElement('p');descEl.id='lb-desc';descEl.style.cssText='color:rgba(255,255,255,.6);font-size:.82rem;margin-top:10px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto';document.querySelector('.lb-box').appendChild(descEl);}
+  descEl.textContent=d.desc;
   document.getElementById('lbox').classList.add('open');
   document.body.style.overflow='hidden';
 }
+
+// Desktop lightbox
+function lb(el){
+  openLightbox(el.querySelector('img'),el.dataset.title,el.dataset.sub,el.dataset.detail||el.dataset.cat);
+}
+
+// Mobile slide lightbox
+function lbSlide(el){
+  openLightbox(el.querySelector('img'),el.dataset.title,el.dataset.sub,el.dataset.cat);
+}
+
 function closeLb(){document.getElementById('lbox').classList.remove('open');document.body.style.overflow=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+// ── MOBILE SLIDER ──
+const track=document.getElementById('galTrack');
+const slides=[...document.querySelectorAll('.gal-slide')];
+const dotsWrap=document.getElementById('galDots');
+const counter=document.getElementById('galCounter');
+let slideIdx=0,startX=0,isDragging=false,slideFilterCat='all';
+
+function buildDots(){
+  dotsWrap.innerHTML='';
+  const visible=slides.filter(s=>s.style.display!=='none');
+  if(visible.length<=1){dotsWrap.style.display='none';return;}
+  dotsWrap.style.display='flex';
+  visible.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='gal-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.onclick=()=>goSlide(i);
+    dotsWrap.appendChild(d);
+  });
+}
+
+function getVisible(){return slides.filter(s=>s.style.display!=='none');}
+
+function goSlide(n){
+  const vis=getVisible();
+  if(!vis.length)return;
+  slideIdx=((n%vis.length)+vis.length)%vis.length;
+  // compute pixel offset: slides are all 100% of wrapper width stacked in flex
+  const w=document.getElementById('galSlider').offsetWidth;
+  // need to find absolute index in track (includes hidden ones)
+  let absIdx=0,count=0;
+  slides.forEach((s,i)=>{if(s.style.display!=='none'){if(count===slideIdx)absIdx=i;count++;}});
+  track.style.transform='translateX(-'+(absIdx*w)+'px)';
+  [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active',i===slideIdx));
+  counter.textContent=(slideIdx+1)+' / '+vis.length;
+}
+
+document.getElementById('galPrev').onclick=()=>goSlide(slideIdx-1);
+document.getElementById('galNext').onclick=()=>goSlide(slideIdx+1);
+
+// touch swipe
+track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;isDragging=true},{passive:true});
+track.addEventListener('touchend',e=>{
+  if(!isDragging)return;isDragging=false;
+  const dx=e.changedTouches[0].clientX-startX;
+  if(Math.abs(dx)>40)goSlide(slideIdx+(dx<0?1:-1));
+},{passive:true});
+
+function filterSlider(cat){
+  slideFilterCat=cat;
+  slides.forEach(s=>{
+    s.style.display=(cat==='all'||s.dataset.cat===cat)?'':'none';
+  });
+  slideIdx=0;
+  const vis=getVisible();
+  if(!vis.length){counter.textContent='0 / 0';dotsWrap.innerHTML='';return;}
+  buildDots();
+  goSlide(0);
+}
+
+// init slider
+(function(){
+  filterSlider('all');
+  // re-calc on resize
+  window.addEventListener('resize',()=>goSlide(slideIdx));
+})();
 
 // Testimonial slider
 const testiCards=[...document.querySelectorAll('.testi-slider .tc')];
