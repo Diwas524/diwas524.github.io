@@ -66,10 +66,10 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .hero h1 span{font-style:italic;color:var(--mint)}
 .hero-p{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:420px;margin-bottom:32px;font-weight:300}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:var(--ink);padding:14px 28px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
-.btn-gold:hover{background:#C49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
-.btn-wh{background:rgba(255,255,255,.12);color:#fff;padding:13px 28px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
-.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.2)}
+.btn-gold{background:var(--gold);color:var(--ink);padding:16px 36px;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);letter-spacing:.02em;box-shadow:0 8px 24px rgba(212,168,83,.3);border:none;cursor:pointer}
+.btn-gold:hover{background:#C49640;transform:translateY(-4px);box-shadow:0 16px 40px rgba(212,168,83,.5);letter-spacing:.04em}
+.btn-wh{background:rgba(255,255,255,.15);color:#fff;padding:15px 36px;border-radius:50px;border:2px solid rgba(255,255,255,.6);font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.25);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 /* legacy trust-item / trust-div kept for mobile fallback but hidden on desktop */
 .hero-trust{display:none}
 .trust-item{text-align:center}
@@ -98,8 +98,8 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 /* ── ABOUT ── */
 .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center}
 .photo-stack{position:relative}
-.photo-stack .pm-wrap{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(30,58,47,.18)}
-.photo-stack .pm{width:100%;height:460px;object-fit:cover;display:block}
+.photo-stack .pm-wrap{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(30,58,47,.18);background:rgba(255,255,255,.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2)}
+.photo-stack .pm{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85;filter:blur(1px) brightness(1.08);mix-blend-mode:screen}
 .badge{position:absolute;top:20px;left:20px;display:inline-flex;align-items:center;gap:10px;background:var(--forest);color:#fff;padding:12px 18px;border-radius:12px;font-size:.82rem;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,.22);z-index:2}
 .badge-dot{width:8px;height:8px;background:var(--mint);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
 .journey-card{display:flex;align-items:center;gap:16px;background:var(--forest);border-radius:16px;padding:16px;margin-top:-44px;margin-left:24px;margin-right:24px;position:relative;z-index:3;text-decoration:none;transition:background .2s,transform .2s;box-shadow:0 16px 36px rgba(17,27,20,.28)}
