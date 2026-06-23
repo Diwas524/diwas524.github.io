@@ -50,27 +50,52 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .mob-ph{color:var(--gold)!important;border:none!important;font-weight:600!important;font-size:1.1rem!important}
 .mob-close{position:absolute;top:20px;right:20px;background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;color:var(--body);display:flex;align-items:center;justify-content:center}
 
-/* ── HERO ── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.hero-left{background:var(--forest);display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px 72px;position:relative;z-index:1}
-.hero-left::after{content:'';position:absolute;top:0;right:-1px;bottom:0;width:80px;background:var(--forest);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);z-index:2}
-.hero-right{position:relative;overflow:hidden}
-.hero-right img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--forest) 0%,transparent 30%)}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:28px}
-.hero h1{font-family:var(--fd);font-size:clamp(2.8rem,4.5vw,4.2rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:22px}
+/* ── HERO — full bleed ── */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(30%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(17,40,28,.88) 0%,rgba(17,40,28,.6) 55%,rgba(17,40,28,.25) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:120px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero-left{display:flex;flex-direction:column;justify-content:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:8px 18px;border-radius:100px;margin-bottom:28px;width:fit-content;backdrop-filter:blur(8px)}
+.hero-tag-dot{width:7px;height:7px;background:var(--mint);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.hero h1{font-family:var(--fd);font-size:clamp(3rem,5.5vw,4.8rem);font-weight:700;color:#fff;line-height:1.05;margin-bottom:20px}
 .hero h1 span{font-style:italic;color:var(--mint)}
-.hero-p{font-size:1.05rem;color:rgba(255,255,255,.72);line-height:1.8;max-width:420px;margin-bottom:44px;font-weight:300}
+.hero-p{font-size:1rem;color:rgba(255,255,255,.68);line-height:1.8;max-width:420px;margin-bottom:36px;font-weight:300}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--ink);padding:15px 28px;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
+.btn-gold:hover{background:#c49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
+.btn-gold .btn-arrow{width:32px;height:32px;background:rgba(0,0,0,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.btn-wh{background:rgba(255,255,255,.1);color:#fff;padding:14px 28px;border-radius:100px;border:1.5px solid rgba(255,255,255,.35);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s;backdrop-filter:blur(8px)}
+.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.18)}
+.btn-wh .btn-ic{width:32px;height:32px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+/* stats grid right side */
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:340px}
+.hs{background:rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:24px 22px;transition:background .2s}
+.hs:hover{background:rgba(255,255,255,.15)}
+.hs-num{font-family:var(--fd);font-size:2.4rem;font-weight:700;color:#fff;line-height:1;margin-bottom:8px}
+.hs-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+/* trust badges row */
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;max-width:340px}
+.hb{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:7px 14px 7px 10px}
+.hb-icon{font-size:18px;opacity:.85}
+.hb-text{font-size:.62rem;font-weight:600;color:rgba(255,255,255,.75);line-height:1.35;letter-spacing:.02em}
+
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr;padding:110px 28px 60px}
+  .hero-right{align-items:flex-start}
+  .hero-stats,.hero-badges{max-width:100%}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.6rem}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .hero-stats{grid-template-columns:1fr 1fr}
+}
 .btn-gold{background:var(--gold);color:var(--ink);padding:15px 30px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
 .btn-gold:hover{background:#C49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
 .btn-wh{background:transparent;color:#fff;padding:14px 30px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
 .btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-.hero-trust{display:flex;align-items:center;gap:16px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12)}
-.trust-item{text-align:center}
-.trust-n{font-family:var(--fd);font-size:1.9rem;font-weight:700;color:var(--mint);line-height:1}
-.trust-l{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
-.trust-div{width:1px;height:36px;background:rgba(255,255,255,.15)}
 
 /* ── PROMISE STRIP ── */
 .promise{background:var(--gold-pale);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:40px 24px}
@@ -284,19 +309,14 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .fs{display:none;background:var(--mint-pale);border:2px solid var(--moss);border-radius:12px;padding:24px;margin-top:14px;color:var(--forest);font-weight:600;text-align:center;font-size:.95rem}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
-.ft{max-width:1040px;margin:0 auto}
-.ft-top{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:56px;margin-bottom:52px}
-.ft-logo{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:14px}
-.ft-brand p{font-size:.875rem;line-height:1.8;max-width:260px}
-.ft-brand .lic{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:16px}
-.ft-col h4{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px}
-.ft-col a{display:block;color:rgba(255,255,255,.4);text-decoration:none;font-size:.875rem;margin-bottom:11px;transition:color .2s}
-.ft-col a:hover{color:var(--mint)}
-.ft-bar{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.78rem}
-.ft-bar a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
-.ft-bar a:hover{color:rgba(255,255,255,.6)}
-.ft-motto{color:var(--mint);font-family:var(--fd);font-style:italic;font-size:.9rem}
+footer{background:var(--ink);padding:28px 24px}
+.ft{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff}
+.ft-copy{font-size:.78rem;color:rgba(255,255,255,.35)}
+.ft-links{display:flex;gap:20px}
+.ft-links a{color:rgba(255,255,255,.35);text-decoration:none;font-size:.78rem;transition:color .2s}
+.ft-links a:hover{color:rgba(255,255,255,.7)}
+@media(max-width:600px){.ft{justify-content:center;text-align:center}.ft-links{justify-content:center}}
 
 /* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
@@ -311,12 +331,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
   nav{top:10px;padding:0 8px 0 16px;height:54px;border-radius:14px;width:calc(100% - 24px)}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-left{padding:120px 32px 60px}
-  .hero-left::after{display:none}
-  .hero-right{height:300px}
-  .hero-right::after{background:linear-gradient(to bottom,var(--forest) 0%,transparent 40%)}
-  .hero-trust{flex-wrap:wrap;gap:12px}
   .promise-inner{grid-template-columns:1fr 1fr;gap:20px}
   .about-grid{grid-template-columns:1fr;gap:44px}
   .photo-stack .pm{height:320px}
@@ -331,11 +345,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
   .process-row{grid-template-columns:1fr;gap:20px}
   .loc-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr;gap:40px}
-  .ft-top{grid-template-columns:1fr;gap:36px}
-  .ft-bar{justify-content:center;text-align:center}
+
 }
 @media(max-width:540px){
-  .hero-left{padding:100px 24px 52px}
   .svc-grid{grid-template-columns:1fr}
   .gal-grid{grid-template-columns:1fr}
   .gi:nth-child(1){grid-column:span 1}
@@ -457,26 +469,28 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
 
 <!-- HERO — split layout -->
 <section class="hero">
-  <div class="hero-left">
-    
-    <h1>A Home Where<br>Every Elder<br><span>Truly Belongs</span></h1>
-    <p class="hero-p">Six residents. Round-the-clock care. A real home, not a hallway. Peace Park is where families find peace, and seniors find joy again.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-gold">📅 Schedule a Free Tour</a>
-      <a href="tel:+12065550192" class="btn-wh">📞 (206) 555-0192</a>
-    </div>
-    <div class="hero-trust">
-      <div class="trust-item"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div>
-      <div class="trust-div"></div>
-      <div class="trust-item"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div>
-      <div class="trust-div"></div>
-      <div class="trust-item"><div class="trust-n">10+</div><div class="trust-l">Yrs Serving Families</div></div>
-      <div class="trust-div"></div>
-      <div class="trust-item"><div class="trust-n">100%</div><div class="trust-l">State Licensed</div></div>
-    </div>
+  <div class="hero-bg">
+    <img src="https://raw.githubusercontent.com/Diwas524/diwas524.github.io/refs/heads/main/theme.png?w=1800&q=85" alt="Caregiver and senior walking together" loading="eager"/>
   </div>
-  <div class="hero-right">
-    <img src="https://raw.githubusercontent.com/Diwas524/diwas524.github.io/refs/heads/main/theme.png?w=1400&q=85" alt="Senior resident with caregiver in a warm home setting" loading="eager" />
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="hero-tag-dot"></span> Currently accepting new residents</div>
+      <h1>A Home Where Every Elder <span>Truly Belongs</span></h1>
+      <p class="hero-p">Six residents. Round-the-clock care. A real home — not a hallway. Peace Park is where families find peace, and seniors find joy again.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">Schedule a Free Tour <span class="btn-arrow">›</span></a>
+        <a href="#contact" class="btn-wh">Contact Us <span class="btn-ic">📞</span></a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-num">6</div><div class="hs-label">Max Residents</div></div>
+        <div class="hs"><div class="hs-num">24/7</div><div class="hs-label">Staffed Care</div></div>
+        <div class="hs"><div class="hs-num">10+</div><div class="hs-label">Yrs Serving Families</div></div>
+        <div class="hs"><div class="hs-num">100%</div><div class="hs-label">State Licensed</div></div>
+      </div>
+      
+    </div>
   </div>
 </section>
 
@@ -1050,32 +1064,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:64px 24px 36px}
 <!-- FOOTER -->
 <footer>
   <div class="ft">
-    <div class="ft-top">
-      <div class="ft-brand">
-        <div class="ft-logo">🕊️ Peace Park AFH</div>
-        <p>A Washington State-licensed adult family home in Bonney Lake, WA, dedicated to warm, personalized care in a true home environment since 2014.</p>
-        <div class="lic">License #: WA-AFH-XXXXX &nbsp;|&nbsp; DSHS Certified</div>
-      </div>
-      <div class="ft-col">
-        <h4>Navigation</h4>
-        <a href="#about">About Us</a>
-        <a href="#services">Care Services</a>
-        <a href="#gallery">Photo Gallery</a>
-        <a href="#testimonials">Family Stories</a>
-        <a href="#contact">Contact Us</a>
-      </div>
-      <div class="ft-col">
-        <h4>Contact</h4>
-        <a href="tel:+12065550192">(206) 555-0192</a>
-        <a href="mailto:info@peaceparkafh.com">info@peaceparkafh.com</a>
-        <a href="#">Bonney Lake, WA 98391</a>
-        <a href="#">Get Directions →</a>
-      </div>
-    </div>
-    <div class="ft-bar">
-      <span>© 2025 Peace Park Adult Family Home. All rights reserved.</span>
-      <span class="ft-motto">"Every resident is family."</span>
-      <div style="display:flex;gap:20px"><a href="#">Privacy Policy</a><a href="#">Accessibility</a></div>
+    <div class="ft-logo">🕊️ Peace Park AFH</div>
+    <span class="ft-copy">© 2025 Peace Park Adult Family Home · Bonney Lake, WA</span>
+    <div class="ft-links">
+      <a href="tel:+12065550192">(206) 555-0192</a>
+      <a href="mailto:info@peaceparkafh.com">info@peaceparkafh.com</a>
+      <a href="#">Privacy</a>
     </div>
   </div>
 </footer>
