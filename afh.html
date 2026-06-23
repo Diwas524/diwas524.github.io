@@ -50,52 +50,32 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .mob-ph{color:var(--gold)!important;border:none!important;font-weight:600!important;font-size:1.1rem!important}
 .mob-close{position:absolute;top:20px;right:20px;background:none;border:1.5px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;color:var(--body);display:flex;align-items:center;justify-content:center}
 
-/* ── HERO — full bleed ── */
-.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(30%)}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(17,40,28,.88) 0%,rgba(17,40,28,.6) 55%,rgba(17,40,28,.25) 100%)}
-.hero-inner{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:120px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+/* ── HERO ── */
+.hero{height:calc(100vh - 46px);max-height:calc(100vh - 46px);position:relative;overflow:hidden;display:flex;align-items:stretch}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;z-index:0}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(17,40,28,.88) 0%,rgba(17,40,28,.65) 50%,rgba(17,40,28,.28) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px 40px}
 .hero-left{display:flex;flex-direction:column;justify-content:center}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:8px 18px;border-radius:100px;margin-bottom:28px;width:fit-content;backdrop-filter:blur(8px)}
-.hero-tag-dot{width:7px;height:7px;background:var(--mint);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-.hero h1{font-family:var(--fd);font-size:clamp(3rem,5.5vw,4.8rem);font-weight:700;color:#fff;line-height:1.05;margin-bottom:20px}
+.hero-right-stats{display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.stats-bento{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:340px}
+.stat-card{background:rgba(30,40,35,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:22px 26px}
+.stat-n{font-family:var(--fd);font-size:2.2rem;font-weight:700;color:#fff;line-height:1;margin-bottom:6px}
+.stat-l{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px;width:fit-content;align-self:flex-start}
+.hero h1{font-family:var(--fd);font-size:clamp(2.4rem,4vw,3.8rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:16px}
 .hero h1 span{font-style:italic;color:var(--mint)}
-.hero-p{font-size:1rem;color:rgba(255,255,255,.68);line-height:1.8;max-width:420px;margin-bottom:36px;font-weight:300}
+.hero-p{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:420px;margin-bottom:32px;font-weight:300}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:var(--ink);padding:15px 28px;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
-.btn-gold:hover{background:#c49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
-.btn-gold .btn-arrow{width:32px;height:32px;background:rgba(0,0,0,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
-.btn-wh{background:rgba(255,255,255,.1);color:#fff;padding:14px 28px;border-radius:100px;border:1.5px solid rgba(255,255,255,.35);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s;backdrop-filter:blur(8px)}
-.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.18)}
-.btn-wh .btn-ic{width:32px;height:32px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
-/* stats grid right side */
-.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:340px}
-.hs{background:rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:24px 22px;transition:background .2s}
-.hs:hover{background:rgba(255,255,255,.15)}
-.hs-num{font-family:var(--fd);font-size:2.4rem;font-weight:700;color:#fff;line-height:1;margin-bottom:8px}
-.hs-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-/* trust badges row */
-.hero-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;max-width:340px}
-.hb{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:7px 14px 7px 10px}
-.hb-icon{font-size:18px;opacity:.85}
-.hb-text{font-size:.62rem;font-weight:600;color:rgba(255,255,255,.75);line-height:1.35;letter-spacing:.02em}
-
-@media(max-width:860px){
-  .hero-inner{grid-template-columns:1fr;padding:110px 28px 60px}
-  .hero-right{align-items:flex-start}
-  .hero-stats,.hero-badges{max-width:100%}
-}
-@media(max-width:480px){
-  .hero h1{font-size:2.6rem}
-  .hero-btns{flex-direction:column;align-items:flex-start}
-  .hero-stats{grid-template-columns:1fr 1fr}
-}
-.btn-gold{background:var(--gold);color:var(--ink);padding:15px 30px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
+.btn-gold{background:var(--gold);color:var(--ink);padding:14px 28px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
 .btn-gold:hover{background:#C49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
-.btn-wh{background:transparent;color:#fff;padding:14px 30px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
-.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-wh{background:rgba(255,255,255,.12);color:#fff;padding:13px 28px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.2)}
+/* legacy trust-item / trust-div kept for mobile fallback but hidden on desktop */
+.hero-trust{display:none}
+.trust-item{text-align:center}
+.trust-n{font-family:var(--fd);font-size:1.9rem;font-weight:700;color:var(--mint);line-height:1}
+.trust-l{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+.trust-div{width:1px;height:36px;background:rgba(255,255,255,.15)}
 
 /* ── PROMISE STRIP ── */
 .promise{background:var(--gold-pale);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:40px 24px}
@@ -326,11 +306,80 @@ footer{background:var(--ink);padding:28px 24px}
 .rv-r{opacity:0;transform:translateX(28px);transition:opacity .6s ease,transform .6s ease}
 .rv-r.in{opacity:1;transform:none}
 
+/* ── MOBILE STATS STRIP (hero only) ── */
+.mob-stats{display:none}
+
 /* ── MOBILE ── */
 @media(max-width:900px){
   nav{top:10px;padding:0 8px 0 16px;height:54px;border-radius:14px;width:calc(100% - 24px)}
   .nav-links{display:none}
   .hamburger{display:flex}
+  .trust-bar{display:none}
+  .hero-right-stats{display:none}
+
+  /* Cinematic full-screen hero */
+  .hero{height:100svh;max-height:100svh}
+  .hero-bg-img{object-position:60% center}
+  .hero-overlay{background:linear-gradient(160deg,rgba(10,25,18,.05) 0%,rgba(10,25,18,.2) 30%,rgba(10,25,18,.85) 62%,rgba(10,25,18,.98) 100%)}
+  .hero-inner{grid-template-columns:1fr;align-items:flex-end;padding:0 0 0;gap:0;height:100%}
+  .hero-left{
+    padding:32px 24px 44px;
+    background:linear-gradient(to top,rgba(10,25,18,.98) 0%,rgba(10,25,18,.85) 60%,transparent 100%);
+    border-radius:28px 28px 0 0;
+    backdrop-filter:blur(2px);
+  }
+  .hero-tag{
+    align-self:flex-start;
+    margin-bottom:16px;
+    font-size:.58rem;
+    letter-spacing:.18em;
+    padding:6px 13px;
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.15);
+  }
+  .hero h1{
+    font-size:clamp(2.5rem,10.5vw,3.2rem);
+    line-height:1.05;
+    margin-bottom:10px;
+    text-align:left;
+  }
+  .hero-p{
+    font-size:.85rem;
+    margin-bottom:20px;
+    text-align:left;
+    max-width:100%;
+    line-height:1.65;
+    color:rgba(255,255,255,.55);
+  }
+
+  /* Mobile stats strip */
+  .mob-stats{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:20px;
+  }
+  .mob-stat{text-align:center;flex:1}
+  .mob-stat-n{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;font-weight:700;color:#fff;line-height:1}
+  .mob-stat-l{font-size:.52rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
+  .mob-stat-div{width:1px;height:28px;background:rgba(255,255,255,.12);flex-shrink:0}
+
+  /* Buttons */
+  .hero-btns{flex-direction:column;gap:10px;width:100%}
+  .btn-gold{
+    width:100%;
+    justify-content:space-between;
+    padding:18px 22px;
+    font-size:.95rem;
+    border-radius:14px;
+    letter-spacing:.01em;
+  }
+  .btn-wh{display:none}
+
   .promise-inner{grid-template-columns:1fr 1fr;gap:20px}
   .about-grid{grid-template-columns:1fr;gap:44px}
   .photo-stack .pm{height:320px}
@@ -345,7 +394,6 @@ footer{background:var(--ink);padding:28px 24px}
   .process-row{grid-template-columns:1fr;gap:20px}
   .loc-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr;gap:40px}
-
 }
 @media(max-width:540px){
   .svc-grid{grid-template-columns:1fr}
@@ -467,29 +515,37 @@ footer{background:var(--ink);padding:28px 24px}
   <a href="#contact" class="mob-cta" onclick="closeMob()">Schedule a Free Tour</a>
 </div>
 
-<!-- HERO — split layout -->
+<!-- HERO — full-bleed with bento stats -->
 <section class="hero">
-  <div class="hero-bg">
-    <img src="https://raw.githubusercontent.com/Diwas524/diwas524.github.io/refs/heads/main/theme.png?w=1800&q=85" alt="Caregiver and senior walking together" loading="eager"/>
-  </div>
+  <img class="hero-bg-img" src="https://raw.githubusercontent.com/Diwas524/diwas524.github.io/refs/heads/main/theme.png?w=1800&q=85" alt="Senior resident with caregiver walking together in a peaceful garden" loading="eager" />
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-tag"><span class="hero-tag-dot"></span> Currently accepting new residents</div>
-      <h1>A Home Where Every Elder <span>Truly Belongs</span></h1>
+      <div class="hero-tag"><span style="width:7px;height:7px;border-radius:50%;background:#6fcf97;display:inline-block"></span> Currently Accepting Residents</div>
+      <h1>A Home Where<br>Every Elder<br><span>Truly Belongs</span></h1>
       <p class="hero-p">Six residents. Round-the-clock care. A real home — not a hallway. Peace Park is where families find peace, and seniors find joy again.</p>
+      <!-- Mobile stats strip -->
+      <div class="mob-stats">
+        <div class="mob-stat"><div class="mob-stat-n">6</div><div class="mob-stat-l">Residents</div></div>
+        <div class="mob-stat-div"></div>
+        <div class="mob-stat"><div class="mob-stat-n">24/7</div><div class="mob-stat-l">Care</div></div>
+        <div class="mob-stat-div"></div>
+        <div class="mob-stat"><div class="mob-stat-n">10+</div><div class="mob-stat-l">Yrs</div></div>
+        <div class="mob-stat-div"></div>
+        <div class="mob-stat"><div class="mob-stat-n">100%</div><div class="mob-stat-l">Licensed</div></div>
+      </div>
       <div class="hero-btns">
-        <a href="#contact" class="btn-gold">Schedule a Free Tour <span class="btn-arrow">›</span></a>
-        <a href="#contact" class="btn-wh">Contact Us <span class="btn-ic">📞</span></a>
+        <a href="#contact" class="btn-gold">Schedule a Free Tour <span style="width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.18);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem">→</span></a>
+        <a href="tel:+15648883396" class="btn-wh"><span style="width:26px;height:26px;border-radius:50%;background:#e75480;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></span> Contact Us</a>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-stats">
-        <div class="hs"><div class="hs-num">6</div><div class="hs-label">Max Residents</div></div>
-        <div class="hs"><div class="hs-num">24/7</div><div class="hs-label">Staffed Care</div></div>
-        <div class="hs"><div class="hs-num">10+</div><div class="hs-label">Yrs Serving Families</div></div>
-        <div class="hs"><div class="hs-num">100%</div><div class="hs-label">State Licensed</div></div>
+    <div class="hero-right-stats">
+      <div class="stats-bento">
+        <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">Max Residents</div></div>
+        <div class="stat-card"><div class="stat-n">24/7</div><div class="stat-l">Staffed Care</div></div>
+        <div class="stat-card"><div class="stat-n">10+</div><div class="stat-l">Yrs Serving Families</div></div>
+        <div class="stat-card"><div class="stat-n">100%</div><div class="stat-l">State Licensed</div></div>
       </div>
-      
     </div>
   </div>
 </section>
