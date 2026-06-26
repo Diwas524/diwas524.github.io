@@ -32,7 +32,7 @@
   html { scroll-behavior: smooth; }
 
   /* ── FAQ ── */
-  .faq { background: var(--gold-bg); }
+  .faq { background: #ffffff; }
   .faq-header h2 { color: var(--forest-dark); margin-bottom: 16px; }
   .faq-header h2 em { font-style: italic; color: var(--forest); font-family: var(--font-display); }
   .faq-header p { font-size: 0.97rem; color: var(--forest); }
@@ -701,31 +701,107 @@
   .amenity-card p { font-size: 0.8rem; }
 
   /* ── TESTIMONIALS SLIDER ── */
-  .testimonials { background: var(--gold-bg); }
-  .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 50px; }
-  .testimonials-header h2 { color: var(--gold-text); }
-  .testimonials-header p { color: var(--gold-mid); }
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: var(--gold-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonials::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(184,148,90,0.08);
+    pointer-events: none;
+  }
+  .testimonials::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(184,148,90,0.06);
+    pointer-events: none;
+  }
+  .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 44px; position: relative; z-index: 1; }
+  .testimonials-header h2 { color: var(--gold-text); font-size: clamp(1.9rem, 3.5vw, 2.7rem); }
+  .testimonials-header p { color: var(--gold-mid); font-size: 1rem; margin-top: 12px; }
   .testimonials-header .eyebrow { color: var(--gold-accent) !important; }
-  .testimonials-slider-container { position: relative; overflow: hidden; }
-  .testimonials-slider { display: flex; gap: 24px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 0 40px 0; scrollbar-width: none; }
+
+  .testi-rating-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(184,148,90,0.25);
+    border-radius: 60px;
+    padding: 16px 40px;
+    margin: 0 auto 52px;
+    width: fit-content;
+    position: relative; z-index: 1;
+  }
+  .testi-rating-item { text-align: center; }
+  .testi-rating-number { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--gold-text); line-height: 1; }
+  .testi-rating-stars { color: var(--gold-accent); font-size: 0.85rem; letter-spacing: 2px; margin: 3px 0; }
+  .testi-rating-label { font-size: 0.68rem; color: var(--gold-mid); letter-spacing: 0.09em; text-transform: uppercase; }
+  .testi-rating-divider { width: 1px; height: 44px; background: rgba(184,148,90,0.25); }
+
+  .testimonials-slider-container { position: relative; overflow: hidden; z-index: 1; }
+  .testimonials-slider { display: flex; gap: 22px; overflow-x: auto; scroll-behavior: smooth; padding: 8px 4px 44px 4px; scrollbar-width: none; }
   .testimonials-slider::-webkit-scrollbar { display: none; }
   .testi-card {
-    flex: 0 0 calc(50% - 12px);
+    flex: 0 0 calc(50% - 11px);
+    min-width: 320px;
     background: #fff;
-    border-radius: 16px; padding: 32px;
     border: 1px solid rgba(184,148,90,0.2);
-    transition: all 0.3s ease;
+    border-radius: 20px;
+    padding: 36px 36px 32px;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    overflow: hidden;
   }
-  .testi-card:hover { box-shadow: 0 12px 40px rgba(184,148,90,0.2); transform: translateY(-4px); border-color: var(--gold-accent); }
-  .testi-stars { color: var(--gold-accent); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
-  .testi-text { font-size: 0.95rem; color: var(--gold-mid); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+  .testi-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 12px; right: 26px;
+    font-family: var(--font-display);
+    font-size: 7rem;
+    line-height: 1;
+    color: rgba(184,148,90,0.1);
+    pointer-events: none;
+    user-select: none;
+  }
+  .testi-card::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 28px; bottom: 28px;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold-accent), transparent);
+    border-radius: 0 3px 3px 0;
+  }
+  .testi-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(184,148,90,0.18);
+    border-color: var(--gold-accent);
+  }
+  .testi-stars { color: var(--gold-accent); font-size: 0.95rem; margin-bottom: 18px; letter-spacing: 3px; }
+  .testi-text { font-size: 0.97rem; color: var(--gold-mid); line-height: 1.85; margin-bottom: 28px; font-style: italic; }
   .testi-author { display: flex; align-items: center; gap: 14px; }
-  .testi-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--gold-accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; border: 2px solid var(--gold-light); }
-  .testi-name strong { display: block; font-size: 0.9rem; color: var(--gold-text); margin-bottom: 2px; }
-  .testi-name span { font-size: 0.8rem; color: var(--gold-mid); }
-  .testimonials-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
-  .testimonials-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(184,148,90,0.3); cursor: pointer; transition: all 0.3s; }
-  .testimonials-dot.active { background: var(--gold-accent); width: 28px; border-radius: 5px; }
+  .testi-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-accent), var(--gold-light));
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(184,148,90,0.3);
+  }
+  .testi-name strong { display: block; font-size: 0.92rem; color: var(--gold-text); margin-bottom: 3px; }
+  .testi-name span { font-size: 0.78rem; color: var(--gold-mid); }
+  .testimonials-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; position: relative; z-index: 1; }
+  .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(184,148,90,0.3); cursor: pointer; transition: all 0.3s; }
+  .testimonials-dot.active { background: var(--gold-accent); width: 26px; border-radius: 4px; }
 
   /* ── LOCATIONS ── */
   .locations { background: var(--forest-dark); }
@@ -876,50 +952,139 @@
   .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   /* ── REFERRALS & CONTACT ── */
-  .referrals { background: #ffffff; }
-  .referrals-header { max-width: 640px; margin-bottom: 50px; }
-  .referrals-header .eyebrow { color: var(--gold-accent) !important; }
-  .referrals-header h2 { color: var(--gold-text); }
-  .referrals-header p { color: var(--gold-mid); }
-  .referrals-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; align-items: stretch; }
+  /* ── CONTACT / GET IN TOUCH ── */
+  .referrals {
+    background: var(--gold-bg);
+    padding: 90px 0;
+  }
+  .referrals .section-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  /* Left column */
+  .referrals-left {}
+  .referrals-left .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--forest) !important;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .referrals-left h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+  }
+  .referrals-left h2 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+  .referrals-left .referrals-sub {
+    font-size: 0.96rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    margin-bottom: 38px;
+    max-width: 360px;
+  }
+  .contact-pills { display: flex; flex-direction: column; gap: 18px; }
+  .contact-pill {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .contact-pill-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--forest-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-pill-icon svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-pill-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 2px;
+  }
+  .contact-pill-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .contact-pill-value a { color: var(--charcoal); }
+  .contact-pill-value a:hover { color: var(--forest); }
+
+  /* Right column — white card */
   .referrals-card {
     background: #fff;
-    border: 1px solid rgba(184,148,90,0.2);
-    border-radius: 16px; padding: 40px;
-    box-shadow: 0 4px 24px rgba(184,148,90,0.1);
+    border-radius: 20px;
+    padding: 44px 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
   }
-  .referrals-card h3 { font-size: 1.35rem; margin-bottom: 26px; color: var(--gold-text); }
-  .contact-item {
-    background: var(--gold-bg-dark);
-    border: 1px solid rgba(184,148,90,0.2);
-    border-radius: 10px; padding: 16px 18px; margin-bottom: 14px;
+  .referrals-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 28px;
   }
-  .contact-item:last-child { margin-bottom: 0; }
-  .contact-item strong { display: block; font-size: 0.86rem; color: var(--gold-mid); margin-bottom: 4px; }
-  .contact-item span, .contact-item a { font-size: 0.92rem; color: var(--gold-text); }
-  .contact-item a:hover { color: var(--gold-accent); }
-  .referral-form { display: flex; flex-direction: column; gap: 16px; }
-  .referral-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .referral-form { display: flex; flex-direction: column; gap: 18px; }
+  .referral-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .referral-field { display: flex; flex-direction: column; gap: 6px; }
+  .referral-field label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
   .referral-form input, .referral-form select, .referral-form textarea {
-    width: 100%; border: 1px solid rgba(184,148,90,0.3); border-radius: 10px;
-    padding: 14px 16px; font-family: var(--font-body); font-size: 0.9rem;
-    color: var(--gold-text); background: #fff;
+    width: 100%;
+    border: 1.5px solid #E8E4DD;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--charcoal);
+    background: #fff;
+    transition: border-color 0.15s;
   }
-  .referral-form input::placeholder, .referral-form textarea::placeholder { color: rgba(92,74,30,0.4); }
-  .referral-form select { appearance: none; cursor: pointer; color: var(--gold-text); }
-  .referral-form select option { background: #fff; color: var(--gold-text); }
-  .referral-form textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
-  .referral-form input:focus, .referral-form select:focus, .referral-form textarea:focus { outline: none; border-color: var(--gold-accent); }
+  .referral-form input::placeholder, .referral-form textarea::placeholder { color: #BBBAB6; }
+  .referral-form select { appearance: none; cursor: pointer; color: var(--charcoal); }
+  .referral-form select option { background: #fff; color: var(--charcoal); }
+  .referral-form textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+  .referral-form input:focus, .referral-form select:focus, .referral-form textarea:focus {
+    outline: none; border-color: var(--forest);
+  }
   .btn-referral-submit {
-    align-self: flex-start; background: var(--gold-accent); color: #fff;
-    border: none; border-radius: 30px; padding: 14px 30px;
-    font-size: 0.88rem; font-weight: 700; cursor: pointer;
+    width: 100%;
+    background: var(--forest-dark);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 30px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
     transition: background 0.15s, transform 0.15s;
+    letter-spacing: 0.01em;
   }
-  .btn-referral-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-referral-submit:hover { background: var(--forest); transform: translateY(-1px); }
+  .btn-referral-submit .btn-arrow { margin-left: 6px; }
 
-  @media (max-width: 880px) {
-    .referrals-grid { grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    .referrals .section-inner { grid-template-columns: 1fr; gap: 40px; }
     .referral-form-row { grid-template-columns: 1fr; }
   }
 
@@ -1249,7 +1414,7 @@
     .services-header-text { max-width: 100%; }
     .services-header-nav { width: 100%; justify-content: center; }
     .services-slider { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .testi-card { flex: 0 0 calc(50% - 12px); }
+    .testi-card { flex: 0 0 calc(50% - 11px); }
     .locations-grid { grid-template-columns: 1fr; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 20px; padding-bottom: 8px; }
     .locations-grid::-webkit-scrollbar { display: none; }
     .location-card { flex: 0 0 100%; scroll-snap-align: center; }
@@ -1839,6 +2004,20 @@
       <h2>Stories from families like yours</h2>
       <p>The trust of local families is the truest measure of our care.</p>
     </div>
+    <div class="testi-rating-bar">
+      <div class="testi-rating-item">
+        <div class="testi-rating-number">4.9</div>
+        <div class="testi-rating-stars">★★★★★</div>
+        <div class="testi-rating-label">Google Rating</div>
+      </div>
+      <div class="testi-rating-divider"></div>
+      <div class="testi-rating-item">
+        <div class="testi-rating-number">60+</div>
+        <div class="testi-rating-stars" style="opacity:0; font-size:0.5rem;">·</div>
+        <div class="testi-rating-label">Reviews</div>
+      </div>
+
+    </div>
     <div class="testimonials-slider-container">
       <div class="testimonials-slider" id="testimonialsSlider">
         <div class="testi-card">
@@ -2056,56 +2235,86 @@
   </div>
 </section>
 
-<!-- REFERRALS & CONTACT -->
+<!-- GET IN TOUCH / CONTACT -->
 <section class="referrals" id="contact">
   <div class="section-inner">
-    <div class="referrals-header">
-      <div class="eyebrow" style="color:#B8945A;">Referrals &amp; Contact</div>
-      <h2>Connect with Autumn Hill Manor</h2>
-      <p>For placement inquiries, referral coordination, or questions about resident fit, contact our team directly.</p>
+    <!-- Left: heading + contact info -->
+    <div class="referrals-left">
+      <span class="eyebrow">Get in Touch</span>
+      <h2>We'd Love to <em>Hear From You</em></h2>
+      <p class="referrals-sub">Whether you have questions, want to tour, or simply need someone to talk to, we're here. No obligation. Just a warm, honest conversation.</p>
+
+      <div class="contact-pills">
+        <div class="contact-pill">
+          <div class="contact-pill-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+          </div>
+          <div>
+            <div class="contact-pill-label">Phone</div>
+            <div class="contact-pill-value"><a href="tel:+18175964159">(817) 596-4159</a></div>
+          </div>
+        </div>
+
+        <div class="contact-pill">
+          <div class="contact-pill-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-pill-label">Email</div>
+            <div class="contact-pill-value"><a href="mailto:info@autumnhillmanor.com">info@autumnhillmanor.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-pill">
+          <div class="contact-pill-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-pill-label">Location</div>
+            <div class="contact-pill-value">1200 Manor Way, Weatherford, TX 76086</div>
+          </div>
+        </div>
+
+        <div class="contact-pill">
+          <div class="contact-pill-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-pill-label">Office Hours</div>
+            <div class="contact-pill-value">Monday – Saturday, 8 AM – 6 PM</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="referrals-grid">
-      <div class="referrals-card">
-        <h3>Direct contact</h3>
-        <div class="contact-item">
-          <strong>Email</strong>
-          <a href="mailto:info@autumnhillmanor.com">info@autumnhillmanor.com</a>
-        </div>
-        <div class="contact-item">
-          <strong>Phone</strong>
-          <a href="tel:+18175964159">(817) 596-4159</a>
-        </div>
-        <div class="contact-item">
-          <strong>Fax</strong>
-          <span>(817) 596-4160</span>
-        </div>
-        <div class="contact-item">
-          <strong>Address</strong>
-          <span>1200 Manor Way, Weatherford, TX 76086</span>
-        </div>
-      </div>
-      <div class="referrals-card">
-        <h3>Resident referral form</h3>
-        <form class="referral-form" onsubmit="event.preventDefault(); alert('Thank you — your referral has been received.');">
-          <div class="referral-form-row">
-            <input type="text" placeholder="Referring person / organization" required>
-            <input type="email" placeholder="Your email" required>
+
+    <!-- Right: form card -->
+    <div class="referrals-card">
+      <h3>Send us a message</h3>
+      <form class="referral-form" onsubmit="event.preventDefault(); alert('Thank you — we\'ll be in touch soon!');">
+        <div class="referral-form-row">
+          <div class="referral-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Margaret" required>
           </div>
-          <div class="referral-form-row">
-            <input type="tel" placeholder="Phone number">
-            <select required>
-              <option value="" disabled selected>Referral type</option>
-              <option value="hospital">Hospital discharge</option>
-              <option value="family">Family / private</option>
-              <option value="agency">Agency / case manager</option>
-              <option value="other">Other</option>
-            </select>
+          <div class="referral-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Johnson" required>
           </div>
-          <input type="text" placeholder="Resident name or initials">
-          <textarea placeholder="Please include diagnosis overview, mobility, medication needs, current setting, and any relevant behavioral or placement information."></textarea>
-          <button type="submit" class="btn-referral-submit">Send referral</button>
-        </form>
-      </div>
+        </div>
+        <div class="referral-field">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(817) 555-0000">
+        </div>
+        <div class="referral-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="referral-field">
+          <label>Message</label>
+          <textarea placeholder="Tell us a little about your loved one and what kind of care they may need…"></textarea>
+        </div>
+        <button type="submit" class="btn-referral-submit">Send Message &amp; Request a Tour <span class="btn-arrow">→</span></button>
+      </form>
     </div>
   </div>
 </section>
