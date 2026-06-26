@@ -803,6 +803,33 @@
   .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(184,148,90,0.3); cursor: pointer; transition: all 0.3s; }
   .testimonials-dot.active { background: var(--gold-accent); width: 26px; border-radius: 4px; }
 
+  .testi-arrow {
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    border: 1px solid rgba(184,148,90,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--gold-text);
+    box-shadow: 0 6px 20px rgba(184,148,90,0.22);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .testi-arrow:hover { background: var(--gold-accent); color: #fff; box-shadow: 0 8px 24px rgba(184,148,90,0.35); }
+  .testi-arrow:active { transform: translateY(-50%) scale(0.94); }
+  .testi-arrow.left { left: 4px; }
+  .testi-arrow.right { right: 4px; }
+  @media (max-width: 900px) {
+    .testi-arrow { display: none; }
+  }
+
   /* ── LOCATIONS ── */
   .locations { background: var(--forest-dark); }
   .locations-header h2 { color: #ffffff; }
@@ -2019,6 +2046,8 @@
 
     </div>
     <div class="testimonials-slider-container">
+      <button class="testi-arrow left" onclick="scrollTestimonials(-1)" aria-label="Previous testimonial">&#8249;</button>
+      <button class="testi-arrow right" onclick="scrollTestimonials(1)" aria-label="Next testimonial">&#8250;</button>
       <div class="testimonials-slider" id="testimonialsSlider">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
@@ -2462,6 +2491,14 @@ function goToTestimonial(sliderId, index) {
   const cardWidth = cards[0].offsetWidth + 24; // card width + gap
   slider.scrollLeft = index * cardWidth;
   updateTestimonialDots(sliderId);
+}
+
+function scrollTestimonials(dir) {
+  const slider = document.getElementById('testimonialsSlider');
+  if (!slider) return;
+  const card = slider.querySelector('.testi-card');
+  const cardWidth = card.offsetWidth + 22; // card width + gap
+  slider.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
 }
 
 function updateDots(sliderId, dotsId) {
