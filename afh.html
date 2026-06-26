@@ -84,6 +84,35 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .promise-item strong{display:block;font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:4px}
 .promise-item p{font-size:.8rem;color:var(--sub);line-height:1.55}
 
+/* ── DOWNLOAD CARDS ── */
+.dl-sec{padding:80px 24px}
+.dl-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center}
+.dl-list{display:flex;flex-direction:column;gap:14px}
+.dl-card{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:18px 20px;text-decoration:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.dl-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.32);transform:translateY(-3px)}
+.dl-card:active{transform:translateY(0) scale(.98)}
+.dl-ic{width:44px;height:44px;flex-shrink:0;background:var(--gold);color:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.dl-text{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.dl-title{font-size:.96rem;font-weight:700;color:#fff}
+.dl-sub{font-size:.8rem;color:rgba(255,255,255,.6)}
+.dl-arrow{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.95rem;border:1px solid rgba(255,255,255,.18);transition:all .25s}
+.dl-card:hover .dl-arrow{background:var(--gold);color:var(--ink);border-color:var(--gold);transform:translateX(3px)}
+
+@media (max-width:760px){
+  .dl-sec{padding:64px 20px}
+  .dl-wrap{grid-template-columns:1fr;gap:32px;text-align:center}
+  .dl-wrap .lead{max-width:440px;margin:0 auto}
+  .dl-list{gap:12px}
+  .dl-card{text-align:left;padding:16px 16px}
+}
+@media (max-width:420px){
+  .dl-card{gap:12px;padding:14px 14px}
+  .dl-ic{width:40px;height:40px;font-size:16px}
+  .dl-title{font-size:.9rem}
+  .dl-sub{font-size:.76rem}
+  .dl-arrow{display:none}
+}
+
 /* ── SECTION BASE ── */
 .sec{padding:96px 24px}
 .wrap{max-width:1040px;margin:0 auto}
@@ -815,6 +844,36 @@ footer{background:var(--ink);padding:28px 24px}
     </div>
   </div>
 </section>
+
+<!-- DOWNLOADS / TAKE A CLOSER LOOK -->
+<section class="sec dl-sec" id="downloads" style="background:var(--forest)">
+  <div class="wrap dl-wrap">
+    <div class="rv">
+      <p class="ew ew-wh">Plan Your Visit</p>
+      <h2 class="h2 h2-wh">Take a Closer <i style="color:var(--gold)">Look</i></h2>
+      <p class="lead lead-wh">Download our community brochure for a full overview of floor plans, pricing, and amenities, or grab this week's dining menu to see what's cooking at Peace Park.</p>
+    </div>
+    <div class="rv dl-list">
+      <a href="#" class="dl-card">
+        <span class="dl-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <span class="dl-text">
+          <span class="dl-title">Download Brochure</span>
+          <span class="dl-sub">Floor plans, pricing &amp; amenities</span>
+        </span>
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="#" class="dl-card">
+        <span class="dl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v6a2 2 0 1 1-4 0V2"/><path d="M6 8v14"/><path d="M18 2c-1.2 1.4-1.5 3-1.5 5 0 1.6.7 2.6 1.5 3.2V22"/></svg></span>
+        <span class="dl-text">
+          <span class="dl-title">Download Weekly Menu</span>
+          <span class="dl-sub">This week's home-style dining</span>
+        </span>
+        <span class="dl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lbox" onclick="closeLb()">
