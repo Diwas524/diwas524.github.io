@@ -33,27 +33,30 @@
 
   /* ── FAQ ── */
   .faq { background: var(--gold-bg); }
-  .faq-header h2 { color: var(--gold-text); margin-bottom: 16px; }
-  .faq-header h2 em { font-style: italic; color: var(--gold-accent); font-family: var(--font-display); }
-  .faq-header p { font-size: 0.97rem; color: var(--gold-mid); }
-  .faq-header .eyebrow { color: var(--gold-mid); }
+  .faq-header h2 { color: var(--forest-dark); margin-bottom: 16px; }
+  .faq-header h2 em { font-style: italic; color: var(--forest); font-family: var(--font-display); }
+  .faq-header p { font-size: 0.97rem; color: var(--forest); }
+  .faq-header .eyebrow { color: var(--forest) !important; }
   .faq-header { text-align: center; max-width: 600px; margin: 0 auto 52px; }
-  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; grid-auto-rows: auto; }
+  @media (max-width: 768px) {
+    .faq-grid { grid-template-columns: 1fr; }
+  }
   .faq-item {
     background: #fff;
-    border: 1.5px solid rgba(184,148,90,0.25);
+    border: 1.5px solid rgba(59,90,62,0.2);
     border-radius: 14px; overflow: hidden;
     transition: box-shadow 0.2s, border-color 0.2s;
   }
-  .faq-item:hover { border-color: var(--gold-accent); box-shadow: 0 4px 18px rgba(184,148,90,0.2); }
-  .faq-item.open { border-color: var(--gold-accent); box-shadow: 0 4px 20px rgba(184,148,90,0.25); }
-  .faq-question span { font-size: 0.95rem; font-weight: 600; color: var(--gold-text); line-height: 1.45; }
+  .faq-item:hover { border-color: var(--forest); box-shadow: 0 4px 18px rgba(59,90,62,0.2); }
+  .faq-item.open { border-color: var(--forest); box-shadow: 0 4px 20px rgba(59,90,62,0.25); }
+  .faq-question span { font-size: 0.95rem; font-weight: 600; color: var(--forest-dark); line-height: 1.45; }
   .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 24px; cursor: pointer; user-select: none; }
-  .faq-plus { width: 30px; height: 30px; border-radius: 50%; background: rgba(184,148,90,0.15); color: var(--gold-accent); font-size: 1.2rem; font-weight: 400; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.3s; line-height: 1; }
-  .faq-item.open .faq-plus { background: var(--gold-accent); color: #fff; transform: rotate(45deg); }
+  .faq-plus { width: 30px; height: 30px; border-radius: 50%; background: rgba(59,90,62,0.12); color: var(--forest); font-size: 1.2rem; font-weight: 400; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.3s; line-height: 1; }
+  .faq-item.open .faq-plus { background: var(--forest); color: #fff; transform: rotate(45deg); }
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s ease; padding: 0 24px; }
   .faq-item.open .faq-answer { max-height: 400px; padding: 0 24px 22px; }
-  .faq-answer p { font-size: 0.9rem; color: var(--gold-mid); line-height: 1.75; }
+  .faq-answer p { font-size: 0.9rem; color: var(--forest-light); line-height: 1.75; }
 
 
   body { font-family: var(--font-body); color: var(--charcoal); background: var(--cream); line-height: 1.6; }
@@ -297,7 +300,7 @@
   .welcome { background: #fff; }
   .welcome-text h2 { color: var(--charcoal); }
   .welcome-text p { color: var(--mid-gray); }
-  .welcome .eyebrow { color: var(--forest); }
+  .welcome .eyebrow { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
   .sig-info strong { color: var(--charcoal) !important; }
   .sig-info span { color: var(--mid-gray) !important; }
   .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
@@ -334,7 +337,7 @@
   .services-slider-container { position: relative; }
   .services-slider { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; padding: 10px 0; }
   .services-header p { color: var(--gold-mid); }
-  .services-header .eyebrow { color: var(--gold-mid); }
+  .services-header .eyebrow { color: var(--gold-accent) !important; }
   .service-card {
     background: #fff;
     border-radius: 14px;
@@ -373,12 +376,12 @@
   .why-card p { font-size: 0.86rem; color: rgba(255,255,255,0.65); }
 
   /* ── CARE VERTICAL SLIDER ── */
-  .care { background: #fff; }
+  .care { background: var(--gold-bg); }
   .care-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; justify-items: center; }
   .care-text { padding-right: 40px; width: 100%; }
   .care-text h2 { margin-bottom: 16px; font-size: 2.2rem; }
   .care-text > p { margin-bottom: 50px; font-size: 1.02rem; line-height: 1.7; color: var(--mid-gray); }
-  .care-text .eyebrow { margin-bottom: 14px; }
+  .care-text .eyebrow { margin-bottom: 14px; color: #B8945A !important; }
   
   .care-list {
     display: grid;
@@ -516,7 +519,7 @@
   }
 
   /* ── FLOOR PLANS ── */
-  .floorplans { background: var(--gold-bg); }
+  .floorplans { background: var(--forest-dark); }
   .floorplans-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -531,6 +534,7 @@
   }
   .fp-feat { display: flex; align-items: flex-start; gap: 12px; }
   .fp-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .fp-eyebrow {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -538,7 +542,7 @@
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--gold-mid);
+    color: #3B5A3E !important;
     margin-bottom: 14px;
   }
   .fp-eyebrow::before {
@@ -546,7 +550,7 @@
     display: block;
     width: 28px;
     height: 2px;
-    background: var(--gold-mid);
+    background: #ffffff !important;
     border-radius: 2px;
     flex-shrink: 0;
   }
@@ -554,47 +558,47 @@
     font-family: var(--font-display);
     font-size: clamp(1.9rem, 3.5vw, 2.6rem);
     font-weight: 600;
-    color: var(--gold-text);
+    color: #ffffff;
     line-height: 1.2;
     margin-bottom: 18px;
   }
   .fp-desc {
     font-size: 0.95rem;
-    color: var(--gold-mid);
+    color: rgba(255,255,255,0.75);
     line-height: 1.7;
     margin-bottom: 32px;
   }
   .fp-feat-icon {
     width: 36px; height: 36px; border-radius: 8px;
-    background: rgba(184,148,90,0.2);
+    background: rgba(255,255,255,0.15);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    color: var(--gold-accent);
+    color: var(--gold-light);
     font-size: 1rem;
   }
   .fp-feat-text strong {
     display: block; font-size: 0.88rem; font-weight: 700;
-    color: var(--gold-text); margin-bottom: 1px;
+    color: #ffffff; margin-bottom: 1px;
   }
-  .fp-feat-text span { font-size: 0.78rem; color: var(--gold-mid); }
+  .fp-feat-text span { font-size: 0.78rem; color: rgba(255,255,255,0.65); }
   .btn-fp-primary {
     padding: 14px 26px;
-    background: var(--forest-dark);
+    background: var(--gold-accent);
     color: #fff;
     border-radius: 50px;
     font-size: 0.88rem; font-weight: 600;
     transition: background 0.15s; white-space: nowrap;
   }
-  .btn-fp-primary:hover { background: var(--forest); }
+  .btn-fp-primary:hover { background: var(--gold-light); }
   .btn-fp-secondary {
     padding: 13px 26px;
-    border: 1.5px solid var(--gold-text);
-    color: var(--gold-text);
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: #ffffff;
     border-radius: 50px;
     font-size: 0.88rem; font-weight: 600;
     transition: all 0.15s; white-space: nowrap;
   }
-  .btn-fp-secondary:hover { background: var(--gold-text); color: #fff; }
+  .btn-fp-secondary:hover { background: rgba(255,255,255,0.15); color: #fff; }
 
   /* Right image side */
   .floorplans-img {
@@ -642,7 +646,7 @@
   .resources-text { max-width: 460px; }
   .resources-actions { display: flex; gap: 16px; flex-wrap: wrap; }
   .resource-card-text { line-height: 1.3; }
-  .resources-text .eyebrow { color: var(--gold-light); }
+  .resources-text .eyebrow { color: var(--forest) !important; }
   .resources-text h2 { color: #fff; margin: 8px 0 14px; }
   .resources-text h2 em { color: var(--gold-light); }
   .resources-text p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
@@ -697,37 +701,37 @@
   .amenity-card p { font-size: 0.8rem; }
 
   /* ── TESTIMONIALS SLIDER ── */
-  .testimonials { background: var(--forest-dark); }
+  .testimonials { background: var(--gold-bg); }
   .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 50px; }
-  .testimonials-header h2 { color: #fff; }
-  .testimonials-header p { color: rgba(255,255,255,0.7); }
-  .testimonials-header .eyebrow { color: var(--gold-light); }
+  .testimonials-header h2 { color: var(--gold-text); }
+  .testimonials-header p { color: var(--gold-mid); }
+  .testimonials-header .eyebrow { color: var(--gold-accent) !important; }
   .testimonials-slider-container { position: relative; overflow: hidden; }
   .testimonials-slider { display: flex; gap: 24px; overflow-x: auto; scroll-behavior: smooth; padding: 10px 0 40px 0; scrollbar-width: none; }
   .testimonials-slider::-webkit-scrollbar { display: none; }
   .testi-card {
     flex: 0 0 calc(50% - 12px);
-    background: rgba(255,255,255,0.07);
+    background: #fff;
     border-radius: 16px; padding: 32px;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(184,148,90,0.2);
     transition: all 0.3s ease;
   }
-  .testi-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.3); transform: translateY(-4px); border-color: var(--gold-light); }
-  .testi-stars { color: var(--gold-light); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
-  .testi-text { font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+  .testi-card:hover { box-shadow: 0 12px 40px rgba(184,148,90,0.2); transform: translateY(-4px); border-color: var(--gold-accent); }
+  .testi-stars { color: var(--gold-accent); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .testi-text { font-size: 0.95rem; color: var(--gold-mid); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
   .testi-author { display: flex; align-items: center; gap: 14px; }
   .testi-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--gold-accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; border: 2px solid var(--gold-light); }
-  .testi-name strong { display: block; font-size: 0.9rem; color: #fff; margin-bottom: 2px; }
-  .testi-name span { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+  .testi-name strong { display: block; font-size: 0.9rem; color: var(--gold-text); margin-bottom: 2px; }
+  .testi-name span { font-size: 0.8rem; color: var(--gold-mid); }
   .testimonials-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
-  .testimonials-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.3s; }
-  .testimonials-dot.active { background: var(--gold-light); width: 28px; border-radius: 5px; }
+  .testimonials-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(184,148,90,0.3); cursor: pointer; transition: all 0.3s; }
+  .testimonials-dot.active { background: var(--gold-accent); width: 28px; border-radius: 5px; }
 
   /* ── LOCATIONS ── */
-  .locations { background: #fff; }
-  .locations-header h2 { color: var(--charcoal); }
-  .locations-header .eyebrow { color: var(--forest); }
-  .locations-header p { color: var(--mid-gray); }
+  .locations { background: var(--forest-dark); }
+  .locations-header h2 { color: #ffffff; }
+  .locations-header .eyebrow { color: #ffffff !important; }
+  .locations-header p { color: rgba(255,255,255,0.75); }
   .location-card {
     background: var(--section-bg);
     border-radius: 16px; overflow: hidden;
@@ -872,40 +876,40 @@
   .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   /* ── REFERRALS & CONTACT ── */
-  .referrals { background: var(--forest-dark); }
+  .referrals { background: #ffffff; }
   .referrals-header { max-width: 640px; margin-bottom: 50px; }
-  .referrals-header .eyebrow { color: var(--gold-light); }
-  .referrals-header h2 { color: #fff; }
-  .referrals-header p { color: rgba(255,255,255,0.7); }
+  .referrals-header .eyebrow { color: var(--gold-accent) !important; }
+  .referrals-header h2 { color: var(--gold-text); }
+  .referrals-header p { color: var(--gold-mid); }
   .referrals-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; align-items: stretch; }
   .referrals-card {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #fff;
+    border: 1px solid rgba(184,148,90,0.2);
     border-radius: 16px; padding: 40px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 24px rgba(184,148,90,0.1);
   }
-  .referrals-card h3 { font-size: 1.35rem; margin-bottom: 26px; color: #fff; }
+  .referrals-card h3 { font-size: 1.35rem; margin-bottom: 26px; color: var(--gold-text); }
   .contact-item {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--gold-bg-dark);
+    border: 1px solid rgba(184,148,90,0.2);
     border-radius: 10px; padding: 16px 18px; margin-bottom: 14px;
   }
   .contact-item:last-child { margin-bottom: 0; }
-  .contact-item strong { display: block; font-size: 0.86rem; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
-  .contact-item span, .contact-item a { font-size: 0.92rem; color: rgba(255,255,255,0.9); }
-  .contact-item a:hover { color: var(--gold-light); }
+  .contact-item strong { display: block; font-size: 0.86rem; color: var(--gold-mid); margin-bottom: 4px; }
+  .contact-item span, .contact-item a { font-size: 0.92rem; color: var(--gold-text); }
+  .contact-item a:hover { color: var(--gold-accent); }
   .referral-form { display: flex; flex-direction: column; gap: 16px; }
   .referral-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .referral-form input, .referral-form select, .referral-form textarea {
-    width: 100%; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px;
+    width: 100%; border: 1px solid rgba(184,148,90,0.3); border-radius: 10px;
     padding: 14px 16px; font-family: var(--font-body); font-size: 0.9rem;
-    color: #fff; background: rgba(255,255,255,0.1);
+    color: var(--gold-text); background: #fff;
   }
-  .referral-form input::placeholder, .referral-form textarea::placeholder { color: rgba(255,255,255,0.4); }
-  .referral-form select { appearance: none; cursor: pointer; color: rgba(255,255,255,0.9); }
-  .referral-form select option { background: var(--forest-dark); color: #fff; }
+  .referral-form input::placeholder, .referral-form textarea::placeholder { color: rgba(92,74,30,0.4); }
+  .referral-form select { appearance: none; cursor: pointer; color: var(--gold-text); }
+  .referral-form select option { background: #fff; color: var(--gold-text); }
   .referral-form textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
-  .referral-form input:focus, .referral-form select:focus, .referral-form textarea:focus { outline: none; border-color: var(--gold-light); }
+  .referral-form input:focus, .referral-form select:focus, .referral-form textarea:focus { outline: none; border-color: var(--gold-accent); }
   .btn-referral-submit {
     align-self: flex-start; background: var(--gold-accent); color: #fff;
     border: none; border-radius: 30px; padding: 14px 30px;
@@ -1026,7 +1030,8 @@
   /* ── LIFE GALLERY ── */
   .life-gallery { background: #fff; padding: 90px 40px; }
   .life-gallery-inner { max-width: 1200px; margin: 0 auto; }
-  .life-gallery-header { text-align: center; max-width: 640px; margin: 0 auto 50px; } color: var(--forest); margin-bottom: 14px; }
+  .life-gallery-header { text-align: center; max-width: 640px; margin: 0 auto 50px; }
+  .life-gallery-header .eyebrow { color: #3B5A3E !important; margin-bottom: 14px; }
   .life-gallery-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--charcoal); margin-bottom: 16px; line-height: 1.2; }
   .life-gallery-header p { font-size: 0.98rem; color: var(--mid-gray); line-height: 1.75; }
 
@@ -1216,8 +1221,25 @@
     .hero-badge-text span { font-size: 0.7rem; }
 
     .resources-inner { flex-direction: column; text-align: center; align-items: center; }
-    .resources-actions { flex-direction: column; width: 100%; }
-    .resource-card { width: 100%; }
+    .resources-actions { flex-direction: column; width: 100%; gap: 14px; }
+    .resource-card {
+      width: 100%;
+      padding: 20px 24px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      gap: 18px;
+    }
+    .resource-icon {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      background: var(--gold-accent);
+      color: #fff;
+    }
+    .resource-card-text strong { font-size: 1rem; }
+    .resource-card-text span { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+    .resources-text h2 { font-size: 2rem; }
+    .resources-text p { font-size: 0.92rem; }
     section { padding: 60px 24px; }
     .welcome-grid, .floorplans-grid, .care-layout { grid-template-columns: 1fr; }
     .floorplans-img { order: -1; }
@@ -1247,7 +1269,7 @@
   }
 
   /* ── CAREGIVING TEAM ── */
-  .team { background: var(--gold-bg); }
+  .team { background: #ffffff; }
   .team-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .team-photo { width: 100%; height: 210px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -1259,7 +1281,7 @@
   .team-card-body h3 { margin-bottom: 4px; color: var(--gold-text); }
   .team-role { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-accent); margin-bottom: 14px; }
   .team-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
-  .team-header .eyebrow { color: var(--gold-mid); }
+  .team-header .eyebrow { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
   .team-header p { color: var(--gold-mid); }
   .team-header h2 { color: var(--gold-text); }
   .team-header h2 em { font-family: 'Dancing Script', cursive; font-style: italic; font-weight: 700; color: var(--gold-accent); }
@@ -1392,7 +1414,7 @@
       <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor exterior" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
     </div>
     <div class="welcome-text">
-      <div class="eyebrow">Welcome Home</div>
+      <div class="eyebrow" style="color:#3B5A3E;">Welcome Home</div>
       <h2>More than care. More like family.</h2>
       <p>Choosing senior living for someone you love can feel overwhelming. We understand — and we're here to make it simple, personal, and reassuring.</p>
       <p>At Autumn Hill Manor, our smaller size is our greatest strength. It lets us learn life stories, celebrate birthdays, recognize preferences, and build genuine relationships that larger communities simply can't.</p>
@@ -1413,7 +1435,7 @@
   <div class="section-inner">
     <div class="services-header">
       <div class="services-header-text">
-        <div class="eyebrow">Our Services</div>
+        <div class="eyebrow" style="color:#B8945A;">Our Services</div>
         <h2>Care that fits your family</h2>
         <p>Thoughtful, individualized support for every stage — always delivered with warmth, dignity, and respect.</p>
       </div>
@@ -1475,7 +1497,7 @@
 <section class="resources">
   <div class="section-inner resources-inner">
     <div class="resources-text">
-      <div class="eyebrow">Plan Your Visit</div>
+      <div class="eyebrow" style="color:#D4AB76;">Plan Your Visit</div>
       <h2>Take a Closer <em>Look</em></h2>
       <p>Download our community brochure for a full overview of floor plans, pricing, and amenities, or grab this week's dining menu to see what's cooking at Autumn Hill Manor.</p>
     </div>
@@ -1506,7 +1528,7 @@
 <section class="life-gallery">
   <div class="life-gallery-inner">
     <div class="life-gallery-header">
-      <div class="eyebrow">Life at the Manor</div>
+      <div class="eyebrow" style="color:#ffffff;">Life at the Manor</div>
       <h2>A glimpse of everyday life</h2>
       <p>Sunlit common rooms, blooming gardens, shared meals, and good company — moments from our Weatherford community.</p>
     </div>
@@ -1601,7 +1623,7 @@
 <section class="care" id="care">
   <div class="section-inner care-layout">
     <div class="care-text">
-      <div class="eyebrow">Care Support</div>
+      <div class="eyebrow" style="color:#B8945A !important;">Care Support</div>
       <h2>Support that's always nearby</h2>
       <p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>
       <div class="care-list">
@@ -1671,7 +1693,7 @@
 
     <!-- LEFT: text -->
     <div>
-      <div class="fp-eyebrow">Accepting New Residents</div>
+      <div class="fp-eyebrow" style="color:#ffffff !important;">Accepting New Residents</div>
       <h2 class="fp-heading">Room to live independently</h2>
       <p class="fp-desc">Our independent living apartments offer the space and comforts of home, with optional services available whenever they're needed.</p>
 
@@ -1758,7 +1780,7 @@
 <section class="team" id="team">
   <div class="section-inner">
     <div class="team-header">
-      <div class="eyebrow">The People Behind the Care</div>
+      <div class="eyebrow" style="color:#ffffff;">The People Behind the Care</div>
       <h2>Meet Our <em>Caregiving Team</em></h2>
       <p>Every person who walks through our door is greeted by someone who genuinely cares. Here are the dedicated individuals who make Autumn Hill Manor feel like home.</p>
     </div>
@@ -1813,7 +1835,7 @@
 <section class="testimonials">
   <div class="section-inner">
     <div class="testimonials-header">
-      <div class="eyebrow">From Our Families</div>
+      <div class="eyebrow" style="color:#B8945A;">From Our Families</div>
       <h2>Stories from families like yours</h2>
       <p>The trust of local families is the truest measure of our care.</p>
     </div>
@@ -1888,8 +1910,8 @@
 <section class="locations">
   <div class="section-inner">
     <div class="locations-header">
-      <div class="eyebrow">Part of the Autumn Hill Family</div>
-      <h2>One Community, <span style="color: var(--forest); font-style: italic;">Multiple Locations</span> Across Texas</h2>
+      <div class="eyebrow" style="color:#ffffff;">Part of the Autumn Hill Family</div>
+      <h2>One Community, <span style="color: #B8945A; font-style: italic;">Multiple Locations</span> Across Texas</h2>
       <p>Same warmth, same standard of care, each location licensed, family-run, and built around the same promise of compassionate senior living.</p>
     </div>
     <div class="locations-slider-wrap">
@@ -1964,7 +1986,7 @@
 <section class="faq" id="faq">
   <div class="section-inner">
     <div class="faq-header">
-      <div class="eyebrow">Common Questions</div>
+      <div class="eyebrow" style="color:#B8945A;">Common Questions</div>
       <h2>Answers to What <em>Families<br>Ask Most</em></h2>
       <p>We believe in total transparency. Here are the questions we hear most often, answered honestly.</p>
     </div>
@@ -2038,7 +2060,7 @@
 <section class="referrals" id="contact">
   <div class="section-inner">
     <div class="referrals-header">
-      <div class="eyebrow">Referrals &amp; Contact</div>
+      <div class="eyebrow" style="color:#B8945A;">Referrals &amp; Contact</div>
       <h2>Connect with Autumn Hill Manor</h2>
       <p>For placement inquiries, referral coordination, or questions about resident fit, contact our team directly.</p>
     </div>
