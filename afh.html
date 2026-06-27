@@ -453,6 +453,17 @@ footer{background:var(--ink);padding:28px 24px}
 .staff-role{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin-bottom:12px}
 .staff-bio{font-size:.83rem;color:var(--sub);line-height:1.72}
 .staff-badge{display:inline-flex;align-items:center;gap:6px;background:var(--mint-pale);color:var(--forest);font-size:.7rem;font-weight:700;padding:5px 12px;border-radius:100px;margin-top:12px}
+.owner-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
+.owner-photo-wrap{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(30,58,47,.18)}
+.owner-photo-wrap img{width:100%;height:520px;object-fit:cover;display:block}
+.owner-credentials{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+.owner-cred{display:inline-flex;align-items:center;gap:7px;background:var(--mint-pale);color:var(--forest);font-size:.74rem;font-weight:700;padding:8px 14px;border-radius:100px}
+.owner-sig{margin-top:24px;font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--forest)}
+.owner-sig span{display:block;font-family:var(--fb);font-size:.75rem;font-weight:600;color:var(--sub);letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+.owner-letter p{font-size:.97rem;color:var(--sub);line-height:1.85;margin-bottom:18px}
+.owner-letter p:last-child{margin-bottom:0}
+.owner-pullquote{border-left:3px solid var(--gold);padding-left:20px;margin:28px 0;font-family:var(--fd);font-size:1.15rem;font-style:italic;color:var(--ink);line-height:1.55}
+@media (max-width:860px){.owner-grid{grid-template-columns:1fr;gap:36px}.owner-photo-wrap img{height:380px}}
 
 /* ── COMPARISON ── */
 .compare-bg{background:var(--forest)}
@@ -610,7 +621,7 @@ footer{background:var(--ink);padding:28px 24px}
           <img class="pm" src="https://images.unsplash.com/photo-1574279606130-09958dc756f7?w=900&q=80" alt="Caregiver walking with senior resident in peaceful garden" loading="lazy" />
           <div class="badge"><span class="badge-dot"></span> Currently accepting new residents</div>
         </div>
-        <a class="journey-card" href="#about">
+        <a class="journey-card" href="owner.html">
           <img class="jc-photo" src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/Beautiful-2.JPG?w=200&q=100" alt="In Each Other's Care caregiver" />
           <div class="jc-text"><strong>Meet the Owner (RN-BSN) </strong><span>A Lifetime of Caregiving</span></div>
           <span class="jc-arrow">→</span>
@@ -888,6 +899,32 @@ footer{background:var(--ink);padding:28px 24px}
   </div>
 </div>
 
+<!-- MEET THE OWNER -->
+<section class="sec" id="owner" style="background:var(--blush)">
+  <div class="wrap">
+    <div class="owner-grid">
+      <div class="rv-l">
+        <div class="owner-photo-wrap">
+          <img src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/IMG_6020.JPG?w=900&q=90" alt="Tami, RN BSN, Owner and Administrator" loading="lazy"/>
+        </div>
+        <div class="owner-credentials">
+          <span class="owner-cred">🎓 RN, BSN</span>
+          <span class="owner-cred">👶 15 Years NICU</span>
+          <span class="owner-cred">🏡 6 Years AFH Provider</span>
+        </div>
+      </div>
+      <div class="rv-r">
+        <p class="ew">From Our Owner</p>
+        <h2 class="h2">A Lifetime Spent <i>Caring for Others</i></h2>
+        <p class="lead">My name is Tami, and caring for others has been a part of my life for as long as I can remember. I grew up in an Adult Family Home owned and operated by my mother, where I learned early on that caregiving is about much more than meeting physical needs.</p>
+        <p class="lead" style="margin-top:14px">Today, I combine my nursing background with a lifetime of caregiving experience to provide thoughtful, personalized care for each resident entrusted to us.</p>
+        <a href="owner.html" class="btn-gold" style="margin-top:28px">Read Tami's Full Story →</a>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- STAFF -->
 <section class="sec" id="staff" style="background:var(--white)">
   <div class="wrap">
@@ -897,15 +934,7 @@ footer{background:var(--ink);padding:28px 24px}
       <p class="lead" style="margin:0 auto">Every person who walks through our door is greeted by someone who genuinely cares. Here are the dedicated individuals who make In Each Other's Care feel like home.</p>
     </div>
     <div class="staff-grid">
-      <div class="staff-card rv">
-        <img class="staff-img" src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/Beautiful-2.JPG?w=600&q=80" alt="Tami Serpa, Home Director"/>
-        <div class="staff-body">
-          <div class="staff-name">Tami Serpa</div>
-          <div class="staff-role">Care Director & Owner</div>
-          <p class="staff-bio">With a lifetime of caregiving experience and more than 15 years as a Registered Nurse, Tami co-founded our adult family homes on a simple belief: every person deserves dignity, compassion, and a true sense of home. She is actively involved in the daily care of each resident, ensuring personalized support, meaningful relationships, and a warm, welcoming environment where residents feel at home and families have peace of mind.</p>
-          <span class="staff-badge">🎓 Certified AFH Administrator</span>
-        </div>
-      </div>
+      
       <div class="staff-card rv">
         <img class="staff-img" src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/carlos1.JPG?w=600&q=80" alt="James Reyes, Lead Caregiver"/>
         <div class="staff-body">
@@ -925,6 +954,16 @@ footer{background:var(--ink);padding:28px 24px}
           <span class="staff-badge">🎨 Recreation & Activities Coordinator</span>
         </div>
       </div>
+<div class="staff-card rv">
+        <img class="staff-img" src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/Beautiful-2.JPG?w=600&q=80" alt="Tami Serpa, Home Director"/>
+        <div class="staff-body">
+          <div class="staff-name">Nicole</div>
+          <div class="staff-role">AFH Manager</div>
+          <p class="staff-bio">With over 15 years of caregiving experience, 9 years in resident care management, and 5 years with Parkside, Nicole is a key part of our team. Known for her organization and reliability, she helps keep daily operations running smoothly while ensuring residents receive consistent, compassionate care and support.</p>
+          <span class="staff-badge">👩‍⚕️ Resident Care Manager</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1187,7 +1226,7 @@ footer{background:var(--ink);padding:28px 24px}
     <span class="ft-copy">© 2026 In Each Other's Care Adult Family Home · Vancouver, WA</span>
     <div class="ft-links">
       <a href="tel:+18013696018">(801) 369-6018</a>
-      <a href="mailto:info@peaceparkafh.com">info@peaceparkafh.com</a>
+      <a href="mailto:parksideadultfamilyhome@gmail.com">parksideadultfamilyhome@gmail.com</a>
       <a href="#">Privacy</a>
     </div>
   </div>
