@@ -54,9 +54,9 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .hero{height:calc(100vh - 46px);max-height:calc(100vh - 46px);position:relative;overflow:hidden;display:flex;align-items:stretch}
 .hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;z-index:0}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(17,40,28,.55) 0%,rgba(17,40,28,.35) 50%,rgba(17,40,28,.08) 100%)}
-.hero-inner{position:relative;z-index:2;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px 40px}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding-top:80px}
-.hero-right-stats{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding-top:80px}
+.hero-inner{position:relative;z-index:2;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:60px 72px 40px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding-top:40px}
+.hero-right-stats{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding-top:40px}
 .stats-bento{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:340px}
 .stat-card{background:rgba(30,40,35,.2);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:22px 26px;box-shadow:0 8px 32px rgba(0,0,0,.1)}
 .stat-n{font-family:var(--fd);font-size:2.2rem;font-weight:700;color:#fff;line-height:1;margin-bottom:6px}
@@ -66,10 +66,10 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .hero h1 span{font-style:italic;color:var(--mint)}
 .hero-p{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:420px;margin-bottom:32px;font-weight:300}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:var(--ink);padding:16px 36px;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);letter-spacing:.02em;box-shadow:0 8px 24px rgba(212,168,83,.3);border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--ink);padding:16px 36px;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);letter-spacing:.02em;box-shadow:0 8px 32px rgba(212,168,83,.55),0 2px 8px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.3);cursor:pointer}
 .btn-gold:hover{background:#C49640;transform:translateY(-4px);box-shadow:0 16px 40px rgba(212,168,83,.5);letter-spacing:.04em}
-.btn-wh{background:rgba(255,255,255,.15);color:#fff;padding:15px 36px;border-radius:50px;border:2px solid rgba(255,255,255,.6);font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
-.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.25);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-wh{background:rgba(255,255,255,.28);color:#fff;padding:15px 36px;border-radius:50px;border:2px solid rgba(255,255,255,.95);font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3);text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.4);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.35);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 /* legacy trust-item / trust-div kept for mobile fallback but hidden on desktop */
 .hero-trust{display:none}
 .trust-item{text-align:center}
@@ -407,8 +407,7 @@ footer{background:var(--ink);padding:28px 24px}
     border-radius:14px;
     letter-spacing:.01em;
   }
-  .btn-wh{display:none}
-
+  .btn-wh{display:none!important}
   .promise-inner{grid-template-columns:1fr 1fr;gap:20px}
   .about-grid{grid-template-columns:1fr;gap:44px}
   .photo-stack .pm{height:320px}
@@ -426,10 +425,11 @@ footer{background:var(--ink);padding:28px 24px}
   .gal-grid{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
   .promise-inner{grid-template-columns:1fr 1fr}
-  .hero-btns,.cta-btns{flex-direction:column;align-items:flex-start}
+  .hero-btns,.cta-btns{flex-direction:column;align-items:stretch}
   .cta-sec .cta-btns{align-items:center}
   .form-row{grid-template-columns:1fr}
   .form-card{padding:28px 22px}
+  .btn-wh{display:none!important}
 }
 /* ── TRUST BAR ── */
 .trust-bar{background:var(--forest);padding:14px 24px}
@@ -1118,7 +1118,7 @@ footer{background:var(--ink);padding:28px 24px}
       <p class="lead">Same warmth, same standard of care, two sister homes across Washington, each licensed, RN-BSN-run, and built around the same promise.</p>
     </div>
     <div class="loc-grid">
-      <div class="loc-card rv">
+      <div class="loc-card rv" onclick="openSlider('parkside')" style="cursor:pointer">
         <div class="loc-img"><img src="https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/pafh.jpg?w=700&q=80" alt="Parkside Adult Family Home in Vancouver WA"/></div>
         <div class="loc-body">
           <h3>Parkside Adult Family Home</h3>
@@ -1126,7 +1126,7 @@ footer{background:var(--ink);padding:28px 24px}
           <a class="loc-phone" href="tel:+18013696018">📞 (801) 369-6018</a>
         </div>
       </div>
-      <div class="loc-card rv">
+      <div class="loc-card rv" onclick="openSlider('firstplace')" style="cursor:pointer">
         <div class="loc-img"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="First Place Adult Family Home"/></div>
         <div class="loc-body">
           <h3>First Place Adult Family Home</h3>
@@ -1135,7 +1135,7 @@ footer{background:var(--ink);padding:28px 24px}
         </div>
       </div>
 
-      <div class="loc-card rv">
+      <div class="loc-card rv" onclick="openSlider('comingsoon')" style="cursor:pointer">
         <div class="loc-img"><img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=700&q=80" alt="In Each Other's Care Adult Family Home in Auburn"/></div>
         <div class="loc-body">
           <h3>Opening Soon ..!</h3>
@@ -1486,6 +1486,168 @@ function testiMove(d){testiGo(testiIdx+d);resetTesti()}
 function resetTesti(){clearInterval(testiTimer);testiTimer=setInterval(()=>testiGo(testiIdx+1),6000)}
 resetTesti();
 
+</script>
+
+<!-- ── IMAGE SLIDER LIGHTBOX ── -->
+<style>
+.ls-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.ls-overlay.open{opacity:1;pointer-events:all}
+.ls-header{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;z-index:10}
+.ls-title{color:#fff;font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.ls-close{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0}
+.ls-close:hover{background:rgba(255,255,255,.3);border-color:#fff}
+.ls-stage{position:relative;width:100%;max-width:900px;display:flex;align-items:center;justify-content:center;padding:80px 70px}
+.ls-img-wrap{width:100%;max-height:72vh;display:flex;align-items:center;justify-content:center;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.ls-img-wrap img{width:100%;max-height:72vh;object-fit:contain;display:block;background:#111}
+.ls-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0}
+.ls-arrow:hover{background:rgba(255,255,255,.3);border-color:#fff}
+.ls-prev{left:10px}.ls-next{right:10px}
+.ls-footer{display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:24px}
+.ls-counter{color:rgba(255,255,255,.6);font-size:.82rem;letter-spacing:.1em}
+.ls-dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:300px}
+.ls-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);border:none;cursor:pointer;transition:background .2s,transform .2s;padding:0}
+.ls-dot.active{background:#fff;transform:scale(1.3)}
+@media(max-width:600px){
+  .ls-stage{padding:70px 50px}
+  .ls-arrow{width:38px;height:38px;font-size:1rem}
+  .ls-prev{left:4px}.ls-next{right:4px}
+}
+</style>
+
+<!-- Lightbox Modal -->
+<div class="ls-overlay" id="lsOverlay" role="dialog" aria-modal="true" aria-label="Home image gallery">
+  <div class="ls-header">
+    <span class="ls-title" id="lsTitle"></span>
+    <button class="ls-close" id="lsClose" aria-label="Close gallery">✕</button>
+  </div>
+  <div class="ls-stage">
+    <button class="ls-arrow ls-prev" id="lsPrev" aria-label="Previous image">‹</button>
+    <div class="ls-img-wrap"><img id="lsImg" src="" alt=""/></div>
+    <button class="ls-arrow ls-next" id="lsNext" aria-label="Next image">›</button>
+  </div>
+  <div class="ls-footer">
+    <div class="ls-counter" id="lsCounter"></div>
+    <div class="ls-dots" id="lsDots"></div>
+  </div>
+</div>
+
+<script>
+// ── SLIDER DATA — replace placeholder URLs with your real images ──
+const sliderData = {
+  parkside: {
+    title: 'Parkside Adult Family Home',
+    images: [
+      {src:'https://raw.githubusercontent.com/Diwas524/website-file/refs/heads/main/pafh.jpg',alt:'Parkside front exterior'},
+      {src:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85',alt:'Parkside living room'},
+      {src:'https://images.unsplash.com/photo-1615873968403-89e068629265?w=900&q=85',alt:'Parkside bedroom'},
+      {src:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85',alt:'Parkside kitchen'},
+      {src:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85',alt:'Parkside backyard'},
+      {src:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=85',alt:'Parkside exterior side view'},
+      {src:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=85',alt:'Parkside dining area'},
+      {src:'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=85',alt:'Parkside bathroom'},
+      {src:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85',alt:'Parkside garden'},
+      {src:'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=900&q=85',alt:'Parkside common area'},
+    ]
+  },
+  firstplace: {
+    title: 'First Place Adult Family Home',
+    images: [
+      {src:'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=85',alt:'First Place front exterior'},
+      {src:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=85',alt:'First Place living room'},
+      {src:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85',alt:'First Place bedroom'},
+      {src:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85',alt:'First Place kitchen'},
+      {src:'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=85',alt:'First Place backyard'},
+      {src:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=85',alt:'First Place exterior'},
+      {src:'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=85',alt:'First Place dining'},
+      {src:'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=900&q=85',alt:'First Place bathroom'},
+      {src:'https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=900&q=85',alt:'First Place garden'},
+      {src:'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=900&q=85',alt:'First Place common area'},
+    ]
+  },
+  comingsoon: {
+    title: 'Opening Soon — Vancouver, WA',
+    images: [
+      {src:'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&q=85',alt:'Coming soon home exterior'},
+      {src:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85',alt:'Interior preview'},
+      {src:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=85',alt:'Exterior view'},
+      {src:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85',alt:'Garden area'},
+      {src:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=85',alt:'Front of home'},
+      {src:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=900&q=85',alt:'Dining area'},
+      {src:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85',alt:'Bedroom'},
+      {src:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=85',alt:'Living space'},
+      {src:'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=85',alt:'Bathroom'},
+      {src:'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=900&q=85',alt:'Common area'},
+    ]
+  }
+};
+
+let lsCurrent=0, lsImages=[], lsKey='';
+const lsOverlay=document.getElementById('lsOverlay');
+const lsImg=document.getElementById('lsImg');
+const lsTitle=document.getElementById('lsTitle');
+const lsCounter=document.getElementById('lsCounter');
+const lsDots=document.getElementById('lsDots');
+
+function openSlider(key){
+  lsKey=key;
+  const data=sliderData[key];
+  lsImages=data.images;
+  lsTitle.textContent=data.title;
+  lsCurrent=0;
+  buildDots();
+  showSlide(0);
+  lsOverlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeSlider(){
+  lsOverlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function buildDots(){
+  lsDots.innerHTML='';
+  lsImages.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='ls-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','View image '+(i+1));
+    d.onclick=()=>showSlide(i);
+    lsDots.appendChild(d);
+  });
+}
+
+function showSlide(i){
+  lsCurrent=(i+lsImages.length)%lsImages.length;
+  lsImg.src=lsImages[lsCurrent].src;
+  lsImg.alt=lsImages[lsCurrent].alt;
+  lsCounter.textContent=(lsCurrent+1)+' / '+lsImages.length;
+  lsDots.querySelectorAll('.ls-dot').forEach((d,idx)=>d.classList.toggle('active',idx===lsCurrent));
+}
+
+document.getElementById('lsClose').onclick=closeSlider;
+document.getElementById('lsPrev').onclick=()=>showSlide(lsCurrent-1);
+document.getElementById('lsNext').onclick=()=>showSlide(lsCurrent+1);
+
+// Close on backdrop click
+lsOverlay.addEventListener('click',e=>{if(e.target===lsOverlay)closeSlider()});
+
+// Keyboard navigation
+document.addEventListener('keydown',e=>{
+  if(!lsOverlay.classList.contains('open'))return;
+  if(e.key==='ArrowLeft')showSlide(lsCurrent-1);
+  else if(e.key==='ArrowRight')showSlide(lsCurrent+1);
+  else if(e.key==='Escape')closeSlider();
+});
+
+// Touch swipe support
+let lsTouchX=null;
+lsOverlay.addEventListener('touchstart',e=>{lsTouchX=e.touches[0].clientX},{passive:true});
+lsOverlay.addEventListener('touchend',e=>{
+  if(lsTouchX===null)return;
+  const diff=lsTouchX-e.changedTouches[0].clientX;
+  if(Math.abs(diff)>40){diff>0?showSlide(lsCurrent+1):showSlide(lsCurrent-1)}
+  lsTouchX=null;
+},{passive:true});
 </script>
 </body>
 </html>
