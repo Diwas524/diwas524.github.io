@@ -319,13 +319,14 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 
 /* ── FOOTER ── */
 footer{background:var(--ink);padding:28px 24px}
-.ft{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.ft-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff}
+.ft-inner{max-width:1040px;margin:0 auto}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-logo{font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
 .ft-copy{font-size:.78rem;color:rgba(255,255,255,.35)}
-.ft-links{display:flex;gap:20px}
-.ft-links a{color:rgba(255,255,255,.35);text-decoration:none;font-size:.78rem;transition:color .2s}
-.ft-links a:hover{color:rgba(255,255,255,.7)}
-@media(max-width:600px){.ft{justify-content:center;text-align:center}.ft-links{justify-content:center}}
+.ft-credit{font-size:.78rem;color:rgba(255,255,255,.35)}
+.ft-credit a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.ft-credit a:hover{color:rgba(255,255,255,.8)}
+@media(max-width:600px){.ft-bottom{justify-content:center;text-align:center}}
 
 /* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
@@ -1331,13 +1332,11 @@ footer{background:var(--ink);padding:28px 24px}
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft">
-    <div class="ft-logo">🕊️ In Each Other's Care AFH</div>
-    <span class="ft-copy">© 2026 In Each Other's Care Adult Family Home · Vancouver, WA</span>
-    <div class="ft-links">
-      <a href="tel:+18013696018">(801) 369-6018</a>
-      <a href="mailto:parksideadultfamilyhome@gmail.com">parksideadultfamilyhome@gmail.com</a>
-      <a href="#">Privacy</a>
+  <div class="ft-inner">
+    <div class="ft-bottom">
+      <div class="ft-logo">🕊️ In Each Other's Care AFH</div>
+      <span class="ft-copy">© 2026 In Each Other's Care Adult Family Home</span>
+      <span class="ft-credit">Designed by <a href="https://diwaspandey.com.np" target="_blank" rel="noopener">Diwas Pandey</a></span>
     </div>
   </div>
 </footer>
