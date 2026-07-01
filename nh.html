@@ -11,20 +11,20 @@
   :root {
     --cream: #FAF7F2;
     --warm-white: #FFFFFF;
-    --forest: #3B5A3E;
-    --forest-dark: #2C4430;
-    --forest-light: #4E7252;
-    --gold: #B8945A;
-    --gold-light: #D4AB76;
+    --forest: #0F766E;
+    --forest-dark: #0B5C56;
+    --forest-light: #14958A;
+    --gold: #FF7F50;
+    --gold-light: #FFB199;
     --charcoal: #2A2A2A;
     --mid-gray: #6B6B6B;
     --light-gray: #E8E4DD;
     --section-bg: #F5F1EB;
-    --gold-bg: #F5EDD8;
-    --gold-bg-dark: #EDE0C4;
-    --gold-text: #5C4A1E;
-    --gold-mid: #7A6030;
-    --gold-accent: #B8945A;
+    --gold-bg: #F5E6CA;
+    --gold-bg-dark: #F0DFB8;
+    --gold-text: #9A3412;
+    --gold-mid: #B45309;
+    --gold-accent: #FF7F50;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
   }
@@ -44,15 +44,15 @@
   }
   .faq-item {
     background: #fff;
-    border: 1.5px solid rgba(59,90,62,0.2);
+    border: 1.5px solid rgba(15, 118, 110,0.2);
     border-radius: 14px; overflow: hidden;
     transition: box-shadow 0.2s, border-color 0.2s;
   }
-  .faq-item:hover { border-color: var(--forest); box-shadow: 0 4px 18px rgba(59,90,62,0.2); }
-  .faq-item.open { border-color: var(--forest); box-shadow: 0 4px 20px rgba(59,90,62,0.25); }
+  .faq-item:hover { border-color: var(--forest); box-shadow: 0 4px 18px rgba(15, 118, 110,0.2); }
+  .faq-item.open { border-color: var(--forest); box-shadow: 0 4px 20px rgba(15, 118, 110,0.25); }
   .faq-question span { font-size: 0.95rem; font-weight: 600; color: var(--forest-dark); line-height: 1.45; }
   .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 24px; cursor: pointer; user-select: none; }
-  .faq-plus { width: 30px; height: 30px; border-radius: 50%; background: rgba(59,90,62,0.12); color: var(--forest); font-size: 1.2rem; font-weight: 400; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.3s; line-height: 1; }
+  .faq-plus { width: 30px; height: 30px; border-radius: 50%; background: rgba(15, 118, 110,0.12); color: var(--forest); font-size: 1.2rem; font-weight: 400; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.3s; line-height: 1; }
   .faq-item.open .faq-plus { background: var(--forest); color: #fff; transform: rotate(45deg); }
   .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s ease; padding: 0 24px; }
   .faq-item.open .faq-answer { max-height: 400px; padding: 0 24px 22px; }
@@ -107,7 +107,7 @@
 
   .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; justify-content: flex-end; }
   .nav-call { display: flex; align-items: center; gap: 7px; }
-  .nav-call-icon { color: #d4845a; font-size: 1rem; }
+  .nav-call-icon { color: #FF7F50; font-size: 1rem; }
   .nav-call-text { line-height: 1.15; }
   .nav-call-text small { display: block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); }
   .nav-call-text strong { display: block; font-size: 0.88rem; color: var(--charcoal); font-weight: 600; }
@@ -156,14 +156,13 @@
     position: relative;
     height: 100vh;
     min-height: 600px;
-    max-height: 860px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
   }
   .hero-photo-wrap {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, #2c4430 0%, #3B5A3E 55%, #4E7252 100%);
+    background: linear-gradient(135deg, #0b5c56 0%, #0F766E 55%, #14958A 100%);
   }
   .hero-photo-wrap img {
     width: 100%; height: 100%;
@@ -213,7 +212,7 @@
     font-family: 'Dancing Script', cursive;
     font-style: normal;
     font-weight: 700;
-    color: #c8a554;
+    color: #FFA07A;
     display: block;
     font-size: clamp(3.2rem, 7vw, 5.4rem);
     line-height: 1.1;
@@ -223,7 +222,7 @@
   .hero-divider {
     width: 72px;
     height: 2px;
-    background: #c8a554;
+    background: #FFA07A;
     margin: 22px 0;
     border-radius: 2px;
   }
@@ -241,7 +240,7 @@
     align-items: center;
     gap: 10px;
     padding: 15px 32px;
-    background: #c8a554;
+    background: #FFA07A;
     color: #1a1800;
     border-radius: 50px;
     font-weight: 700;
@@ -250,9 +249,9 @@
     text-transform: uppercase;
     transition: background 0.15s, transform 0.15s;
     align-self: flex-start;
-    border: 2px solid #c8a554;
+    border: 2px solid #FFA07A;
   }
-  .btn-hero-tour:hover { background: #dfc070; border-color: #dfc070; transform: translateY(-1px); }
+  .btn-hero-tour:hover { background: #FFAB85; border-color: #FFAB85; transform: translateY(-1px); }
   .btn-hero-tour .arrow { font-size: 1rem; }
 
   /* ── BADGE BAR ── */
@@ -260,7 +259,7 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     z-index: 3;
-    background: #3b4a30;
+    background: #0B5C56;
     display: flex;
   }
   .hero-badge {
@@ -300,7 +299,7 @@
   .welcome { background: #fff; }
   .welcome-text h2 { color: var(--charcoal); }
   .welcome-text p { color: var(--mid-gray); }
-  .welcome .eyebrow { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+  .welcome .eyebrow { color: #0F766E !important; }
   .sig-info strong { color: var(--charcoal) !important; }
   .sig-info span { color: var(--mid-gray) !important; }
   .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
@@ -342,10 +341,10 @@
     background: #fff;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid rgba(184,148,90,0.2);
+    border: 1px solid rgba(255, 127, 80,0.2);
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .service-card:hover { box-shadow: 0 8px 30px rgba(184,148,90,0.2); transform: translateY(-3px); }
+  .service-card:hover { box-shadow: 0 8px 30px rgba(255, 127, 80,0.2); transform: translateY(-3px); }
   .service-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
   .service-card-body { padding: 20px 18px; }
   .service-card-body h3 { font-size: 1rem; margin-bottom: 10px; font-weight: 600; }
@@ -381,7 +380,7 @@
   .care-text { padding-right: 40px; width: 100%; }
   .care-text h2 { margin-bottom: 16px; font-size: 2.2rem; }
   .care-text > p { margin-bottom: 50px; font-size: 1.02rem; line-height: 1.7; color: var(--mid-gray); }
-  .care-text .eyebrow { margin-bottom: 14px; color: #B8945A !important; }
+  .care-text .eyebrow { margin-bottom: 14px; color: #FF7F50 !important; }
   
   .care-list {
     display: grid;
@@ -389,6 +388,8 @@
     gap: 14px 20px;
     width: 100%;
   }
+
+  .care-scroll-track { display: none; }
   
   .care-item {
     display: block;
@@ -442,10 +443,10 @@
   }
   
   .care-item:hover {
-    background: linear-gradient(135deg, rgba(59, 90, 62, 0.07) 0%, rgba(59, 90, 62, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.07) 0%, rgba(15, 118, 110, 0.02) 100%);
     border-color: var(--forest-light);
     transform: translateX(3px);
-    box-shadow: 0 3px 12px rgba(59, 90, 62, 0.1);
+    box-shadow: 0 3px 12px rgba(15, 118, 110, 0.1);
   }
 
   .care-item:hover::before {
@@ -453,10 +454,10 @@
   }
   
   .care-item.active-care-item {
-    background: linear-gradient(135deg, rgba(59, 90, 62, 0.12) 0%, rgba(59, 90, 62, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0%, rgba(15, 118, 110, 0.05) 100%);
     border-color: var(--forest);
     border-left-color: transparent;
-    box-shadow: 0 4px 16px rgba(59, 90, 62, 0.15);
+    box-shadow: 0 4px 16px rgba(15, 118, 110, 0.15);
     transform: translateX(3px);
   }
 
@@ -542,7 +543,7 @@
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: #3B5A3E !important;
+    color: #0F766E !important;
     margin-bottom: 14px;
   }
   .fp-eyebrow::before {
@@ -646,7 +647,7 @@
   .resources-text { max-width: 460px; }
   .resources-actions { display: flex; gap: 16px; flex-wrap: wrap; }
   .resource-card-text { line-height: 1.3; }
-  .resources-text .eyebrow { color: var(--forest) !important; }
+  .resources-text .eyebrow { color: #FFB199 !important; }
   .resources-text h2 { color: #fff; margin: 8px 0 14px; }
   .resources-text h2 em { color: var(--gold-light); }
   .resources-text p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
@@ -713,7 +714,7 @@
     top: -120px; right: -120px;
     width: 500px; height: 500px;
     border-radius: 50%;
-    background: rgba(184,148,90,0.08);
+    background: rgba(255, 127, 80,0.08);
     pointer-events: none;
   }
   .testimonials::after {
@@ -722,7 +723,7 @@
     bottom: -80px; left: -80px;
     width: 360px; height: 360px;
     border-radius: 50%;
-    background: rgba(184,148,90,0.06);
+    background: rgba(255, 127, 80,0.06);
     pointer-events: none;
   }
   .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 44px; position: relative; z-index: 1; }
@@ -736,7 +737,7 @@
     justify-content: center;
     gap: 32px;
     background: rgba(255,255,255,0.55);
-    border: 1px solid rgba(184,148,90,0.25);
+    border: 1px solid rgba(255, 127, 80,0.25);
     border-radius: 60px;
     padding: 16px 40px;
     margin: 0 auto 52px;
@@ -747,33 +748,35 @@
   .testi-rating-number { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--gold-text); line-height: 1; }
   .testi-rating-stars { color: var(--gold-accent); font-size: 0.85rem; letter-spacing: 2px; margin: 3px 0; }
   .testi-rating-label { font-size: 0.68rem; color: var(--gold-mid); letter-spacing: 0.09em; text-transform: uppercase; }
-  .testi-rating-divider { width: 1px; height: 44px; background: rgba(184,148,90,0.25); }
+  .testi-rating-divider { width: 1px; height: 44px; background: rgba(255, 127, 80,0.25); }
 
-  .testimonials-slider-container { position: relative; overflow: hidden; z-index: 1; }
-  .testimonials-slider { display: flex; gap: 22px; overflow-x: auto; scroll-behavior: smooth; padding: 8px 4px 44px 4px; scrollbar-width: none; }
-  .testimonials-slider::-webkit-scrollbar { display: none; }
+  .testimonials-slider-container { position: relative; z-index: 1; overflow: visible; padding: 8px 0 20px; }
+  .testi-deck-row { display: flex; align-items: center; justify-content: center; gap: 26px; }
+  .testi-deck { position: relative; width: 100%; max-width: 560px; transition: height 0.4s ease; }
   .testi-card {
-    flex: 0 0 calc(50% - 11px);
-    min-width: 320px;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
     background: #fff;
-    border: 1px solid rgba(184,148,90,0.2);
+    border: 1px solid rgba(255, 127, 80,0.2);
     border-radius: 20px;
     padding: 36px 36px 32px;
-    position: relative;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    box-shadow: 0 16px 40px rgba(255, 127, 80,0.16);
+    transition: transform 0.55s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease, box-shadow 0.35s ease;
     overflow: hidden;
+    transform-origin: 50% 120%;
   }
   .testi-card::before {
-    content: '\201C';
+    content: attr(data-suit);
     position: absolute;
-    top: 12px; right: 26px;
-    font-family: var(--font-display);
-    font-size: 7rem;
+    top: 8px; right: 20px;
+    font-size: 6.4rem;
     line-height: 1;
-    color: rgba(184,148,90,0.1);
+    color: rgba(255, 127, 80,0.12);
     pointer-events: none;
     user-select: none;
   }
+  .testi-card[data-color="red"]::before { color: rgba(178,59,59,0.10); }
   .testi-card::after {
     content: '';
     position: absolute;
@@ -782,11 +785,33 @@
     background: linear-gradient(to bottom, var(--gold-accent), transparent);
     border-radius: 0 3px 3px 0;
   }
-  .testi-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(184,148,90,0.18);
-    border-color: var(--gold-accent);
+  .testi-corner {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--charcoal);
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
   }
+  .testi-card[data-color="red"] .testi-corner { color: #B23B3B; }
+  .testi-corner.tl { top: 16px; left: 18px; }
+  .testi-corner.br { bottom: 16px; right: 18px; transform: rotate(180deg); }
+  .testi-corner .testi-rank { font-size: 1rem; }
+  .testi-corner .testi-suit { font-size: 1rem; margin-top: 1px; }
+  .testi-card.testi-pos-c { transform: translate(0,0) rotate(0deg) scale(1); z-index: 70; opacity: 1; box-shadow: 0 24px 56px rgba(255, 127, 80,0.24); }
+  .testi-card.testi-pos-l1 { transform: translate(-88px, 16px) rotate(-7deg) scale(0.92); z-index: 60; opacity: 1; }
+  .testi-card.testi-pos-r1 { transform: translate(88px, 16px) rotate(7deg) scale(0.92); z-index: 60; opacity: 1; }
+  .testi-card.testi-pos-l2 { transform: translate(-168px, 34px) rotate(-13deg) scale(0.84); z-index: 50; opacity: 0.95; }
+  .testi-card.testi-pos-r2 { transform: translate(168px, 34px) rotate(13deg) scale(0.84); z-index: 50; opacity: 0.95; }
+  .testi-card.testi-pos-l3 { transform: translate(-240px, 56px) rotate(-19deg) scale(0.76); z-index: 40; opacity: 0.85; }
+  .testi-card.testi-pos-r3 { transform: translate(240px, 56px) rotate(19deg) scale(0.76); z-index: 40; opacity: 0.85; }
+  .testi-card:not(.testi-pos-c) { cursor: pointer; }
+  .testi-card:not(.testi-pos-c):hover { box-shadow: 0 20px 46px rgba(255, 127, 80,0.26); }
   .testi-stars { color: var(--gold-accent); font-size: 0.95rem; margin-bottom: 18px; letter-spacing: 3px; }
   .testi-text { font-size: 0.97rem; color: var(--gold-mid); line-height: 1.85; margin-bottom: 28px; font-style: italic; }
   .testi-author { display: flex; align-items: center; gap: 14px; }
@@ -795,23 +820,22 @@
     background: linear-gradient(135deg, var(--gold-accent), var(--gold-light));
     color: #fff; display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(184,148,90,0.3);
+    box-shadow: 0 4px 12px rgba(255, 127, 80,0.3);
   }
   .testi-name strong { display: block; font-size: 0.92rem; color: var(--gold-text); margin-bottom: 3px; }
   .testi-name span { font-size: 0.78rem; color: var(--gold-mid); }
   .testimonials-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; position: relative; z-index: 1; }
-  .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(184,148,90,0.3); cursor: pointer; transition: all 0.3s; }
+  .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 127, 80,0.3); cursor: pointer; transition: all 0.3s; }
   .testimonials-dot.active { background: var(--gold-accent); width: 26px; border-radius: 4px; }
 
   .testi-arrow {
-    position: absolute;
-    top: 38%;
-    transform: translateY(-50%);
+    position: static;
+    flex-shrink: 0;
     z-index: 4;
     width: 46px;
     height: 46px;
     background: #fff;
-    border: 1px solid rgba(184,148,90,0.3);
+    border: 1px solid rgba(255, 127, 80,0.3);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -819,15 +843,34 @@
     justify-content: center;
     font-size: 1.1rem;
     color: var(--gold-text);
-    box-shadow: 0 6px 20px rgba(184,148,90,0.22);
+    box-shadow: 0 6px 20px rgba(255, 127, 80,0.22);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
-  .testi-arrow:hover { background: var(--gold-accent); color: #fff; box-shadow: 0 8px 24px rgba(184,148,90,0.35); }
-  .testi-arrow:active { transform: translateY(-50%) scale(0.94); }
-  .testi-arrow.left { left: 4px; }
-  .testi-arrow.right { right: 4px; }
+  .testi-arrow:hover { background: var(--gold-accent); color: #fff; box-shadow: 0 8px 24px rgba(255, 127, 80,0.35); }
+  .testi-arrow:active { transform: scale(0.94); }
   @media (max-width: 900px) {
     .testi-arrow { display: none; }
+  }
+  @media (max-width: 780px) {
+    .testi-deck { max-width: 380px; }
+    .testi-card { padding: 28px 26px 24px; }
+    .testi-card.testi-pos-l3, .testi-card.testi-pos-r3 { opacity: 0; pointer-events: none; }
+    .testi-card.testi-pos-l2, .testi-card.testi-pos-r2 { opacity: 0; pointer-events: none; }
+    .testi-card.testi-pos-l1 { transform: translate(-30px, 14px) rotate(-6deg) scale(0.92); }
+    .testi-card.testi-pos-r1 { transform: translate(30px, 14px) rotate(6deg) scale(0.92); }
+  }
+  @media (max-width: 520px) {
+    .testi-deck { max-width: 300px; }
+    .testi-card { padding: 24px 22px 20px; border-radius: 16px; }
+    .testi-card.testi-pos-l1, .testi-card.testi-pos-r1 { opacity: 0; pointer-events: none; }
+    .testi-text { font-size: 0.92rem; margin-bottom: 20px; }
+    .testi-avatar { width: 42px; height: 42px; font-size: 0.78rem; }
+    .testi-rating-bar { gap: 20px; padding: 14px 24px; }
+    .testi-rating-number { font-size: 1.5rem; }
+    .testi-corner.tl { top: 12px; left: 14px; }
+    .testi-corner.br { bottom: 12px; right: 14px; }
+    .testi-corner .testi-rank, .testi-corner .testi-suit { font-size: 0.85rem; }
+    .testi-card::before { font-size: 5rem; top: 4px; right: 14px; }
   }
 
   /* ── LOCATIONS ── */
@@ -842,7 +885,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
-  .location-card:hover { box-shadow: 0 12px 36px rgba(59,90,62,0.15); transform: translateY(-8px); border-color: var(--forest); }
+  .location-card:hover { box-shadow: 0 12px 36px rgba(15, 118, 110,0.15); transform: translateY(-8px); border-color: var(--forest); }
   .locations-header {
     text-align: center;
     max-width: 700px;
@@ -1223,7 +1266,7 @@
   .life-gallery { background: #fff; padding: 90px 40px; }
   .life-gallery-inner { max-width: 1200px; margin: 0 auto; }
   .life-gallery-header { text-align: center; max-width: 640px; margin: 0 auto 50px; }
-  .life-gallery-header .eyebrow { color: #3B5A3E !important; margin-bottom: 14px; }
+  .life-gallery-header .eyebrow { color: #0F766E !important; margin-bottom: 14px; }
   .life-gallery-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--charcoal); margin-bottom: 16px; line-height: 1.2; }
   .life-gallery-header p { font-size: 0.98rem; color: var(--mid-gray); line-height: 1.75; }
 
@@ -1314,49 +1357,47 @@
     line-height: 1;
   }
   .lightbox-close:hover { background: #eee; }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+    line-height: 1;
+    z-index: 2;
+  }
+  .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+  .lightbox-prev { left: -12px; }
+  .lightbox-next { right: -12px; }
+  .lightbox-counter {
+    text-align: center;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.8rem;
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .lightbox-prev { left: 4px; }
+    .lightbox-next { right: 4px; }
+  }
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
-    .gallery-grid { display: none; }
-    .gallery-slider-mobile {
-      display: block;
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 160px);
+      gap: 10px;
     }
-    .gallery-slider-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      border-radius: 14px;
-    }
-    .gallery-slider-track::-webkit-scrollbar { display: none; }
-    .gallery-slide {
-      position: relative;
-      flex: 0 0 100%;
-      scroll-snap-align: center;
-      height: 320px;
-      overflow: hidden;
-    }
-    .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .gallery-slide .gallery-caption { padding: 40px 16px 14px; font-size: 0.9rem; }
-    .gallery-slider-dots {
-      display: flex;
-      justify-content: center;
-      gap: 7px;
-      margin-top: 14px;
-    }
-    .gallery-slider-dots .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--light-gray);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .gallery-slider-dots .dot.active { background: var(--forest); width: 18px; border-radius: 4px; transition: width 0.2s; }
+    .gallery-caption { padding: 22px 10px 10px; font-size: 0.74rem; }
+    .gallery-slider-mobile { display: none !important; }
     .dining-strip-inner { padding: 0 20px; }
     nav {
       top: 14px;
@@ -1435,8 +1476,124 @@
     section { padding: 60px 24px; }
     .welcome-grid, .floorplans-grid, .care-layout { grid-template-columns: 1fr; }
     .floorplans-img { order: -1; }
-    .care-layout { gap: 40px; }
-    .care-list { grid-template-columns: 1fr; gap: 12px; }
+
+    /* ── CARE SUPPORT (mobile redesign): header on top, vertical list slider left + image right ── */
+    .care-text { display: contents; }
+    .care-layout {
+      display: grid;
+      grid-template-columns: 44% 1fr;
+      grid-template-areas:
+        "eyebrow eyebrow"
+        "heading heading"
+        "para para"
+        "list image";
+      column-gap: 14px;
+      row-gap: 8px;
+      align-items: start;
+      justify-items: stretch;
+    }
+    .care-text > .eyebrow { grid-area: eyebrow; margin-bottom: 2px; }
+    .care-text > h2 { grid-area: heading; font-size: 1.55rem; margin-bottom: 6px; line-height: 1.25; }
+    .care-text > p { grid-area: para; font-size: 0.9rem; line-height: 1.6; margin-bottom: 14px; }
+
+    .care-list {
+      grid-area: list;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 320px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scroll-snap-type: y proximity;
+      padding-right: 12px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+    }
+    .care-list::-webkit-scrollbar { display: none; }
+
+    .care-scroll-track {
+      display: block;
+      grid-area: list;
+      justify-self: end;
+      align-self: start;
+      width: 4px;
+      height: 320px;
+      background: rgba(15, 118, 110, 0.14);
+      border-radius: 4px;
+      position: relative;
+      margin-right: 1px;
+      pointer-events: none;
+    }
+    .care-scroll-thumb {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #FF7F50, #E8603A);
+    }
+
+    .care-item {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1.5px solid var(--light-gray);
+    }
+    .care-item strong {
+      font-size: 0.75rem;
+      gap: 8px;
+      line-height: 1.3;
+    }
+    .care-item span { display: none; }
+    .care-item strong::before {
+      content: '✦';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(15, 118, 110, 0.1);
+      color: var(--forest);
+      font-size: 0.55rem;
+      opacity: 1;
+      flex-shrink: 0;
+    }
+    .care-item.active-care-item strong::before,
+    .care-item:active strong::before {
+      background: var(--forest);
+      color: #fff;
+    }
+    .care-item:active {
+      transform: scale(0.98);
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.09) 0%, rgba(15, 118, 110, 0.03) 100%);
+      border-color: var(--forest-light);
+    }
+    .care-item.active-care-item {
+      transform: none;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0%, rgba(15, 118, 110, 0.05) 100%);
+      border-color: var(--forest);
+    }
+
+    .care-img { grid-area: image; margin-bottom: 0; }
+    .care-img-container {
+      height: 320px;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(11, 92, 86, 0.16);
+    }
+    .care-description {
+      margin-top: 10px;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      text-align: left;
+      padding: 0 2px;
+    }
+
     .services-header { flex-direction: column; gap: 20px; }
     .services-header-text { max-width: 100%; }
     .services-header-nav { width: 100%; justify-content: center; }
@@ -1455,9 +1612,14 @@
     .services-slider { grid-template-columns: 1fr; }
     .testi-card { flex: 0 0 100%; }
     .services-header { flex-direction: column; }
-    .care-item { padding: 14px; }
-    .care-item strong { font-size: 0.9rem; }
-    .care-list { grid-template-columns: 1fr; gap: 10px; }
+    .care-layout { grid-template-columns: 42% 1fr; column-gap: 10px; }
+    .care-item { padding: 8px 10px; min-height: 44px; }
+    .care-item strong { font-size: 0.7rem; }
+    .care-item strong::before { width: 20px; height: 20px; font-size: 0.5rem; }
+    .care-list { height: 280px; }
+    .care-scroll-track { height: 280px; }
+    .care-img-container { height: 280px; }
+    .care-description { font-size: 0.68rem; }
   }
 
   /* ── CAREGIVING TEAM ── */
@@ -1473,18 +1635,18 @@
   .team-card-body h3 { margin-bottom: 4px; color: var(--gold-text); }
   .team-role { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-accent); margin-bottom: 14px; }
   .team-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
-  .team-header .eyebrow { color: #ffffff !important; text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+  .team-header .eyebrow { color: #FF7F50 !important; }
   .team-header p { color: var(--gold-mid); }
   .team-header h2 { color: var(--gold-text); }
   .team-header h2 em { font-family: 'Dancing Script', cursive; font-style: italic; font-weight: 700; color: var(--gold-accent); }
   .team-card {
     background: #fff;
-    border: 1px solid rgba(184,148,90,0.2);
+    border: 1px solid rgba(255, 127, 80,0.2);
     border-radius: 16px;
     overflow: hidden;
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .team-card:hover { box-shadow: 0 12px 40px rgba(184,148,90,0.25); transform: translateY(-3px); }
+  .team-card:hover { box-shadow: 0 12px 40px rgba(255, 127, 80,0.25); transform: translateY(-3px); }
   .team-bio { font-size: 0.92rem; margin-bottom: 18px; color: var(--mid-gray); }
   .team-badge {
     display: inline-flex; align-items: center; gap: 6px;
@@ -1497,6 +1659,89 @@
   @media (max-width: 900px) {
     .team-grid { grid-template-columns: 1fr; gap: 22px; }
   }
+
+  /* ── MOBILE APP-STYLE FLOATING GLASS BOTTOM NAV ── */
+  .mobile-tabbar { display: none; }
+
+  @media (max-width: 900px) {
+    body { padding-bottom: 84px; }
+
+    .mobile-tabbar {
+      display: flex;
+      position: fixed;
+      top: auto;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 480px;
+      height: auto;
+      z-index: 998;
+      background: rgba(250, 246, 237, 0.68);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 26px;
+      box-shadow: 0 10px 34px rgba(11, 92, 86, 0.18), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+      padding: 6px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .mobile-tabbar a.tab-item {
+      position: relative;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 9px 2px 8px;
+      border-radius: 20px;
+      color: var(--forest-dark);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    }
+
+    .mobile-tabbar a.tab-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      transition: transform 0.25s ease;
+    }
+
+    .mobile-tabbar a.tab-item span {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: currentColor;
+      white-space: nowrap;
+    }
+
+    .mobile-tabbar a.tab-item.active {
+      color: #fff;
+      background: linear-gradient(160deg, #FF7F50 0%, #E8603A 100%);
+      box-shadow: 0 6px 16px rgba(255, 127, 80, 0.42);
+      transform: translateY(-3px);
+    }
+
+    .mobile-tabbar a.tab-item.active svg { transform: scale(1.08); }
+
+    .mobile-tabbar a.tab-item:active { transform: scale(0.94); }
+
+    /* hide desktop top nav's center links + call block on small screens so it doesn't crowd; logo + tour stay */
+    nav .nav-links { display: none; }
+    nav .nav-call { display: none; }
+    nav { grid-template-columns: auto auto; justify-content: space-between; padding: 0 10px 0 16px; }
+    nav .btn-tour { padding: 10px 18px; font-size: 0.78rem; }
+  }
+
+  @media (max-width: 380px) {
+    .mobile-tabbar a.tab-item span { font-size: 0.56rem; }
+    .mobile-tabbar { padding: 5px; }
+    .gallery-grid { grid-template-rows: repeat(4, 130px); }
+  }
 </style>
 </head>
 <body>
@@ -1508,8 +1753,8 @@
     <div class="nav-logo-icon">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
         <!-- leaf/plant emblem approximating original -->
-        <circle cx="24" cy="24" r="22" fill="none" stroke="#c8a554" stroke-width="1.5"/>
-        <path d="M24 38 C24 38 12 30 12 20 C12 13 17 9 24 9 C31 9 36 13 36 20 C36 30 24 38 24 38Z" fill="#c8a554" opacity="0.9"/>
+        <circle cx="24" cy="24" r="22" fill="none" stroke="#FFA07A" stroke-width="1.5"/>
+        <path d="M24 38 C24 38 12 30 12 20 C12 13 17 9 24 9 C31 9 36 13 36 20 C36 30 24 38 24 38Z" fill="#FFA07A" opacity="0.9"/>
         <path d="M24 9 L24 38" stroke="#2d2b26" stroke-width="1.2"/>
         <path d="M18 18 Q24 14 30 18" stroke="#2d2b26" stroke-width="1" fill="none"/>
         <path d="M16 24 Q24 19 32 24" stroke="#2d2b26" stroke-width="1" fill="none"/>
@@ -1544,8 +1789,8 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-photo-wrap" style="background: linear-gradient(135deg, #2c4430 0%, #3B5A3E 55%, #4E7252 100%); background-image: url('https://images.unsplash.com/photo-1771463572032-5f2b131f7ef8?w=1600&q=80'); background-size: cover; background-position: center top;">
+<section class="hero" id="home">
+  <div class="hero-photo-wrap" style="background: linear-gradient(135deg, #0b5c56 0%, #0F766E 55%, #14958A 100%); background-image: url('https://images.unsplash.com/photo-1771463572032-5f2b131f7ef8?w=1600&q=80'); background-size: cover; background-position: center top;">
     <img src="https://images.unsplash.com/photo-1771463572032-5f2b131f7ef8?w=1600&q=80" alt="Senior couple walking arm in arm outside Autumn Hill Manor" crossorigin="anonymous" referrerpolicy="no-referrer">
   </div>
   <div class="hero-overlay"></div>
@@ -1603,10 +1848,10 @@
 <section class="welcome" id="about">
   <div class="section-inner welcome-grid">
     <div class="welcome-img">
-      <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor exterior" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor exterior" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
     </div>
     <div class="welcome-text">
-      <div class="eyebrow" style="color:#3B5A3E;">Welcome Home</div>
+      <div class="eyebrow" style="color:#0F766E;">Welcome Home</div>
       <h2>More than care. More like family.</h2>
       <p>Choosing senior living for someone you love can feel overwhelming. We understand — and we're here to make it simple, personal, and reassuring.</p>
       <p>At Autumn Hill Manor, our smaller size is our greatest strength. It lets us learn life stories, celebrate birthdays, recognize preferences, and build genuine relationships that larger communities simply can't.</p>
@@ -1627,7 +1872,7 @@
   <div class="section-inner">
     <div class="services-header">
       <div class="services-header-text">
-        <div class="eyebrow" style="color:#B8945A;">Our Services</div>
+        <div class="eyebrow" style="color:#FF7F50;">Our Services</div>
         <h2>Care that fits your family</h2>
         <p>Thoughtful, individualized support for every stage — always delivered with warmth, dignity, and respect.</p>
       </div>
@@ -1635,7 +1880,7 @@
     <div class="services-slider-container">
       <div class="services-slider" id="servicesSlider">
         <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.height='220px';this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="service-card-body">
             <h3>Assisted Living</h3>
             <p>A warm residential setting with tailored, hands-on support for daily routines — while always encouraging independence.</p>
@@ -1643,7 +1888,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.height='220px';this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="service-card-body">
             <h3>Memory Care</h3>
             <p>Specialized, compassionate care and gentle engagement for residents living with Alzheimer's or dementia-related memory loss.</p>
@@ -1651,7 +1896,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.height='220px';this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="service-card-body">
             <h3>Catheter Care</h3>
             <p>Professional, discreet catheter management provided by our trained care team with comfort and dignity in mind.</p>
@@ -1659,7 +1904,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.height='220px';this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="service-card-body">
             <h3>Wound Care</h3>
             <p>Skilled wound assessment and ongoing care to support healing, prevent infection, and promote resident wellbeing.</p>
@@ -1667,7 +1912,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.height='220px';this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="service-card-body">
             <h3>Medication Management</h3>
             <p>Careful, consistent oversight of medications by our trained team — ensuring the right dose, at the right time, every time.</p>
@@ -1689,7 +1934,7 @@
 <section class="resources">
   <div class="section-inner resources-inner">
     <div class="resources-text">
-      <div class="eyebrow" style="color:#D4AB76;">Plan Your Visit</div>
+      <div class="eyebrow" style="color:#FFB199;">Plan Your Visit</div>
       <h2>Take a Closer <em>Look</em></h2>
       <p>Download our community brochure for a full overview of floor plans, pricing, and amenities, or grab this week's dining menu to see what's cooking at Autumn Hill Manor.</p>
     </div>
@@ -1717,7 +1962,7 @@
 </section>
 
 
-<section class="life-gallery">
+<section class="life-gallery" id="gallery">
   <div class="life-gallery-inner">
     <div class="life-gallery-header">
       <div class="eyebrow" style="color:#ffffff;">Life at the Manor</div>
@@ -1727,36 +1972,36 @@
 
     <!-- Desktop grid: 4 columns x 2 rows -->
     <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80', 'Daily Wellness')">
-        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(0)">
+        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Daily Wellness</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80', 'Spring on the Grounds')">
-        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(1)">
+        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Spring on the Grounds</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80', 'Private Suites')">
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(2)">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Private Suites</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80', 'The Great Room')">
-        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(3)">
+        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">The Great Room</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80', 'Morning Walks')">
-        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(4)">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Morning Walks</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', 'Our Weatherford Home')">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(5)">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Our Weatherford Home</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80', 'Garden Courtyard')">
-        <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(6)">
+        <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Garden Courtyard</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80', 'Garden Blooms')">
-        <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+      <div class="gallery-item" onclick="openLightbox(7)">
+        <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         <div class="gallery-caption">Garden Blooms</div>
       </div>
     </div>
@@ -1764,36 +2009,36 @@
     <!-- Mobile slider: one image at a time, swipeable -->
     <div class="gallery-slider-mobile">
       <div class="gallery-slider-track" id="gallerySliderTrack" onscroll="updateGalleryDots()">
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80', 'Daily Wellness')">
-          <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(0)">
+          <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Daily Wellness</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80', 'Spring on the Grounds')">
-          <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(1)">
+          <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Spring on the Grounds</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80', 'Private Suites')">
-          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(2)">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Private Suites</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80', 'The Great Room')">
-          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(3)">
+          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">The Great Room</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80', 'Morning Walks')">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(4)">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Morning Walks</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', 'Our Weatherford Home')">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(5)">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Our Weatherford Home</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80', 'Garden Courtyard')">
-          <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(6)">
+          <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Garden Courtyard</div>
         </div>
-        <div class="gallery-slide" onclick="openLightbox('https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80', 'Garden Blooms')">
-          <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <div class="gallery-slide" onclick="openLightbox(7)">
+          <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
           <div class="gallery-caption">Garden Blooms</div>
         </div>
       </div>
@@ -1815,11 +2060,11 @@
 <section class="care" id="care">
   <div class="section-inner care-layout">
     <div class="care-text">
-      <div class="eyebrow" style="color:#B8945A !important;">Care Support</div>
+      <div class="eyebrow" style="color:#FF7F50 !important;">Care Support</div>
       <h2>Support that's always nearby</h2>
       <p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>
       <div class="care-list">
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 0)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 0); return false;">
+        <a href="#" class="care-item active-care-item" onmouseover="onCareItemHover(this, 0)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 0); return false;">
           <strong>Activities of Daily Living / ADL Assistance</strong>
           <span>Hands-on help with bathing, dressing, grooming, toileting, and eating — always with kindness and respect.</span>
         </a>
@@ -1860,19 +2105,22 @@
           <span>Skilled nursing guidance, right where it's needed.</span>
         </a>
       </div>
+      <div class="care-scroll-track" id="careScrollTrack">
+        <div class="care-scroll-thumb" id="careScrollThumb"></div>
+      </div>
     </div>
     <div class="care-img">
       <div class="care-img-container">
         <img id="careImage0" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Activities of Daily Living" class="">
-        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
-        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
       </div>
       <p class="care-description" id="careDescription">Our peaceful, welcoming environment is designed to feel like home while providing every amenity and support your loved one needs.</p>
     </div>
@@ -1957,7 +2205,7 @@
       <img
         src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg"
         alt="Spacious 900 sq ft apartment interior"
-        onerror="this.style.background='#c8d9c9';this.removeAttribute('src')"
+        onerror="this.style.background='#F5E6CA';this.removeAttribute('src')"
       >
       <div class="fp-sqft-badge">
         <span class="num">900</span>
@@ -1972,7 +2220,7 @@
 <section class="team" id="team">
   <div class="section-inner">
     <div class="team-header">
-      <div class="eyebrow" style="color:#ffffff;">The People Behind the Care</div>
+      <div class="eyebrow" style="color:#FF7F50;">The People Behind the Care</div>
       <h2>Meet Our <em>Caregiving Team</em></h2>
       <p>Every person who walks through our door is greeted by someone who genuinely cares. Here are the dedicated individuals who make Autumn Hill Manor feel like home.</p>
     </div>
@@ -2024,10 +2272,10 @@
 </section>
 
 <!-- TESTIMONIALS SLIDER -->
-<section class="testimonials">
+<section class="testimonials" id="reviews">
   <div class="section-inner">
     <div class="testimonials-header">
-      <div class="eyebrow" style="color:#B8945A;">From Our Families</div>
+      <div class="eyebrow" style="color:#FF7F50;">From Our Families</div>
       <h2>Stories from families like yours</h2>
       <p>The trust of local families is the truest measure of our care.</p>
     </div>
@@ -2046,10 +2294,12 @@
 
     </div>
     <div class="testimonials-slider-container">
-      <button class="testi-arrow left" onclick="scrollTestimonials(-1)" aria-label="Previous testimonial">&#8249;</button>
-      <button class="testi-arrow right" onclick="scrollTestimonials(1)" aria-label="Next testimonial">&#8250;</button>
-      <div class="testimonials-slider" id="testimonialsSlider">
-        <div class="testi-card">
+      <div class="testi-deck-row">
+        <button class="testi-arrow left" onclick="prevTestimonial(); restartTestiAutoplay();" aria-label="Previous testimonial">&#8249;</button>
+        <div class="testi-deck" id="testimonialsDeck">
+        <div class="testi-card" data-index="0" data-suit="♠" data-color="black" onclick="handleCardClick(0)">
+          <div class="testi-corner tl"><span class="testi-rank">7</span><span class="testi-suit">♠</span></div>
+          <div class="testi-corner br"><span class="testi-rank">7</span><span class="testi-suit">♠</span></div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">Gina and her staff are so awesome and attentive. They truly care about all of the residents and treat them like their own family! The facility is super clean and the meals they prepare are amazing. We started with our parents in an independent apartment around seven years ago — we have been greatly blessed by the care and love for our Mom.</p>
           <div class="testi-author">
@@ -2060,7 +2310,9 @@
             </div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-index="1" data-suit="♥" data-color="red" onclick="handleCardClick(1)">
+          <div class="testi-corner tl"><span class="testi-rank">Q</span><span class="testi-suit">♥</span></div>
+          <div class="testi-corner br"><span class="testi-rank">Q</span><span class="testi-suit">♥</span></div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">My mom was a resident at Autumn Hill Manor for almost six years. The staff provided her with excellent care and lots of love! The meals were wonderful and there were always activities for the residents to enjoy! I would highly recommend Autumn Hill Manor to anyone seeking assisted living for a loved one.</p>
           <div class="testi-author">
@@ -2071,7 +2323,9 @@
             </div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-index="2" data-suit="♦" data-color="red" onclick="handleCardClick(2)">
+          <div class="testi-corner tl"><span class="testi-rank">K</span><span class="testi-suit">♦</span></div>
+          <div class="testi-corner br"><span class="testi-rank">K</span><span class="testi-suit">♦</span></div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">Autumn Hill Manor was the perfect place for our Grandmother during the last several years of her life. The staff treats the residents like family and really get to know you on a first name basis. From the Easter Bunny tradition to game nights throughout the week, I can't think of a better choice our family could have made.</p>
           <div class="testi-author">
@@ -2082,7 +2336,9 @@
             </div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-index="3" data-suit="♣" data-color="black" onclick="handleCardClick(3)">
+          <div class="testi-corner tl"><span class="testi-rank">9</span><span class="testi-suit">♣</span></div>
+          <div class="testi-corner br"><span class="testi-rank">9</span><span class="testi-suit">♣</span></div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">Our grandmother was at Autumn Hill for many years, and we absolutely loved it. The grounds are beautiful, the facility is newly renovated and feels very homey. So many of the precious staff have been there for 15–20 years — which says it all! They love what they do. It was sweet to see her thriving in such a loving environment.</p>
           <div class="testi-author">
@@ -2093,7 +2349,9 @@
             </div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-index="4" data-suit="♠" data-color="black" onclick="handleCardClick(4)">
+          <div class="testi-corner tl"><span class="testi-rank">A</span><span class="testi-suit">♠</span></div>
+          <div class="testi-corner br"><span class="testi-rank">A</span><span class="testi-suit">♠</span></div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">My husband and I highly recommend Autumn Hill! His precious mom moved in initially as a temporary resident. What she found is a community of friends and staff that have re-ignited her excitement and zest of life! She feels cared for and important. When she comes home for visits she always has stories to share about her relationships there.</p>
           <div class="testi-author">
@@ -2104,11 +2362,43 @@
             </div>
           </div>
         </div>
+        <div class="testi-card" data-index="5" data-suit="♥" data-color="red" onclick="handleCardClick(5)">
+          <div class="testi-corner tl"><span class="testi-rank">10</span><span class="testi-suit">♥</span></div>
+          <div class="testi-corner br"><span class="testi-rank">10</span><span class="testi-suit">♥</span></div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">From our very first visit, Autumn Hill felt different — warm, unhurried, and genuinely caring. My father settled in quickly, and the staff learned his routines and preferences within days. It's clear this isn't just a job for them; they truly love the residents like family.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RM</div>
+            <div class="testi-name">
+              <strong>Rachel Moss</strong>
+              <span>Daughter · Google review</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-index="6" data-suit="♦" data-color="red" onclick="handleCardClick(6)">
+          <div class="testi-corner tl"><span class="testi-rank">J</span><span class="testi-suit">♦</span></div>
+          <div class="testi-corner br"><span class="testi-rank">J</span><span class="testi-suit">♦</span></div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">We toured several communities before choosing Autumn Hill, and nothing else compared. The staff-to-resident ratio really shows in how attentive everyone is. My aunt has made close friends here and looks forward to the weekly activities. We couldn't be happier with our choice.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DW</div>
+            <div class="testi-name">
+              <strong>David Whitfield</strong>
+              <span>Nephew · Google review</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <button class="testi-arrow right" onclick="nextTestimonial(); restartTestiAutoplay();" aria-label="Next testimonial">&#8250;</button>
       </div>
       <div class="testimonials-dots" id="testimonialsDotsContainer">
-        <span class="testimonials-dot active" onclick="goToTestimonial('testimonialsSlider', 0)"></span>
-        <span class="testimonials-dot" onclick="goToTestimonial('testimonialsSlider', 1)"></span>
-        <span class="testimonials-dot" onclick="goToTestimonial('testimonialsSlider', 2)"></span>
+        <span class="testimonials-dot active" onclick="goToTestimonial(0)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(1)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(2)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(3)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(4)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(5)"></span>
+        <span class="testimonials-dot" onclick="goToTestimonial(6)"></span>
       </div>
     </div>
   </div>
@@ -2119,7 +2409,7 @@
   <div class="section-inner">
     <div class="locations-header">
       <div class="eyebrow" style="color:#ffffff;">Part of the Autumn Hill Family</div>
-      <h2>One Community, <span style="color: #B8945A; font-style: italic;">Multiple Locations</span> Across Texas</h2>
+      <h2>One Community, <span style="color: #FF7F50; font-style: italic;">Multiple Locations</span> Across Texas</h2>
       <p>Same warmth, same standard of care, each location licensed, family-run, and built around the same promise of compassionate senior living.</p>
     </div>
     <div class="locations-slider-wrap">
@@ -2127,7 +2417,7 @@
       <div class="locations-grid" id="locationsGrid">
       <div class="location-card">
         <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor Weatherford" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor Weatherford" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         </div>
         <div class="location-body">
           <h3>Autumn Hill Manor — Weatherford</h3>
@@ -2145,7 +2435,7 @@
       </div>
       <div class="location-card">
         <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="Autumn Hill Manor Arlington" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="Autumn Hill Manor Arlington" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         </div>
         <div class="location-body">
           <h3>Autumn Hill Manor — Arlington</h3>
@@ -2163,7 +2453,7 @@
       </div>
       <div class="location-card">
         <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining.jpg" alt="Autumn Hill Manor Fort Worth" onerror="this.style.background='#c8d9c9';this.removeAttribute('src')">
+          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining.jpg" alt="Autumn Hill Manor Fort Worth" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
         </div>
         <div class="location-body">
           <h3>Autumn Hill Manor — Fort Worth</h3>
@@ -2194,7 +2484,7 @@
 <section class="faq" id="faq">
   <div class="section-inner">
     <div class="faq-header">
-      <div class="eyebrow" style="color:#B8945A;">Common Questions</div>
+      <div class="eyebrow" style="color:#FF7F50;">Common Questions</div>
       <h2>Answers to What <em>Families<br>Ask Most</em></h2>
       <p>We believe in total transparency. Here are the questions we hear most often, answered honestly.</p>
     </div>
@@ -2366,8 +2656,11 @@
 <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
   <div class="lightbox-inner">
     <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); lightboxPrev()">‹</button>
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); lightboxNext()">›</button>
     <img id="lightboxImg" src="" alt="">
     <div class="lightbox-label" id="lightboxLabel"></div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 </div>
 
@@ -2471,6 +2764,35 @@ function resetImage() {
   }
 }
 
+// Care list vertical scroll-track (mobile slider indicator)
+(function() {
+  const list = document.querySelector('.care-list');
+  const thumb = document.getElementById('careScrollThumb');
+  if (!list || !thumb) return;
+
+  function updateThumb() {
+    const trackHeight = list.clientHeight;
+    const scrollHeight = list.scrollHeight;
+    if (scrollHeight <= trackHeight) {
+      thumb.style.height = trackHeight + 'px';
+      thumb.style.transform = 'translateY(0px)';
+      return;
+    }
+    const thumbHeight = Math.max((trackHeight / scrollHeight) * trackHeight, 24);
+    const maxScroll = scrollHeight - trackHeight;
+    const maxThumbTravel = trackHeight - thumbHeight;
+    const ratio = list.scrollTop / maxScroll;
+    thumb.style.height = thumbHeight + 'px';
+    thumb.style.transform = `translateY(${ratio * maxThumbTravel}px)`;
+  }
+
+  list.addEventListener('scroll', updateThumb, { passive: true });
+  window.addEventListener('resize', updateThumb);
+  window.addEventListener('load', updateThumb);
+  document.addEventListener('DOMContentLoaded', updateThumb);
+  setTimeout(updateThumb, 300);
+})();
+
 function scrollSlider(sliderId, offset) {
   const slider = document.getElementById(sliderId);
   slider.scrollBy({ left: offset, behavior: 'smooth' });
@@ -2485,21 +2807,106 @@ function goToSlide(sliderId, dotsId, index) {
   updateDots(sliderId, dotsId);
 }
 
-function goToTestimonial(sliderId, index) {
-  const slider = document.getElementById(sliderId);
-  const cards = slider.querySelectorAll('.testi-card');
-  const cardWidth = cards[0].offsetWidth + 24; // card width + gap
-  slider.scrollLeft = index * cardWidth;
-  updateTestimonialDots(sliderId);
+let currentTestiIndex = 0;
+const testiCardEls = () => document.querySelectorAll('#testimonialsDeck .testi-card');
+const testiCount = 7;
+const fanClasses = { '-3': 'testi-pos-l3', '-2': 'testi-pos-l2', '-1': 'testi-pos-l1', '0': 'testi-pos-c', '1': 'testi-pos-r1', '2': 'testi-pos-r2', '3': 'testi-pos-r3' };
+
+function renderTestiDeck() {
+  const cards = testiCardEls();
+  cards.forEach(card => {
+    const idx = parseInt(card.getAttribute('data-index'), 10);
+    let rel = (idx - currentTestiIndex + testiCount) % testiCount;
+    if (rel > testiCount / 2) rel -= testiCount; // wrap into -3..3 range
+    card.classList.remove('testi-pos-l3','testi-pos-l2','testi-pos-l1','testi-pos-c','testi-pos-r1','testi-pos-r2','testi-pos-r3');
+    card.classList.add(fanClasses[String(rel)]);
+  });
+  document.querySelectorAll('#testimonialsDotsContainer .testimonials-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentTestiIndex);
+  });
+  updateTestiDeckHeight();
 }
 
-function scrollTestimonials(dir) {
-  const slider = document.getElementById('testimonialsSlider');
-  if (!slider) return;
-  const card = slider.querySelector('.testi-card');
-  const cardWidth = card.offsetWidth + 22; // card width + gap
-  slider.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+function updateTestiDeckHeight() {
+  const deck = document.getElementById('testimonialsDeck');
+  const front = deck.querySelector('.testi-pos-c');
+  if (deck && front) {
+    deck.style.height = (front.offsetHeight + 60) + 'px';
+  }
 }
+
+function nextTestimonial() {
+  currentTestiIndex = (currentTestiIndex + 1) % testiCount;
+  renderTestiDeck();
+}
+
+function prevTestimonial() {
+  currentTestiIndex = (currentTestiIndex - 1 + testiCount) % testiCount;
+  renderTestiDeck();
+}
+
+function goToTestimonial(index) {
+  currentTestiIndex = index;
+  renderTestiDeck();
+  restartTestiAutoplay();
+}
+
+function handleCardClick(idx) {
+  // clicking a peeking (non-front) card brings it to the front
+  if (idx !== currentTestiIndex) {
+    currentTestiIndex = idx;
+    renderTestiDeck();
+    restartTestiAutoplay();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', renderTestiDeck);
+window.addEventListener('resize', updateTestiDeckHeight);
+
+let testiAutoplayTimer = null;
+const TESTI_AUTOPLAY_MS = 2200;
+
+function startTestiAutoplay() {
+  stopTestiAutoplay();
+  testiAutoplayTimer = setInterval(nextTestimonial, TESTI_AUTOPLAY_MS);
+}
+function stopTestiAutoplay() {
+  if (testiAutoplayTimer) { clearInterval(testiAutoplayTimer); testiAutoplayTimer = null; }
+}
+function restartTestiAutoplay() {
+  stopTestiAutoplay();
+  startTestiAutoplay();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const deck = document.getElementById('testimonialsDeck');
+  const container = document.querySelector('.testimonials-slider-container');
+  startTestiAutoplay();
+  if (container) {
+    container.addEventListener('mouseenter', stopTestiAutoplay);
+    container.addEventListener('mouseleave', startTestiAutoplay);
+    container.addEventListener('touchstart', stopTestiAutoplay, { passive: true });
+  }
+});
+
+(function() {
+  const deck = document.getElementById('testimonialsDeck');
+  if (!deck) return;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  deck.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+  deck.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) nextTestimonial(); else prevTestimonial();
+      restartTestiAutoplay();
+    }
+  }, { passive: true });
+})();
 
 function updateDots(sliderId, dotsId) {
   const slider = document.getElementById(sliderId);
@@ -2513,30 +2920,14 @@ function updateDots(sliderId, dotsId) {
   });
 }
 
-function updateTestimonialDots(sliderId) {
-  const slider = document.getElementById(sliderId);
-  const dots = document.querySelectorAll('#testimonialsDotsContainer .testimonials-dot');
-  const scrollPosition = slider.scrollLeft;
-  const cardWidth = slider.querySelector('.testi-card').offsetWidth + 24;
-  const activeIndex = Math.round(scrollPosition / cardWidth);
-  
-  dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === activeIndex);
-  });
-}
-
 // Update dots on scroll
 document.addEventListener('DOMContentLoaded', function() {
   const sliders = document.querySelectorAll('[id$="Slider"]');
   sliders.forEach(slider => {
     slider.addEventListener('scroll', function() {
       const sliderId = this.id;
-      if (sliderId === 'testimonialsSlider') {
-        updateTestimonialDots(sliderId);
-      } else {
-        const dotsId = sliderId.replace('Slider', 'Dots');
-        updateDots(sliderId, dotsId);
-      }
+      const dotsId = sliderId.replace('Slider', 'Dots');
+      updateDots(sliderId, dotsId);
     });
   });
 });
@@ -2569,12 +2960,40 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-function openLightbox(src, label) {
-  const overlay = document.getElementById('lightboxOverlay');
-  document.getElementById('lightboxImg').src = src;
-  document.getElementById('lightboxLabel').textContent = label;
-  overlay.classList.add('open');
+const lightboxImages = [
+  { src: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1400&q=80', label: 'Daily Wellness' },
+  { src: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1400&q=80', label: 'Spring on the Grounds' },
+  { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1400&q=80', label: 'Private Suites' },
+  { src: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1400&q=80', label: 'The Great Room' },
+  { src: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=80', label: 'Morning Walks' },
+  { src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80', label: 'Our Weatherford Home' },
+  { src: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=1400&q=80', label: 'Garden Courtyard' },
+  { src: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?w=1400&q=80', label: 'Garden Blooms' }
+];
+let lightboxIndex = 0;
+
+function renderLightbox() {
+  const item = lightboxImages[lightboxIndex];
+  document.getElementById('lightboxImg').src = item.src;
+  document.getElementById('lightboxLabel').textContent = item.label;
+  document.getElementById('lightboxCounter').textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+}
+
+function openLightbox(index) {
+  lightboxIndex = index;
+  renderLightbox();
+  document.getElementById('lightboxOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function lightboxPrev() {
+  lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+  renderLightbox();
+}
+
+function lightboxNext() {
+  lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+  renderLightbox();
 }
 
 function closeLightbox(e) {
@@ -2588,6 +3007,75 @@ function closeLightboxBtn() {
   document.getElementById('lightboxOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightboxOverlay').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') lightboxPrev();
+  else if (e.key === 'ArrowRight') lightboxNext();
+  else if (e.key === 'Escape') closeLightboxBtn();
+});
+</script>
+
+<!-- MOBILE APP-STYLE FLOATING GLASS BOTTOM NAV -->
+<nav class="mobile-tabbar" id="mobileTabbar">
+  <a href="#home" class="tab-item" data-target="home">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="#services" class="tab-item" data-target="services">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 9 9"/><path d="M3 12a9 9 0 0 1 9-9"/><path d="M12 7v5l3 3"/></svg>
+    <span>Service</span>
+  </a>
+  <a href="#gallery" class="tab-item" data-target="gallery">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg>
+    <span>Gallery</span>
+  </a>
+  <a href="#floorplans" class="tab-item" data-target="floorplans">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-8H7v8"/><path d="M7 3h10v5H7z"/><path d="M4 21V8l8-5 8 5v13"/></svg>
+    <span>New Residents</span>
+  </a>
+  <a href="#reviews" class="tab-item" data-target="reviews">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.3 6.2 21l1.5-6.6-5-4.4 6.7-.6L12 3l2.6 6.4 6.7.6-5 4.4L17.8 21z"/></svg>
+    <span>Reviews</span>
+  </a>
+  <a href="#contact" class="tab-item" data-target="contact">
+    <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+    <span>Contact</span>
+  </a>
+</nav>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('#mobileTabbar .tab-item');
+  var sectionIds = Array.prototype.map.call(tabs, function(t) { return t.getAttribute('data-target'); });
+  var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+
+  function setActive(id) {
+    tabs.forEach(function(tab) {
+      tab.classList.toggle('active', tab.getAttribute('data-target') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var observer = new IntersectionObserver(function(entries) {
+      var visible = entries.filter(function(e) { return e.isIntersecting; })
+                            .sort(function(a, b) { return b.intersectionRatio - a.intersectionRatio; });
+      if (visible.length) {
+        setActive(visible[0].target.id);
+      }
+    }, { root: null, rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+    sections.forEach(function(sec) { observer.observe(sec); });
+  }
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      setActive(tab.getAttribute('data-target'));
+    });
+  });
+
+  setActive('home');
+})();
 </script>
 
 </body>
