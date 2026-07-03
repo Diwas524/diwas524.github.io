@@ -328,36 +328,77 @@
   .sig-info strong { display: block; font-size: 0.9rem; color: var(--charcoal); }
   .sig-info span { font-size: 0.8rem; color: var(--mid-gray); }
 
-  /* ── SERVICES GRID ── */
+  /* ── SERVICES GRID (merged) ── */
+  @media (min-width: 901px) {
+    #services { display: none; }
+  }
+  @media (max-width: 900px) {
+    #care { display: none; }
+  }
   .services { background: var(--gold-bg); }
   .services-header { text-align: center; margin-bottom: 50px; }
   .services-header-text { max-width: 600px; margin: 0 auto; }
-  .services-header-nav { display: none; }
-  .services-slider-container { position: relative; }
-  .services-slider { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; padding: 10px 0; }
   .services-header p { color: var(--gold-mid); }
   .services-header .eyebrow { color: var(--gold-accent) !important; }
-  .service-card {
+
+  .msvc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .msvc-card {
     background: #fff;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(255, 127, 80,0.2);
+    cursor: pointer;
+    border: 1px solid rgba(255, 127, 80, 0.2);
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .service-card:hover { box-shadow: 0 8px 30px rgba(255, 127, 80,0.2); transform: translateY(-3px); }
-  .service-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
-  .service-card-body { padding: 20px 18px; }
-  .service-card-body h3 { font-size: 1rem; margin-bottom: 10px; font-weight: 600; }
-  .service-card-body p { font-size: 0.82rem; margin-bottom: 14px; color: var(--mid-gray); line-height: 1.6; }
-  .learn-more { font-size: 0.82rem; font-weight: 600; color: var(--forest); display: inline-flex; align-items: center; gap: 6px; }
-  .learn-more:hover { color: var(--forest-dark); }
+  .msvc-card:hover { box-shadow: 0 8px 30px rgba(255, 127, 80,0.2); transform: translateY(-3px); }
+  .msvc-thumb-wrap { position: relative; }
+  .msvc-thumb { width: 100%; height: 140px; object-fit: cover; display: block; }
+  .msvc-thumb-icon {
+    width: 100%; height: 140px; display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; background: #16231A;
+  }
+  .msvc-heart {
+    display: none;
+    position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); color: #e5533d; align-items: center; justify-content: center;
+    font-size: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .msvc-body { padding: 16px 16px 18px; }
+  .msvc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .msvc-body h3 { font-size: 0.98rem; font-weight: 600; margin: 0; }
+  .msvc-toggle {
+    width: 26px; height: 26px; border-radius: 50%; background: rgba(255,127,80,0.12);
+    color: var(--gold-accent); font-size: 1.05rem; font-weight: 400; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; line-height: 1;
+    transition: background 0.2s, transform 0.3s, color 0.2s;
+  }
+  .msvc-card.open .msvc-toggle { background: var(--gold-accent); color: #fff; transform: rotate(45deg); }
+  .msvc-subtitle { display: none; }
+  .msvc-details { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin-top 0.25s ease; }
+  .msvc-card.open .msvc-details { max-height: 220px; margin-top: 10px; }
+  .msvc-details p { font-size: 0.82rem; color: var(--mid-gray); line-height: 1.6; margin: 0; }
 
-  .slider-nav-btn { display: none; }
+  /* Mobile: 3-column grid, "Popular Destinations" card style */
+  @media (max-width: 900px) {
+    .msvc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .msvc-card {
+      cursor: default;
+    }
+    .msvc-card:hover { transform: none; box-shadow: none; }
+    .msvc-thumb, .msvc-thumb-icon { height: 72px; font-size: 1.5rem; }
+    .msvc-heart { display: flex; width: 22px; height: 22px; font-size: 0.75rem; top: 6px; right: 6px; }
+    .msvc-body { padding: 8px 6px 10px; }
+    .msvc-toggle { display: none; }
+    .msvc-details { display: none; }
+    .msvc-body h3 { font-size: 0.72rem; line-height: 1.25; }
+    .msvc-subtitle { display: none; }
+  }
 
-  /* Carousel dots */
-  .slider-dots { display: none; }
 
-  /* ── WHY US ── */
   .why { background: var(--forest-dark); color: #fff; }
   .why h2 { color: #fff; }
   .why .eyebrow { color: var(--gold-light); }
@@ -871,6 +912,96 @@
     .testi-corner.br { bottom: 12px; right: 14px; }
     .testi-corner .testi-rank, .testi-corner .testi-suit { font-size: 0.85rem; }
     .testi-card::before { font-size: 5rem; top: 4px; right: 14px; }
+  }
+
+  /* ── TESTIMONIALS · DESKTOP ENHANCEMENT (≥901px only) ── */
+  @media (min-width: 901px) {
+    .testimonials { padding-top: 110px; padding-bottom: 120px; }
+    .testimonials::before {
+      top: -160px; right: -160px;
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(255,127,80,0.12) 0%, rgba(255,127,80,0.02) 70%);
+    }
+    .testimonials::after {
+      bottom: -120px; left: -120px;
+      width: 460px; height: 460px;
+      background: radial-gradient(circle, rgba(255,127,80,0.09) 0%, rgba(255,127,80,0.01) 70%);
+    }
+    .testimonials-header { max-width: 660px; margin-bottom: 50px; }
+    .testimonials-header h2 { font-size: clamp(2.3rem, 3vw, 3rem); }
+
+    .testi-rating-bar {
+      gap: 44px;
+      padding: 20px 52px;
+      margin-bottom: 64px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 12px 32px rgba(255,127,80,0.14);
+      border-color: rgba(255,127,80,0.22);
+    }
+    .testi-rating-number { font-size: 2.3rem; }
+    .testi-rating-divider { height: 50px; }
+
+    .testimonials-slider-container { padding: 24px 0 32px; }
+    .testi-deck-row { gap: 40px; }
+    .testi-deck { max-width: 620px; }
+
+    /* soft glow anchoring the stack for a more premium, staged look */
+    .testi-deck::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 560px; height: 380px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(255,127,80,0.16) 0%, rgba(255,127,80,0) 68%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .testi-card {
+      padding: 46px 48px 40px;
+      border-radius: 22px;
+      box-shadow: 0 18px 44px rgba(255,127,80,0.15), 0 2px 6px rgba(30,20,10,0.04);
+    }
+    .testi-card::before { font-size: 7.4rem; top: 4px; right: 24px; }
+    .testi-card.testi-pos-c {
+      box-shadow: 0 34px 70px rgba(255,127,80,0.28), 0 6px 16px rgba(30,20,10,0.06);
+    }
+    .testi-card.testi-pos-c:hover { transform: translate(0,-6px) rotate(0deg) scale(1.015); }
+    .testi-card.testi-pos-l1 { transform: translate(-104px, 18px) rotate(-7deg) scale(0.92); }
+    .testi-card.testi-pos-r1 { transform: translate(104px, 18px) rotate(7deg) scale(0.92); }
+    .testi-card.testi-pos-l2 { transform: translate(-198px, 38px) rotate(-13deg) scale(0.84); }
+    .testi-card.testi-pos-r2 { transform: translate(198px, 38px) rotate(13deg) scale(0.84); }
+    .testi-card.testi-pos-l3 { transform: translate(-282px, 62px) rotate(-19deg) scale(0.76); }
+    .testi-card.testi-pos-r3 { transform: translate(282px, 62px) rotate(19deg) scale(0.76); }
+    .testi-card.testi-pos-l1:hover { transform: translate(-104px, 8px) rotate(-7deg) scale(0.94); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+    .testi-card.testi-pos-r1:hover { transform: translate(104px, 8px) rotate(7deg) scale(0.94); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+    .testi-card.testi-pos-l2:hover { transform: translate(-198px, 28px) rotate(-13deg) scale(0.86); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+    .testi-card.testi-pos-r2:hover { transform: translate(198px, 28px) rotate(13deg) scale(0.86); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+    .testi-card.testi-pos-l3:hover { transform: translate(-282px, 52px) rotate(-19deg) scale(0.78); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+    .testi-card.testi-pos-r3:hover { transform: translate(282px, 52px) rotate(19deg) scale(0.78); box-shadow: 0 22px 50px rgba(255,127,80,0.3); }
+
+    .testi-stars { font-size: 1.05rem; margin-bottom: 22px; }
+    .testi-text { font-size: 1.08rem; line-height: 1.9; margin-bottom: 32px; }
+    .testi-avatar { width: 54px; height: 54px; font-size: 0.95rem; box-shadow: 0 6px 16px rgba(255,127,80,0.35), 0 0 0 4px rgba(255,255,255,0.9); }
+    .testi-name strong { font-size: 1rem; }
+    .testi-name span { font-size: 0.82rem; }
+
+    .testi-corner .testi-rank, .testi-corner .testi-suit { font-size: 1.1rem; }
+    .testi-corner.tl { top: 20px; left: 22px; }
+    .testi-corner.br { bottom: 20px; right: 22px; }
+
+    .testi-arrow {
+      width: 54px; height: 54px;
+      font-size: 1.3rem;
+      box-shadow: 0 10px 26px rgba(255,127,80,0.2);
+      border-color: rgba(255,127,80,0.28);
+    }
+    .testi-arrow:hover { transform: scale(1.08); box-shadow: 0 12px 30px rgba(255,127,80,0.38); }
+
+    .testimonials-dots { margin-top: 20px; gap: 10px; }
+    .testimonials-dot { width: 9px; height: 9px; }
+    .testimonials-dot.active { width: 32px; }
   }
 
   /* ── LOCATIONS ── */
@@ -1399,15 +1530,7 @@
     .gallery-caption { padding: 22px 10px 10px; font-size: 0.74rem; }
     .gallery-slider-mobile { display: none !important; }
     .dining-strip-inner { padding: 0 20px; }
-    nav {
-      top: 14px;
-      width: calc(100% - 28px);
-      max-width: calc(100% - 28px);
-      padding: 0 10px 0 16px;
-      height: 56px;
-      border-radius: 40px;
-      grid-template-columns: auto 1fr auto;
-    }
+    nav { display: none; }
     .nav-links, .nav-call { display: none; }
     .nav-logo-text strong { font-size: 0.76rem; }
     .nav-logo-text span { font-size: 0.62rem; }
@@ -1417,7 +1540,7 @@
     .hero-content {
       flex: none;
       padding: 0 22px;
-      padding-top: 96px;
+      padding-top: 36px;
       padding-bottom: 36px;
       max-width: 100%;
     }
@@ -1440,37 +1563,54 @@
     .hero-badge-bar {
       flex-wrap: wrap;
       position: relative;
+      margin: 28px 16px 24px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      background: linear-gradient(155deg, #0F766E, #0B5C56 60%);
+      z-index: 4;
     }
     .hero-badge {
       flex: 0 0 50%;
-      padding: 14px 16px;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 16px;
+      gap: 12px;
+      border-right: 1px solid rgba(255,255,255,0.14);
+      border-bottom: 1px solid rgba(255,255,255,0.14);
     }
     .hero-badge:nth-child(2n) { border-right: none; }
     .hero-badge:nth-last-child(-n+2) { border-bottom: none; }
-    .hero-badge-icon svg { width: 22px; height: 22px; }
-    .hero-badge-text strong { font-size: 0.78rem; }
+    .hero-badge-icon {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px;
+      background: rgba(255,255,255,0.14);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-light);
+    }
+    .hero-badge-icon svg { width: 20px; height: 20px; }
+    .hero-badge-text strong { font-size: 0.8rem; }
     .hero-badge-text span { font-size: 0.7rem; }
 
     .resources-inner { flex-direction: column; text-align: center; align-items: center; }
-    .resources-actions { flex-direction: column; width: 100%; gap: 14px; }
+    .resources-actions { flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 12px; justify-content: center; }
     .resource-card {
-      width: 100%;
-      padding: 20px 24px;
+      flex: 1 1 0;
+      min-width: 0;
+      width: auto;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px 12px;
       border-radius: 18px;
       background: rgba(255,255,255,0.1);
       border: 1.5px solid rgba(255,255,255,0.2);
-      gap: 18px;
+      gap: 10px;
     }
     .resource-icon {
-      width: 54px; height: 54px;
-      border-radius: 14px;
+      width: 46px; height: 46px;
+      border-radius: 13px;
       background: var(--gold-accent);
       color: #fff;
     }
-    .resource-card-text strong { font-size: 1rem; }
-    .resource-card-text span { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+    .resource-card-text strong { font-size: 0.86rem; line-height: 1.3; }
+    .resource-card-text span { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 3px; line-height: 1.35; }
     .resources-text h2 { font-size: 2rem; }
     .resources-text p { font-size: 0.92rem; }
     section { padding: 60px 24px; }
@@ -1597,7 +1737,6 @@
     .services-header { flex-direction: column; gap: 20px; }
     .services-header-text { max-width: 100%; }
     .services-header-nav { width: 100%; justify-content: center; }
-    .services-slider { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .testi-card { flex: 0 0 calc(50% - 11px); }
     .locations-grid { grid-template-columns: 1fr; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 20px; padding-bottom: 8px; }
     .locations-grid::-webkit-scrollbar { display: none; }
@@ -1609,7 +1748,6 @@
   }
 
   @media (max-width: 600px) {
-    .services-slider { grid-template-columns: 1fr; }
     .testi-card { flex: 0 0 100%; }
     .services-header { flex-direction: column; }
     .care-layout { grid-template-columns: 42% 1fr; column-gap: 10px; }
@@ -1626,7 +1764,15 @@
   .team { background: #ffffff; }
   .team-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .team-photo { width: 100%; height: 210px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+  .team-photo { width: 100%; height: 210px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; filter: grayscale(0.55) sepia(0.3) saturate(1.5) contrast(1.08) brightness(1.03); }
+  .team-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(255,127,80,0.14), rgba(120,70,30,0.10));
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
   .team-photo-1 { background: url('https://images.unsplash.com/photo-1745434159123-4908d0b9df94?w=500&q=80') center/cover; }
   .team-photo-2 { background: url('https://images.unsplash.com/photo-1562124638-724e13052daf?w=500&q=80') center/cover; }
   .team-photo-3 { background: url('https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?w=500&q=80') center/cover; }
@@ -1742,107 +1888,230 @@
     .mobile-tabbar { padding: 5px; }
     .gallery-grid { grid-template-rows: repeat(4, 130px); }
   }
+
+/* ===================================================================
+   AFH_V2 NAV + HERO — scoped under #afhHeader so it can't collide
+   with Autumn Hill Manor's own .nav / .hero / .nav-links / etc rules
+   =================================================================== */
+:root{
+  --afh-forest:#1E3A2F;
+  --afh-forest-mid:#2C5440;
+  --afh-mint:#C8E6C9;
+  --afh-mint-pale:#EDF7EE;
+  --afh-gold:#D4A853;
+  --afh-ink:#111B14;
+  --afh-body:#374840;
+  --afh-border:#D6E4D9;
+  --afh-white:#FFFFFF;
+  --afh-fd:'Playfair Display',Georgia,serif;
+}
+
+#afhHeader nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);border-radius:100px;padding:0 10px 0 20px;display:flex;align-items:center;gap:8px;height:58px;box-shadow:0 8px 32px rgba(30,58,47,.12);width:calc(100% - 48px);max-width:960px;transition:all .3s}
+#afhHeader .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;margin-right:auto}
+#afhHeader .nl-icon{width:32px;height:32px;background:var(--afh-forest);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+#afhHeader .nl-name{font-family:var(--afh-fd);font-size:1rem;font-weight:700;color:var(--afh-forest);white-space:nowrap}
+#afhHeader .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+#afhHeader .nav-links a{text-decoration:none;font-size:.82rem;font-weight:500;color:var(--afh-body);padding:7px 14px;border-radius:100px;transition:background .2s,color .2s}
+#afhHeader .nav-links a:hover{background:var(--afh-mint-pale);color:var(--afh-forest)}
+#afhHeader .nav-cta{background:var(--afh-forest)!important;color:var(--afh-white)!important;padding:9px 20px!important;border-radius:100px!important;font-weight:600!important;font-size:.82rem!important;white-space:nowrap;transition:background .2s!important}
+#afhHeader .nav-cta:hover{background:var(--afh-forest-mid)!important}
+#afhHeader .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:var(--afh-forest);border:none;padding:10px 12px;border-radius:100px;margin-left:4px}
+#afhHeader .hamburger span{display:block;width:18px;height:1.5px;background:#fff;border-radius:2px}
+#afhHeader .mob-overlay{display:none;position:fixed;inset:0;background:rgba(17,27,20,.55);z-index:280;backdrop-filter:blur(4px)}
+#afhHeader .mob-overlay.open{display:block}
+#afhHeader .mob-drawer{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:var(--afh-white);z-index:290;padding:80px 32px 40px;display:flex;flex-direction:column;gap:4px;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.12)}
+#afhHeader .mob-drawer.open{right:0}
+#afhHeader .mob-drawer a{display:block;padding:14px 0;font-size:1rem;font-weight:500;color:var(--afh-body);text-decoration:none;border-bottom:1px solid var(--afh-border);transition:color .2s}
+#afhHeader .mob-drawer a:hover{color:var(--afh-forest)}
+#afhHeader .mob-cta{margin-top:24px;background:var(--afh-forest);color:var(--afh-white)!important;text-align:center;border-radius:10px;padding:16px!important;border:none!important;font-weight:700!important;font-size:1rem!important}
+#afhHeader .mob-ph{color:var(--afh-gold)!important;border:none!important;font-weight:600!important;font-size:1.1rem!important}
+#afhHeader .mob-close{position:absolute;top:20px;right:20px;background:none;border:1.5px solid var(--afh-border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;color:var(--afh-body);display:flex;align-items:center;justify-content:center}
+
+#afhHeader .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+#afhHeader .hero-bg{position:absolute;inset:0;z-index:0}
+#afhHeader .hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+#afhHeader .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(17,27,20,.72) 0%,rgba(17,27,20,.42) 42%,rgba(17,27,20,.78) 100%)}
+#afhHeader .hero-content{position:relative;z-index:2;max-width:1320px;padding:150px 48px 90px;margin:0 auto;width:100%;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:56px}
+#afhHeader .hero-text{flex:1 1 auto;max-width:560px;align-self:flex-start;margin-top:-36px}
+#afhHeader .hero h1{font-family:var(--afh-fd);font-size:clamp(2.8rem,4.5vw,4.2rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:22px}
+#afhHeader .hero h1 span{font-style:italic;color:var(--afh-mint)}
+#afhHeader .hero-p{font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.8;max-width:460px;margin-bottom:44px;font-weight:300}
+#afhHeader .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+#afhHeader .btn-gold{background:var(--afh-gold);color:var(--afh-ink);padding:15px 30px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
+#afhHeader .btn-gold:hover{background:#C49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
+#afhHeader .btn-wh{background:transparent;color:#fff;padding:14px 30px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+#afhHeader .btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+#afhHeader .hero-stats{flex:0 0 auto;display:flex;flex-direction:column;gap:18px;min-width:190px;margin-left:auto;padding:28px 30px;background:rgba(17,27,20,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:20px}
+#afhHeader .hero-stats .trust-item{text-align:left;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.16)}
+#afhHeader .hero-stats .trust-item:last-child{padding-bottom:0;border-bottom:none}
+#afhHeader .trust-n{font-family:var(--afh-fd);font-size:1.9rem;font-weight:700;color:var(--afh-mint);line-height:1}
+#afhHeader .trust-l{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+
+
+@media(max-width:900px){
+  #afhHeader nav{top:10px;padding:0 8px 0 16px;height:54px;border-radius:14px;width:calc(100% - 24px);display:flex}
+  #afhHeader .nav-links{display:none}
+  #afhHeader .hamburger{display:flex}
+  #afhHeader .hero{min-height:640px}
+  #afhHeader .hero-content{padding:120px 32px 60px;max-width:100%}
+  #afhHeader .hero-text{margin-top:0}
+  #afhHeader .hero-stats{display:none}
+}
+@media(max-width:540px){
+  #afhHeader .hero-content{padding:100px 24px 52px}
+  #afhHeader .hero-btns{flex-direction:column;align-items:flex-start}
+}
+
+
+/* ===== OWNER STORY — distinct dark/gold spotlight design ===== */
+.owner-story{background:var(--forest-dark);padding:110px 40px;position:relative;overflow:hidden}
+.owner-story .owner-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center}
+.owner-text h2{font-family:var(--font-display);font-size:clamp(2.1rem,3.2vw,2.9rem);color:#fff;line-height:1.18;margin:14px 0 24px;font-weight:700}
+.owner-text p{color:rgba(255,255,255,.78);font-size:1.02rem;line-height:1.8;margin-bottom:18px;max-width:520px}
+.owner-badges{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 34px}
+.owner-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;padding:9px 16px;border-radius:8px;font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;letter-spacing:.01em}
+.owner-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;border:1.5px solid var(--gold-accent);color:var(--gold-accent);padding:14px 26px;border-radius:100px;font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s}
+.owner-cta:hover{background:var(--gold-accent);color:#fff}
+.owner-cta span{display:inline-block;transition:transform .25s}
+.owner-cta:hover span{transform:translateX(4px)}
+.owner-media{position:relative}
+.owner-media::before{content:'';position:absolute;top:22px;left:22px;right:-22px;bottom:-22px;border:2px solid var(--gold-accent);border-radius:22px;z-index:0}
+.owner-media-frame{position:relative;z-index:1;border-radius:22px;overflow:hidden;box-shadow:0 24px 56px rgba(0,0,0,.4);height:440px}
+.owner-media-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-play{position:absolute;bottom:22px;right:22px;width:56px;height:56px;border-radius:14px;background:var(--gold-accent);border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.35);transition:all .25s;z-index:2}
+.owner-play:hover{transform:scale(1.08);background:#E96A3C}
+.owner-badges--after-media{display:none}
+
+/* -- Mobile: rebuilt as a stacked card, full-width photo, centered play button -- */
+@media(max-width:900px){
+  .owner-story{padding:64px 20px}
+  .owner-story .owner-grid{grid-template-columns:1fr;gap:0}
+  .owner-media{order:-1;max-width:100%;margin:0 0 28px}
+  .owner-media::before{display:none}
+  .owner-media-frame{height:230px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+  .owner-play{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%}
+  .owner-play:hover{transform:translate(-50%,-50%) scale(1.08)}
+  .owner-text h2{font-size:1.6rem;margin:12px 0 16px}
+  .owner-text p{font-size:.92rem;line-height:1.7;margin-bottom:14px;max-width:100%}
+  .owner-badges--intext{display:none}
+  .owner-badges--after-media{display:flex;margin:20px 0 0}
+  .owner-badge{font-size:.74rem;padding:8px 12px}
+  .owner-cta{width:100%}
+}
+@media(max-width:480px){
+  .owner-story{padding:52px 16px}
+  .owner-media-frame{height:200px}
+}
+
+/* ===== FAQ — new responsive two-column design (sticky intro + accordion list) ===== */
+.faq{background:#fff;padding:110px 40px}
+.faq-layout{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:start}
+.faq-intro{position:sticky;top:110px}
+.faq-intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.faq-intro h2{font-family:var(--font-display);font-size:clamp(2rem,3vw,2.6rem);color:var(--forest-dark);line-height:1.22;margin-bottom:18px;font-weight:700}
+.faq-intro h2 em{font-style:italic;color:var(--forest)}
+.faq-intro p{color:var(--mid-gray);font-size:1rem;line-height:1.75;margin-bottom:32px;max-width:420px}
+.faq-cta-card{background:var(--section-bg);border:1px solid var(--light-gray);border-radius:16px;padding:26px;max-width:360px}
+.faq-cta-card strong{display:block;color:var(--forest-dark);font-size:1.05rem;font-family:var(--font-display);margin-bottom:6px}
+.faq-cta-card span{display:block;color:var(--mid-gray);font-size:.9rem;margin-bottom:16px;line-height:1.5}
+.faq-cta-btn{display:inline-flex;align-items:center;gap:6px;color:var(--forest);font-weight:700;font-size:.9rem;text-decoration:none;transition:gap .25s}
+.faq-cta-btn:hover{gap:10px}
+.faq-cta-btn span{transition:transform .25s}
+
+.faq-list{display:flex;flex-direction:column;gap:14px}
+.faq-list .faq-item{border:1px solid var(--light-gray);border-radius:14px;overflow:hidden;background:#fff;transition:border-color .25s,box-shadow .25s}
+.faq-list .faq-item.open{border-color:var(--forest);box-shadow:0 10px 30px rgba(15,118,110,.12)}
+.faq-q{width:100%;display:flex;align-items:center;gap:18px;padding:22px 24px;background:none;border:none;cursor:pointer;text-align:left;font:inherit}
+.faq-num{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--gold-accent);flex-shrink:0}
+.faq-q-text{flex:1;font-size:.98rem;font-weight:600;color:var(--forest-dark);line-height:1.4}
+.faq-chevron{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--section-bg);color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:transform .3s,background .25s,color .25s}
+.faq-list .faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--forest);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-list .faq-item.open .faq-a{max-height:400px}
+.faq-a p{padding:0 24px 24px 62px;font-size:.92rem;color:var(--mid-gray);line-height:1.75}
+
+/* -- Mobile: centered intro, no sticky/CTA card, compact full-width accordion -- */
+@media(max-width:900px){
+  .faq{padding:64px 20px}
+  .faq-layout{grid-template-columns:1fr;gap:30px}
+  .faq-intro{position:static;text-align:center}
+  .faq-intro p{margin:0 auto;max-width:100%}
+  .faq-cta-card{display:none}
+  .faq-list{gap:10px}
+  .faq-q{padding:16px 16px}
+  .faq-num{display:none}
+  .faq-q-text{font-size:.92rem}
+  .faq-a p{padding:0 16px 18px 16px;font-size:.88rem}
+}
+@media(max-width:480px){
+  .faq{padding:52px 16px}
+  .faq-intro h2{font-size:1.6rem}
+  .faq-intro p{font-size:.9rem}
+  .faq-chevron{width:24px;height:24px;font-size:.85rem}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <!-- Logo -->
+<!-- ===== AFH_V2 NAV + HERO (kept as-is, hrefs mapped to Autumn Hill section ids) ===== -->
+<div id="afhHeader">
+<nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
-        <!-- leaf/plant emblem approximating original -->
-        <circle cx="24" cy="24" r="22" fill="none" stroke="#FFA07A" stroke-width="1.5"/>
-        <path d="M24 38 C24 38 12 30 12 20 C12 13 17 9 24 9 C31 9 36 13 36 20 C36 30 24 38 24 38Z" fill="#FFA07A" opacity="0.9"/>
-        <path d="M24 9 L24 38" stroke="#2d2b26" stroke-width="1.2"/>
-        <path d="M18 18 Q24 14 30 18" stroke="#2d2b26" stroke-width="1" fill="none"/>
-        <path d="M16 24 Q24 19 32 24" stroke="#2d2b26" stroke-width="1" fill="none"/>
-      </svg>
-    </div>
-    <div class="nav-logo-text">
-      <strong>Autumn</strong>
-      <span>Hill Manor</span>
-    </div>
+    <div class="nl-icon">🕊️</div>
+    <span class="nl-name">Unknow AFH</span>
   </a>
-
-  <!-- Center links -->
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#care">Care</a>
-    <a href="#floorplans">Floor Plans</a>
-    <a href="#team">Our Team</a>
-  </div>
-
-  <!-- Call & tour button -->
-  <div class="nav-right">
-    <div class="nav-call">
-      <div class="nav-call-icon">📞</div>
-      <div class="nav-call-text">
-        <small>Call Us</small>
-        <strong>(817) 596-4159</strong>
-      </div>
-    </div>
-    <a href="#" class="btn-tour">Schedule Tour</a>
-  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="tel:+15648883396" style="color:var(--afh-forest);font-weight:700">📞 (564) 888-3396</a></li>
+    <li><a href="#contact" class="nav-cta">Schedule Tour</a></li>
+  </ul>
+  <button class="hamburger" id="ham" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
+<div class="mob-overlay" id="ov" onclick="closeMob()"></div>
+<div class="mob-drawer" id="drawer">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#about" onclick="closeMob()">About Us</a>
+  <a href="#services" onclick="closeMob()">Care Services</a>
+  <a href="#team" onclick="closeMob()">Our Team</a>
+  <a href="#gallery" onclick="closeMob()">Photo Gallery</a>
+  <a href="#faq" onclick="closeMob()">FAQ</a>
+  <a href="#reviews" onclick="closeMob()">Family Stories</a>
+  <a href="tel:+15648883396" class="mob-ph">📞 (564) 888-3396</a>
+  <a href="#contact" class="mob-cta" onclick="closeMob()">Schedule a Free Tour</a>
+</div>
+
+<!-- HERO — photo background, nav & content overlaid -->
 <section class="hero" id="home">
-  <div class="hero-photo-wrap" style="background: linear-gradient(135deg, #0b5c56 0%, #0F766E 55%, #14958A 100%); background-image: url('https://images.unsplash.com/photo-1771463572032-5f2b131f7ef8?w=1600&q=80'); background-size: cover; background-position: center top;">
-    <img src="https://images.unsplash.com/photo-1771463572032-5f2b131f7ef8?w=1600&q=80" alt="Senior couple walking arm in arm outside Autumn Hill Manor" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <div class="hero-bg">
+    <img src="https://raw.githubusercontent.com/Diwas524/diwas524.github.io/refs/heads/main/theme.png?w=1400&q=85" alt="Senior resident with caregiver in a warm home setting" loading="eager" />
   </div>
   <div class="hero-overlay"></div>
-  <div class="hero-overlay-bottom"></div>
-
   <div class="hero-content">
-    <h1>Where Every Resident<span class="italic-gold">Is Family</span></h1>
-    <div class="hero-divider"></div>
-    <p class="hero-sub">A family-owned senior living community in Weatherford, TX offering compassionate care, meaningful connections, and a place to truly call home.</p>
-    <a href="#" class="btn-hero-tour">Schedule a Tour <span class="arrow">→</span></a>
-  </div>
-
-  <!-- Badge bar pinned to bottom -->
-  <div class="hero-badge-bar">
-    <div class="hero-badge">
-      <div class="hero-badge-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
-      <div class="hero-badge-text">
-        <strong>Compassionate Care</strong>
-        <span>24/7 Support</span>
+    <div class="hero-text">
+      <h1>A Home Where<br>Every Elder<br><span>Truly Belongs</span></h1>
+      <p class="hero-p">Six residents. Round-the-clock care. A real home, not a hallway. Unknown AFHis where families find peace, and seniors find joy again.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">📅 Schedule a Free Tour</a>
+        <a href="tel:+12065550192" class="btn-wh">📞 (206) 555-0192</a>
       </div>
     </div>
-    <div class="hero-badge">
-      <div class="hero-badge-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <div class="hero-badge-text">
-        <strong>Family Owned</strong>
-        <span>&amp; Operated</span>
-      </div>
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <div class="hero-badge-text">
-        <strong>Comfortable Living</strong>
-        <span>Like Home</span>
-      </div>
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div class="hero-badge-text">
-        <strong>Engaging Activities</strong>
-        <span>Every Day</span>
-      </div>
+    <div class="hero-stats">
+      <div class="trust-item"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div>
+      <div class="trust-item"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div>
+      <div class="trust-item"><div class="trust-n">10+</div><div class="trust-l">Yrs Serving Families</div></div>
+      <div class="trust-item"><div class="trust-n">100%</div><div class="trust-l">State Licensed</div></div>
     </div>
   </div>
 </section>
+</div>
+<!-- ===== END AFH_V2 NAV + HERO ===== -->
+
 
 <!-- WELCOME -->
 <section class="welcome" id="about">
@@ -1867,6 +2136,77 @@
   </div>
 </section>
 
+
+<section class="care" id="care">
+  <div class="section-inner care-layout">
+    <div class="care-text">
+      <div class="eyebrow" style="color:#FF7F50 !important;">Care Support</div>
+      <h2>Support that's always nearby</h2>
+      <p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>
+      <div class="care-list">
+        <a href="#" class="care-item active-care-item" onmouseover="onCareItemHover(this, 0)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 0); return false;">
+          <strong>Activities of Daily Living / ADL Assistance</strong>
+          <span>Hands-on help with bathing, dressing, grooming, toileting, and eating — always with kindness and respect.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 1)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 1); return false;">
+          <strong>Alzheimer's Care</strong>
+          <span>Compassionate, patient-focused memory care for residents living with Alzheimer's disease.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 2)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 2); return false;">
+          <strong>Community Activities</strong>
+          <span>Group outings, chapel services, local events, and seasonal celebrations that residents look forward to each day.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 3)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 3); return false;">
+          <strong>Dementia Support Services</strong>
+          <span>Thoughtful, around-the-clock care for residents living with various forms of dementia.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 4)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 4); return false;">
+          <strong>Family Visitation</strong>
+          <span>Our open visitation policy means family is always welcome.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 5)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 5); return false;">
+          <strong>Meals and Entertainment</strong>
+          <span>Three home-cooked meals and snacks served daily in a warm, social setting.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 6)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 6); return false;">
+          <strong>Medication Management</strong>
+          <span>Careful, consistent oversight by our trained team.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 7)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 7); return false;">
+          <strong>24-Hour Care & Supervision</strong>
+          <span>A caring presence, day and night.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 8)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 8); return false;">
+          <strong>Fall Prevention</strong>
+          <span>Thoughtful safeguards to keep residents safe and confident.</span>
+        </a>
+        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 9)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 9); return false;">
+          <strong>On-Site Nursing Support</strong>
+          <span>Skilled nursing guidance, right where it's needed.</span>
+        </a>
+      </div>
+      <div class="care-scroll-track" id="careScrollTrack">
+        <div class="care-scroll-thumb" id="careScrollThumb"></div>
+      </div>
+    </div>
+    <div class="care-img">
+      <div class="care-img-container">
+        <img id="careImage0" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Activities of Daily Living" class="">
+        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+      </div>
+      <p class="care-description" id="careDescription">Our peaceful, welcoming environment is designed to feel like home while providing every amenity and support your loved one needs.</p>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICES SLIDER -->
 <section class="services" id="services">
   <div class="section-inner">
@@ -1877,53 +2217,132 @@
         <p>Thoughtful, individualized support for every stage — always delivered with warmth, dignity, and respect.</p>
       </div>
     </div>
-    <div class="services-slider-container">
-      <div class="services-slider" id="servicesSlider">
-        <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
-          <div class="service-card-body">
+    <div class="msvc-grid" id="servicesMsvcGrid">
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
             <h3>Assisted Living</h3>
-            <p>A warm residential setting with tailored, hands-on support for daily routines — while always encouraging independence.</p>
-            <a href="#" class="learn-more">Learn More →</a>
+            <span class="msvc-toggle">+</span>
           </div>
-        </div>
-        <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
-          <div class="service-card-body">
-            <h3>Memory Care</h3>
-            <p>Specialized, compassionate care and gentle engagement for residents living with Alzheimer's or dementia-related memory loss.</p>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
-          <div class="service-card-body">
-            <h3>Catheter Care</h3>
-            <p>Professional, discreet catheter management provided by our trained care team with comfort and dignity in mind.</p>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
-          <div class="service-card-body">
-            <h3>Wound Care</h3>
-            <p>Skilled wound assessment and ongoing care to support healing, prevent infection, and promote resident wellbeing.</p>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.height='220px';this.style.background='#F5E6CA';this.removeAttribute('src')">
-          <div class="service-card-body">
-            <h3>Medication Management</h3>
-            <p>Careful, consistent oversight of medications by our trained team — ensuring the right dose, at the right time, every time.</p>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
+          <p class="msvc-subtitle">Warm, tailored daily support</p>
+          <div class="msvc-details"><p>A warm residential setting with tailored, hands-on support for daily routines — while always encouraging independence.</p></div>
         </div>
       </div>
-      <div class="slider-dots" id="serviceDots">
-        <span class="slider-dot active" onclick="goToSlide('servicesSlider', 'serviceDots', 0)"></span>
-        <span class="slider-dot" onclick="goToSlide('servicesSlider', 'serviceDots', 1)"></span>
-        <span class="slider-dot" onclick="goToSlide('servicesSlider', 'serviceDots', 2)"></span>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Memory Care</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Compassionate memory support</p>
+          <div class="msvc-details"><p>Specialized, compassionate care and gentle engagement for residents living with Alzheimer's or dementia-related memory loss.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Catheter Care</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Discreet, professional care</p>
+          <div class="msvc-details"><p>Professional, discreet catheter management provided by our trained care team with comfort and dignity in mind.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Wound Care</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Skilled healing & assessment</p>
+          <div class="msvc-details"><p>Skilled wound assessment and ongoing care to support healing, prevent infection, and promote resident wellbeing.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Medication Management</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Right dose, right time</p>
+          <div class="msvc-details"><p>Careful, consistent oversight of medications by our trained team — ensuring the right dose, at the right time, every time.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <div class="msvc-thumb-icon">👩‍⚕️</div>
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>24/7 Certified Caregivers</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Help close by, day or night</p>
+          <div class="msvc-details"><p>Trained, certified caregivers are on-site around the clock, so help is always close by — day or night.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <div class="msvc-thumb-icon">📋</div>
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Individualized Care Plans</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Built around each resident</p>
+          <div class="msvc-details"><p>Every resident's plan is built around their unique needs and preferences, then reviewed regularly as those needs change.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <div class="msvc-thumb-icon">🍲</div>
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Home-Cooked Meals</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Fresh, made from scratch</p>
+          <div class="msvc-details"><p>Nutritious, made-from-scratch meals prepared fresh daily, with menus that accommodate individual dietary needs.</p></div>
+        </div>
+      </div>
+      <div class="msvc-card" onclick="toggleMsvc(this)">
+        <div class="msvc-thumb-wrap">
+          <div class="msvc-thumb-icon">🎨</div>
+          <span class="msvc-heart">♡</span>
+        </div>
+        <div class="msvc-body">
+          <div class="msvc-row">
+            <h3>Activities &amp; Enrichment</h3>
+            <span class="msvc-toggle">+</span>
+          </div>
+          <p class="msvc-subtitle">Engaging every day</p>
+          <div class="msvc-details"><p>Daily programs designed to engage the mind, body, and spirit, from arts and games to music and social gatherings.</p></div>
+        </div>
       </div>
     </div>
   </div>
@@ -2056,165 +2475,35 @@
   </div>
 </section>
 
-<!-- CARE VERTICAL SLIDER -->
-<section class="care" id="care">
-  <div class="section-inner care-layout">
-    <div class="care-text">
-      <div class="eyebrow" style="color:#FF7F50 !important;">Care Support</div>
-      <h2>Support that's always nearby</h2>
-      <p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>
-      <div class="care-list">
-        <a href="#" class="care-item active-care-item" onmouseover="onCareItemHover(this, 0)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 0); return false;">
-          <strong>Activities of Daily Living / ADL Assistance</strong>
-          <span>Hands-on help with bathing, dressing, grooming, toileting, and eating — always with kindness and respect.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 1)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 1); return false;">
-          <strong>Alzheimer's Care</strong>
-          <span>Compassionate, patient-focused memory care for residents living with Alzheimer's disease.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 2)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 2); return false;">
-          <strong>Community Activities</strong>
-          <span>Group outings, chapel services, local events, and seasonal celebrations that residents look forward to each day.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 3)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 3); return false;">
-          <strong>Dementia Support Services</strong>
-          <span>Thoughtful, around-the-clock care for residents living with various forms of dementia.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 4)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 4); return false;">
-          <strong>Family Visitation</strong>
-          <span>Our open visitation policy means family is always welcome.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 5)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 5); return false;">
-          <strong>Meals and Entertainment</strong>
-          <span>Three home-cooked meals and snacks served daily in a warm, social setting.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 6)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 6); return false;">
-          <strong>Medication Management</strong>
-          <span>Careful, consistent oversight by our trained team.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 7)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 7); return false;">
-          <strong>24-Hour Care & Supervision</strong>
-          <span>A caring presence, day and night.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 8)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 8); return false;">
-          <strong>Fall Prevention</strong>
-          <span>Thoughtful safeguards to keep residents safe and confident.</span>
-        </a>
-        <a href="#" class="care-item" onmouseover="onCareItemHover(this, 9)" onmouseleave="resetImage()" onclick="onCareItemClick(this, 9); return false;">
-          <strong>On-Site Nursing Support</strong>
-          <span>Skilled nursing guidance, right where it's needed.</span>
-        </a>
+<!-- OWNER STORY (distinct design: dark forest panel, mirrored layout, offset frame) -->
+<section class="owner-story" id="owner">
+  <div class="section-inner owner-grid">
+    <div class="owner-text">
+      <div class="eyebrow" style="color:var(--gold-accent);">From Our Owner</div>
+      <h2>A Lifetime Spent <span style="color:#7FD6C9;font-style:italic;">Caring</span> for Others</h2>
+      <p>My name is Tami, and caring for others has been a part of my life for as long as I can remember. I grew up in an Adult Family Home owned and operated by my mother, where I learned early on that caregiving is about much more than meeting physical needs.</p>
+      <p>Today, I combine my nursing background with a lifetime of caregiving experience to provide thoughtful, personalized care for each resident entrusted to us.</p>
+      <div class="owner-badges owner-badges--intext">
+        <span class="owner-badge">🎓 RN, BSN</span>
+        <span class="owner-badge">👶 15 Years NICU</span>
+        <span class="owner-badge">🏡 6 Years AFH Provider</span>
       </div>
-      <div class="care-scroll-track" id="careScrollTrack">
-        <div class="care-scroll-thumb" id="careScrollThumb"></div>
-      </div>
+      <a href="#contact" class="owner-cta">Read Tami's Full Story <span>→</span></a>
     </div>
-    <div class="care-img">
-      <div class="care-img-container">
-        <img id="careImage0" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Activities of Daily Living" class="">
-        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+    <div class="owner-media">
+      <div class="owner-media-frame">
+        <img src="https://images.unsplash.com/photo-1745434159123-4908d0b9df94?w=900&q=80" alt="Tami, owner and caregiver" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <button class="owner-play" aria-label="Play Tami's story video" onclick="return false;">▶</button>
       </div>
-      <p class="care-description" id="careDescription">Our peaceful, welcoming environment is designed to feel like home while providing every amenity and support your loved one needs.</p>
+      <div class="owner-badges owner-badges--after-media">
+        <span class="owner-badge">🎓 RN, BSN</span>
+        <span class="owner-badge">👶 15 Years NICU</span>
+        <span class="owner-badge">🏡 6 Years AFH Provider</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FLOOR PLANS -->
-<section class="floorplans" id="floorplans">
-  <div class="section-inner floorplans-grid">
-
-    <!-- LEFT: text -->
-    <div>
-      <div class="fp-eyebrow" style="color:#ffffff !important;">Accepting New Residents</div>
-      <h2 class="fp-heading">Room to live independently</h2>
-      <p class="fp-desc">Our independent living apartments offer the space and comforts of home, with optional services available whenever they're needed.</p>
-
-      <div class="fp-features">
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>900 Square Feet</strong>
-            <span>Spacious &amp; comfortable</span>
-          </div>
-        </div>
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="8" y2="2"/><line x1="16" y1="6" x2="16" y2="2"/><rect x="2" y="6" width="20" height="16" rx="2"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>Full Kitchen</strong>
-            <span>Cook and host with ease</span>
-          </div>
-        </div>
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="8" cy="21" r="1"/><circle cx="16" cy="21" r="1"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>Washer &amp; Dryer</strong>
-            <span>In-home convenience</span>
-          </div>
-        </div>
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><line x1="12" y1="3" x2="12" y2="11"/><line x1="8" y1="7" x2="16" y2="7"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>Walk-In Closet</strong>
-            <span>Generous storage</span>
-          </div>
-        </div>
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>Private Patio</strong>
-            <span>Fresh air at home</span>
-          </div>
-        </div>
-        <div class="fp-feat">
-          <div class="fp-feat-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div class="fp-feat-text">
-            <strong>Wi-Fi &amp; Utilities</strong>
-            <span>Included in your rate</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="fp-actions">
-        <a href="#" class="btn-fp-primary">Schedule a Tour</a>
-        <a href="#" class="btn-fp-secondary">Contact Us</a>
-      </div>
-    </div>
-
-    <!-- RIGHT: image with badge -->
-    <div class="floorplans-img">
-      <img
-        src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg"
-        alt="Spacious 900 sq ft apartment interior"
-        onerror="this.style.background='#F5E6CA';this.removeAttribute('src')"
-      >
-      <div class="fp-sqft-badge">
-        <span class="num">900</span>
-        <span class="unit">SQ FT</span>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <!-- CAREGIVING TEAM -->
 <section class="team" id="team">
@@ -2404,148 +2693,85 @@
   </div>
 </section>
 
-<!-- LOCATIONS -->
-<section class="locations">
-  <div class="section-inner">
-    <div class="locations-header">
-      <div class="eyebrow" style="color:#ffffff;">Part of the Autumn Hill Family</div>
-      <h2>One Community, <span style="color: #FF7F50; font-style: italic;">Multiple Locations</span> Across Texas</h2>
-      <p>Same warmth, same standard of care, each location licensed, family-run, and built around the same promise of compassionate senior living.</p>
-    </div>
-    <div class="locations-slider-wrap">
-      <button class="locations-arrow left" onclick="stepLocation(-1)">&#8249;</button>
-      <div class="locations-grid" id="locationsGrid">
-      <div class="location-card">
-        <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor Weatherford" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        </div>
-        <div class="location-body">
-          <h3>Autumn Hill Manor — Weatherford</h3>
-          <div class="location-info">
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <span>Weatherford, TX 76086</span>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📞</span>
-              <a href="tel:+18175964159">(817) 596-4159</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="location-card">
-        <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="Autumn Hill Manor Arlington" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        </div>
-        <div class="location-body">
-          <h3>Autumn Hill Manor — Arlington</h3>
-          <div class="location-info">
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <span>Arlington, TX 76010</span>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📞</span>
-              <a href="tel:+18172161234">(817) 216-1234</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="location-card">
-        <div class="location-image">
-          <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining.jpg" alt="Autumn Hill Manor Fort Worth" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        </div>
-        <div class="location-body">
-          <h3>Autumn Hill Manor — Fort Worth</h3>
-          <div class="location-info">
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <span>Fort Worth, TX 76109</span>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📞</span>
-              <a href="tel:+18175551234">(817) 555-1234</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <button class="locations-arrow right" onclick="stepLocation(1)">&#8250;</button>
-    </div>
-    <div class="locations-dots" id="locationsDots">
-      <button class="locations-dot active" onclick="goToLocation(0)"></button>
-      <button class="locations-dot" onclick="goToLocation(1)"></button>
-      <button class="locations-dot" onclick="goToLocation(2)"></button>
-    </div>
-  </div>
-</section>
 
 <!-- FAQ -->
 <section class="faq" id="faq">
-  <div class="section-inner">
-    <div class="faq-header">
+  <div class="section-inner faq-layout">
+    <div class="faq-intro">
       <div class="eyebrow" style="color:#FF7F50;">Common Questions</div>
-      <h2>Answers to What <em>Families<br>Ask Most</em></h2>
+      <h2>Answers to What <em>Families</em> Ask Most</h2>
       <p>We believe in total transparency. Here are the questions we hear most often, answered honestly.</p>
+      <div class="faq-cta-card">
+        <strong>Still have questions?</strong>
+        <span>We're happy to walk you through anything.</span>
+        <a href="#contact" class="faq-cta-btn">Contact Us <span>→</span></a>
+      </div>
     </div>
-    <div class="faq-grid">
+
+    <div class="faq-list">
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>How much does Autumn Hill Manor cost?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">01</span>
+          <span class="faq-q-text">How much does Autumn Hill Manor cost?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>Monthly rates vary based on level of care and room type. We offer transparent, all-inclusive pricing with no hidden fees. Contact us directly for current rates — we're happy to walk you through exactly what's included and work with your family's budget.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>Does Autumn Hill Manor accept Medicaid or Medicare?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">02</span>
+          <span class="faq-q-text">Does Autumn Hill Manor accept Medicaid or Medicare?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>We accept private pay and long-term care insurance. We do not currently accept Medicaid waiver programs, but our team can help connect families with financial counselors and resources to help plan for care costs.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>What's included in the monthly rate?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">03</span>
+          <span class="faq-q-text">What's included in the monthly rate?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>The monthly rate covers room and board, three home-cooked meals daily, medication management, personal care assistance, housekeeping, laundry, activities, and 24-hour caregiver support. We keep it simple — one predictable rate, no surprise add-ons.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>How do I know if my loved one is ready for an AFH?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">04</span>
+          <span class="faq-q-text">How do I know if my loved one is ready for an AFH?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>Adult family homes are ideal when a loved one needs daily hands-on assistance but doesn't require hospital-level care. Signs include difficulty managing medications, personal hygiene, or mobility, or safety concerns living alone. We're happy to do a free assessment call to help you decide.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>What happens if my loved one's needs increase?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">05</span>
+          <span class="faq-q-text">What happens if my loved one's needs increase?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>We regularly reassess each resident's care plan and can accommodate increasing needs in most cases, including dementia progression, mobility changes, and hospice. If a higher level of medical care becomes necessary, we'll help coordinate a smooth transition with compassion and advance notice.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <span>How do I start the admission process?</span>
-          <div class="faq-plus">+</div>
-        </div>
-        <div class="faq-answer">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-num">06</span>
+          <span class="faq-q-text">How do I start the admission process?</span>
+          <span class="faq-chevron">⌄</span>
+        </button>
+        <div class="faq-a">
           <p>It starts with a simple conversation. Call or email us to share your situation, and we'll schedule a tour and assessment at your convenience. From there, we'll review medical records, complete a care assessment, and walk you through paperwork — usually within a few days.</p>
         </div>
       </div>
@@ -2642,12 +2868,8 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-bottom">
-      <span>© 2026 Autumn Hill Manor. Family-owned senior living in Weatherford, Texas.</span>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Accessibility</a>
-      </div>
+      <span>© Unknown AFH</span>
+      <span>Designed by Diwas Pandey</span>
     </div>
   </div>
 </footer>
@@ -2665,6 +2887,15 @@
 </div>
 
 <script>
+// ── AFH_V2 header: mobile drawer ──
+(function(){
+  const ham=document.getElementById('ham'), ov=document.getElementById('ov'), dr=document.getElementById('drawer');
+  if(ham && ov && dr){
+    ham.addEventListener('click',()=>{ov.classList.add('open');dr.classList.add('open');document.body.style.overflow='hidden'});
+    window.closeMob=function(){ov.classList.remove('open');dr.classList.remove('open');document.body.style.overflow=''};
+  }
+})();
+
 function toggleFaq(questionEl) {
   const item = questionEl.closest('.faq-item');
   const isOpen = item.classList.contains('open');
@@ -2879,14 +3110,7 @@ function restartTestiAutoplay() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const deck = document.getElementById('testimonialsDeck');
-  const container = document.querySelector('.testimonials-slider-container');
   startTestiAutoplay();
-  if (container) {
-    container.addEventListener('mouseenter', stopTestiAutoplay);
-    container.addEventListener('mouseleave', startTestiAutoplay);
-    container.addEventListener('touchstart', stopTestiAutoplay, { passive: true });
-  }
 });
 
 (function() {
@@ -2908,11 +3132,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 })();
 
+function toggleMsvc(card) {
+  const wasOpen = card.classList.contains('open');
+  card.closest('.msvc-grid').querySelectorAll('.msvc-card.open').forEach(c => {
+    if (c !== card) c.classList.remove('open');
+  });
+  card.classList.toggle('open', !wasOpen);
+}
+
 function updateDots(sliderId, dotsId) {
   const slider = document.getElementById(sliderId);
   const dots = document.querySelectorAll(`#${dotsId} .slider-dot`);
+  if (!slider || !dots.length) return;
+  const cardEl = slider.querySelector('.service-card');
+  if (!cardEl) return;
   const scrollPosition = slider.scrollLeft;
-  const cardWidth = slider.querySelector('.service-card').offsetWidth + 24;
+  const cardWidth = cardEl.offsetWidth + 24;
   const activeIndex = Math.round(scrollPosition / cardWidth);
   
   dots.forEach((dot, index) => {
@@ -2932,33 +3167,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-let currentLocationIndex = 0;
-const locationCount = 3;
-
-function goToLocation(index) {
-  const grid = document.getElementById('locationsGrid');
-  if (!grid) return;
-  currentLocationIndex = Math.max(0, Math.min(index, locationCount - 1));
-  const cardWidth = grid.offsetWidth;
-  grid.scrollTo({ left: currentLocationIndex * (cardWidth + 20), behavior: 'smooth' });
-  document.querySelectorAll('.locations-dot').forEach((d, i) => d.classList.toggle('active', i === currentLocationIndex));
-}
-
-function stepLocation(dir) {
-  goToLocation(currentLocationIndex + dir);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  const grid = document.getElementById('locationsGrid');
-  if (grid) {
-    grid.addEventListener('scroll', function() {
-      const cardWidth = grid.offsetWidth;
-      const index = Math.round(grid.scrollLeft / (cardWidth + 20));
-      currentLocationIndex = index;
-      document.querySelectorAll('.locations-dot').forEach((d, i) => d.classList.toggle('active', i === index));
-    });
-  }
-});
 
 const lightboxImages = [
   { src: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1400&q=80', label: 'Daily Wellness' },
@@ -3030,9 +3238,9 @@ document.addEventListener('keydown', function(e) {
     <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg>
     <span>Gallery</span>
   </a>
-  <a href="#floorplans" class="tab-item" data-target="floorplans">
+  <a href="#owner" class="tab-item" data-target="owner">
     <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-8H7v8"/><path d="M7 3h10v5H7z"/><path d="M4 21V8l8-5 8 5v13"/></svg>
-    <span>New Residents</span>
+    <span>Our Story</span>
   </a>
   <a href="#reviews" class="tab-item" data-target="reviews">
     <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.3 6.2 21l1.5-6.6-5-4.4 6.7-.6L12 3l2.6 6.4 6.7.6-5 4.4L17.8 21z"/></svg>
