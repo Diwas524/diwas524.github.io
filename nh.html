@@ -1891,11 +1891,14 @@
 #afhHeader .btn-gold:hover{background:#C49640;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,.4)}
 #afhHeader .btn-wh{background:transparent;color:#fff;padding:14px 30px;border-radius:10px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
 #afhHeader .btn-wh:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-#afhHeader .hero-stats{flex:0 0 auto;align-self:center;display:flex;flex-direction:column;gap:18px;min-width:clamp(190px,12vw,270px);margin-left:auto;padding:clamp(26px,1.8vw,36px) clamp(30px,2vw,42px);background:rgba(17,27,20,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-#afhHeader .hero-stats .trust-item{text-align:left;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.16)}
-#afhHeader .hero-stats .trust-item:last-child{padding-bottom:0;border-bottom:none}
-#afhHeader .trust-n{font-family:var(--afh-fd);font-size:clamp(1.9rem,1vw + 1.3rem,2.8rem);font-weight:700;color:var(--afh-mint);line-height:1}
-#afhHeader .trust-l{font-size:clamp(.65rem,.25vw + .5rem,.85rem);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:4px}
+#afhHeader .hero-stats{flex:0 0 auto;align-self:center;display:flex;flex-direction:column;gap:12px;min-width:clamp(230px,15vw,300px);margin-left:auto}
+#afhHeader .hero-stats .trust-item{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 18px;background:rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.3);border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.22);transition:transform .25s ease,background .25s ease}
+#afhHeader .hero-stats .trust-item:hover{transform:translateX(4px);background:rgba(255,255,255,.2)}
+#afhHeader .trust-icon{flex-shrink:0;width:clamp(34px,2.2vw,40px);height:clamp(34px,2.2vw,40px);border-radius:50%;background:rgba(212,168,83,.18);border:1px solid rgba(212,168,83,.45);display:flex;align-items:center;justify-content:center}
+#afhHeader .trust-icon svg{width:52%;height:52%;stroke:var(--afh-gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#afhHeader .hero-stats .trust-text{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+#afhHeader .trust-n{font-family:var(--afh-fd);font-style:italic;font-size:clamp(1.3rem,.5vw + 1.05rem,1.7rem);font-weight:700;color:var(--afh-mint);line-height:1;text-shadow:0 2px 14px rgba(200,230,201,.18)}
+#afhHeader .trust-l{font-size:clamp(.6rem,.22vw + .48rem,.72rem);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 
 #afhHeader .hero-stats-mob{display:none}
 
@@ -1933,21 +1936,16 @@
   #afhHeader .hero-stats-mob{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:16px 12px;
+    gap:12px;
     width:100%;
     margin-top:26px;
-    padding:20px 20px 18px;
-    background:rgba(17,27,20,.45);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:16px;
-    box-shadow:0 14px 34px rgba(0,0,0,.28);
   }
-  #afhHeader .hero-stats-mob .trust-item{text-align:left;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.16)}
-  #afhHeader .hero-stats-mob .trust-item:nth-last-child(-n+2){padding-bottom:0;border-bottom:none}
-  #afhHeader .hero-stats-mob .trust-n{font-family:var(--afh-fd);font-size:clamp(1.25rem,4vw,1.55rem);font-weight:700;color:var(--afh-mint);line-height:1}
-  #afhHeader .hero-stats-mob .trust-l{font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:6px;line-height:1.3}
+  #afhHeader .hero-stats-mob .trust-item{display:flex;align-items:center;gap:9px;padding:11px 14px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.3);border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+  #afhHeader .hero-stats-mob .trust-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(212,168,83,.2);border:1px solid rgba(212,168,83,.45);display:flex;align-items:center;justify-content:center}
+  #afhHeader .hero-stats-mob .trust-icon svg{width:52%;height:52%;stroke:var(--afh-gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  #afhHeader .hero-stats-mob .trust-text{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;min-width:0}
+  #afhHeader .hero-stats-mob .trust-n{font-family:var(--afh-fd);font-style:italic;font-size:1.05rem;font-weight:700;color:var(--afh-mint);line-height:1;white-space:nowrap}
+  #afhHeader .hero-stats-mob .trust-l{font-size:.56rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:rgba(255,255,255,.8);line-height:1.2}
 }
 @media(max-width:540px){
   #afhHeader .hero-content{padding:100px 20px 36px}
@@ -1956,7 +1954,8 @@
   #afhHeader .new-res-badge{font-size:.72rem;padding:8px 16px 8px 14px}
   #afhHeader .hero h1{font-size:clamp(1.9rem,8vw,2.5rem)}
   #afhHeader .hero-p{font-size:.94rem;line-height:1.7}
-  #afhHeader .hero-stats-mob{margin-top:22px;padding:18px 16px}
+  #afhHeader .hero-stats-mob{margin-top:22px;gap:10px}
+  #afhHeader .hero-stats-mob .trust-item{padding:10px 12px}
 }
 /* tighten vertical rhythm on shorter phone screens so content clears the floating tab bar without scrolling */
 @media(max-width:900px) and (max-height:820px){
@@ -1964,8 +1963,8 @@
   #afhHeader .new-res-badge{margin-bottom:16px}
   #afhHeader .hero h1{margin-bottom:14px}
   #afhHeader .hero-p{margin-bottom:20px}
-  #afhHeader .hero-stats-mob{margin-top:18px;padding:16px 16px 14px;gap:12px 10px}
-  #afhHeader .hero-stats-mob .trust-item{padding-bottom:10px}
+  #afhHeader .hero-stats-mob{margin-top:18px;gap:8px}
+  #afhHeader .hero-stats-mob .trust-item{padding:9px 12px}
 }
 @media(max-width:900px) and (max-height:700px){
   #afhHeader .hero-content{padding-top:80px}
@@ -2114,17 +2113,17 @@
         <a href="tel:+12065550192" class="btn-wh">📞 (206) 555-0192</a>
       </div>
       <div class="hero-stats-mob">
-        <div class="trust-item"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div>
-        <div class="trust-item"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div>
-        <div class="trust-item"><div class="trust-n">10+</div><div class="trust-l">Yrs Experience</div></div>
-        <div class="trust-item"><div class="trust-n">100%</div><div class="trust-l">Licensed</div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg></span><div class="trust-text"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div class="trust-text"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 17.3 6.2 21l1.5-6.6-5-4.4 6.7-.6L12 3l2.6 6.4 6.7.6-5 4.4L17.8 21z"/></svg></span><div class="trust-text"><div class="trust-n">10+</div><div class="trust-l">Yrs Experience</div></div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span><div class="trust-text"><div class="trust-n">100%</div><div class="trust-l">Licensed</div></div></div>
       </div>
     </div>
     <div class="hero-stats">
-      <div class="trust-item"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div>
-      <div class="trust-item"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div>
-      <div class="trust-item"><div class="trust-n">10+</div><div class="trust-l">Yrs Serving Families</div></div>
-      <div class="trust-item"><div class="trust-n">100%</div><div class="trust-l">State Licensed</div></div>
+      <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg></span><div class="trust-text"><div class="trust-n">6</div><div class="trust-l">Max Residents</div></div></div>
+      <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><div class="trust-text"><div class="trust-n">24/7</div><div class="trust-l">Staffed Care</div></div></div>
+      <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 17.3 6.2 21l1.5-6.6-5-4.4 6.7-.6L12 3l2.6 6.4 6.7.6-5 4.4L17.8 21z"/></svg></span><div class="trust-text"><div class="trust-n">10+</div><div class="trust-l">Yrs Serving Families</div></div></div>
+      <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span><div class="trust-text"><div class="trust-n">100%</div><div class="trust-l">State Licensed</div></div></div>
     </div>
   </div>
 </section>
