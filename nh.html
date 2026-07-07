@@ -12,7 +12,7 @@
     --cream: #FAF7F2;
     --warm-white: #FFFFFF;
     --forest: #0F766E;
-    --forest-dark: #0B5C56;
+    --forest-dark: #20a59c;
     --forest-light: #14958A;
     --gold: #FF7F50;
     --gold-light: #FFB199;
@@ -20,6 +20,7 @@
     --mid-gray: #6B6B6B;
     --light-gray: #E8E4DD;
     --section-bg: #F5F1EB;
+    --blue-bg: #5024e2;
     --gold-bg: #F5E6CA;
     --gold-bg-dark: #F0DFB8;
     --gold-text: #9A3412;
@@ -195,14 +196,14 @@
     flex-direction: column;
     justify-content: center;
     padding: 0 64px;
-    padding-bottom: 100px; /* lift above badge bar */
+    padding-bottom: 80px; /* lift above badge bar */
     max-width: 560px;
     color: #fff;
   }
 
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    font-size: clamp(2.1rem, 4.2vw, 3.2rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 0;
@@ -214,7 +215,7 @@
     font-weight: 700;
     color: #FFA07A;
     display: block;
-    font-size: clamp(3.2rem, 7vw, 5.4rem);
+    font-size: clamp(2.5rem, 5.2vw, 4rem);
     line-height: 1.1;
   }
 
@@ -223,16 +224,16 @@
     width: 72px;
     height: 2px;
     background: #FFA07A;
-    margin: 22px 0;
+    margin: 16px 0;
     border-radius: 2px;
   }
 
   .hero-sub {
-    font-size: 0.97rem;
+    font-size: 0.88rem;
     color: rgba(255,255,255,0.88);
     max-width: 420px;
-    margin-bottom: 36px;
-    line-height: 1.7;
+    margin-bottom: 24px;
+    line-height: 1.6;
   }
 
   .btn-hero-tour {
@@ -335,7 +336,7 @@
   @media (max-width: 900px) {
     #care { display: none; }
   }
-  .services { background: var(--section-bg); }
+  .services { background: var(--blue-bg); }
   .services-header { text-align: center; margin-bottom: 50px; }
   .services-header-text { max-width: 600px; margin: 0 auto; }
   .services-header p { color: var(--gold-mid); }
@@ -683,27 +684,41 @@
   }
 
   /* ── RESOURCES / DOWNLOADS ── */
-  .resources { background: var(--forest-dark); padding: 70px 0; }
+  .resources { background: var(--gold-bg); padding: 70px 0; }
   .resources-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
   .resources-text { max-width: 460px; }
   .resources-actions { display: flex; gap: 16px; flex-wrap: wrap; }
   .resource-card-text { line-height: 1.3; }
-  .resources-text .eyebrow { color: #FFB199 !important; }
-  .resources-text h2 { color: #fff; margin: 8px 0 14px; }
-  .resources-text h2 em { color: var(--gold-light); }
-  .resources-text p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+  .resources-text .eyebrow { color: var(--gold-mid) !important; }
+  .resources-text h2 { color: var(--charcoal); margin: 8px 0 14px; }
+  .resources-text h2 em { color: var(--forest); }
+  .resources-text p { color: var(--mid-gray); font-size: 0.95rem; }
   .resource-card {
     display: flex; align-items: center; gap: 14px;
-    background: rgba(255,255,255,0.07);
-    border: 1.5px solid rgba(255,255,255,0.15);
+    background: #fff;
+    border: 1.5px solid var(--light-gray);
     border-radius: 14px; padding: 16px 22px;
-    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     min-width: 250px;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
-  .resource-card:hover { background: rgba(255,255,255,0.14); border-color: var(--gold-light); transform: translateY(-2px); }
-  .resource-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: var(--gold-light); color: var(--forest-dark); display: flex; align-items: center; justify-content: center; }
-  .resource-card-text strong { display: block; color: #fff; font-size: 0.92rem; font-weight: 700; }
-  .resource-card-text span { display: block; color: rgba(255,255,255,0.6); font-size: 0.78rem; margin-top: 2px; }
+  .resource-card:hover { background: #fff; border-color: var(--forest); transform: translateY(-2px); }
+  .resource-card:active { transform: scale(0.96); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  .resource-card:active .resource-icon { transform: scale(0.88) rotate(-6deg); }
+  .resource-card .rc-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(15,118,110,0.18);
+    transform: scale(0);
+    animation: rcRippleOut 0.6s ease-out;
+    pointer-events: none;
+  }
+  @keyframes rcRippleOut { to { transform: scale(2.8); opacity: 0; } }
+  .resource-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: var(--forest); color: #fff; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease; }
+  .resource-card-text strong { display: block; color: var(--charcoal); font-size: 0.92rem; font-weight: 700; }
+  .resource-card-text span { display: block; color: var(--mid-gray); font-size: 0.78rem; margin-top: 2px; }
 
   /* legacy aliases */
   .btn-green {
@@ -745,7 +760,7 @@
   /* ── TESTIMONIALS SLIDER ── */
   /* ── TESTIMONIALS ── */
   .testimonials {
-    background: var(--gold-bg);
+    background: var(--blue-bg);
     position: relative;
     overflow: hidden;
   }
@@ -1110,7 +1125,7 @@
   /* ── REFERRALS & CONTACT — MODERN REDESIGN ── */
   .referrals {
     position: relative;
-    background: linear-gradient(165deg, #0B5C56 0%, #0F766E 55%, #0B5C56 100%);
+    background: linear-gradient(165deg, #F5E6CA 0%, #F0DFB8 55%, #F5E6CA 100%);
     padding: 100px 0;
     overflow: hidden;
   }
@@ -1159,16 +1174,16 @@
     font-size: clamp(2rem, 4vw, 2.9rem);
     font-weight: 700;
     line-height: 1.15;
-    color: #fff;
+    color: var(--charcoal);
     margin-bottom: 16px;
   }
   .referrals-left h2 em {
     font-style: italic;
-    color: #FFB199;
+    color: var(--gold-mid);
   }
   .referrals-left .referrals-sub {
     font-size: 0.98rem;
-    color: rgba(255,255,255,0.78);
+    color: var(--mid-gray);
     line-height: 1.75;
     margin-bottom: 36px;
     max-width: 400px;
@@ -1177,10 +1192,10 @@
   .contact-quick-actions { display: flex; gap: 12px; margin-bottom: 36px; flex-wrap: wrap; }
   .contact-quick-btn {
     display: inline-flex; align-items: center; gap: 9px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.6);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.28);
-    color: #fff;
+    border: 1px solid rgba(11,92,86,0.18);
+    color: var(--charcoal);
     padding: 13px 22px;
     border-radius: 100px;
     font-size: 0.86rem;
@@ -1189,7 +1204,7 @@
     transition: all 0.2s;
   }
   .contact-quick-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
-  .contact-quick-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  .contact-quick-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
   .contact-quick-btn.is-primary {
     background: linear-gradient(135deg, #FF7F50, #E8603A);
     border-color: transparent;
@@ -1203,13 +1218,13 @@
     align-items: center;
     gap: 16px;
     padding: 16px 18px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.5);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.14);
+    border: 1px solid rgba(11,92,86,0.12);
     border-radius: 16px;
     transition: background 0.2s, transform 0.2s;
   }
-  .contact-pill:hover { background: rgba(255,255,255,0.13); transform: translateX(3px); }
+  .contact-pill:hover { background: rgba(255,255,255,0.85); transform: translateX(3px); }
   .contact-pill-icon {
     width: 44px; height: 44px; border-radius: 12px;
     background: linear-gradient(135deg, #FF7F50, #E8603A);
@@ -1223,16 +1238,16 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--mid-gray);
     margin-bottom: 3px;
   }
   .contact-pill-value {
     font-size: 0.94rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--charcoal);
   }
-  .contact-pill-value a { color: #fff; }
-  .contact-pill-value a:hover { color: #FFB199; }
+  .contact-pill-value a { color: var(--charcoal); }
+  .contact-pill-value a:hover { color: var(--forest); }
 
   /* Right column — floating white card */
   .referrals-card {
@@ -1422,7 +1437,7 @@
   .dining-arrow.right { right: 6px; }
 
   /* ── LIFE GALLERY ── */
-  .life-gallery { background: #fff; padding: 90px 40px; }
+  .life-gallery { background: var(--blue-bg); padding: 90px 40px; }
   .life-gallery-inner { max-width: 1200px; margin: 0 auto; }
   .life-gallery-header { text-align: center; max-width: 640px; margin: 0 auto 50px; }
   .life-gallery-header .eyebrow { color: #0F766E !important; margin-bottom: 14px; }
@@ -1632,18 +1647,25 @@
       text-align: center;
       padding: 20px 12px;
       border-radius: 18px;
-      background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(255,255,255,0.2);
+      background: #fff;
+      border: 1.5px solid var(--light-gray);
       gap: 10px;
+      opacity: 0;
+      transform: translateY(28px) scale(0.96);
+      transition: opacity 0.6s cubic-bezier(0.22,0.61,0.36,1), transform 0.6s cubic-bezier(0.22,0.61,0.36,1);
     }
+    .resource-card.in-view { opacity: 1; transform: translateY(0) scale(1); }
+    .resource-card:nth-child(2) { transition-delay: 0.12s; }
     .resource-icon {
       width: 46px; height: 46px;
       border-radius: 13px;
       background: var(--gold-accent);
       color: #fff;
+      transition: transform 0.4s ease 0.3s;
     }
-    .resource-card-text strong { font-size: 0.86rem; line-height: 1.3; }
-    .resource-card-text span { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 3px; line-height: 1.35; }
+    .resource-card.in-view .resource-icon { animation: resourceIconPop 0.5s ease 0.35s backwards; }
+    .resource-card-text strong { font-size: 0.86rem; line-height: 1.3; color: var(--charcoal); }
+    .resource-card-text span { display: block; font-size: 0.7rem; color: var(--mid-gray); margin-top: 3px; line-height: 1.35; }
     .resources-text h2 { font-size: 2rem; }
     .resources-text p { font-size: 0.92rem; }
     section { padding: 60px 24px; }
@@ -1781,7 +1803,7 @@
   }
 
   /* ── FOOD MARQUEE ── */
-  .food-marquee { background: var(--section-bg); padding: 70px 0 76px; overflow: hidden; }
+  .food-marquee { background: #ffffff; padding: 70px 0 76px; overflow: hidden; }
   .food-marquee-header { text-align: center; max-width: 600px; margin: 0 auto 40px; padding: 0 24px; }
   .food-marquee-header .eyebrow { color: var(--gold-mid); }
   .food-marquee-header h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3.2vw, 2.4rem); color: var(--forest-dark); margin: 8px 0 12px; }
@@ -1852,7 +1874,7 @@
   }
 
   /* ── CAREGIVING TEAM ── */
-  .team { background: #ffffff; }
+  .team { background: var(--gold-bg); }
   .team-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
   .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .team-photo { width: 100%; height: 210px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -2016,11 +2038,11 @@
 #afhHeader .hero-overlay{position:absolute;inset:0;z-index:1;background:
     linear-gradient(100deg,rgba(10,16,12,.86) 0%,rgba(10,16,12,.66) 30%,rgba(10,16,12,.22) 55%,rgba(10,16,12,.12) 68%,rgba(10,16,12,.5) 100%),
     linear-gradient(180deg,rgba(17,27,20,.65) 0%,rgba(17,27,20,.1) 26%,rgba(17,27,20,.1) 62%,rgba(17,27,20,.8) 100%)}
-#afhHeader .hero-content{position:relative;z-index:2;max-width:clamp(1320px,74vw,1680px);padding:150px 64px 90px;margin:0 auto;width:100%;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:56px}
+#afhHeader .hero-content{position:relative;z-index:2;max-width:clamp(1320px,74vw,1680px);padding:110px 64px 70px;margin:0 auto;width:100%;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:56px}
 #afhHeader .hero-text{flex:1 1 auto;max-width:560px;align-self:center}
-#afhHeader .hero h1{font-family:var(--afh-fd);font-size:clamp(2.8rem,3.6vw,5.6rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:22px;text-shadow:0 4px 28px rgba(0,0,0,.4)}
+#afhHeader .hero h1{font-family:var(--afh-fd);font-size:clamp(2.2rem,2.8vw,4.2rem);font-weight:700;color:#fff;line-height:1.08;margin-bottom:14px;text-shadow:0 4px 28px rgba(0,0,0,.4)}
 #afhHeader .hero h1 span{font-style:italic;color:var(--afh-mint)}
-#afhHeader .hero-p{font-size:clamp(1.05rem,0.55vw + 0.85rem,1.4rem);color:rgba(255,255,255,.88);line-height:1.8;max-width:460px;margin-bottom:44px;font-weight:300;text-shadow:0 2px 16px rgba(0,0,0,.35)}
+#afhHeader .hero-p{font-size:clamp(0.92rem,0.4vw + 0.78rem,1.1rem);color:rgba(255,255,255,.88);line-height:1.7;max-width:440px;margin-bottom:26px;font-weight:300;text-shadow:0 2px 16px rgba(0,0,0,.35)}
 #afhHeader .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 #afhHeader .btn-gold{background:var(--afh-gold);color:var(--afh-ink);padding:15px 30px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
 #afhHeader .btn-gold:hover{background:#E8603A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,127,80,.4)}
@@ -2037,10 +2059,11 @@
 
 #afhHeader .hero-stats-mob{display:none}
 
-#afhHeader .new-res-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 20px 9px 16px;border-radius:100px;font-size:clamp(.78rem,.3vw + .68rem,.95rem);font-weight:600;letter-spacing:.01em;margin-bottom:22px;box-shadow:0 4px 18px rgba(0,0,0,.12);animation:badgeFlash 2.2s ease-in-out infinite}
+#afhHeader .new-res-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 20px 9px 16px;border-radius:100px;font-size:clamp(.78rem,.3vw + .68rem,.95rem);font-weight:600;letter-spacing:.01em;margin-bottom:14px;box-shadow:0 4px 18px rgba(0,0,0,.12);animation:badgeFlash 2.2s ease-in-out infinite}
 #afhHeader .new-res-badge .dot{width:9px;height:9px;border-radius:50%;background:#7CE3A6;flex-shrink:0;animation:dotPulse 1.6s ease-in-out infinite}
 @keyframes dotPulse{0%{box-shadow:0 0 0 0 rgba(124,227,166,.7)}70%{box-shadow:0 0 0 9px rgba(124,227,166,0)}100%{box-shadow:0 0 0 0 rgba(124,227,166,0)}}
 @keyframes badgeFlash{0%,100%{opacity:1}50%{opacity:.72}}
+@keyframes resourceIconPop{0%{transform:scale(0.4);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
 
 
 @media(max-width:900px){
@@ -2110,12 +2133,12 @@
 
 
 /* ===== OWNER STORY — distinct dark/gold spotlight design ===== */
-.owner-story{background:var(--forest-dark);padding:110px 40px;position:relative;overflow:hidden}
+.owner-story{background:#ffffff;padding:110px 40px;position:relative;overflow:hidden}
 .owner-story .owner-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center}
-.owner-text h2{font-family:var(--font-display);font-size:clamp(2.1rem,3.2vw,2.9rem);color:#fff;line-height:1.18;margin:14px 0 24px;font-weight:700}
-.owner-text p{color:rgba(255,255,255,.78);font-size:1.02rem;line-height:1.8;margin-bottom:18px;max-width:520px}
+.owner-text h2{font-family:var(--font-display);font-size:clamp(2.1rem,3.2vw,2.9rem);color:var(--charcoal);line-height:1.18;margin:14px 0 24px;font-weight:700}
+.owner-text p{color:var(--mid-gray);font-size:1.02rem;line-height:1.8;margin-bottom:18px;max-width:520px}
 .owner-badges{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 34px}
-.owner-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;padding:9px 16px;border-radius:8px;font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;letter-spacing:.01em}
+.owner-badge{background:var(--section-bg);border:1px solid var(--light-gray);color:var(--charcoal);padding:9px 16px;border-radius:8px;font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;letter-spacing:.01em}
 .owner-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;border:1.5px solid var(--gold-accent);color:var(--gold-accent);padding:14px 26px;border-radius:100px;font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s}
 .owner-cta:hover{background:var(--gold-accent);color:#fff}
 .owner-cta span{display:inline-block;transition:transform .25s}
@@ -2502,6 +2525,36 @@
 </section>
 
 
+<!-- FOOD MARQUEE — slow auto-scroll, pauses on hover -->
+<section class="food-marquee">
+  <div class="food-marquee-header">
+    <div class="eyebrow">Home-Style Dining</div>
+    <h2>A Taste of <em>Home</em></h2>
+    <p>Fresh, made-from-scratch meals served daily in a warm, welcoming dining room.</p>
+  </div>
+  <div class="food-marquee-track-wrap">
+    <div class="food-marquee-track" id="foodMarqueeTrack">
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=500&q=80" alt="Fresh Garden Salad" loading="lazy"><div class="food-marquee-caption">Fresh Garden Salad</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80" alt="Hearty Soup" loading="lazy"><div class="food-marquee-caption">Hearty Soup</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&q=80" alt="Roasted Chicken Dinner" loading="lazy"><div class="food-marquee-caption">Roasted Chicken Dinner</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Seasonal Vegetables" loading="lazy"><div class="food-marquee-caption">Seasonal Vegetables</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Fresh Baked Bread" loading="lazy"><div class="food-marquee-caption">Fresh Baked Bread</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="Homemade Dessert" loading="lazy"><div class="food-marquee-caption">Homemade Dessert</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80" alt="Fresh Fruit Plate" loading="lazy"><div class="food-marquee-caption">Fresh Fruit Plate</div></div>
+      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Pancake Breakfast" loading="lazy"><div class="food-marquee-caption">Pancake Breakfast</div></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Garden Salad</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Hearty Soup</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Roasted Chicken Dinner</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Seasonal Vegetables</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Baked Bread</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Homemade Dessert</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Fruit Plate</div></div>
+      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Pancake Breakfast</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- RESOURCES / DOWNLOADS -->
 <section class="resources">
   <div class="section-inner resources-inner">
@@ -2529,36 +2582,6 @@
           <span>This week's home-style dining</span>
         </div>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOD MARQUEE — slow auto-scroll, pauses on hover -->
-<section class="food-marquee">
-  <div class="food-marquee-header">
-    <div class="eyebrow">Home-Style Dining</div>
-    <h2>A Taste of <em>Home</em></h2>
-    <p>Fresh, made-from-scratch meals served daily in a warm, welcoming dining room.</p>
-  </div>
-  <div class="food-marquee-track-wrap">
-    <div class="food-marquee-track" id="foodMarqueeTrack">
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=500&q=80" alt="Fresh Garden Salad" loading="lazy"><div class="food-marquee-caption">Fresh Garden Salad</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80" alt="Hearty Soup" loading="lazy"><div class="food-marquee-caption">Hearty Soup</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&q=80" alt="Roasted Chicken Dinner" loading="lazy"><div class="food-marquee-caption">Roasted Chicken Dinner</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Seasonal Vegetables" loading="lazy"><div class="food-marquee-caption">Seasonal Vegetables</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Fresh Baked Bread" loading="lazy"><div class="food-marquee-caption">Fresh Baked Bread</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="Homemade Dessert" loading="lazy"><div class="food-marquee-caption">Homemade Dessert</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80" alt="Fresh Fruit Plate" loading="lazy"><div class="food-marquee-caption">Fresh Fruit Plate</div></div>
-      <div class="food-marquee-item"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Pancake Breakfast" loading="lazy"><div class="food-marquee-caption">Pancake Breakfast</div></div>
-      <!-- duplicate set for seamless loop -->
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Garden Salad</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Hearty Soup</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Roasted Chicken Dinner</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Seasonal Vegetables</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Baked Bread</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Homemade Dessert</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Fresh Fruit Plate</div></div>
-      <div class="food-marquee-item" aria-hidden="true"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="" loading="lazy"><div class="food-marquee-caption">Pancake Breakfast</div></div>
     </div>
   </div>
 </section>
@@ -2663,7 +2686,7 @@
   <div class="section-inner owner-grid">
     <div class="owner-text">
       <div class="eyebrow" style="color:var(--gold-accent);">From Our Owner</div>
-      <h2>A Lifetime Spent <span style="color:#7FD6C9;font-style:italic;">Caring</span> for Others</h2>
+      <h2>A Lifetime Spent <span style="color:var(--forest);font-style:italic;">Caring</span> for Others</h2>
       <p>My name is Tami, and caring for others has been a part of my life for as long as I can remember. I grew up in an Adult Family Home owned and operated by my mother, where I learned early on that caregiving is about much more than meeting physical needs.</p>
       <p>Today, I combine my nursing background with a lifetime of caregiving experience to provide thoughtful, personalized care for each resident entrusted to us.</p>
       <div class="owner-badges owner-badges--intext">
@@ -3480,6 +3503,44 @@ document.addEventListener('keydown', function(e) {
   });
 
   setActive('home');
+})();
+
+// Ripple + tap feedback on the Download Brochure / Weekly Menu cards
+(function() {
+  var cards = document.querySelectorAll('.resource-card');
+  cards.forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      var rect = card.getBoundingClientRect();
+      var size = Math.max(rect.width, rect.height);
+      var x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
+      var y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
+      var ripple = document.createElement('span');
+      ripple.className = 'rc-ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      card.appendChild(ripple);
+      ripple.addEventListener('animationend', function() { ripple.remove(); });
+    });
+  });
+})();
+
+(function() {
+  var cards = document.querySelectorAll('.resource-card');
+  if (!cards.length) return;
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    cards.forEach(function(card) { io.observe(card); });
+  } else {
+    cards.forEach(function(card) { card.classList.add('in-view'); });
+  }
 })();
 </script>
 
