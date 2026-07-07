@@ -12,20 +12,22 @@
     --cream: #FAF7F2;
     --warm-white: #FFFFFF;
     --forest: #0F766E;
-    --forest-dark: #20a59c;
+    --forest-dark: #0B5C56;
     --forest-light: #14958A;
-    --gold: #FF7F50;
-    --gold-light: #FFB199;
+    --gold: #C9772E;
+    --gold-light: #E2AD68;
     --charcoal: #2A2A2A;
     --mid-gray: #6B6B6B;
     --light-gray: #E8E4DD;
     --section-bg: #F5F1EB;
-    --blue-bg: #5ca4d3;
-    --gold-bg: #F5E6CA;
-    --gold-bg-dark: #F0DFB8;
+    --blue-bg: #C7E0F0;
+    --blue-accent: #386F8F;
+    --blue-deep: #234459;
+    --gold-bg: #EAD3A0;
+    --gold-bg-dark: #E2C48B;
     --gold-text: #9A3412;
-    --gold-mid: #B45309;
-    --gold-accent: #FF7F50;
+    --gold-mid: #C9772E;
+    --gold-accent: #C9772E;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
   }
@@ -108,7 +110,7 @@
 
   .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; justify-content: flex-end; }
   .nav-call { display: flex; align-items: center; gap: 7px; }
-  .nav-call-icon { color: #FF7F50; font-size: 1rem; }
+  .nav-call-icon { color: #C9772E; font-size: 1rem; }
   .nav-call-text { line-height: 1.15; }
   .nav-call-text small { display: block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); }
   .nav-call-text strong { display: block; font-size: 0.88rem; color: var(--charcoal); font-weight: 600; }
@@ -213,7 +215,7 @@
     font-family: 'Dancing Script', cursive;
     font-style: normal;
     font-weight: 700;
-    color: #FFA07A;
+    color: #E2AD68;
     display: block;
     font-size: clamp(2.5rem, 5.2vw, 4rem);
     line-height: 1.1;
@@ -223,7 +225,7 @@
   .hero-divider {
     width: 72px;
     height: 2px;
-    background: #FFA07A;
+    background: #E2AD68;
     margin: 16px 0;
     border-radius: 2px;
   }
@@ -241,7 +243,7 @@
     align-items: center;
     gap: 10px;
     padding: 15px 32px;
-    background: #FFA07A;
+    background: #E2AD68;
     color: #1a1800;
     border-radius: 50px;
     font-weight: 700;
@@ -250,9 +252,9 @@
     text-transform: uppercase;
     transition: background 0.15s, transform 0.15s;
     align-self: flex-start;
-    border: 2px solid #FFA07A;
+    border: 2px solid #E2AD68;
   }
-  .btn-hero-tour:hover { background: #FFAB85; border-color: #FFAB85; transform: translateY(-1px); }
+  .btn-hero-tour:hover { background: #F5D3A0; border-color: #F5D3A0; transform: translateY(-1px); }
   .btn-hero-tour .arrow { font-size: 1rem; }
 
   /* ── BADGE BAR ── */
@@ -339,7 +341,7 @@
   .services { background: var(--blue-bg); }
   .services-header { text-align: center; margin-bottom: 50px; }
   .services-header-text { max-width: 600px; margin: 0 auto; }
-  .services-header p { color: var(--gold-mid); }
+  .services-header p { color: var(--mid-gray); }
   .services-header .eyebrow { color: var(--gold-accent) !important; }
 
   .msvc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -348,10 +350,10 @@
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(255, 127, 80, 0.2);
+    border: 1px solid rgba(201, 119, 46, 0.2);
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .msvc-card:hover { box-shadow: 0 8px 30px rgba(255, 127, 80,0.2); transform: translateY(-3px); }
+  .msvc-card:hover { box-shadow: 0 8px 30px rgba(201, 119, 46,0.2); transform: translateY(-3px); }
   .msvc-thumb-wrap { position: relative; }
   .msvc-thumb { width: 100%; height: 140px; object-fit: cover; display: block; }
   .msvc-thumb-icon {
@@ -361,14 +363,14 @@
   .msvc-heart {
     display: none;
     position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
-    background: rgba(255,255,255,0.9); color: #E8603A; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.9); color: #9B5A1C; align-items: center; justify-content: center;
     font-size: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
   .msvc-body { padding: 16px 16px 18px; }
   .msvc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .msvc-body h3 { font-size: 0.98rem; font-weight: 600; margin: 0; }
   .msvc-toggle {
-    width: 26px; height: 26px; border-radius: 50%; background: rgba(255,127,80,0.12);
+    width: 26px; height: 26px; border-radius: 50%; background: rgba(201,119,46,0.12);
     color: var(--gold-accent); font-size: 1.05rem; font-weight: 400; display: flex;
     align-items: center; justify-content: center; flex-shrink: 0; line-height: 1;
     transition: background 0.2s, transform 0.3s, color 0.2s;
@@ -422,7 +424,7 @@
   .care-text { padding-right: 40px; width: 100%; }
   .care-text h2 { margin-bottom: 16px; font-size: 2.2rem; }
   .care-text > p { margin-bottom: 50px; font-size: 1.02rem; line-height: 1.7; color: var(--mid-gray); }
-  .care-text .eyebrow { margin-bottom: 14px; color: #FF7F50 !important; }
+  .care-text .eyebrow { margin-bottom: 14px; color: #C9772E !important; }
   
   .care-list {
     display: grid;
@@ -770,7 +772,7 @@
     top: -120px; right: -120px;
     width: 500px; height: 500px;
     border-radius: 50%;
-    background: rgba(255, 127, 80,0.08);
+    background: rgba(201, 119, 46,0.08);
     pointer-events: none;
   }
   .testimonials::after {
@@ -779,13 +781,13 @@
     bottom: -80px; left: -80px;
     width: 360px; height: 360px;
     border-radius: 50%;
-    background: rgba(255, 127, 80,0.06);
+    background: rgba(201, 119, 46,0.06);
     pointer-events: none;
   }
   .testimonials { padding: 64px 40px; }
   .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 26px; position: relative; z-index: 1; }
-  .testimonials-header h2 { color: var(--gold-text); font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 0; }
-  .testimonials-header p { color: var(--gold-mid); font-size: 0.94rem; margin-top: 8px; }
+  .testimonials-header h2 { color: var(--charcoal); font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 0; }
+  .testimonials-header p { color: var(--mid-gray); font-size: 0.94rem; margin-top: 8px; }
   .testimonials-header .eyebrow { color: var(--gold-accent) !important; margin-bottom: 6px; }
 
   .testi-rating-bar {
@@ -794,19 +796,19 @@
     justify-content: center;
     gap: 24px;
     background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));
-    border: 1px solid rgba(255, 127, 80,0.3);
+    border: 1px solid rgba(201, 119, 46,0.3);
     border-radius: 60px;
     padding: 11px 28px;
     margin: 0 auto 28px;
     width: fit-content;
     position: relative; z-index: 1;
-    box-shadow: 0 10px 28px rgba(255, 127, 80,0.14);
+    box-shadow: 0 10px 28px rgba(201, 119, 46,0.14);
   }
   .testi-rating-item { text-align: center; }
   .testi-rating-number { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--gold-text); line-height: 1; }
   .testi-rating-stars { color: var(--gold-accent); font-size: 0.72rem; letter-spacing: 2px; margin: 2px 0; }
   .testi-rating-label { font-size: 0.62rem; color: var(--gold-mid); letter-spacing: 0.08em; text-transform: uppercase; }
-  .testi-rating-divider { width: 1px; height: 34px; background: rgba(255, 127, 80,0.3); }
+  .testi-rating-divider { width: 1px; height: 34px; background: rgba(201, 119, 46,0.3); }
 
   .testimonials-slider-container { position: relative; z-index: 1; overflow: visible; padding: 4px 0 12px; }
   .testi-deck-row { display: flex; align-items: center; justify-content: center; gap: 26px; }
@@ -816,10 +818,10 @@
     top: 0; left: 0;
     width: 100%;
     background: #fff;
-    border: 1px solid rgba(255, 127, 80,0.2);
+    border: 1px solid rgba(201, 119, 46,0.2);
     border-radius: 18px;
     padding: 28px 28px 24px;
-    box-shadow: 0 16px 40px rgba(255, 127, 80,0.16);
+    box-shadow: 0 16px 40px rgba(201, 119, 46,0.16);
     transition: transform 0.55s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease, box-shadow 0.35s ease;
     overflow: hidden;
     transform-origin: 50% 120%;
@@ -830,7 +832,7 @@
     top: 8px; right: 20px;
     font-size: 6.4rem;
     line-height: 1;
-    color: rgba(255, 127, 80,0.12);
+    color: rgba(201, 119, 46,0.12);
     pointer-events: none;
     user-select: none;
   }
@@ -861,7 +863,7 @@
   .testi-corner.br { bottom: 16px; right: 18px; transform: rotate(180deg); }
   .testi-corner .testi-rank { font-size: 1rem; }
   .testi-corner .testi-suit { font-size: 1rem; margin-top: 1px; }
-  .testi-card.testi-pos-c { transform: translate(0,0) rotate(0deg) scale(1); z-index: 70; opacity: 1; box-shadow: 0 24px 56px rgba(255, 127, 80,0.24); }
+  .testi-card.testi-pos-c { transform: translate(0,0) rotate(0deg) scale(1); z-index: 70; opacity: 1; box-shadow: 0 24px 56px rgba(201, 119, 46,0.24); }
   .testi-card.testi-pos-l1 { transform: translate(-88px, 16px) rotate(-7deg) scale(0.92); z-index: 60; opacity: 1; }
   .testi-card.testi-pos-r1 { transform: translate(88px, 16px) rotate(7deg) scale(0.92); z-index: 60; opacity: 1; }
   .testi-card.testi-pos-l2 { transform: translate(-168px, 34px) rotate(-13deg) scale(0.84); z-index: 50; opacity: 0.95; }
@@ -869,7 +871,7 @@
   .testi-card.testi-pos-l3 { transform: translate(-240px, 56px) rotate(-19deg) scale(0.76); z-index: 40; opacity: 0.85; }
   .testi-card.testi-pos-r3 { transform: translate(240px, 56px) rotate(19deg) scale(0.76); z-index: 40; opacity: 0.85; }
   .testi-card:not(.testi-pos-c) { cursor: pointer; }
-  .testi-card:not(.testi-pos-c):hover { box-shadow: 0 20px 46px rgba(255, 127, 80,0.26); }
+  .testi-card:not(.testi-pos-c):hover { box-shadow: 0 20px 46px rgba(201, 119, 46,0.26); }
   .testi-stars { color: var(--gold-accent); font-size: 0.88rem; margin-bottom: 12px; letter-spacing: 3px; }
   .testi-text { font-size: 0.92rem; color: var(--gold-mid); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
   .testi-author { display: flex; align-items: center; gap: 14px; }
@@ -878,12 +880,12 @@
     background: linear-gradient(135deg, var(--gold-accent), var(--gold-light));
     color: #fff; display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(255, 127, 80,0.3);
+    box-shadow: 0 4px 12px rgba(201, 119, 46,0.3);
   }
   .testi-name strong { display: block; font-size: 0.92rem; color: var(--gold-text); margin-bottom: 3px; }
   .testi-name span { font-size: 0.78rem; color: var(--gold-mid); }
   .testimonials-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; position: relative; z-index: 1; }
-  .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 127, 80,0.3); cursor: pointer; transition: all 0.3s; }
+  .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(201, 119, 46,0.3); cursor: pointer; transition: all 0.3s; }
   .testimonials-dot.active { background: var(--gold-accent); width: 26px; border-radius: 4px; }
 
   .testi-arrow {
@@ -893,7 +895,7 @@
     width: 46px;
     height: 46px;
     background: #fff;
-    border: 1px solid rgba(255, 127, 80,0.3);
+    border: 1px solid rgba(201, 119, 46,0.3);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -901,10 +903,10 @@
     justify-content: center;
     font-size: 1.1rem;
     color: var(--gold-text);
-    box-shadow: 0 6px 20px rgba(255, 127, 80,0.22);
+    box-shadow: 0 6px 20px rgba(201, 119, 46,0.22);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
-  .testi-arrow:hover { background: var(--gold-accent); color: #fff; box-shadow: 0 8px 24px rgba(255, 127, 80,0.35); }
+  .testi-arrow:hover { background: var(--gold-accent); color: #fff; box-shadow: 0 8px 24px rgba(201, 119, 46,0.35); }
   .testi-arrow:active { transform: scale(0.94); }
   .testi-swipe-hint { display: none; }
   @media (max-width: 900px) {
@@ -954,7 +956,7 @@
       top: 50%; left: 50%;
       width: 720px; height: 420px;
       transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse at center, rgba(255,127,80,0.10) 0%, rgba(255,127,80,0) 70%);
+      background: radial-gradient(ellipse at center, rgba(201,119,46,0.10) 0%, rgba(201,119,46,0) 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -966,13 +968,13 @@
     .testi-card.testi-pos-l3 { transform: translate(-278px, 66px) rotate(-21deg) scale(0.74); }
     .testi-card.testi-pos-r3 { transform: translate(278px, 66px) rotate(21deg) scale(0.74); }
     .testi-card:not(.testi-pos-c):hover {
-      box-shadow: 0 26px 54px rgba(255,127,80,0.32);
+      box-shadow: 0 26px 54px rgba(201,119,46,0.32);
       filter: brightness(1.02);
     }
     .testi-card.testi-pos-l1:hover { transform: translate(-104px, 6px) rotate(-6deg) scale(0.95); }
     .testi-card.testi-pos-r1:hover { transform: translate(104px, 6px) rotate(6deg) scale(0.95); }
     .testi-deck { max-width: 600px; }
-    .testi-card.testi-pos-c { box-shadow: 0 30px 64px rgba(255,127,80,0.28); }
+    .testi-card.testi-pos-c { box-shadow: 0 30px 64px rgba(201,119,46,0.28); }
   }
 
   .locations { background: var(--forest-dark); }
@@ -1125,7 +1127,7 @@
   /* ── REFERRALS & CONTACT — MODERN REDESIGN ── */
   .referrals {
     position: relative;
-    background: linear-gradient(165deg, #F5E6CA 0%, #F0DFB8 55%, #F5E6CA 100%);
+    background: linear-gradient(165deg, #EAD3A0 0%, #E2C48B 55%, #EAD3A0 100%);
     padding: 100px 0;
     overflow: hidden;
   }
@@ -1135,7 +1137,7 @@
     top: -180px; left: -120px;
     width: 480px; height: 480px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,127,80,0.22), transparent 70%);
+    background: radial-gradient(circle, rgba(201,119,46,0.22), transparent 70%);
     pointer-events: none;
   }
   .referrals::after {
@@ -1144,7 +1146,7 @@
     bottom: -220px; right: -160px;
     width: 560px; height: 560px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,127,80,0.14), transparent 70%);
+    background: radial-gradient(circle, rgba(201,119,46,0.14), transparent 70%);
     pointer-events: none;
   }
   .referrals .section-inner {
@@ -1165,7 +1167,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #FF7F50 !important;
+    color: #C9772E !important;
     margin-bottom: 14px;
     display: block;
   }
@@ -1206,11 +1208,11 @@
   .contact-quick-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
   .contact-quick-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
   .contact-quick-btn.is-primary {
-    background: linear-gradient(135deg, #FF7F50, #E8603A);
+    background: linear-gradient(135deg, #C9772E, #9B5A1C);
     border-color: transparent;
-    box-shadow: 0 10px 26px rgba(255,127,80,0.35);
+    box-shadow: 0 10px 26px rgba(201,119,46,0.35);
   }
-  .contact-quick-btn.is-primary:hover { background: linear-gradient(135deg, #FF8F65, #E8603A); }
+  .contact-quick-btn.is-primary:hover { background: linear-gradient(135deg, #C36B1D, #9B5A1C); }
 
   .contact-pills { display: flex; flex-direction: column; gap: 12px; }
   .contact-pill {
@@ -1227,10 +1229,10 @@
   .contact-pill:hover { background: rgba(255,255,255,0.85); transform: translateX(3px); }
   .contact-pill-icon {
     width: 44px; height: 44px; border-radius: 12px;
-    background: linear-gradient(135deg, #FF7F50, #E8603A);
+    background: linear-gradient(135deg, #C9772E, #9B5A1C);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 6px 16px rgba(255,127,80,0.3);
+    box-shadow: 0 6px 16px rgba(201,119,46,0.3);
   }
   .contact-pill-icon svg { width: 19px; height: 19px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .contact-pill-label {
@@ -1294,11 +1296,11 @@
   .referral-form select option { background: #fff; color: var(--charcoal); }
   .referral-form textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
   .referral-form input:focus, .referral-form select:focus, .referral-form textarea:focus {
-    outline: none; border-color: #FF7F50; background: #fff; box-shadow: 0 0 0 4px rgba(255,127,80,0.12);
+    outline: none; border-color: #C9772E; background: #fff; box-shadow: 0 0 0 4px rgba(201,119,46,0.12);
   }
   .btn-referral-submit {
     width: 100%;
-    background: linear-gradient(135deg, #FF7F50, #E8603A);
+    background: linear-gradient(135deg, #C9772E, #9B5A1C);
     color: #fff;
     border: none;
     border-radius: 14px;
@@ -1309,9 +1311,9 @@
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.15s, box-shadow 0.15s;
     letter-spacing: 0.01em;
-    box-shadow: 0 12px 28px rgba(255,127,80,0.35);
+    box-shadow: 0 12px 28px rgba(201,119,46,0.35);
   }
-  .btn-referral-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(255,127,80,0.42); }
+  .btn-referral-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(201,119,46,0.42); }
   .btn-referral-submit:active { transform: translateY(0); }
   .btn-referral-submit .btn-arrow { margin-left: 8px; transition: transform 0.2s; }
   .btn-referral-submit:hover .btn-arrow { transform: translateX(3px); }
@@ -1440,7 +1442,7 @@
   .life-gallery { background: var(--blue-bg); padding: 90px 40px; }
   .life-gallery-inner { max-width: 1200px; margin: 0 auto; }
   .life-gallery-header { text-align: center; max-width: 640px; margin: 0 auto 50px; }
-  .life-gallery-header .eyebrow { color: #0F766E !important; margin-bottom: 14px; }
+  .life-gallery-header .eyebrow { color: var(--blue-accent) !important; margin-bottom: 14px; }
   .life-gallery-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--charcoal); margin-bottom: 16px; line-height: 1.2; }
   .life-gallery-header p { font-size: 0.98rem; color: var(--mid-gray); line-height: 1.75; }
 
@@ -1726,7 +1728,7 @@
       top: 0; left: 0; right: 0;
       width: 4px;
       border-radius: 4px;
-      background: linear-gradient(180deg, #FF7F50, #E8603A);
+      background: linear-gradient(180deg, #C9772E, #9B5A1C);
     }
 
     .care-item {
@@ -1884,25 +1886,25 @@
   .team-initials { display: none; }
   .team-card-body { padding: 24px 22px 26px; text-align: center; }
   .team-card-body h3 { margin-bottom: 4px; color: var(--charcoal); }
-  .team-role { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #E8603A; margin-bottom: 14px; }
+  .team-role { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9B5A1C; margin-bottom: 14px; }
   .team-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
-  .team-header .eyebrow { color: #FF7F50 !important; }
+  .team-header .eyebrow { color: #C9772E !important; }
   .team-header p { color: var(--mid-gray); }
   .team-header h2 { color: var(--charcoal); }
-  .team-header h2 em { font-family: 'Dancing Script', cursive; font-style: italic; font-weight: 700; color: #FF7F50; }
+  .team-header h2 em { font-family: 'Dancing Script', cursive; font-style: italic; font-weight: 700; color: #C9772E; }
   .team-card {
     background: #fff;
-    border: 1px solid rgba(255, 127, 80,0.2);
+    border: 1px solid rgba(201, 119, 46,0.2);
     border-radius: 16px;
     overflow: hidden;
     transition: box-shadow 0.2s, transform 0.2s;
   }
-  .team-card:hover { box-shadow: 0 12px 40px rgba(255, 127, 80,0.25); transform: translateY(-3px); }
+  .team-card:hover { box-shadow: 0 12px 40px rgba(201, 119, 46,0.25); transform: translateY(-3px); }
   .team-bio { font-size: 0.92rem; margin-bottom: 18px; color: var(--mid-gray); }
   .team-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255, 127, 80, 0.14);
-    color: #E8603A;
+    background: rgba(201, 119, 46, 0.14);
+    color: #9B5A1C;
     font-size: 0.78rem; font-weight: 600;
     padding: 7px 14px; border-radius: 30px;
   }
@@ -1972,8 +1974,8 @@
 
     .mobile-tabbar a.tab-item.active {
       color: #fff;
-      background: linear-gradient(160deg, #FF7F50 0%, #E8603A 100%);
-      box-shadow: 0 6px 16px rgba(255, 127, 80, 0.42);
+      background: linear-gradient(160deg, #C9772E 0%, #9B5A1C 100%);
+      box-shadow: 0 6px 16px rgba(201, 119, 46, 0.42);
       transform: translateY(-3px);
     }
 
@@ -2003,7 +2005,7 @@
   --afh-forest-mid:#2C5440;
   --afh-mint:#C8E6C9;
   --afh-mint-pale:#EDF7EE;
-  --afh-gold:#FF7F50;
+  --afh-gold:#C9772E;
   --afh-ink:#111B14;
   --afh-body:#374840;
   --afh-border:#D6E4D9;
@@ -2045,13 +2047,13 @@
 #afhHeader .hero-p{font-size:clamp(0.92rem,0.4vw + 0.78rem,1.1rem);color:rgba(255,255,255,.88);line-height:1.7;max-width:440px;margin-bottom:26px;font-weight:300;text-shadow:0 2px 16px rgba(0,0,0,.35)}
 #afhHeader .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 #afhHeader .btn-gold{background:var(--afh-gold);color:var(--afh-ink);padding:15px 30px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.02em}
-#afhHeader .btn-gold:hover{background:#E8603A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,127,80,.4)}
+#afhHeader .btn-gold:hover{background:#9B5A1C;transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,119,46,.4)}
 #afhHeader .btn-wh{background:rgba(255,255,255,.1);color:#fff;padding:14px 30px;border-radius:10px;border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
 #afhHeader .btn-wh:hover{background:rgba(255,255,255,.18);border-color:#fff;transform:translateY(-2px)}
 #afhHeader .hero-stats{flex:0 0 auto;align-self:center;display:flex;flex-direction:column;gap:12px;min-width:clamp(230px,15vw,300px);margin-left:auto}
 #afhHeader .hero-stats .trust-item{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 18px;background:rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.3);border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.22);transition:transform .25s ease,background .25s ease}
 #afhHeader .hero-stats .trust-item:hover{transform:translateX(4px);background:rgba(255,255,255,.2)}
-#afhHeader .trust-icon{flex-shrink:0;width:clamp(34px,2.2vw,40px);height:clamp(34px,2.2vw,40px);border-radius:50%;background:rgba(255,127,80,.18);border:1px solid rgba(255,127,80,.45);display:flex;align-items:center;justify-content:center}
+#afhHeader .trust-icon{flex-shrink:0;width:clamp(34px,2.2vw,40px);height:clamp(34px,2.2vw,40px);border-radius:50%;background:rgba(201,119,46,.18);border:1px solid rgba(201,119,46,.45);display:flex;align-items:center;justify-content:center}
 #afhHeader .trust-icon svg{width:52%;height:52%;stroke:var(--afh-gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 #afhHeader .hero-stats .trust-text{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
 #afhHeader .trust-n{font-family:var(--afh-fd);font-style:italic;font-size:clamp(1.3rem,.5vw + 1.05rem,1.7rem);font-weight:700;color:var(--afh-mint);line-height:1;text-shadow:0 2px 14px rgba(200,230,201,.18)}
@@ -2099,7 +2101,7 @@
     margin-top:26px;
   }
   #afhHeader .hero-stats-mob .trust-item{display:flex;align-items:center;gap:9px;padding:11px 14px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.3);border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
-  #afhHeader .hero-stats-mob .trust-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(255,127,80,.2);border:1px solid rgba(255,127,80,.45);display:flex;align-items:center;justify-content:center}
+  #afhHeader .hero-stats-mob .trust-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(201,119,46,.2);border:1px solid rgba(201,119,46,.45);display:flex;align-items:center;justify-content:center}
   #afhHeader .hero-stats-mob .trust-icon svg{width:52%;height:52%;stroke:var(--afh-gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   #afhHeader .hero-stats-mob .trust-text{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;min-width:0}
   #afhHeader .hero-stats-mob .trust-n{font-family:var(--afh-fd);font-style:italic;font-size:1.05rem;font-weight:700;color:var(--afh-mint);line-height:1;white-space:nowrap}
@@ -2148,7 +2150,7 @@
 .owner-media-frame{position:relative;z-index:1;border-radius:22px;overflow:hidden;box-shadow:0 24px 56px rgba(0,0,0,.4);height:440px}
 .owner-media-frame img{width:100%;height:100%;object-fit:cover;display:block}
 .owner-play{position:absolute;bottom:22px;right:22px;width:56px;height:56px;border-radius:14px;background:var(--gold-accent);border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.35);transition:all .25s;z-index:2}
-.owner-play:hover{transform:scale(1.08);background:#E96A3C}
+.owner-play:hover{transform:scale(1.08);background:#9B5A1C}
 .owner-badges--after-media{display:none}
 
 /* -- Mobile: rebuilt as a stacked card, full-width photo, centered play button -- */
@@ -2293,7 +2295,7 @@
 <section class="welcome" id="about">
   <div class="section-inner welcome-grid">
     <div class="welcome-img">
-      <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor exterior" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+      <img src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Autumn Hill Manor exterior" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
     </div>
     <div class="welcome-text">
       <div class="eyebrow" style="color:#0F766E;">Welcome Home</div>
@@ -2316,7 +2318,7 @@
 <section class="care" id="care">
   <div class="section-inner care-layout">
     <div class="care-text">
-      <div class="eyebrow" style="color:#FF7F50 !important;">Care Support</div>
+      <div class="eyebrow" style="color:#C9772E !important;">Care Support</div>
       <h2>Support that's always nearby</h2>
       <p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>
       <div class="care-list">
@@ -2368,15 +2370,15 @@
     <div class="care-img">
       <div class="care-img-container">
         <img id="careImage0" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Activities of Daily Living" class="">
-        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
-        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img id="careImage1" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Alzheimer's Care" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage2" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg" alt="Community Activities" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage3" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg" alt="Dementia Support" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage4" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg" alt="Family Visitation" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage5" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg" alt="Meals and Entertainment" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage6" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage7" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg" alt="24-Hour Care" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage8" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Fall Prevention" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
+        <img id="careImage9" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg" alt="Nursing Support" class="hidden" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
       </div>
       <p class="care-description" id="careDescription">Our peaceful, welcoming environment is designed to feel like home while providing every amenity and support your loved one needs.</p>
     </div>
@@ -2388,7 +2390,7 @@
   <div class="section-inner">
     <div class="services-header">
       <div class="services-header-text">
-        <div class="eyebrow" style="color:#FF7F50;">Our Services</div>
+        <div class="eyebrow" style="color:#C9772E;">Our Services</div>
         <h2>Care that fits your family</h2>
         <p>Thoughtful, individualized support for every stage — always delivered with warmth, dignity, and respect.</p>
       </div>
@@ -2396,7 +2398,7 @@
     <div class="msvc-grid" id="servicesMsvcGrid">
       <div class="msvc-card" onclick="toggleMsvc(this)">
         <div class="msvc-thumb-wrap">
-          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg" alt="Assisted Living" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <span class="msvc-heart">♡</span>
         </div>
         <div class="msvc-body">
@@ -2410,7 +2412,7 @@
       </div>
       <div class="msvc-card" onclick="toggleMsvc(this)">
         <div class="msvc-thumb-wrap">
-          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg" alt="Memory Care" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <span class="msvc-heart">♡</span>
         </div>
         <div class="msvc-body">
@@ -2424,7 +2426,7 @@
       </div>
       <div class="msvc-card" onclick="toggleMsvc(this)">
         <div class="msvc-thumb-wrap">
-          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg" alt="Catheter Care" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <span class="msvc-heart">♡</span>
         </div>
         <div class="msvc-body">
@@ -2438,7 +2440,7 @@
       </div>
       <div class="msvc-card" onclick="toggleMsvc(this)">
         <div class="msvc-thumb-wrap">
-          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola-768x510.jpg" alt="Wound Care" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <span class="msvc-heart">♡</span>
         </div>
         <div class="msvc-body">
@@ -2452,7 +2454,7 @@
       </div>
       <div class="msvc-card" onclick="toggleMsvc(this)">
         <div class="msvc-thumb-wrap">
-          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img class="msvc-thumb" src="https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg" alt="Medication Management" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <span class="msvc-heart">♡</span>
         </div>
         <div class="msvc-body">
@@ -2559,7 +2561,7 @@
 <section class="resources">
   <div class="section-inner resources-inner">
     <div class="resources-text">
-      <div class="eyebrow" style="color:#FFB199;">Plan Your Visit</div>
+      <div class="eyebrow" style="color:#E2AD68;">Plan Your Visit</div>
       <h2>Take a Closer <em>Look</em></h2>
       <p>Download our community brochure for a full overview of floor plans, pricing, and amenities, or grab this week's dining menu to see what's cooking at Autumn Hill Manor.</p>
     </div>
@@ -2598,35 +2600,35 @@
     <!-- Desktop grid: 4 columns x 2 rows -->
     <div class="gallery-grid">
       <div class="gallery-item" onclick="openLightbox(0)">
-        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Daily Wellness</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(1)">
-        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Spring on the Grounds</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(2)">
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Private Suites</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(3)">
-        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">The Great Room</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(4)">
-        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Morning Walks</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(5)">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Our Weatherford Home</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(6)">
-        <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Garden Courtyard</div>
       </div>
       <div class="gallery-item" onclick="openLightbox(7)">
-        <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <div class="gallery-caption">Garden Blooms</div>
       </div>
     </div>
@@ -2635,35 +2637,35 @@
     <div class="gallery-slider-mobile">
       <div class="gallery-slider-track" id="gallerySliderTrack" onscroll="updateGalleryDots()">
         <div class="gallery-slide" onclick="openLightbox(0)">
-          <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=800&q=80" alt="Daily Wellness" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Daily Wellness</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(1)">
-          <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Spring on the Grounds" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Spring on the Grounds</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(2)">
-          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" alt="Private Suites" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Private Suites</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(3)">
-          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80" alt="The Great Room" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">The Great Room</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(4)">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Morning Walks" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Morning Walks</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(5)">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80" alt="Our Weatherford Home" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Our Weatherford Home</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(6)">
-          <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=800&q=80" alt="Garden Courtyard" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Garden Courtyard</div>
         </div>
         <div class="gallery-slide" onclick="openLightbox(7)">
-          <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+          <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80" alt="Garden Blooms" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
           <div class="gallery-caption">Garden Blooms</div>
         </div>
       </div>
@@ -2698,7 +2700,7 @@
     </div>
     <div class="owner-media">
       <div class="owner-media-frame">
-        <img src="https://images.unsplash.com/photo-1745434159123-4908d0b9df94?w=900&q=80" alt="Tami, owner and caregiver" onerror="this.style.background='#F5E6CA';this.removeAttribute('src')">
+        <img src="https://images.unsplash.com/photo-1745434159123-4908d0b9df94?w=900&q=80" alt="Tami, owner and caregiver" onerror="this.style.background='#EAD3A0';this.removeAttribute('src')">
         <button class="owner-play" aria-label="Play Tami's story video" onclick="return false;">▶</button>
       </div>
       <div class="owner-badges owner-badges--after-media">
@@ -2715,7 +2717,7 @@
 <section class="team" id="team">
   <div class="section-inner">
     <div class="team-header">
-      <div class="eyebrow" style="color:#FF7F50;">The People Behind the Care</div>
+      <div class="eyebrow" style="color:#C9772E;">The People Behind the Care</div>
       <h2>Meet Our <em>Caregiving Team</em></h2>
       <p>Every person who walks through our door is greeted by someone who genuinely cares. Here are the dedicated individuals who make Autumn Hill Manor feel like home.</p>
     </div>
@@ -2770,7 +2772,7 @@
 <section class="testimonials" id="reviews">
   <div class="section-inner">
     <div class="testimonials-header">
-      <div class="eyebrow" style="color:#FF7F50;">From Our Families</div>
+      <div class="eyebrow" style="color:#C9772E;">From Our Families</div>
       <h2>Stories from families like yours</h2>
       <p>The trust of local families is the truest measure of our care.</p>
     </div>
@@ -2905,7 +2907,7 @@
 <section class="faq" id="faq">
   <div class="section-inner faq-layout">
     <div class="faq-intro">
-      <div class="eyebrow" style="color:#FF7F50;">Common Questions</div>
+      <div class="eyebrow" style="color:#C9772E;">Common Questions</div>
       <h2>Answers to What <em>Families</em> Ask Most</h2>
       <p>We believe in total transparency. Here are the questions we hear most often, answered honestly.</p>
       <div class="faq-cta-card">
