@@ -326,26 +326,36 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .glass-orb2{width:380px;height:380px;bottom:-140px;right:-120px;background:radial-gradient(circle,rgba(212,168,83,.18) 0%,transparent 72%)}
 .glass-orb3{width:240px;height:240px;top:20%;right:12%;background:radial-gradient(circle,rgba(200,230,201,.3) 0%,transparent 75%)}
 .glass-wrap{position:relative;z-index:1;max-width:840px}
-.glass-panels{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
-.glass-panel{background:#fff;border:1.5px dashed var(--border);border-radius:20px;padding:0;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s;box-shadow:0 4px 16px rgba(30,58,47,.06)}
-.glass-panel:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 20px 40px rgba(30,58,47,.14);border-color:var(--gold)}
-.offer-ribbon{position:absolute;top:16px;right:-34px;background:var(--forest);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 38px;transform:rotate(40deg);box-shadow:0 3px 10px rgba(0,0,0,.2);z-index:2}
+.glass-panels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.glass-panel{background:linear-gradient(165deg,var(--mint-pale) 0%,#fff 38%);border:1px solid var(--border);border-radius:22px;padding:0;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s,border-color .35s;box-shadow:0 4px 18px rgba(30,58,47,.07)}
+.glass-panel:nth-child(2){background:linear-gradient(165deg,var(--gold-pale) 0%,#fff 38%)}
+.glass-panel::after{content:'';position:absolute;top:-30px;right:-30px;width:150px;height:150px;background:radial-gradient(circle,rgba(74,124,89,.08) 0%,transparent 70%);pointer-events:none}
+.glass-panel:nth-child(2)::after{background:radial-gradient(circle,rgba(212,168,83,.1) 0%,transparent 70%)}
+.glass-panel:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(30,58,47,.16);border-color:var(--moss)}
+.glass-panel:nth-child(2):hover{box-shadow:0 24px 48px rgba(212,168,83,.22);border-color:var(--gold)}
+.offer-ribbon{position:absolute;top:17px;right:-36px;background:var(--forest);color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 40px;transform:rotate(40deg);box-shadow:0 3px 10px rgba(0,0,0,.22);z-index:2}
 .glass-panel:nth-child(2) .offer-ribbon{background:var(--gold);color:var(--ink)}
-.offer-top{padding:24px 22px 20px;position:relative;z-index:1}
-.glass-ic{width:40px;height:40px;border-radius:12px;background:var(--mint-pale);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;transition:transform .3s}
-.glass-panel:nth-child(2) .glass-ic{background:var(--gold-pale)}
-.glass-panel:hover .glass-ic{transform:scale(1.1) rotate(-6deg)}
-.glass-panel .gp-tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:8px}
-.offer-amount{font-family:var(--fd);font-weight:700;font-size:2.1rem;line-height:1;color:var(--forest);display:flex;align-items:baseline;gap:6px}
-.offer-amount span{font-family:var(--fb);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);padding:4px 9px;border-radius:100px}
+.offer-top{padding:26px 24px 20px;position:relative;z-index:1}
+.glass-ic{width:46px;height:46px;border-radius:13px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:16px;transition:transform .35s;box-shadow:0 6px 16px rgba(74,124,89,.18),inset 0 0 0 1px rgba(74,124,89,.12)}
+.glass-panel:nth-child(2) .glass-ic{box-shadow:0 6px 16px rgba(212,168,83,.22),inset 0 0 0 1px rgba(212,168,83,.18)}
+.glass-panel:hover .glass-ic{transform:scale(1.12) rotate(-6deg)}
+.glass-panel .gp-tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:9px}
+.glass-panel:nth-child(2) .gp-tag{color:#a9822f}
+.offer-amount{font-family:var(--fd);font-weight:700;font-size:2.3rem;line-height:1;color:var(--forest);display:flex;align-items:baseline;gap:7px}
+.offer-amount span{font-family:var(--fb);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:#fff;box-shadow:inset 0 0 0 1px rgba(212,168,83,.35);padding:4px 10px;border-radius:100px}
 .offer-notch-row{position:relative;height:0}
 .offer-notch{position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--white);z-index:2}
 .offer-notch-l{left:-9px}
 .offer-notch-r{right:-9px}
-.offer-divider{border-top:1.5px dashed var(--border);margin:0 22px}
-.offer-bottom{padding:18px 22px 24px}
-.glass-panel h3{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px}
-.glass-panel p{font-size:.8rem;color:var(--sub);line-height:1.6}
+.offer-divider{border-top:1.5px dashed var(--border);margin:0 24px}
+.offer-bottom{padding:18px 24px 22px;position:relative;z-index:1}
+.glass-panel h3{font-family:var(--fd);font-size:1.08rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px}
+.glass-panel p{font-size:.8rem;color:var(--sub);line-height:1.6;margin-bottom:14px}
+.offer-cta{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--forest);text-decoration:none;transition:gap .2s}
+.glass-panel:nth-child(2) .offer-cta{color:#a9822f}
+.offer-cta svg{width:13px;height:13px;transition:transform .2s}
+.glass-panel:hover .offer-cta{gap:10px}
+.glass-panel:hover .offer-cta svg{transform:translateX(2px)}
 @media (max-width:760px){
   .glass-panels{grid-template-columns:1fr;gap:14px}
 }
@@ -1340,6 +1350,7 @@ footer{background:var(--ink);padding:28px 24px}
         <div class="offer-bottom">
           <h3>Off your first month</h3>
           <p>Move in with less to worry about. New residents receive a $1,500 discount applied directly to their first month of care.</p>
+          <a href="#contact" class="offer-cta">Claim this offer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
       <div class="glass-panel">
@@ -1354,6 +1365,7 @@ footer{background:var(--ink);padding:28px 24px}
         <div class="offer-bottom">
           <h3>Referral bonus</h3>
           <p>Know someone who'd thrive here? Past families and staff members earn a $500 bonus for every new resident they refer.</p>
+          <a href="#contact" class="offer-cta">Claim this offer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
     </div>
