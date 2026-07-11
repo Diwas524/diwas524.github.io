@@ -295,6 +295,61 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .btn-wh-lg{background:transparent;color:#fff;padding:17px 38px;border-radius:12px;border:1.5px solid rgba(255,255,255,.4);font-weight:500;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s}
 .btn-wh-lg:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 
+/* ── STEPS (path) ── */
+.path-bg{background:var(--forest);position:relative;overflow:hidden}
+.path-bg::before{content:'';position:absolute;top:-160px;left:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,.12) 0%,transparent 70%);pointer-events:none}
+.path-bg::after{content:'';position:absolute;bottom:-180px;right:-160px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(200,230,201,.08) 0%,transparent 70%);pointer-events:none}
+.path-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px;position:relative}
+.path-connector{position:absolute;top:38px;left:12.5%;right:12.5%;height:0;border-top:2px dashed rgba(255,255,255,.22);z-index:0}
+.path-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 14px}
+.path-circle{position:relative;width:76px;height:76px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 12px 30px rgba(0,0,0,.28);margin-bottom:24px;border:4px solid var(--forest);flex-shrink:0}
+.path-num{position:absolute;top:-8px;right:-8px;background:var(--forest);color:var(--mint);font-family:var(--fd);font-size:.68rem;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold)}
+.path-node h3{font-family:var(--fd);font-size:1.12rem;font-weight:700;color:#fff;margin-bottom:10px}
+.path-node p{font-size:.85rem;color:rgba(255,255,255,.66);line-height:1.75}
+@media (max-width:900px){
+  .path-row{grid-template-columns:1fr;gap:0;margin-top:40px;max-width:420px;margin-left:auto;margin-right:auto}
+  .path-connector{display:none}
+  .path-node{flex-direction:row;text-align:left;align-items:flex-start;gap:18px;padding:0 0 34px 0;position:relative}
+  .path-node:last-child{padding-bottom:0}
+  .path-node:not(:last-child)::before{content:'';position:absolute;left:27px;top:64px;bottom:2px;width:0;border-left:2px dashed rgba(255,255,255,.24)}
+  .path-circle{width:56px;height:56px;font-size:21px;margin-bottom:0;border-width:3px;flex-shrink:0}
+  .path-num{width:19px;height:19px;font-size:.58rem;top:-5px;right:-5px}
+  .path-text{flex:1;min-width:0;padding-top:4px}
+  .path-node h3{font-size:1rem;margin-bottom:6px;line-height:1.3}
+  .path-node p{font-size:.82rem;line-height:1.65}
+}
+
+/* ── PROMO (Apple glass) ── */
+.glass-bg{position:relative;overflow:hidden;background:var(--white)}
+.glass-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.5}
+.glass-orb1{width:360px;height:360px;top:-120px;left:-100px;background:radial-gradient(circle,rgba(74,124,89,.16) 0%,transparent 72%)}
+.glass-orb2{width:380px;height:380px;bottom:-140px;right:-120px;background:radial-gradient(circle,rgba(212,168,83,.18) 0%,transparent 72%)}
+.glass-orb3{width:240px;height:240px;top:20%;right:12%;background:radial-gradient(circle,rgba(200,230,201,.3) 0%,transparent 75%)}
+.glass-wrap{position:relative;z-index:1;max-width:840px}
+.glass-panels{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.glass-panel{background:#fff;border:1.5px dashed var(--border);border-radius:20px;padding:0;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-color .3s;box-shadow:0 4px 16px rgba(30,58,47,.06)}
+.glass-panel:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 20px 40px rgba(30,58,47,.14);border-color:var(--gold)}
+.offer-ribbon{position:absolute;top:16px;right:-34px;background:var(--forest);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 38px;transform:rotate(40deg);box-shadow:0 3px 10px rgba(0,0,0,.2);z-index:2}
+.glass-panel:nth-child(2) .offer-ribbon{background:var(--gold);color:var(--ink)}
+.offer-top{padding:24px 22px 20px;position:relative;z-index:1}
+.glass-ic{width:40px;height:40px;border-radius:12px;background:var(--mint-pale);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;transition:transform .3s}
+.glass-panel:nth-child(2) .glass-ic{background:var(--gold-pale)}
+.glass-panel:hover .glass-ic{transform:scale(1.1) rotate(-6deg)}
+.glass-panel .gp-tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:8px}
+.offer-amount{font-family:var(--fd);font-weight:700;font-size:2.1rem;line-height:1;color:var(--forest);display:flex;align-items:baseline;gap:6px}
+.offer-amount span{font-family:var(--fb);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);padding:4px 9px;border-radius:100px}
+.offer-notch-row{position:relative;height:0}
+.offer-notch{position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--white);z-index:2}
+.offer-notch-l{left:-9px}
+.offer-notch-r{right:-9px}
+.offer-divider{border-top:1.5px dashed var(--border);margin:0 22px}
+.offer-bottom{padding:18px 22px 24px}
+.glass-panel h3{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:7px}
+.glass-panel p{font-size:.8rem;color:var(--sub);line-height:1.6}
+@media (max-width:760px){
+  .glass-panels{grid-template-columns:1fr;gap:14px}
+}
+
 /* ── CONTACT ── */
 .contact-bg{background:var(--blush)}
 .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start;margin-top:56px}
@@ -1213,6 +1268,95 @@ footer{background:var(--ink);padding:28px 24px}
         </div>
       </div>
     </div> 
+  </div>
+</section>
+
+
+<!-- STEPS -->
+<section class="sec path-bg" id="steps">
+  <div class="wrap">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="ew ew-wh">The Process</p>
+      <h2 class="h2 h2-wh">From First Call to <i style="color:var(--mint)">Welcome Home</i></h2>
+      <p class="lead lead-wh" style="margin:0 auto">No pressure, no rush. Just a warm, guided path that helps you find the right fit for someone you love.</p>
+    </div>
+    <div class="path-row rv">
+      <div class="path-connector"></div>
+      <div class="path-node">
+        <div class="path-circle">📝<span class="path-num">1</span></div>
+        <div class="path-text">
+          <h3>Tell Us Your Story</h3>
+          <p>A short call or intake form helps us learn your loved one's needs, health history, and daily rhythms before we ever meet.</p>
+        </div>
+      </div>
+      <div class="path-node">
+        <div class="path-circle">🏡<span class="path-num">2</span></div>
+        <div class="path-text">
+          <h3>Come See It Yourself</h3>
+          <p>Tour the home, meet our caregivers, and feel the everyday warmth for yourself. No pressure, just an honest look around.</p>
+        </div>
+      </div>
+      <div class="path-node">
+        <div class="path-circle">🩺<span class="path-num">3</span></div>
+        <div class="path-text">
+          <h3>We Build the Plan</h3>
+          <p>Our RN designs a care plan around real routines, medications, and comfort, nothing generic and nothing rushed.</p>
+        </div>
+      </div>
+      <div class="path-node">
+        <div class="path-circle">🔑<span class="path-num">4</span></div>
+        <div class="path-text">
+          <h3>Move In &amp; Settle In</h3>
+          <p>We stay close through moving day and every week after, until your family feels at home here too.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROMO -->
+<section class="sec glass-bg" id="offer">
+  <div class="glass-orb glass-orb1"></div>
+  <div class="glass-orb glass-orb2"></div>
+  <div class="glass-orb glass-orb3"></div>
+  <div class="wrap glass-wrap">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="ew">Special Offer</p>
+      <h2 class="h2">Save More, <i>Together</i></h2>
+      <p class="lead" style="margin:0 auto">Two ways to make quality care more affordable for the families we love.</p>
+    </div>
+
+    <div class="glass-panels rv">
+      <div class="glass-panel">
+        <span class="offer-ribbon">Limited Time</span>
+        <div class="offer-top">
+          <div class="glass-ic">💚</div>
+          <p class="gp-tag">New Residents</p>
+          <div class="offer-amount">$2,000<span>OFF</span></div>
+        </div>
+        <div class="offer-notch-row"><div class="offer-notch offer-notch-l"></div><div class="offer-notch offer-notch-r"></div></div>
+        <div class="offer-divider"></div>
+        <div class="offer-bottom">
+          <h3>Off your first month</h3>
+          <p>Move in with less to worry about. New residents receive a $2,000 discount applied directly to their first month of care.</p>
+        </div>
+      </div>
+      <div class="glass-panel">
+        <span class="offer-ribbon">Refer &amp; Earn</span>
+        <div class="offer-top">
+          <div class="glass-ic">🤝</div>
+          <p class="gp-tag">Referrals</p>
+          <div class="offer-amount">$500<span>BONUS</span></div>
+        </div>
+        <div class="offer-notch-row"><div class="offer-notch offer-notch-l"></div><div class="offer-notch offer-notch-r"></div></div>
+        <div class="offer-divider"></div>
+        <div class="offer-bottom">
+          <h3>Referral bonus</h3>
+          <p>Know someone who'd thrive here? Past families and staff members earn a $500 bonus for every new resident they refer.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
