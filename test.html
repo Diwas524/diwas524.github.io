@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Autumn Hill Manor — Drive the Grounds</title>
+<style>
+  :root{
+    --forest-dark:#1F3A2E;
+    --forest:#2E5240;
+    --cream:#FAF6ED;
+    --tan:#EAD3A0;
+    --clay:#C9772E;
+    --clay-dark:#9B5A1C;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;font-family:'Georgia',serif;background:linear-gradient(180deg,#F6D9A8 0%,#F0B87C 35%,#D98D5C 65%,#8FAE7A 100%);}
+  #canvasHost{position:fixed;inset:0;}
+  canvas{display:block;width:100%;height:100%;}
+
+  /* ── Loading screen ── */
+  #loadScreen{
+    position:fixed;inset:0;z-index:100;
+    background:linear-gradient(180deg,#F6D9A8 0%,#EDA96C 50%,#C97C4C 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #loadScreen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  #loadScreen h1{
+    font-family:'Playfair Display', Georgia, serif;
+    color:var(--forest-dark); font-size:clamp(1.6rem,5vw,2.6rem);
+    margin:0 0 6px; letter-spacing:.01em; text-align:center;
+  }
+  #loadScreen p{color:var(--clay-dark);font-size:.95rem;margin:0 0 26px;letter-spacing:.05em;text-transform:uppercase;}
+  .loadbar{width:220px;height:6px;border-radius:6px;background:rgba(31,58,46,0.15);overflow:hidden;}
+  .loadbar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--clay),var(--clay-dark));transition:width .2s ease;}
+  .leaf-icon{font-size:2.4rem;margin-bottom:14px;animation:leafSpin 3s ease-in-out infinite;}
+  @keyframes leafSpin{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+
+  /* ── HUD ── */
+  #hud{position:fixed;inset:0;z-index:10;pointer-events:none;font-family:Georgia,serif;}
+  #brand{
+    position:absolute;top:16px;left:16px;pointer-events:none;
+    color:var(--cream); text-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  #brand .name{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;letter-spacing:.01em;}
+  #brand .sub{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9;margin-top:2px;}
+
+  #hint{
+    position:absolute; top:16px; right:16px; max-width:190px;
+    background:rgba(255,253,247,0.5); backdrop-filter:blur(14px) saturate(180%);
+    -webkit-backdrop-filter:blur(14px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.6); border-radius:16px;
+    padding:10px 12px; font-size:.72rem; color:var(--forest-dark); line-height:1.4;
+    box-shadow:0 8px 24px rgba(11,92,86,0.15);
+  }
+  #hint b{color:var(--clay-dark);}
+
+  #minimap{
+    position:absolute; bottom:18px; right:18px; width:118px;height:118px;border-radius:50%;
+    background:rgba(250,246,237,0.55); backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:2px solid rgba(255,255,255,0.7); box-shadow:0 8px 24px rgba(11,92,86,0.22);
+  }
+
+  #promptBubble{
+    position:absolute; left:50%; bottom:22%; transform:translateX(-50%) translateY(10px);
+    background:linear-gradient(160deg,#C9772E,#9B5A1C); color:#fff;
+    padding:10px 20px; border-radius:100px; font-size:.85rem; font-weight:600;
+    letter-spacing:.02em; box-shadow:0 8px 22px rgba(201,119,46,0.45);
+    opacity:0; transition:opacity .25s ease, transform .25s ease; pointer-events:none;
+    white-space:nowrap;
+  }
+  #promptBubble.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ── info panel ── */
+  #overlay{position:fixed; inset:0; z-index:50; display:flex; align-items:flex-end; justify-content:center;
+    background:rgba(20,30,22,0); pointer-events:none; transition:background .35s ease;}
+  #overlay.open{pointer-events:auto; background:rgba(20,30,22,0.42);}
+  #panel{
+    width:100%; max-width:920px; max-height:82vh; overflow-y:auto;
+    background:rgba(250,246,237,0.92); backdrop-filter:blur(22px) saturate(180%); -webkit-backdrop-filter:blur(22px) saturate(180%);
+    border-radius:28px 28px 0 0; border:1px solid rgba(255,255,255,0.7); border-bottom:none;
+    box-shadow:0 -16px 50px rgba(11,92,86,0.3);
+    padding:30px 26px 34px; transform:translateY(100%); transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  #overlay.open #panel{transform:translateY(0);}
+  #panelGuide{flex:none; width:96px; display:flex; flex-direction:column; align-items:center; padding-top:4px;}
+  #panelGuide svg{width:88px;height:auto; filter:drop-shadow(0 8px 16px rgba(0,0,0,.18));}
+  #panelGuide .pg-name{font-size:.64rem; font-weight:700; color:var(--clay-dark); text-transform:uppercase; letter-spacing:.03em; margin-top:6px; text-align:center;}
+  #panelGuide .pg-bubble{
+    margin-top:8px; background:rgba(201,119,46,0.1); border:1px solid rgba(201,119,46,0.22);
+    border-radius:14px; padding:8px 9px; font-size:.66rem; line-height:1.4; color:var(--forest-dark); text-align:center;
+  }
+  #panelBody{flex:1; min-width:0;}
+  @media (max-width:600px){
+    #panel{flex-direction:column; align-items:center; text-align:left;}
+    #panelGuide{flex-direction:row; width:auto; gap:10px; padding-top:0; margin-bottom:8px; align-items:center;}
+    #panelGuide svg{width:56px;}
+    #panelGuide .pg-name{margin-top:0;}
+    #panelGuide .pg-bubble{display:none;}
+    #panelBody{width:100%;}
+  }
+  #panel .eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-dark);font-weight:700;margin-bottom:6px;}
+  #panel h2{font-family:'Playfair Display',Georgia,serif; color:var(--forest-dark); font-size:1.5rem; margin:0 0 12px;}
+  #panel p{color:#3c4a3f; line-height:1.65; font-size:.95rem; margin:0 0 14px;}
+  #panel ul{margin:0 0 16px; padding-left:18px; color:#3c4a3f; font-size:.9rem; line-height:1.7;}
+  #panel .cta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
+  #panel .btn{
+    display:inline-block; padding:11px 22px; border-radius:100px; font-size:.82rem; font-weight:700;
+    text-decoration:none; letter-spacing:.02em;
+  }
+  #panel .btn.primary{background:linear-gradient(160deg,#C9772E,#9B5A1C); color:#fff; box-shadow:0 6px 18px rgba(201,119,46,0.4);}
+  #panel .btn.secondary{background:transparent; color:var(--forest-dark); border:1.5px solid rgba(31,58,46,0.3);}
+  @keyframes foodMarqueeScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .food-marquee-sub{ margin-top:26px; }
+  .food-marquee-header{ text-align:center; max-width:520px; margin:0 auto 18px; }
+  .food-marquee-header .eyebrow{ color:var(--clay-dark); margin-bottom:4px; }
+  .food-marquee-header h2{ font-family:'Playfair Display',Georgia,serif; font-size:1.3rem; color:var(--forest-dark); margin:4px 0 8px; }
+  .food-marquee-header h2 em{ font-style:italic; color:var(--forest); }
+  .food-marquee-header p{ font-size:.84rem; color:#5c6b5f; line-height:1.55; margin:0; }
+  .food-marquee-track-wrap{
+    position:relative; width:100%; overflow:hidden;
+    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .food-marquee-track{ display:flex; flex-wrap:nowrap; align-items:stretch; gap:14px; width:max-content; animation:foodMarqueeScroll 34s linear infinite; }
+  .food-marquee-track-wrap:hover .food-marquee-track,
+  .food-marquee-track-wrap:focus-within .food-marquee-track{ animation-play-state:paused; }
+  .food-marquee-item{ position:relative; flex-shrink:0; width:148px; height:188px; border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.15); }
+  .food-marquee-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .food-marquee-item:hover img{ transform:scale(1.06); }
+  .food-marquee-caption{
+    position:absolute; left:0; right:0; bottom:0; padding:18px 10px 8px;
+    background:linear-gradient(to top, rgba(15,20,15,.78), transparent); color:#fff;
+    font-family:'Playfair Display',Georgia,serif; font-size:.76rem; font-weight:600; letter-spacing:.01em;
+  }
+  @media (max-width:480px){ .food-marquee-item{width:120px; height:156px;} .food-marquee-track{gap:10px; animation-duration:26s;} }
+  #panel h2 em{font-style:italic; color:var(--forest);}
+  .resources-inner{display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap; margin:14px 0 4px;}
+  .resources-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .resource-card{
+    display:flex; align-items:center; gap:14px; background:#fff; border:1.5px solid rgba(31,58,46,0.12);
+    border-radius:14px; padding:14px 18px; min-width:220px; position:relative; overflow:hidden;
+    transition:background .15s, border-color .15s, transform .15s, box-shadow .15s; text-decoration:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .resource-card:hover{border-color:var(--forest); transform:translateY(-2px);}
+  .resource-card:active{transform:scale(.96); box-shadow:0 2px 10px rgba(0,0,0,.1);}
+  .resource-card:active .resource-icon{transform:scale(.88) rotate(-6deg);}
+  .resource-icon{width:42px;height:42px;flex:none;border-radius:50%;background:var(--forest);color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;}
+  .resource-card-text strong{display:block; color:#2A2A2A; font-size:.88rem; font-weight:700;}
+  .resource-card-text span{display:block; color:#6B6B6B; font-size:.75rem; margin-top:2px;}
+  .rc-ripple{position:absolute; border-radius:50%; background:rgba(15,118,110,.18); transform:scale(0); animation:rcRippleOut .6s ease-out; pointer-events:none;}
+  @keyframes rcRippleOut{ to{ transform:scale(2.8); opacity:0; } }
+  @media (max-width:600px){
+    .resources-inner{flex-direction:column; align-items:flex-start;}
+    .resources-actions{width:100%;}
+    .resource-card{min-width:0; flex:1;}
+  }
+  #closePanel{
+    position:absolute; top:14px; right:16px; width:34px;height:34px;border-radius:50%;
+    background:rgba(31,58,46,0.08); border:none; color:var(--forest-dark); font-size:1.1rem; cursor:pointer;
+  }
+  #panel{position:relative;}
+
+  /* care list */
+  /* ── CARE VERTICAL SLIDER (ported from live site) ── */
+  .care-layout{ display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; margin:16px 0 4px; }
+  @media (max-width:700px){ .care-layout{ grid-template-columns:1fr; gap:20px; } }
+  .care-list{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; width:100%; }
+  @media (max-width:460px){ .care-list{ grid-template-columns:1fr; } }
+  .care-item{
+    display:block; padding:12px 13px; border-radius:10px; transition:all .25s ease; cursor:pointer;
+    position:relative; background:#f9f7f4; border:1.5px solid var(--light-gray, #E8E4DD); overflow:hidden; text-decoration:none;
+  }
+  .care-item::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--forest);
+    transform:scaleY(0); transform-origin:center; transition:transform .25s ease; border-radius:3px 0 0 3px;
+  }
+  .care-item strong{ display:flex; align-items:center; gap:8px; font-size:.8rem; font-weight:700; color:#2A2A2A; transition:all .25s ease; line-height:1.4; }
+  .care-item strong::before{ content:'✦'; font-size:.5rem; color:var(--forest); opacity:.5; flex-shrink:0; transition:opacity .2s; }
+  .care-item span{ display:none; }
+  .care-item:hover{ background:linear-gradient(135deg, rgba(15,118,110,.07) 0%, rgba(15,118,110,.02) 100%); border-color:var(--forest-light, #3d7a63); transform:translateX(3px); box-shadow:0 3px 12px rgba(15,118,110,.1); }
+  .care-item:hover::before{ transform:scaleY(1); }
+  .care-item.active-care-item{ background:linear-gradient(135deg, rgba(15,118,110,.12) 0%, rgba(15,118,110,.05) 100%); border-color:var(--forest); border-left-color:transparent; box-shadow:0 4px 16px rgba(15,118,110,.15); transform:translateX(3px); }
+  .care-item.active-care-item::before{ transform:scaleY(1); }
+  .care-item.active-care-item strong,
+  .care-item:hover strong{ color:var(--forest); }
+  .care-item.active-care-item strong::before{ opacity:1; }
+  .care-img{ position:relative; overflow:hidden; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .care-img-container{ position:relative; width:100%; height:300px; border-radius:20px; overflow:hidden; box-shadow:0 12px 30px rgba(31,58,46,.2); background:var(--tan); }
+  .care-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:opacity .5s ease; opacity:1; position:absolute; inset:0; }
+  .care-img img.hidden{ opacity:0; pointer-events:none; }
+  .care-description{ margin-top:14px; font-size:.82rem; color:#5c6b5f; line-height:1.65; text-align:center; }
+
+  /* gallery grid */
+  .mini-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0;}
+  .mini-grid-item{position:relative; border-radius:12px; overflow:hidden; aspect-ratio:1; background:var(--tan);}
+  .mini-grid-item img{width:100%;height:100%;object-fit:cover; display:block;}
+  .mini-grid-item span{position:absolute; left:0;right:0;bottom:0; padding:5px 6px 4px; font-size:.6rem; color:#fff;
+    background:linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,0)); font-weight:600;}
+  @media (max-width:480px){ .mini-grid{grid-template-columns:repeat(3,1fr);} }
+
+  /* team */
+  .mini-team{display:flex; flex-direction:column; gap:14px; margin:14px 0;}
+  .mini-team-card{display:flex; gap:12px; align-items:flex-start;}
+  .mini-team-photo{
+    flex:none; width:52px;height:52px;border-radius:50%; display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#2E5240,#1F3A2E); color:#fff; font-weight:700; font-size:.85rem;
+  }
+  .mini-team-card h4{margin:0 0 2px; color:var(--forest-dark); font-family:'Playfair Display',Georgia,serif; font-size:1rem;}
+  .mini-team-role{color:var(--clay-dark); font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;}
+  .mini-team-card p{margin:0 0 6px; font-size:.82rem; line-height:1.55;}
+  .mini-team-badge{display:inline-block; font-size:.68rem; padding:4px 10px; border-radius:100px; background:rgba(46,82,64,0.1); color:var(--forest-dark); font-weight:600;}
+
+  /* faq */
+  .mini-faq{margin:14px 0; display:flex; flex-direction:column; gap:12px;}
+  .mini-faq-q{font-weight:700; color:var(--forest-dark); font-size:.88rem; margin-bottom:3px;}
+  .mini-faq p{margin:0;}
+
+  /* services */
+  .mini-services{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .mini-service-item{padding:12px 13px; border-radius:14px; background:rgba(201,119,46,0.06);}
+  .mini-service-item h4{margin:0 0 2px; font-family:'Playfair Display',Georgia,serif; color:var(--forest-dark); font-size:.92rem;}
+  .mini-service-sub{color:var(--clay-dark); font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; margin-bottom:5px;}
+  .mini-service-item p{margin:0; font-size:.78rem; line-height:1.5; color:#5c6b5f;}
+  @media (max-width:480px){ .mini-services{grid-template-columns:1fr;} }
+
+  /* testimonials */
+  .mini-testimonials{display:flex; flex-direction:column; gap:12px; margin:14px 0;}
+  .mini-testimonial{padding:14px 16px; border-radius:16px; background:rgba(46,82,64,0.06);}
+  .mini-testi-stars{color:var(--clay-dark); font-size:.8rem; margin-bottom:6px; letter-spacing:.05em;}
+  .mini-testimonial p{margin:0 0 8px; font-style:italic; font-size:.85rem; line-height:1.6; color:#3c4a3f;}
+  .mini-testi-author{display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .mini-testi-author b{color:var(--forest-dark); font-size:.82rem;}
+  .mini-testi-author span{color:#7a8a7d; font-size:.72rem;}
+
+  /* contact */
+  .mini-contact{display:flex; flex-direction:column; gap:8px; margin:14px 0; padding:14px; border-radius:14px; background:rgba(46,82,64,0.06);}
+  .mini-contact div{display:flex; justify-content:space-between; gap:10px; font-size:.85rem; flex-wrap:wrap;}
+  .mini-contact span{color:#7a8a7d; font-weight:600; text-transform:uppercase; font-size:.68rem; letter-spacing:.04em; align-self:center;}
+  .mini-contact a, .mini-contact b{color:var(--forest-dark); font-weight:700; text-decoration:none;}
+
+  /* welcome hero content in panel */
+  .welcome-badge{display:inline-flex; align-items:center; gap:7px; padding:6px 14px; border-radius:100px; background:rgba(46,82,64,0.08); border:1px solid rgba(46,82,64,0.18); font-size:.66rem; font-weight:700; color:var(--forest-dark); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;}
+  .welcome-badge .dot{width:7px;height:7px;border-radius:50%;background:#4CAF6C;box-shadow:0 0 0 3px rgba(76,175,108,0.25);}
+  .welcome-accent{display:block; font-family:'Playfair Display',Georgia,serif; font-style:italic; color:var(--clay-dark); font-size:1.2rem; margin-top:2px;}
+  .stat-pills{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:16px 0 18px;}
+  .stat-pill{display:flex; align-items:center; gap:9px; padding:10px 12px; border-radius:14px; background:rgba(201,119,46,0.07); border:1px solid rgba(201,119,46,0.15);}
+  .stat-pill .icon{flex:none; width:30px;height:30px;border-radius:50%; background:rgba(201,119,46,0.16); display:flex;align-items:center;justify-content:center; font-size:.85rem;}
+  .stat-pill .num{display:block; font-family:'Playfair Display',Georgia,serif; font-weight:700; color:var(--clay-dark); font-size:.92rem; line-height:1.2;}
+  .stat-pill .lbl{display:block; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#5c6b5f; line-height:1.3;}
+  @media (max-width:420px){ .stat-pills{grid-template-columns:1fr;} }
+
+  /* tour guide HUD widget */
+  .guide-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+  #guideAvatar{flex:none; width:32px;height:32px;border-radius:50%; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.25); background:#F3D9BE;}
+  #guideAvatar svg{width:100%;height:100%;display:block;}
+  .guide-name{font-size:.74rem; font-weight:700; color:var(--forest-dark); line-height:1.15;}
+  .guide-name span{display:block; font-size:.58rem; font-weight:600; color:var(--clay-dark); text-transform:uppercase; letter-spacing:.03em;}
+  #guideText{font-size:.72rem; color:var(--forest-dark); line-height:1.4;}
+
+  /* direction arrow */
+  #compass{
+    position:absolute; top:78px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:2px; pointer-events:none;
+  }
+  #compassArrow{
+    width:38px;height:38px; transition:transform .15s linear;
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+  }
+  #compassLabel{
+    background:rgba(255,253,247,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.6); border-radius:100px; padding:4px 12px;
+    font-size:.68rem; font-weight:700; color:var(--forest-dark); letter-spacing:.02em; white-space:nowrap;
+    box-shadow:0 6px 16px rgba(11,92,86,0.15);
+  }
+
+  @media (max-width:820px){
+    #hint{font-size:.68rem; max-width:150px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="loadScreen">
+  <div class="leaf-icon">🍂</div>
+  <h1>Autumn Hill Manor</h1>
+  <p>Hop in &amp; explore the grounds</p>
+  <div class="loadbar"><div class="loadbar-fill" id="loadFill"></div></div>
+  <p style="text-transform:none;letter-spacing:0;font-size:.82rem;margin-top:18px;opacity:.85;">👋 Sophie, your tour guide, is warming up the cart…</p>
+</div>
+
+<div id="canvasHost"></div>
+
+<div id="hud">
+  <div id="brand">
+    <div class="name">Autumn Hill Manor</div>
+    <div class="sub">Weatherford, TX</div>
+  </div>
+  <div id="hint">
+    <div class="guide-row">
+      <div id="guideAvatar">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 100c2-20 15-30 44-30s42 10 44 30z" fill="#C9772E"/>
+          <rect x="42" y="60" width="16" height="18" rx="6" fill="#F3D9BE"/>
+          <path d="M18 42c0-19 12-32 32-32s32 13 32 32c0 7-1 13-4 18-1-9-4-15-9-15 2 5 0 8-4 7-8-2-13 1-18 6-3 3-4 7-4 11-5-4-8-10-8-16-4 3-7 0-9-11-3 4-6 4-8 0z" fill="#3B2416"/>
+          <circle cx="50" cy="46" r="24" fill="#F3D9BE"/>
+          <path d="M22 43c2-15 12-23 24-23s21 8 23 23c-4-5-9-8-15-6 1-4-2-5-5-3-6 3-12 2-16-2-2 3-2 7-1 10-5-1-8 1-10 1z" fill="#3B2416"/>
+          <path d="M32 40c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M53 39c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="38" cy="46" r="3.2" fill="#3B2416"/>
+          <circle cx="39" cy="45" r="1" fill="#fff"/>
+          <path d="M55 46c2 2 6 2 8 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="34" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
+          <circle cx="61" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
+          <path d="M38 58c4 4 15 4 19 0" stroke="#9B5A1C" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="guide-name">Sophie<span>Your Tour Guide</span></div>
+    </div>
+    <div id="guideText">Sit back and relax — I'll drive you around the grounds.</div>
+  </div>
+  <div id="compass">
+    <svg id="compassArrow" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2 L19 20 L12 16 L5 20 Z" fill="#C9772E" stroke="#FAF6ED" stroke-width="1"/>
+    </svg>
+    <div id="compassLabel">Welcome Home</div>
+  </div>
+  <canvas id="minimap" width="118" height="118"></canvas>
+  <div id="promptBubble">Arriving...</div>
+</div>
+
+<div id="overlay">
+  <div id="panel">
+    <button id="closePanel">✕</button>
+    <div id="panelGuide">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 100c2-20 15-30 44-30s42 10 44 30z" fill="#C9772E"/>
+        <rect x="42" y="60" width="16" height="18" rx="6" fill="#F3D9BE"/>
+        <path d="M18 42c0-19 12-32 32-32s32 13 32 32c0 7-1 13-4 18-1-9-4-15-9-15 2 5 0 8-4 7-8-2-13 1-18 6-3 3-4 7-4 11-5-4-8-10-8-16-4 3-7 0-9-11-3 4-6 4-8 0z" fill="#3B2416"/>
+        <circle cx="50" cy="46" r="24" fill="#F3D9BE"/>
+        <path d="M22 43c2-15 12-23 24-23s21 8 23 23c-4-5-9-8-15-6 1-4-2-5-5-3-6 3-12 2-16-2-2 3-2 7-1 10-5-1-8 1-10 1z" fill="#3B2416"/>
+        <path d="M32 40c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M53 39c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="46" r="3.2" fill="#3B2416"/>
+        <circle cx="39" cy="45" r="1" fill="#fff"/>
+        <path d="M55 46c2 2 6 2 8 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="34" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
+        <circle cx="61" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
+        <path d="M38 58c4 4 15 4 19 0" stroke="#9B5A1C" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="pg-name">Sophie</div>
+      <div class="pg-bubble" id="panelGuideBubble">Here's what I wanted to show you!</div>
+    </div>
+    <div id="panelBody"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+
+  // ───────────────────────────── content per station (full site copy, same flow as the real page) ─────────────────────────────
+  var CARE_ITEMS = [
+    ["Activities of Daily Living / ADL Assistance","Hands-on help with bathing, dressing, grooming, toileting, and eating — always with kindness and respect."],
+    ["Alzheimer's Care","Compassionate, patient-focused memory care for residents living with Alzheimer's disease."],
+    ["Community Activities","Group outings, chapel services, local events, and seasonal celebrations that residents look forward to each day."],
+    ["Dementia Support Services","Thoughtful, around-the-clock care for residents living with various forms of dementia."],
+    ["Family Visitation","Our open visitation policy means family is always welcome."],
+    ["Meals and Entertainment","Three home-cooked meals and snacks served daily in a warm, social setting."],
+    ["Medication Management","Careful, consistent oversight by our trained team."],
+    ["24-Hour Care &amp; Supervision","A caring presence, day and night."],
+    ["Fall Prevention","Thoughtful safeguards to keep residents safe and confident."],
+    ["On-Site Nursing Support","Skilled nursing guidance, right where it's needed."]
+  ];
+  var GALLERY_ITEMS = [
+    ["https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&q=80","Daily Wellness"],
+    ["https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&q=80","Spring on the Grounds"],
+    ["https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80","Private Suites"],
+    ["https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&q=80","The Great Room"],
+    ["https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80","Morning Walks"],
+    ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80","Our Weatherford Home"],
+    ["https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=400&q=80","Garden Courtyard"],
+    ["https://images.unsplash.com/photo-1463320726281-696a485928c7?w=400&q=80","Garden Blooms"]
+  ];
+  var TEAM_MEMBERS = [
+    ["MS","Maria Santos","Home Director & Owner","With over 15 years in senior care, Maria founded Autumn Hill Manor on a simple belief: every elder deserves dignity, warmth, and a true sense of home. She is on-site daily and personally oversees every resident's care plan.","Certified AFH Administrator"],
+    ["JR","James Reyes","Lead Caregiver","James brings 8 years of hands-on caregiving experience and a natural warmth that residents respond to immediately. He specializes in memory care and is known for his patience, humor, and genuine compassion.","Memory Care Specialist"],
+    ["LP","Linda Park, RN","Care Coordinator & Nurse","Linda oversees all medical coordination, medication management, and physician communications. Families love her proactive updates and her ability to explain complex care needs in simple, reassuring terms.","Registered Nurse · 12 Yrs"]
+  ];
+  var FAQ_ITEMS = [
+    ["How much does Autumn Hill Manor cost?","Monthly rates vary based on level of care and room type. We offer transparent, all-inclusive pricing with no hidden fees. Contact us directly for current rates — we're happy to walk you through exactly what's included and work with your family's budget."],
+    ["Does Autumn Hill Manor accept Medicaid or Medicare?","We accept private pay and long-term care insurance. We do not currently accept Medicaid waiver programs, but our team can help connect families with financial counselors and resources to help plan for care costs."],
+    ["What's included in the monthly rate?","The monthly rate covers room and board, three home-cooked meals daily, medication management, personal care assistance, housekeeping, laundry, activities, and 24-hour caregiver support. We keep it simple — one predictable rate, no surprise add-ons."],
+    ["How do I know if my loved one is ready for an AFH?","Adult family homes are ideal when a loved one needs daily hands-on assistance but doesn't require hospital-level care. Signs include difficulty managing medications, personal hygiene, or mobility, or safety concerns living alone. We're happy to do a free assessment call to help you decide."],
+    ["What happens if my loved one's needs increase?","We regularly reassess each resident's care plan and can accommodate increasing needs in most cases, including dementia progression, mobility changes, and hospice. If a higher level of medical care becomes necessary, we'll help coordinate a smooth transition with compassion and advance notice."],
+    ["How do I start the admission process?","It starts with a simple conversation. Call or email us to share your situation, and we'll schedule a tour and assessment at your convenience. From there, we'll review medical records, complete a care assessment, and walk you through paperwork — usually within a few days."]
+  ];
+  var FOOD_ITEMS = [
+    ["https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=500&q=80","Fresh Garden Salad"],
+    ["https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80","Hearty Soup"],
+    ["https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&q=80","Roasted Chicken Dinner"],
+    ["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80","Seasonal Vegetables"],
+    ["https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80","Fresh Baked Bread"],
+    ["https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&q=80","Homemade Dessert"],
+    ["https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80","Fresh Fruit Plate"],
+    ["https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80","Pancake Breakfast"]
+  ];
+  var CARE_IMAGES = [
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room-1.jpg","Activities of Daily Living"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/lounge.jpg","Alzheimer's Care"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/activity-band.jpg","Community Activities"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/courtyard-pergola.jpg","Dementia Support"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/exterior-aerial.jpg","Family Visitation"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/dining-1.jpg","Meals and Entertainment"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/apartment-bedroom.jpg","Medication Management"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/living-room.jpg","24-Hour Care"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/stock-d-768x512.jpg","Fall Prevention"],
+    ["https://autumnhillmanor.com/wp-content/uploads/2026/05/garden-flowers.jpg","Nursing Support"]
+  ];
+  var SERVICES_ITEMS = [
+    ["Assisted Living","Warm, tailored daily support","A warm residential setting with tailored, hands-on support for daily routines — while always encouraging independence."],
+    ["Memory Care","Compassionate memory support","Specialized, compassionate care and gentle engagement for residents living with Alzheimer's or dementia-related memory loss."],
+    ["Catheter Care","Discreet, professional care","Professional, discreet catheter management provided by our trained care team with comfort and dignity in mind."],
+    ["Wound Care","Skilled healing & assessment","Skilled wound assessment and ongoing care to support healing, prevent infection, and promote resident wellbeing."],
+    ["Medication Management","Right dose, right time","Careful, consistent oversight of medications by our trained team — ensuring the right dose, at the right time, every time."],
+    ["24/7 Certified Caregivers","Help close by, day or night","Trained, certified caregivers are on-site around the clock, so help is always close by — day or night."],
+    ["Individualized Care Plans","Built around each resident","Every resident's plan is built around their unique needs and preferences, then reviewed regularly as those needs change."],
+    ["Home-Cooked Meals","Fresh, made from scratch","Nutritious, made-from-scratch meals prepared fresh daily, with menus that accommodate individual dietary needs."],
+    ["Activities & Enrichment","Engaging every day","Daily programs designed to engage the mind, body, and spirit, from arts and games to music and social gatherings."]
+  ];
+  var TESTIMONIALS_ITEMS = [
+    ["Gina and her staff are so awesome and attentive. They truly care about all of the residents and treat them like their own family! The facility is super clean and the meals they prepare are amazing.","Kevin Hanson","Son · Google review"],
+    ["My mom was a resident at Autumn Hill Manor for almost six years. The staff provided her with excellent care and lots of love! The meals were wonderful and there were always activities for the residents to enjoy!","Linda LaRose","Daughter · Google review"],
+    ["Autumn Hill Manor was the perfect place for our Grandmother during the last several years of her life. The staff treats the residents like family and really get to know you on a first name basis.","Tommy Stallings","Grandson · Google review"],
+    ["Our grandmother was at Autumn Hill for many years, and we absolutely loved it. The grounds are beautiful, the facility is newly renovated and feels very homey. So many of the precious staff have been there for 15–20 years.","Karaline Hamilton","Granddaughter · Google review"],
+    ["My husband and I highly recommend Autumn Hill! His precious mom moved in initially as a temporary resident. What she found is a community of friends and staff that have re-ignited her excitement and zest of life!","Tanna Gallaher","Family member · Google review"],
+    ["From our very first visit, Autumn Hill felt different — warm, unhurried, and genuinely caring. My father settled in quickly, and the staff learned his routines and preferences within days.","Rachel Moss","Daughter · Google review"]
+  ];
+
+  function careListHtml(){
+    return "<div class='care-list'>" + CARE_ITEMS.map(function(it, idx){
+      var active = idx===0 ? ' active-care-item' : '';
+      return "<a href='#' class='care-item"+active+"' onmouseover=\"onCareItemHover(this,"+idx+")\" onmouseleave=\"resetCareImage()\" onclick=\"onCareItemClick(this,"+idx+"); return false;\"><strong>"+it[0]+"</strong><span>"+it[1]+"</span></a>";
+    }).join("") + "</div>";
+  }
+  function careImagesHtml(){
+    return "<div class='care-img-container'>" + CARE_IMAGES.map(function(g, idx){
+      var hidden = idx===0 ? '' : ' hidden';
+      return "<img id='careImage"+idx+"' src='"+g[0]+"' alt='"+g[1]+"' class='"+hidden.trim()+"' loading='lazy' onerror=\"this.style.background='#EAD3A0';this.removeAttribute('src')\">";
+    }).join("") + "</div>";
+  }
+  function galleryGridHtml(){
+    return "<div class='mini-grid'>" + GALLERY_ITEMS.map(function(g){
+      return "<div class='mini-grid-item'><img src='"+g[0]+"' alt='"+g[1]+"' loading='lazy' onerror=\"this.style.background='#EAD3A0';this.removeAttribute('src')\"><span>"+g[1]+"</span></div>";
+    }).join("") + "</div>";
+  }
+  function foodMarqueeHtml(){
+    var items = FOOD_ITEMS.concat(FOOD_ITEMS); // doubled for seamless loop
+    var track = items.map(function(f){
+      return "<div class='food-marquee-item'><img src='"+f[0]+"' alt='"+f[1]+"' loading='lazy' onerror=\"this.style.background='#EAD3A0';this.removeAttribute('src')\"><div class='food-marquee-caption'>"+f[1]+"</div></div>";
+    }).join("");
+    return "<div class='food-marquee-sub'>" +
+             "<div class='food-marquee-header'>" +
+               "<div class='eyebrow'>Home-Style Dining</div>" +
+               "<h2>A Taste of <em>Home</em></h2>" +
+               "<p>Fresh, made-from-scratch meals served daily in a warm, welcoming dining room.</p>" +
+             "</div>" +
+             "<div class='food-marquee-track-wrap'><div class='food-marquee-track'>" + track + "</div></div>" +
+           "</div>";
+  }
+  function teamGridHtml(){
+    return "<div class='mini-team'>" + TEAM_MEMBERS.map(function(m){
+      return "<div class='mini-team-card'><div class='mini-team-photo'>"+m[0]+"</div><div><h4>"+m[1]+"</h4><div class='mini-team-role'>"+m[2]+"</div><p>"+m[3]+"</p><span class='mini-team-badge'>"+m[4]+"</span></div></div>";
+    }).join("") + "</div>";
+  }
+  function faqHtml(){
+    return "<div class='mini-faq'>" + FAQ_ITEMS.map(function(f){
+      return "<div class='mini-faq-item'><div class='mini-faq-q'>"+f[0]+"</div><p>"+f[1]+"</p></div>";
+    }).join("") + "</div>";
+  }
+  function servicesGridHtml(){
+    return "<div class='mini-services'>" + SERVICES_ITEMS.map(function(s){
+      return "<div class='mini-service-item'><h4>"+s[0]+"</h4><div class='mini-service-sub'>"+s[1]+"</div><p>"+s[2]+"</p></div>";
+    }).join("") + "</div>";
+  }
+  function testimonialsHtml(){
+    return "<div class='mini-testimonials'>" + TESTIMONIALS_ITEMS.map(function(t){
+      return "<div class='mini-testimonial'><div class='mini-testi-stars'>★★★★★</div><p>\u201c"+t[0]+"\u201d</p><div class='mini-testi-author'><b>"+t[1]+"</b><span>"+t[2]+"</span></div></div>";
+    }).join("") + "</div>";
+  }
+
+  // ── care support interactive image swapper (ported from live site) ──
+  var careClickMode = false;
+  window.changeCareImage = function(el, index, isClick){
+    if (isClick){
+      careClickMode = true;
+      el.classList.add('active-care-item');
+      var items = document.querySelectorAll('.care-item');
+      items.forEach(function(item, i){ if (i !== index) item.classList.remove('active-care-item'); });
+    }
+    for (var i=0;i<CARE_IMAGES.length;i++){
+      var img = document.getElementById('careImage'+i);
+      if (img) img.classList.add('hidden');
+    }
+    var selected = document.getElementById('careImage'+index);
+    if (selected) selected.classList.remove('hidden');
+  };
+  window.onCareItemClick = function(el, index){ window.changeCareImage(el, index, true); return false; };
+  window.onCareItemHover = function(el, index){ if (!careClickMode) window.changeCareImage(el, index, false); };
+  window.resetCareImage = function(){
+    if (careClickMode) return;
+    for (var i=0;i<CARE_IMAGES.length;i++){
+      var img = document.getElementById('careImage'+i);
+      if (img) { if (i===0) img.classList.remove('hidden'); else img.classList.add('hidden'); }
+    }
+  };
+
+  var STATIONS_CONTENT = {
+    welcome: {
+      eyebrow: "Welcome",
+      title: "A Home Where Every Elder<br><span class='welcome-accent'>Truly Belongs</span>",
+      html: "<div class='welcome-badge'><span class='dot'></span>We're Accepting New Residents</div>" +
+            "<p>Six residents. Round-the-clock care. A real home, not a hallway. Autumn Hill Manor is where families find peace, and seniors find joy again.</p>" +
+            "<div class='stat-pills'>" +
+              "<div class='stat-pill'><div class='icon'>🏡</div><div><span class='num'>6</span><span class='lbl'>Max Residents</span></div></div>" +
+              "<div class='stat-pill'><div class='icon'>⏰</div><div><span class='num'>24/7</span><span class='lbl'>Staffed Care</span></div></div>" +
+              "<div class='stat-pill'><div class='icon'>⭐</div><div><span class='num'>10+</span><span class='lbl'>Yrs Serving Families</span></div></div>" +
+              "<div class='stat-pill'><div class='icon'>🛡️</div><div><span class='num'>100%</span><span class='lbl'>State Licensed</span></div></div>" +
+            "</div>" +
+            "<p>Whether you have questions, want to tour, or simply need someone to talk to, we're here. No obligation. Just a warm, honest conversation.</p>" +
+            "<div class='cta-row'>" +
+              "<a class='btn primary' href='tel:+18175964159'>📅 Schedule a Free Tour</a>" +
+              "<a class='btn secondary' href='tel:+18175964159'>📞 (817) 596-4159</a>" +
+            "</div>"
+    },
+    care: {
+      eyebrow: "Care Support",
+      title: "Support that's always nearby",
+      html: "<p>Our experienced, compassionate team is there when your loved one needs them — providing support, encouragement, and around-the-clock peace of mind.</p>" +
+            "<div class='care-layout'>" +
+              "<div class='care-text'>" + careListHtml() + "</div>" +
+              "<div class='care-img'>" +
+                careImagesHtml() +
+                "<p class='care-description' id='careDescription'>Our peaceful, welcoming environment is designed to feel like home while providing every amenity and support your loved one needs.</p>" +
+              "</div>" +
+            "</div>" +
+            "<div class='cta-row'><a class='btn secondary' href='#' data-back>Keep exploring</a></div>"
+    },
+    services: {
+      eyebrow: "",
+      title: "",
+      html: foodMarqueeHtml() +
+            "<div class='food-marquee-sub'>" +
+              "<div class='food-marquee-header'>" +
+                "<div class='eyebrow'>Plan Your Visit</div>" +
+                "<h2>Take a Closer <em>Look</em></h2>" +
+                "<p>Download our community brochure for a full overview of floor plans, pricing, and amenities, or grab this week's dining menu to see what's cooking at Autumn Hill Manor.</p>" +
+              "</div>" +
+              "<div class='resources-actions' style='justify-content:center;'>" +
+                "<a href='#' class='resource-card' data-resource>" +
+                  "<div class='resource-icon'><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='12' y1='18' x2='12' y2='12'/><polyline points='9 15 12 18 15 15'/></svg></div>" +
+                  "<div class='resource-card-text'><strong>Download Brochure</strong><span>Floor plans, pricing &amp; amenities</span></div>" +
+                "</a>" +
+                "<a href='#' class='resource-card' data-resource>" +
+                  "<div class='resource-icon'><svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2l-3 2-3-2-3 2-3-2-3 2z'/><line x1='8' y1='7' x2='16' y2='7'/><line x1='8' y1='11' x2='16' y2='11'/><line x1='8' y1='15' x2='13' y2='15'/></svg></div>" +
+                  "<div class='resource-card-text'><strong>Download Weekly Menu</strong><span>This week's home-style dining</span></div>" +
+                "</a>" +
+              "</div>" +
+            "</div>" +
+            "<div class='cta-row' style='justify-content:center;margin-top:20px;'><a class='btn secondary' href='#' data-back>Keep exploring</a></div>"
+    },
+    life: {
+      eyebrow: "Life at the Manor",
+      title: "A glimpse of everyday life",
+      html: "<p>Sunlit common rooms, blooming gardens, shared meals, and good company — moments from our Weatherford community.</p>" +
+            galleryGridHtml() +
+            "<div class='cta-row'><a class='btn secondary' href='#' data-back>Keep exploring</a></div>"
+    },
+    team: {
+      eyebrow: "The People Behind the Care",
+      title: "Meet Our Caregiving Team",
+      html: "<p>Every person who walks through our door is greeted by someone who genuinely cares. Here are the dedicated individuals who make Autumn Hill Manor feel like home.</p>" +
+            teamGridHtml() +
+            "<p style='margin-top:16px;font-style:italic;'>\"Caring for others has been a part of my life for as long as I can remember. I grew up in an Adult Family Home owned and operated by my mother, where I learned early on that caregiving is about much more than meeting physical needs.\" — Tami, Owner (RN, BSN · 15 Years NICU · 6 Years AFH Provider)</p>" +
+            "<div class='cta-row'><a class='btn secondary' href='#' data-back>Keep exploring</a></div>"
+    },
+    testimonials: {
+      eyebrow: "From Our Families",
+      title: "Stories from families like yours",
+      html: "<p>The trust of local families is the truest measure of our care. 4.9★ average across 60+ Google reviews.</p>" +
+            testimonialsHtml() +
+            "<div class='cta-row'><a class='btn secondary' href='#' data-back>Keep exploring</a></div>"
+    },
+    tour: {
+      eyebrow: "Get in Touch",
+      title: "We'd Love to Hear From You",
+      html: "<p>Whether you have questions, want to tour, or simply need someone to talk to, we're here. No obligation. Just a warm, honest conversation.</p>" +
+            "<p>It starts with a simple conversation. Call or email us to share your situation, and we'll schedule a tour and assessment at your convenience. From there, we'll review medical records, complete a care assessment, and walk you through paperwork — usually within a few days.</p>" +
+            "<div class='mini-contact'>" +
+              "<div><span>Phone</span><a href='tel:+18175964159'>(817) 596-4159</a></div>" +
+              "<div><span>Email</span><a href='mailto:info@autumnhillmanor.com'>info@autumnhillmanor.com</a></div>" +
+              "<div><span>Location</span><b>1200 Manor Way, Weatherford, TX 76086</b></div>" +
+            "</div>" +
+            "<div class='cta-row'>" +
+              "<a class='btn primary' href='tel:+18175964159'>Call (817) 596-4159</a>" +
+              "<a class='btn secondary' href='#' data-back>Keep exploring</a>" +
+            "</div>"
+    },
+    faq: {
+      eyebrow: "Frequently Asked",
+      title: "Questions We Hear Most Often",
+      html: "<p>We believe in total transparency. Here are the questions we hear most often, answered honestly.</p>" +
+            faqHtml() +
+            "<div class='cta-row'>" +
+              "<a class='btn primary' href='tel:+18175964159'>Still have questions? Call us</a>" +
+              "<a class='btn secondary' href='#' data-back>Keep exploring</a>" +
+            "</div>"
+    }
+  };
+
+  // ───────────────────────────── three.js setup ─────────────────────────────
+  var host = document.getElementById('canvasHost');
+  var scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0xE9B888, 0.014);
+
+  var camera = new THREE.PerspectiveCamera(58, window.innerWidth/window.innerHeight, 0.1, 500);
+  var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  host.appendChild(renderer.domElement);
+
+  window.addEventListener('resize', function(){
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // lights
+  var hemi = new THREE.HemisphereLight(0xFCE3B0, 0x3C5A3F, 0.85);
+  scene.add(hemi);
+  var sun = new THREE.DirectionalLight(0xFFDFA8, 1.15);
+  sun.position.set(30, 42, 18);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.camera.left = -60; sun.shadow.camera.right = 60;
+  sun.shadow.camera.top = 60; sun.shadow.camera.bottom = -60;
+  sun.shadow.camera.far = 150;
+  scene.add(sun);
+
+  // ground
+  var groundGeo = new THREE.CircleGeometry(90, 64);
+  var groundMat = new THREE.MeshStandardMaterial({color:0x6E9A5E, roughness:1});
+  var ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI/2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // winding path connecting the stations, drawn as a flattened tube-ish ribbon
+  function makePath(points, width, color){
+    var shapePts = [];
+    for (var i=0;i<points.length;i++){
+      var p0 = points[i];
+      var p1 = points[(i+1)%points.length];
+      var dir = new THREE.Vector2(p1[0]-p0[0], p1[1]-p0[1]).normalize();
+      var normal = new THREE.Vector2(-dir.y, dir.x).multiplyScalar(width/2);
+      shapePts.push([p0[0]+normal.x, p0[1]+normal.y]);
+    }
+    var geo = new THREE.BufferGeometry();
+    var verts = [];
+    for (var j=0;j<points.length;j++){
+      var a = points[j], b = points[(j+1)%points.length];
+      var dir2 = new THREE.Vector2(b[0]-a[0], b[1]-a[1]).normalize();
+      var n = new THREE.Vector2(-dir2.y, dir2.x).multiplyScalar(width/2);
+      var a1=[a[0]+n.x,a[1]+n.y], a2=[a[0]-n.x,a[1]-n.y];
+      var b1=[b[0]+n.x,b[1]+n.y], b2=[b[0]-n.x,b[1]-n.y];
+      verts.push(a1[0],0.02,a1[1],  b1[0],0.02,b1[1],  a2[0],0.02,a2[1]);
+      verts.push(b1[0],0.02,b1[1],  b2[0],0.02,b2[1],  a2[0],0.02,a2[1]);
+    }
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(verts,3));
+    geo.computeVertexNormals();
+    var mat = new THREE.MeshStandardMaterial({color:color, roughness:0.95});
+    var mesh = new THREE.Mesh(geo, mat);
+    mesh.receiveShadow = true;
+    return mesh;
+  }
+
+  var stationPositions = {
+    welcome: [0, 0],
+    care:    [26, -14],
+    services:[36, 12],
+    life:    [18, 24],
+    team:    [-24, 16],
+    testimonials: [-36, -6],
+    tour:    [-16, -26],
+    faq:     [10, -36]
+  };
+  var loopPts = [ [0,-8], stationPositions.care, stationPositions.services, [30,20], stationPositions.life, [0,18], stationPositions.team, stationPositions.testimonials, [-24,-18], stationPositions.tour, stationPositions.faq, [-4,-20] ];
+  scene.add(makePath(loopPts, 5, 0xD9B98A));
+
+  // low-poly trees
+  function makeTree(x,z,scale){
+    var g = new THREE.Group();
+    var trunk = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18,0.24,1.4,6),
+      new THREE.MeshStandardMaterial({color:0x6B4A2E, roughness:1})
+    );
+    trunk.position.y = 0.7; trunk.castShadow = true;
+    g.add(trunk);
+    var leafColors = [0xC9772E, 0xE0A23B, 0x8FAE45, 0xB85C2E];
+    var leaf = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.15, 0),
+      new THREE.MeshStandardMaterial({color: leafColors[Math.floor(Math.random()*leafColors.length)], roughness:0.9, flatShading:true})
+    );
+    leaf.position.y = 2.05; leaf.castShadow = true; leaf.scale.y = 0.85;
+    g.add(leaf);
+    g.position.set(x,0,z);
+    g.scale.setScalar(scale);
+    return g;
+  }
+  var treeGroup = new THREE.Group();
+  for (var t=0;t<46;t++){
+    var ang = Math.random()*Math.PI*2, rad = 32 + Math.random()*46;
+    var tx = Math.cos(ang)*rad, tz = Math.sin(ang)*rad;
+    var tooClose = false;
+    for (var key in stationPositions){
+      var sp = stationPositions[key];
+      if (Math.hypot(tx-sp[0], tz-sp[1]) < 10) tooClose = true;
+    }
+    if (Math.hypot(tx,tz) < 14) tooClose = true;
+    if (tooClose) { t--; continue; }
+    treeGroup.add(makeTree(tx,tz, 0.8+Math.random()*0.7));
+  }
+  scene.add(treeGroup);
+
+  // buildings
+  function makeBuilding(color, roofColor, w,h,d){
+    var g = new THREE.Group();
+    var body = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), new THREE.MeshStandardMaterial({color:color, roughness:0.85}));
+    body.position.y = h/2; body.castShadow = true; body.receiveShadow = true;
+    g.add(body);
+    var roof = new THREE.Mesh(new THREE.ConeGeometry(w*0.8, h*0.6, 4), new THREE.MeshStandardMaterial({color:roofColor, roughness:0.7, flatShading:true}));
+    roof.position.y = h + (h*0.3); roof.rotation.y = Math.PI/4; roof.castShadow = true;
+    g.add(roof);
+    return g;
+  }
+  var buildingDefs = {
+    welcome: {color:0xFAF6ED, roof:0x2E5240, w:6,h:4,d:6},
+    care:    {color:0xF3E2C4, roof:0xC9772E, w:5.5,h:3.6,d:5},
+    services:{color:0xF6ECD9, roof:0xC9772E, w:5.2,h:3.5,d:5},
+    life:    {color:0xEAD3A0, roof:0x9B5A1C, w:5,h:3.4,d:5},
+    team:    {color:0xF6ECD9, roof:0x2E5240, w:5,h:3.4,d:5},
+    testimonials: {color:0xFAF6ED, roof:0xC9772E, w:5,h:3.4,d:5},
+    tour:    {color:0xFAF6ED, roof:0xC9772E, w:4.6,h:3.2,d:4.6},
+    faq:     {color:0xF3E2C4, roof:0x2E5240, w:4.8,h:3.3,d:4.8}
+  };
+  var buildingMeshes = {};
+  for (var key2 in stationPositions){
+    var def = buildingDefs[key2];
+    var b = makeBuilding(def.color, def.roof, def.w, def.h, def.d);
+    b.position.set(stationPositions[key2][0], 0, stationPositions[key2][1]);
+    scene.add(b);
+    buildingMeshes[key2] = b;
+  }
+
+  // signposts (simple thin box + sprite label via canvas texture)
+  function makeLabelSprite(text){
+    var canvas = document.createElement('canvas');
+    canvas.width = 512; canvas.height = 128;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(250,246,237,0.94)';
+    roundRect(ctx, 8,8,496,112,28); ctx.fill();
+    ctx.strokeStyle = 'rgba(201,119,46,0.9)'; ctx.lineWidth = 5;
+    roundRect(ctx, 8,8,496,112,28); ctx.stroke();
+    ctx.fillStyle = '#1F3A2E';
+    ctx.font = 'bold 46px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 256, 66);
+    var tex = new THREE.CanvasTexture(canvas);
+    var mat = new THREE.SpriteMaterial({map:tex, transparent:true});
+    var spr = new THREE.Sprite(mat);
+    spr.scale.set(5.2, 1.3, 1);
+    return spr;
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+  var labelText = {welcome:'Welcome Home', care:'Care Support', services:'Plan Your Visit', life:'Life & Gardens', team:'Meet the Team', testimonials:'Family Stories', tour:'Schedule a Tour', faq:'FAQ'};
+  var guideLines = {
+    welcome: "Hi, I'm Sophie! Hop in and I'll show you around Autumn Hill Manor.",
+    care: "Next up, let me show you how our caregivers support residents around the clock.",
+    services: "This way — grab our brochure or this week's menu.",
+    life: "Follow me for a peek into everyday life here on the grounds.",
+    team: "Let's go meet the wonderful team who make this feel like home.",
+    testimonials: "Just ahead — hear what families just like yours have to say.",
+    tour: "Ready to visit in person? I'll help you get a tour scheduled.",
+    faq: "Almost there — let's cover the questions families ask most."
+  };
+  for (var key3 in stationPositions){
+    var spr = makeLabelSprite(labelText[key3]);
+    spr.position.set(stationPositions[key3][0], buildingDefs[key3].h + 2.6, stationPositions[key3][1]);
+    scene.add(spr);
+  }
+
+  // falling autumn leaves (instanced)
+  var LEAF_COUNT = 140;
+  var leafGeo = new THREE.PlaneGeometry(0.28,0.28);
+  var leafMat = new THREE.MeshBasicMaterial({color:0xD98D3E, side:THREE.DoubleSide, transparent:true, opacity:0.9});
+  var leaves = new THREE.InstancedMesh(leafGeo, leafMat, LEAF_COUNT);
+  var leafData = [];
+  var dummy = new THREE.Object3D();
+  for (var l=0;l<LEAF_COUNT;l++){
+    var lx = (Math.random()-0.5)*140, ly = Math.random()*22, lz=(Math.random()-0.5)*140;
+    leafData.push({x:lx,y:ly,z:lz, spin:Math.random()*Math.PI*2, speed:0.4+Math.random()*0.5, sway:1+Math.random()*2, phase:Math.random()*Math.PI*2});
+  }
+  scene.add(leaves);
+
+  // ───────────────────────────── cart ─────────────────────────────
+  var cart = new THREE.Group();
+  var chassisMat = new THREE.MeshStandardMaterial({color:0x2E5240, roughness:0.55, metalness:0.15});
+  var chassis = new THREE.Mesh(new THREE.BoxGeometry(1.5,0.6,2.6), chassisMat);
+  chassis.position.y = 0.55; chassis.castShadow = true;
+  cart.add(chassis);
+  var canopyPost = new THREE.MeshStandardMaterial({color:0xC9772E});
+  [[-0.6,-0.9],[0.6,-0.9],[-0.6,0.9],[0.6,0.9]].forEach(function(p){
+    var post = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.1,6), canopyPost);
+    post.position.set(p[0], 1.35, p[1]); post.castShadow = true;
+    cart.add(post);
+  });
+  var roofMesh = new THREE.Mesh(new THREE.BoxGeometry(1.7,0.1,3.0), new THREE.MeshStandardMaterial({color:0xFAF6ED, roughness:0.6}));
+  roofMesh.position.y = 1.95; roofMesh.castShadow = true;
+  cart.add(roofMesh);
+  var wheelGeo = new THREE.CylinderGeometry(0.32,0.32,0.28,14);
+  var wheelMat = new THREE.MeshStandardMaterial({color:0x2b2b2b, roughness:0.9});
+  var wheels = [];
+  [[-0.82,0.35,0.85],[0.82,0.35,0.85],[-0.82,0.35,-0.85],[0.82,0.35,-0.85]].forEach(function(p){
+    var wheel = new THREE.Mesh(wheelGeo, wheelMat);
+    wheel.rotation.z = Math.PI/2;
+    wheel.position.set(p[0],p[1],p[2]);
+    wheel.castShadow = true;
+    cart.add(wheel);
+    wheels.push(wheel);
+  });
+  // ── tour guide character (a girl, seated in the cart) ──
+  var guideGroup = new THREE.Group();
+  var skinMat = new THREE.MeshStandardMaterial({color:0xF3D9BE, roughness:0.6});
+  var hairMat = new THREE.MeshStandardMaterial({color:0x3B2416, roughness:0.7});
+  var dressMat = new THREE.MeshStandardMaterial({color:0xC9772E, roughness:0.55});
+  var torsoGuide = new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.26,0.5,10), dressMat);
+  torsoGuide.position.set(0, 1.0, 0.1); torsoGuide.castShadow = true;
+  guideGroup.add(torsoGuide);
+  var headGuide = new THREE.Mesh(new THREE.SphereGeometry(0.16,16,16), skinMat);
+  headGuide.position.set(0, 1.42, 0.1); headGuide.castShadow = true;
+  guideGroup.add(headGuide);
+  var hairCap = new THREE.Mesh(new THREE.SphereGeometry(0.175,16,16,0,Math.PI*2,0,Math.PI*0.6), hairMat);
+  hairCap.position.set(0, 1.47, 0.1);
+  guideGroup.add(hairCap);
+  var ponytail = new THREE.Mesh(new THREE.ConeGeometry(0.055,0.3,8), hairMat);
+  ponytail.position.set(0, 1.35, -0.08); ponytail.rotation.x = Math.PI*0.42;
+  guideGroup.add(ponytail);
+  [[-0.24,0.98,0.22],[0.24,0.98,0.22]].forEach(function(p){
+    var armGuide = new THREE.Mesh(new THREE.CylinderGeometry(0.045,0.045,0.4,8), dressMat);
+    armGuide.position.set(p[0],p[1],p[2]); armGuide.rotation.x = -0.5;
+    armGuide.castShadow = true;
+    guideGroup.add(armGuide);
+  });
+  guideGroup.position.set(-0.35, 0, 0.15);
+  cart.add(guideGroup);
+
+  cart.position.set(0,0,-8);
+  scene.add(cart);
+
+  // ───────────────────────────── input (autopilot — no user controls) ─────────────────────────────
+  var input = {fwd:0, turn:0};
+
+  // ───────────────────────────── physics ─────────────────────────────
+  var speed = 0, heading = Math.PI;
+  var MAX_SPEED = 9, ACCEL = 10, FRICTION = 6, TURN_RATE = 2.0;
+  var WORLD_LIMIT = 84;
+
+  var nearStation = null;
+  var visited = {welcome:false, care:false, services:false, life:false, team:false, testimonials:false, tour:false, faq:false};
+  var stationOrder = ['welcome','care','services','life','team','testimonials','tour','faq'];
+  var autoOpenLock = {welcome:false, care:false, services:false, life:false, team:false, testimonials:false, tour:false, faq:false};
+  var autopilotIndex = 0;
+
+  function normalizeAngle(a){
+    while (a > Math.PI) a -= Math.PI*2;
+    while (a < -Math.PI) a += Math.PI*2;
+    return a;
+  }
+
+  function updateAutopilot(){
+    var targetKey = stationOrder[autopilotIndex % stationOrder.length];
+    var sp = stationPositions[targetKey];
+    var dx = sp[0] - cart.position.x;
+    var dz = sp[1] - cart.position.z;
+    var dist = Math.hypot(dx, dz);
+    var angleToTarget = Math.atan2(dx, dz);
+    var diff = normalizeAngle(angleToTarget - heading);
+
+    input.turn = Math.max(-1, Math.min(1, diff * 1.4));
+    var slowRadius = 14;
+    var speedTarget = Math.max(0.32, Math.min(1, dist / slowRadius));
+    // ease off turning sharpness at low speed so it doesn't spin in place
+    input.fwd = speedTarget;
+  }
+
+  function getCompassTarget(){
+    // prefer nearest unvisited station; once all visited, cycle to nearest overall
+    var best = null, bestDist = Infinity, anyUnvisited = false;
+    for (var i=0;i<stationOrder.length;i++){
+      var k = stationOrder[i];
+      if (!visited[k]){
+        anyUnvisited = true;
+        var sp = stationPositions[k];
+        var d = Math.hypot(cart.position.x-sp[0], cart.position.z-sp[1]);
+        if (d < bestDist){ bestDist = d; best = k; }
+      }
+    }
+    if (!anyUnvisited){
+      for (var j=0;j<stationOrder.length;j++){
+        var k2 = stationOrder[j];
+        var sp2 = stationPositions[k2];
+        var d2 = Math.hypot(cart.position.x-sp2[0], cart.position.z-sp2[1]);
+        if (d2 < bestDist){ bestDist = d2; best = k2; }
+      }
+    }
+    return {key:best, dist:bestDist};
+  }
+
+  var compassArrow = document.getElementById('compassArrow');
+  var compassLabel = document.getElementById('compassLabel');
+  function updateCompass(){
+    var target = getCompassTarget();
+    if (!target.key) return;
+    var sp = stationPositions[target.key];
+    var dx = sp[0] - cart.position.x;
+    var dz = sp[1] - cart.position.z;
+    var angleToTarget = Math.atan2(dx, dz);
+    var relative = angleToTarget - heading;
+    var deg = relative * 180/Math.PI;
+    compassArrow.style.transform = 'rotate(' + deg + 'deg)';
+    var distText = Math.round(target.dist) + 'm';
+    compassLabel.textContent = (visited[target.key] ? 'Revisit ' : 'Next: ') + labelText[target.key] + ' · ' + distText;
+    var gt = document.getElementById('guideText');
+    if (gt && guideLines[target.key]) gt.textContent = guideLines[target.key];
+  }
+
+  function updateCart(dt){
+    var targetSpeed = input.fwd * MAX_SPEED;
+    if (Math.abs(input.fwd) > 0.01){
+      speed += (targetSpeed - speed) * Math.min(1, ACCEL*dt/MAX_SPEED*4);
+    } else {
+      speed -= Math.sign(speed) * FRICTION * dt;
+      if (Math.abs(speed) < 0.05) speed = 0;
+    }
+    speed = Math.max(-MAX_SPEED*0.5, Math.min(MAX_SPEED, speed));
+
+    var speedFactor = Math.min(1, Math.abs(speed)/3);
+    heading += input.turn * TURN_RATE * dt * (0.3 + 0.7*speedFactor) * (speed<0?-1:1);
+
+    var vx = Math.sin(heading) * speed * dt;
+    var vz = Math.cos(heading) * speed * dt;
+    var nx = cart.position.x + vx;
+    var nz = cart.position.z + vz;
+    var distFromCenter = Math.hypot(nx,nz);
+    if (distFromCenter > WORLD_LIMIT){
+      var ang = Math.atan2(nz,nx);
+      nx = Math.cos(ang)*WORLD_LIMIT; nz = Math.sin(ang)*WORLD_LIMIT;
+      speed *= 0.5;
+    }
+    cart.position.x = nx; cart.position.z = nz;
+    cart.rotation.y = heading;
+
+    wheels.forEach(function(w){ w.rotation.x -= speed*dt*2.2; });
+
+    // proximity check
+    var AUTO_OPEN_DIST = 4;
+    var closest = null, closestDist = 6.2, closestExact = Infinity;
+    for (var k in stationPositions){
+      var sp = stationPositions[k];
+      var d = Math.hypot(cart.position.x-sp[0], cart.position.z-sp[1]);
+      if (d < closestDist){ closest = k; closestDist = d; closestExact = d; }
+      // reset the auto-open lock once we've driven back out past the trigger ring
+      if (d > AUTO_OPEN_DIST + 2 && autoOpenLock[k]) autoOpenLock[k] = false;
+    }
+    nearStation = closest;
+    var bubble = document.getElementById('promptBubble');
+    if (closest){
+      bubble.textContent = 'Arriving at ' + labelText[closest] + '...';
+      bubble.classList.add('show');
+      if (closestExact <= AUTO_OPEN_DIST && !autoOpenLock[closest] && !overlay.classList.contains('open')){
+        autoOpenLock[closest] = true;
+        var idx = stationOrder.indexOf(closest);
+        if (idx !== -1) autopilotIndex = (idx + 1) % stationOrder.length;
+        openPanel(closest);
+      }
+    } else {
+      bubble.classList.remove('show');
+    }
+  }
+
+  // camera follow
+  var camHeight = 4.4, camDist = 8.5;
+  function updateCamera(dt){
+    var forwardDir = new THREE.Vector3(Math.sin(heading), 0, Math.cos(heading));
+    var desired = new THREE.Vector3(
+      cart.position.x - forwardDir.x * camDist,
+      camHeight,
+      cart.position.z - forwardDir.z * camDist
+    );
+    camera.position.lerp(desired, Math.min(1, dt*4));
+    var lookTarget = new THREE.Vector3(
+      cart.position.x + forwardDir.x * 2,
+      1.2,
+      cart.position.z + forwardDir.z * 2
+    );
+    camera.lookAt(lookTarget);
+  }
+
+  // minimap
+  var mm = document.getElementById('minimap').getContext('2d');
+  function drawMinimap(){
+    mm.clearRect(0,0,118,118);
+    mm.save();
+    mm.translate(59,59);
+    var scale = 0.5;
+    mm.fillStyle = 'rgba(46,82,64,0.25)';
+    mm.beginPath(); mm.arc(0,0,55,0,Math.PI*2); mm.fill();
+    for (var k in stationPositions){
+      var sp = stationPositions[k];
+      mm.fillStyle = visited[k] ? '#2E5240' : '#C9772E';
+      mm.beginPath(); mm.arc(sp[0]*scale, sp[1]*scale, 4, 0, Math.PI*2); mm.fill();
+      if (visited[k]){
+        mm.strokeStyle = 'rgba(255,255,255,0.8)'; mm.lineWidth = 1.5;
+        mm.beginPath(); mm.arc(sp[0]*scale, sp[1]*scale, 6, 0, Math.PI*2); mm.stroke();
+      }
+    }
+    mm.fillStyle = '#1F3A2E';
+    mm.save();
+    mm.translate(cart.position.x*scale, cart.position.z*scale);
+    mm.rotate(heading);
+    mm.beginPath();
+    mm.moveTo(0,-6); mm.lineTo(4,5); mm.lineTo(-4,5); mm.closePath(); mm.fill();
+    mm.restore();
+    mm.restore();
+  }
+
+  // panel logic
+  var overlay = document.getElementById('overlay');
+  var panelBody = document.getElementById('panelBody');
+  var panelGuideLines = {
+    welcome: "Welcome! I'm so glad you stopped by. 😊",
+    care: "Our caregivers are here day and night — just like family.",
+    services: "Grab the brochure — it's got everything in one place!",
+    life: "This is what a normal day looks like around here!",
+    team: "These are the faces you'll see every single day.",
+    testimonials: "I love hearing these stories — read a few!",
+    tour: "I'd love to show you around in person!",
+    faq: "Great questions deserve honest answers."
+  };
+  function openPanel(key){
+    var c = STATIONS_CONTENT[key];
+    var headerHtml = c.title ? ("<div class='eyebrow'>"+c.eyebrow+"</div><h2>"+c.title+"</h2>") : "";
+    panelBody.innerHTML = headerHtml + c.html;
+    if (key === 'care') careClickMode = false;
+    var pgb = document.getElementById('panelGuideBubble');
+    if (pgb) pgb.textContent = panelGuideLines[key] || "Here's what I wanted to show you!";
+    overlay.classList.add('open');
+    visited[key] = true;
+    input.fwd = 0; input.turn = 0;
+    setTimeout(function(){
+      Array.prototype.forEach.call(panelBody.querySelectorAll("[data-back]"), function(btn){
+        btn.addEventListener('click', function(e){ e.preventDefault(); closePanel(); });
+      });
+      Array.prototype.forEach.call(panelBody.querySelectorAll("[data-resource]"), function(card){
+        card.addEventListener('click', function(e){
+          e.preventDefault();
+          var rect = card.getBoundingClientRect();
+          var size = Math.max(rect.width, rect.height);
+          var x = (e.clientX || rect.left + rect.width/2) - rect.left - size/2;
+          var y = (e.clientY || rect.top + rect.height/2) - rect.top - size/2;
+          var ripple = document.createElement('span');
+          ripple.className = 'rc-ripple';
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          card.appendChild(ripple);
+          ripple.addEventListener('animationend', function(){ ripple.remove(); });
+        });
+      });
+    },0);
+  }
+  function closePanel(){ overlay.classList.remove('open'); }
+  document.getElementById('closePanel').addEventListener('click', closePanel);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closePanel(); });
+
+  // ───────────────────────────── loop ─────────────────────────────
+  var clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    var dt = Math.min(0.05, clock.getDelta());
+    updateAutopilot();
+    if (!overlay.classList.contains('open')){
+      updateCart(dt);
+    }
+    updateCamera(dt);
+    updateCompass();
+    drawMinimap();
+
+    var t = clock.elapsedTime;
+    for (var i=0;i<LEAF_COUNT;i++){
+      var d = leafData[i];
+      d.y -= d.speed*dt*2;
+      if (d.y < 0){ d.y = 20 + Math.random()*4; d.x = (Math.random()-0.5)*140; d.z = (Math.random()-0.5)*140; }
+      var sway = Math.sin(t*0.6 + d.phase) * d.sway;
+      dummy.position.set(d.x+sway, d.y, d.z);
+      dummy.rotation.set(t*d.speed, d.spin + t*0.5, t*0.3);
+      dummy.scale.setScalar(1);
+      dummy.updateMatrix();
+      leaves.setMatrixAt(i, dummy.matrix);
+    }
+    leaves.instanceMatrix.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+
+  // fake loading progress then start
+  var fill = document.getElementById('loadFill');
+  var pct = 0;
+  var loadTimer = setInterval(function(){
+    pct += 8 + Math.random()*14;
+    if (pct >= 100){
+      pct = 100;
+      clearInterval(loadTimer);
+      setTimeout(function(){
+        document.getElementById('loadScreen').classList.add('hidden');
+        animate();
+      }, 260);
+    }
+    fill.style.width = pct + '%';
+  }, 120);
+
+})();
+</script>
+</body>
+</html>
