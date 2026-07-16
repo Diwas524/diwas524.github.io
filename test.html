@@ -639,7 +639,7 @@
   var MAX_DPR = Math.min(window.devicePixelRatio || 1, IS_MOBILE ? 1.5 : 2.5);
   renderer.setPixelRatio(MAX_DPR);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = false; // disabled entirely for speed — skips shadow map render pass and all per-object shadow costs
   renderer.shadowMap.type = IS_MOBILE ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -732,7 +732,7 @@
   var sun = new THREE.DirectionalLight(0xEDF0E6, 1.0);
   sun.position.set(30, 42, 18);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(IS_MOBILE ? 1536 : 4096, IS_MOBILE ? 1536 : 4096);
+  sun.shadow.mapSize.set(IS_MOBILE ? 1536 : 2560, IS_MOBILE ? 1536 : 2560);
   sun.shadow.camera.left = -60; sun.shadow.camera.right = 60;
   sun.shadow.camera.top = 60; sun.shadow.camera.bottom = -60;
   sun.shadow.camera.far = 150;
@@ -1680,7 +1680,7 @@
   var treeGroup = new THREE.Group();
   var ROAD_CLEAR = ROAD_W/2 + CURB_W + WALK_W + 1.4;
   var FOREST_OUT_R = 92; // pushed out from 88 so the hand-built (fully detailed) treeline runs deeper before the cheap backdrop layer takes over
-  var TREE_COUNT = IS_MOBILE ? 480 : 1250; // thick old-growth wall — up from 340/900
+  var TREE_COUNT = IS_MOBILE ? 480 : 500; // reduced from 1250 for desktop render speed — each tree is several uninstanced meshes with shadows, so count drives frame time directly
   for (var t=0;t<TREE_COUNT;t++){
     var ang = Math.random()*Math.PI*2, rad = 30 + Math.random()*(FOREST_OUT_R-30);
     var tx = Math.cos(ang)*rad, tz = Math.sin(ang)*rad;
