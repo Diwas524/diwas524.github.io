@@ -10,8 +10,8 @@
     --forest:#2E5240;
     --cream:#FAF6ED;
     --tan:#EAD3A0;
-    --clay:#C9772E;
-    --clay-dark:#9B5A1C;
+    --clay:#3D8B63;
+    --clay-dark:#1E4A34;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;height:100%;overflow:hidden;font-family:'Georgia',serif;background:linear-gradient(180deg,#F6D9A8 0%,#F0B87C 35%,#D98D5C 65%,#8FAE7A 100%);}
@@ -46,21 +46,6 @@
   #brand .name{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;letter-spacing:.01em;}
   #brand .sub{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9;margin-top:2px;}
 
-  #dayNightToggle{
-    position:absolute; top:16px; left:50%; transform:translateX(-50%);
-    display:flex; gap:2px; pointer-events:auto;
-    background:rgba(255,253,247,0.5); backdrop-filter:blur(14px) saturate(180%);
-    -webkit-backdrop-filter:blur(14px) saturate(180%);
-    border:1px solid rgba(255,255,255,0.6); border-radius:100px; padding:4px;
-    box-shadow:0 8px 24px rgba(11,92,86,0.15);
-  }
-  .dnBtn{
-    font-family:Georgia,serif; font-size:.75rem; font-weight:700; letter-spacing:.02em;
-    border:none; border-radius:100px; padding:7px 14px; cursor:pointer;
-    background:transparent; color:var(--forest-dark); transition:background .25s ease, color .25s ease;
-  }
-  .dnBtn.active{background:linear-gradient(160deg,#C9772E,#9B5A1C); color:#fff; box-shadow:0 4px 12px rgba(201,119,46,0.4);}
-
   #hint{
     position:absolute; top:16px; right:16px; max-width:190px;
     background:rgba(255,253,247,0.5); backdrop-filter:blur(14px) saturate(180%);
@@ -71,11 +56,6 @@
   }
   #hint b{color:var(--clay-dark);}
 
-  @media (max-width:520px){
-    #dayNightToggle{top:auto; bottom:18px; left:16px; transform:none;}
-    .dnBtn{padding:6px 11px; font-size:.68rem;}
-  }
-
   #minimap{
     position:absolute; bottom:18px; right:18px; width:118px;height:118px;border-radius:50%;
     background:rgba(250,246,237,0.55); backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -84,9 +64,9 @@
 
   #promptBubble{
     position:absolute; left:50%; bottom:22%; transform:translateX(-50%) translateY(10px);
-    background:linear-gradient(160deg,#C9772E,#9B5A1C); color:#fff;
+    background:linear-gradient(160deg,#3D8B63,#1E4A34); color:#fff;
     padding:10px 20px; border-radius:100px; font-size:.85rem; font-weight:600;
-    letter-spacing:.02em; box-shadow:0 8px 22px rgba(201,119,46,0.45);
+    letter-spacing:.02em; box-shadow:0 8px 22px rgba(61,139,99,0.45);
     opacity:0; transition:opacity .25s ease, transform .25s ease; pointer-events:none;
     white-space:nowrap;
   }
@@ -105,20 +85,9 @@
     display:flex; gap:16px; align-items:flex-start;
   }
   #overlay.open #panel{transform:translateY(0);}
-  #panelGuide{flex:none; width:96px; display:flex; flex-direction:column; align-items:center; padding-top:4px;}
-  #panelGuide svg{width:88px;height:auto; filter:drop-shadow(0 8px 16px rgba(0,0,0,.18));}
-  #panelGuide .pg-name{font-size:.64rem; font-weight:700; color:var(--clay-dark); text-transform:uppercase; letter-spacing:.03em; margin-top:6px; text-align:center;}
-  #panelGuide .pg-bubble{
-    margin-top:8px; background:rgba(201,119,46,0.1); border:1px solid rgba(201,119,46,0.22);
-    border-radius:14px; padding:8px 9px; font-size:.66rem; line-height:1.4; color:var(--forest-dark); text-align:center;
-  }
   #panelBody{flex:1; min-width:0;}
   @media (max-width:600px){
     #panel{flex-direction:column; align-items:center; text-align:left;}
-    #panelGuide{flex-direction:row; width:auto; gap:10px; padding-top:0; margin-bottom:8px; align-items:center;}
-    #panelGuide svg{width:56px;}
-    #panelGuide .pg-name{margin-top:0;}
-    #panelGuide .pg-bubble{display:none;}
     #panelBody{width:100%;}
   }
   #panel .eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-dark);font-weight:700;margin-bottom:6px;}
@@ -128,10 +97,12 @@
   #panel .cta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
   #panel .btn{
     display:inline-block; padding:11px 22px; border-radius:100px; font-size:.82rem; font-weight:700;
-    text-decoration:none; letter-spacing:.02em;
+    text-decoration:none; letter-spacing:.02em; transition:transform .2s ease, box-shadow .2s ease;
   }
-  #panel .btn.primary{background:linear-gradient(160deg,#C9772E,#9B5A1C); color:#fff; box-shadow:0 6px 18px rgba(201,119,46,0.4);}
-  #panel .btn.secondary{background:transparent; color:var(--forest-dark); border:1.5px solid rgba(31,58,46,0.3);}
+  #panel .btn.primary{background:linear-gradient(160deg,#4A9E72,#1E4A34); color:#fff; box-shadow:0 8px 20px rgba(30,74,52,0.4);}
+  #panel .btn.primary:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(30,74,52,0.48);}
+  #panel .btn.secondary{background:rgba(46,82,64,0.05); color:var(--forest-dark); border:1.5px solid rgba(46,82,64,0.3);}
+  #panel .btn.secondary:hover{background:rgba(46,82,64,0.1); border-color:rgba(46,82,64,0.5);}
   @keyframes foodMarqueeScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
   .food-marquee-sub{ margin-top:26px; }
   .food-marquee-header{ text-align:center; max-width:520px; margin:0 auto 18px; }
@@ -241,7 +212,7 @@
 
   /* services */
   .mini-services{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
-  .mini-service-item{padding:12px 13px; border-radius:14px; background:rgba(201,119,46,0.06);}
+  .mini-service-item{padding:12px 13px; border-radius:14px; background:rgba(61,139,99,0.06);}
   .mini-service-item h4{margin:0 0 2px; font-family:'Playfair Display',Georgia,serif; color:var(--forest-dark); font-size:.92rem;}
   .mini-service-sub{color:var(--clay-dark); font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; margin-bottom:5px;}
   .mini-service-item p{margin:0; font-size:.78rem; line-height:1.5; color:#5c6b5f;}
@@ -263,23 +234,19 @@
   .mini-contact a, .mini-contact b{color:var(--forest-dark); font-weight:700; text-decoration:none;}
 
   /* welcome hero content in panel */
-  .welcome-badge{display:inline-flex; align-items:center; gap:7px; padding:6px 14px; border-radius:100px; background:rgba(46,82,64,0.08); border:1px solid rgba(46,82,64,0.18); font-size:.66rem; font-weight:700; color:var(--forest-dark); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;}
-  .welcome-badge .dot{width:7px;height:7px;border-radius:50%;background:#4CAF6C;box-shadow:0 0 0 3px rgba(76,175,108,0.25);}
-  .welcome-accent{display:block; font-family:'Playfair Display',Georgia,serif; font-style:italic; color:var(--clay-dark); font-size:1.2rem; margin-top:2px;}
+  .welcome-badge{display:inline-flex; align-items:center; gap:7px; padding:7px 15px; border-radius:100px; background:linear-gradient(135deg, rgba(61,139,99,0.14), rgba(46,82,64,0.08)); border:1px solid rgba(61,139,99,0.28); box-shadow:0 3px 10px rgba(31,58,46,0.08); font-size:.66rem; font-weight:700; color:var(--forest-dark); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;}
+  .welcome-badge .dot{width:7px;height:7px;border-radius:50%;background:#3D8B63;box-shadow:0 0 0 3px rgba(61,139,99,0.25);}
+  .welcome-accent{display:block; font-family:'Playfair Display',Georgia,serif; font-style:italic; background:linear-gradient(120deg,#3D8B63,#1E4A34); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:1.22rem; margin-top:2px;}
   .stat-pills{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:16px 0 18px;}
-  .stat-pill{display:flex; align-items:center; gap:9px; padding:10px 12px; border-radius:14px; background:rgba(201,119,46,0.07); border:1px solid rgba(201,119,46,0.15);}
-  .stat-pill .icon{flex:none; width:30px;height:30px;border-radius:50%; background:rgba(201,119,46,0.16); display:flex;align-items:center;justify-content:center; font-size:.85rem;}
+  .stat-pill{display:flex; align-items:center; gap:9px; padding:10px 12px; border-radius:14px; background:linear-gradient(135deg, rgba(61,139,99,0.09), rgba(46,82,64,0.03)); border:1px solid rgba(61,139,99,0.18); box-shadow:0 2px 8px rgba(31,58,46,0.05); transition:transform .2s ease, box-shadow .2s ease;}
+  .stat-pill:hover{transform:translateY(-1px); box-shadow:0 5px 14px rgba(31,58,46,0.1);}
+  .stat-pill .icon{flex:none; width:30px;height:30px;border-radius:50%; background:linear-gradient(160deg, rgba(61,139,99,0.22), rgba(46,82,64,0.14)); display:flex;align-items:center;justify-content:center; font-size:.85rem;}
   .stat-pill .num{display:block; font-family:'Playfair Display',Georgia,serif; font-weight:700; color:var(--clay-dark); font-size:.92rem; line-height:1.2;}
   .stat-pill .lbl{display:block; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:#5c6b5f; line-height:1.3;}
   @media (max-width:420px){ .stat-pills{grid-template-columns:1fr;} }
 
-  /* tour guide HUD widget */
-  .guide-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
-  #guideAvatar{flex:none; width:32px;height:32px;border-radius:50%; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,.25); background:#F3D9BE;}
-  #guideAvatar svg{width:100%;height:100%;display:block;}
-  .guide-name{font-size:.74rem; font-weight:700; color:var(--forest-dark); line-height:1.15;}
-  .guide-name span{display:block; font-size:.58rem; font-weight:600; color:var(--clay-dark); text-transform:uppercase; letter-spacing:.03em;}
-  #guideText{font-size:.72rem; color:var(--forest-dark); line-height:1.4;}
+  /* HUD status hint */
+  #hintText{font-size:.72rem; color:var(--forest-dark); line-height:1.4;}
 
   @media (max-width:820px){
     #hint{font-size:.68rem; max-width:150px;}
@@ -297,7 +264,7 @@
   <h1>Autumn Hill Manor</h1>
   <p>Hop in &amp; explore the grounds</p>
   <div class="loadbar"><div class="loadbar-fill" id="loadFill"></div></div>
-  <p style="text-transform:none;letter-spacing:0;font-size:.82rem;margin-top:18px;opacity:.85;">👋 Sophie, your tour guide, is warming up the cart…</p>
+  <p style="text-transform:none;letter-spacing:0;font-size:.82rem;margin-top:18px;opacity:.85;">🚗 Getting the cart ready for your tour…</p>
 </div>
 
 <div id="canvasHost"></div>
@@ -308,32 +275,8 @@
     <div class="name">Autumn Hill Manor</div>
     <div class="sub">Weatherford, TX</div>
   </div>
-  <div id="dayNightToggle">
-    <button id="dayBtn" class="dnBtn active" type="button">☀ Day</button>
-    <button id="nightBtn" class="dnBtn" type="button">☾ Night</button>
-  </div>
   <div id="hint">
-    <div class="guide-row">
-      <div id="guideAvatar">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 100c2-20 15-30 44-30s42 10 44 30z" fill="#C9772E"/>
-          <rect x="42" y="60" width="16" height="18" rx="6" fill="#F3D9BE"/>
-          <path d="M18 42c0-19 12-32 32-32s32 13 32 32c0 7-1 13-4 18-1-9-4-15-9-15 2 5 0 8-4 7-8-2-13 1-18 6-3 3-4 7-4 11-5-4-8-10-8-16-4 3-7 0-9-11-3 4-6 4-8 0z" fill="#3B2416"/>
-          <circle cx="50" cy="46" r="24" fill="#F3D9BE"/>
-          <path d="M22 43c2-15 12-23 24-23s21 8 23 23c-4-5-9-8-15-6 1-4-2-5-5-3-6 3-12 2-16-2-2 3-2 7-1 10-5-1-8 1-10 1z" fill="#3B2416"/>
-          <path d="M32 40c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M53 39c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="38" cy="46" r="3.2" fill="#3B2416"/>
-          <circle cx="39" cy="45" r="1" fill="#fff"/>
-          <path d="M55 46c2 2 6 2 8 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="34" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-          <circle cx="61" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-          <path d="M38 58c4 4 15 4 19 0" stroke="#9B5A1C" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="guide-name">Sophie<span>Your Tour Guide</span></div>
-    </div>
-    <div id="guideText">Sit back and relax — I'll drive you around the grounds.</div>
+    <div id="hintText">Sit back and relax — enjoy the tour of the grounds.</div>
   </div>
   <canvas id="minimap" width="118" height="118"></canvas>
   <div id="promptBubble">Arriving...</div>
@@ -342,25 +285,6 @@
 <div id="overlay">
   <div id="panel">
     <button id="closePanel">✕</button>
-    <div id="panelGuide">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 100c2-20 15-30 44-30s42 10 44 30z" fill="#C9772E"/>
-        <rect x="42" y="60" width="16" height="18" rx="6" fill="#F3D9BE"/>
-        <path d="M18 42c0-19 12-32 32-32s32 13 32 32c0 7-1 13-4 18-1-9-4-15-9-15 2 5 0 8-4 7-8-2-13 1-18 6-3 3-4 7-4 11-5-4-8-10-8-16-4 3-7 0-9-11-3 4-6 4-8 0z" fill="#3B2416"/>
-        <circle cx="50" cy="46" r="24" fill="#F3D9BE"/>
-        <path d="M22 43c2-15 12-23 24-23s21 8 23 23c-4-5-9-8-15-6 1-4-2-5-5-3-6 3-12 2-16-2-2 3-2 7-1 10-5-1-8 1-10 1z" fill="#3B2416"/>
-        <path d="M32 40c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M53 39c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="38" cy="46" r="3.2" fill="#3B2416"/>
-        <circle cx="39" cy="45" r="1" fill="#fff"/>
-        <path d="M55 46c2 2 6 2 8 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="34" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-        <circle cx="61" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-        <path d="M38 58c4 4 15 4 19 0" stroke="#9B5A1C" stroke-width="2" fill="none" stroke-linecap="round"/>
-      </svg>
-      <div class="pg-name">Sophie</div>
-      <div class="pg-bubble" id="panelGuideBubble">Here's what I wanted to show you!</div>
-    </div>
     <div id="panelBody"></div>
   </div>
 </div>
@@ -1901,7 +1825,7 @@
 
   // ── woodland wildlife — deer, rabbits, snakes, and squirrels scattered through the
   // grounds and forest edge, well clear of the road and buildings ──
-  var wildlife = { deer: [], rabbits: [], snakes: [], squirrels: [] };
+  var wildlife = { deer: [], rabbits: [], squirrels: [] };
   function findWildlifeSpot(minR, maxR, minClear){
     for (var attempt=0; attempt<24; attempt++){
       var ang = Math.random()*Math.PI*2, rad = minR + Math.random()*(maxR-minR);
@@ -1989,47 +1913,6 @@
     return g;
   }
 
-  // snake — an S-curved body lying flat on the ground, built from a short chain of
-  // oriented, tapering cylinder segments rather than TubeGeometry: a Frenet-frame tube
-  // following a curve that's confined to a flat plane (constant Y here) is a known
-  // three.js edge case that produces NaN normals, so we sidestep it entirely
-  function makeSnake(){
-    var palette = [0x4A5C2E,0x5C4A2E,0x33402A];
-    var color = palette[Math.floor(Math.random()*palette.length)];
-    var mat = new THREE.MeshStandardMaterial({color:color, roughness:0.75});
-    var len = 0.55+Math.random()*0.35;
-    var pts = [
-      new THREE.Vector3(0,0.022,0),
-      new THREE.Vector3(len*0.28, 0.022, len*0.22),
-      new THREE.Vector3(len*0.55, 0.022, -len*0.12),
-      new THREE.Vector3(len*0.8, 0.022, len*0.15),
-      new THREE.Vector3(len, 0.022, 0)
-    ];
-    var g = new THREE.Group();
-    var segCount = pts.length-1;
-    for (var i=0;i<segCount;i++){
-      var a = pts[i], b = pts[i+1];
-      var mid = new THREE.Vector3().addVectors(a,b).multiplyScalar(0.5);
-      var segLen = a.distanceTo(b);
-      if (segLen < 1e-5) continue; // guard against a degenerate zero-length segment
-      // taper the body slightly toward the tail end
-      var rStart = 0.032 * (1 - (i/segCount)*0.55);
-      var rEnd = 0.032 * (1 - ((i+1)/segCount)*0.55);
-      var seg = new THREE.Mesh(new THREE.CylinderGeometry(rEnd, rStart, segLen, 7), mat);
-      seg.position.copy(mid);
-      // orient the cylinder's local Y axis to point from a to b
-      var dir = new THREE.Vector3().subVectors(b,a).normalize();
-      seg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir);
-      seg.castShadow = true;
-      g.add(seg);
-    }
-    // a slightly raised head with two eye flecks
-    var head = new THREE.Mesh(new THREE.SphereGeometry(0.032,6,6), mat);
-    head.position.set(0,0.025,0);
-    g.add(head);
-    return g;
-  }
-
   // squirrel — small perched body with a big curled tail, usually near a tree trunk
   function makeSquirrel(){
     var g = new THREE.Group();
@@ -2048,7 +1931,7 @@
     return g;
   }
 
-  var DEER_COUNT = (IS_MOBILE ? 4 : 9) * 10; // 10x — herds grazing right along the road/sidewalk
+  var DEER_COUNT = (IS_MOBILE ? 4 : 9) * 5; // herds grazing right along the road/sidewalk
   var deerPlaced = 0;
   var deerAttempts = 0;
   while (deerPlaced < DEER_COUNT && deerAttempts < DEER_COUNT*6){
@@ -2082,18 +1965,6 @@
     wildlife.rabbits.push({mesh:mesh, phase:Math.random()*Math.PI*2});
   }
 
-  var SNAKE_COUNT = IS_MOBILE ? 6 : 14;
-  for (var si=0; si<SNAKE_COUNT; si++){
-    var ss = findWildlifeSpot(20, FOREST_OUT_R, ROAD_CLEAR - 0.2);
-    if (!ss) continue;
-    var mesh = makeSnake();
-    mesh.position.set(ss.x,0,ss.z);
-    mesh.rotation.y = Math.random()*Math.PI*2;
-    mesh.scale.setScalar(0.85+Math.random()*0.5);
-    scene.add(mesh);
-    wildlife.snakes.push({mesh:mesh, phase:Math.random()*Math.PI*2});
-  }
-
   var SQUIRREL_COUNT = IS_MOBILE ? 8 : 20;
   for (var qi=0; qi<SQUIRREL_COUNT; qi++){
     var qs = findWildlifeSpot(20, FOREST_OUT_R, ROAD_CLEAR - 0.4);
@@ -2120,10 +1991,6 @@
       var twitch = Math.sin(t*3 + r.phase);
       r.mesh.userData.earL.rotation.x = Math.max(0,twitch)*0.25;
       r.mesh.userData.earR.rotation.x = Math.max(0,-twitch)*0.25;
-    }
-    for (var k=0;k<wildlife.snakes.length;k++){
-      var sn = wildlife.snakes[k];
-      sn.mesh.rotation.z = Math.sin(t*0.7+sn.phase)*0.05;
     }
     for (var m=0;m<wildlife.squirrels.length;m++){
       var sq = wildlife.squirrels[m];
@@ -2743,15 +2610,15 @@
     ctx.closePath();
   }
   var labelText = {welcome:'Welcome Home', care:'Care Support', services:'Plan Your Visit', life:'Life & Gardens', team:'Meet the Team', testimonials:'Family Stories', tour:'Schedule a Tour', faq:'FAQ'};
-  var guideLines = {
-    welcome: "Hi, I'm Sophie! Hop in and I'll show you around Autumn Hill Manor.",
-    care: "Next up, let me show you how our caregivers support residents around the clock.",
-    services: "This way — grab our brochure or this week's menu.",
-    life: "Follow me for a peek into everyday life here on the grounds.",
-    team: "Let's go meet the wonderful team who make this feel like home.",
+  var hintLines = {
+    welcome: "Hop in and explore Autumn Hill Manor.",
+    care: "Next up: how caregivers support residents around the clock.",
+    services: "This way — grab the brochure or this week's menu.",
+    life: "A peek into everyday life here on the grounds.",
+    team: "Meet the wonderful team who make this feel like home.",
     testimonials: "Just ahead — hear what families just like yours have to say.",
-    tour: "Ready to visit in person? I'll help you get a tour scheduled.",
-    faq: "Almost there — let's cover the questions families ask most."
+    tour: "Ready to visit in person? Schedule a tour.",
+    faq: "Almost there — the questions families ask most."
   };
   for (var key3 in stationPositions){
     var spr = makeLabelSprite(labelText[key3]);
@@ -2771,19 +2638,6 @@
     leafData.push({x:lx,y:ly,z:lz, spin:Math.random()*Math.PI*2, speed:0.4+Math.random()*0.5, sway:1+Math.random()*2, phase:Math.random()*Math.PI*2});
   }
   scene.add(leaves);
-
-  // heavy falling snow (instanced)
-  var SNOW_COUNT = 13000;
-  var snowGeo = new THREE.PlaneGeometry(0.13,0.13);
-  var snowMat = new THREE.MeshBasicMaterial({color:0xFFFFFF, side:THREE.DoubleSide, transparent:true, opacity:0.92, depthWrite:false});
-  var snow = new THREE.InstancedMesh(snowGeo, snowMat, SNOW_COUNT);
-  var snowData = [];
-  var dummySnow = new THREE.Object3D();
-  for (var sf=0; sf<SNOW_COUNT; sf++){
-    var sx = (Math.random()-0.5)*160, sy = Math.random()*30, sz = (Math.random()-0.5)*160;
-    snowData.push({x:sx,y:sy,z:sz, speed:1.4+Math.random()*1.3, sway:0.5+Math.random()*0.9, phase:Math.random()*Math.PI*2, spin:Math.random()*Math.PI*2});
-  }
-  scene.add(snow);
 
   // heavy falling rain (instanced thin streaks)
   var RAIN_COUNT = 22000;
@@ -3062,8 +2916,8 @@
   function updateCompass(){
     var target = getCompassTarget();
     if (!target.key) return;
-    var gt = document.getElementById('guideText');
-    if (gt && guideLines[target.key]) gt.textContent = guideLines[target.key];
+    var gt = document.getElementById('hintText');
+    if (gt && hintLines[target.key]) gt.textContent = hintLines[target.key];
   }
 
   function updateCart(dt){
@@ -3249,23 +3103,11 @@
   // panel logic
   var overlay = document.getElementById('overlay');
   var panelBody = document.getElementById('panelBody');
-  var panelGuideLines = {
-    welcome: "Welcome! I'm so glad you stopped by. 😊",
-    care: "Our caregivers are here day and night — just like family.",
-    services: "Grab the brochure — it's got everything in one place!",
-    life: "This is what a normal day looks like around here!",
-    team: "These are the faces you'll see every single day.",
-    testimonials: "I love hearing these stories — read a few!",
-    tour: "I'd love to show you around in person!",
-    faq: "Great questions deserve honest answers."
-  };
   function openPanel(key){
     var c = STATIONS_CONTENT[key];
     var headerHtml = c.title ? ("<div class='eyebrow'>"+c.eyebrow+"</div><h2>"+c.title+"</h2>") : "";
     panelBody.innerHTML = headerHtml + c.html;
     if (key === 'care') careClickMode = false;
-    var pgb = document.getElementById('panelGuideBubble');
-    if (pgb) pgb.textContent = panelGuideLines[key] || "Here's what I wanted to show you!";
     overlay.classList.add('open');
     visited[key] = true;
     input.fwd = 0; input.turn = 0;
@@ -3304,63 +3146,13 @@
     document.body.classList.add('started');
     camera.position.copy(GARDEN_VIEW);
     introFlightT0 = performance.now();
-    var gt = document.getElementById('guideText');
-    if (gt) gt.textContent = "Let's start here in the garden, then head over to the cart.";
+    var gt = document.getElementById('hintText');
+    if (gt) gt.textContent = "Starting in the garden, then heading over to the cart.";
     setTimeout(function(){
       driveMode = mode;
-      if (gt) gt.textContent = "Sit back and relax — I'll drive you around the grounds.";
+      if (gt) gt.textContent = "Sit back and relax — enjoy the tour of the grounds.";
     }, INTRO_FLIGHT_MS + 200);
   }
-  // ───────────────────────────── day / night toggle ─────────────────────────────
-  var dayPreset = {
-    top:0x8FA3A6, mid:0xB9C7BE, bot:0x7E9484, sunGlow:0xEFF2E9,
-    fogColor:0xAEBAB4, fogDensity:0.019,
-    hemiColor:0xC3D0C8, hemiGround:0x2E4A34, hemiIntensity:0.9,
-    sunColor:0xEDF0E6, sunIntensity:1.0,
-    fillColor:0xA9C2CC, fillIntensity:0.32,
-    rimColor:0xD6E2D8, rimIntensity:0.18,
-    exposure:1.0, lampIntensity:1.3
-  };
-  var nightPreset = {
-    top:0x060B18, mid:0x0E1A30, bot:0x131E1A, sunGlow:0xAFC4FF,
-    fogColor:0x0A1120, fogDensity:0.022,
-    hemiColor:0x33456E, hemiGround:0x090F0C, hemiIntensity:0.32,
-    sunColor:0x8FA6E0, sunIntensity:0.28,
-    fillColor:0x3355AA, fillIntensity:0.16,
-    rimColor:0x5570B0, rimIntensity:0.12,
-    exposure:0.72, lampIntensity:2.6
-  };
-  var timeOfDay = 'day';
-  function applyTimeOfDay(mode){
-    var p = mode === 'night' ? nightPreset : dayPreset;
-    timeOfDay = mode;
-    skyMat.uniforms.topColor.value.set(p.top);
-    skyMat.uniforms.midColor.value.set(p.mid);
-    skyMat.uniforms.botColor.value.set(p.bot);
-    skyMat.uniforms.sunColor.value.set(p.sunGlow);
-    scene.fog.color.set(p.fogColor);
-    scene.fog.density = p.fogDensity;
-    hemi.color.set(p.hemiColor);
-    hemi.groundColor.set(p.hemiGround);
-    hemi.intensity = p.hemiIntensity;
-    sun.color.set(p.sunColor);
-    sun.intensity = p.sunIntensity;
-    fillLight.color.set(p.fillColor);
-    fillLight.intensity = p.fillIntensity;
-    rimLight.color.set(p.rimColor);
-    rimLight.intensity = p.rimIntensity;
-    renderer.toneMappingExposure = p.exposure;
-    streetLampHeads.forEach(function(m){ m.emissiveIntensity = p.lampIntensity; });
-    var dayBtn = document.getElementById('dayBtn'), nightBtn = document.getElementById('nightBtn');
-    if (dayBtn && nightBtn){
-      dayBtn.classList.toggle('active', mode === 'day');
-      nightBtn.classList.toggle('active', mode === 'night');
-    }
-  }
-  var dayBtnEl = document.getElementById('dayBtn'), nightBtnEl = document.getElementById('nightBtn');
-  if (dayBtnEl) dayBtnEl.addEventListener('click', function(){ applyTimeOfDay('day'); });
-  if (nightBtnEl) nightBtnEl.addEventListener('click', function(){ applyTimeOfDay('night'); });
-
   // ───────────────────────────── loop ─────────────────────────────
   var clock = new THREE.Clock();
   function animate(){
@@ -3391,19 +3183,6 @@
       leaves.setMatrixAt(i, dummy.matrix);
     }
     leaves.instanceMatrix.needsUpdate = true;
-
-    for (var si=0;si<SNOW_COUNT;si++){
-      var sd = snowData[si];
-      sd.y -= sd.speed*dt*1.1;
-      if (sd.y < 0){ sd.y = 24 + Math.random()*6; sd.x = (Math.random()-0.5)*160; sd.z = (Math.random()-0.5)*160; }
-      var swaySnow = Math.sin(t*0.5 + sd.phase) * sd.sway;
-      dummySnow.position.set(sd.x+swaySnow, sd.y, sd.z);
-      dummySnow.rotation.set(0, sd.spin + t*0.2, 0);
-      dummySnow.scale.setScalar(1);
-      dummySnow.updateMatrix();
-      snow.setMatrixAt(si, dummySnow.matrix);
-    }
-    snow.instanceMatrix.needsUpdate = true;
 
     for (var ri=0;ri<RAIN_COUNT;ri++){
       var rd = rainData[ri];
