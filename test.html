@@ -12,6 +12,7 @@
     --tan:#EAD3A0;
     --clay:#3D8B63;
     --clay-dark:#1E4A34;
+    --mobileNavH:70px;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;height:100%;overflow:hidden;font-family:'Georgia',serif;background:linear-gradient(180deg,#F6D9A8 0%,#F0B87C 35%,#D98D5C 65%,#8FAE7A 100%);}
@@ -72,6 +73,66 @@
   }
   #promptBubble.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
+  /* ── vertical station nav menu ── */
+  /* z-index sits above #overlay (50) so the menu stays visible and tappable even
+     while a station's info panel is open, on both desktop and mobile */
+  #stationMenu{
+    position:fixed; top:50%; right:16px; transform:translateY(-50%); z-index:55;
+    display:flex; flex-direction:column; gap:3px; pointer-events:auto;
+    background:rgba(255,253,247,0.55); backdrop-filter:blur(16px) saturate(180%);
+    -webkit-backdrop-filter:blur(16px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.65); border-radius:20px;
+    padding:10px; box-shadow:0 10px 30px rgba(11,92,86,0.18);
+    max-height:78vh; overflow-y:auto;
+  }
+  .station-menu-title{
+    font-size:.6rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--forest-dark); opacity:.65; padding:2px 10px 6px;
+  }
+  .station-menu-item{
+    display:flex; align-items:center; gap:9px; width:100%; padding:8px 10px; border-radius:12px;
+    border:none; background:transparent; font-family:Georgia,serif; font-size:.78rem; font-weight:600;
+    color:var(--forest-dark); cursor:pointer; text-align:left; white-space:nowrap;
+    transition:background .18s ease, transform .15s ease, box-shadow .18s ease;
+  }
+  .station-menu-item .icon{flex:none; width:18px; text-align:center; font-size:.9rem;}
+  .station-menu-item .lbl{flex:1; min-width:0;}
+  .station-menu-item .check{flex:none; font-size:.68rem; color:#3D8B63; opacity:0; transform:scale(.6); transition:opacity .2s ease, transform .2s ease;}
+  .station-menu-item.visited .check{opacity:1; transform:scale(1);}
+  .station-menu-item:hover{background:rgba(46,82,64,0.09); transform:translateX(-2px);}
+  .station-menu-item.active{
+    background:linear-gradient(135deg, rgba(61,139,99,0.24), rgba(30,74,52,0.14));
+    box-shadow:inset 0 0 0 1px rgba(61,139,99,0.4);
+  }
+  @media (max-width:820px){
+    #stationMenu{
+      top:auto; bottom:0; left:0; right:0; transform:none;
+      flex-direction:row; align-items:stretch; justify-content:space-between;
+      width:100%; height:var(--mobileNavH); max-height:none;
+      border-radius:22px 22px 0 0; border-bottom:none;
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+      gap:0; overflow-x:auto; overflow-y:hidden;
+      z-index:60; /* above #overlay(50) and the panel it holds — the tab bar is
+                     always reachable, even while a station's details are open */
+    }
+    .station-menu-title{display:none;}
+    .station-menu-item{
+      position:relative; flex:1 1 0; min-width:0; height:100%; width:auto;
+      flex-direction:column; justify-content:center; align-items:center;
+      gap:2px; padding:4px 2px; border-radius:14px;
+    }
+    .station-menu-item:hover{transform:none;}
+    .station-menu-item .icon{font-size:1.05rem; width:auto;}
+    .station-menu-item .lbl{
+      display:block; flex:none; font-size:.52rem; font-weight:700; letter-spacing:.01em;
+      max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .station-menu-item .check{
+      position:absolute; top:2px; right:14%; font-size:.55rem; opacity:0; transform:scale(.6);
+    }
+    .station-menu-item.visited .check{opacity:1; transform:scale(1);}
+  }
+
   /* ── info panel ── */
   #overlay{position:fixed; inset:0; z-index:50; display:flex; align-items:flex-end; justify-content:center;
     background:rgba(20,30,22,0); pointer-events:none; transition:background .35s ease;}
@@ -87,7 +148,7 @@
   #overlay.open #panel{transform:translateY(0);}
   #panelBody{flex:1; min-width:0;}
   @media (max-width:600px){
-    #panel{flex-direction:column; align-items:center; text-align:left;}
+    #panel{flex-direction:column; align-items:center; text-align:left; padding-bottom:calc(34px + var(--mobileNavH));}
     #panelBody{width:100%;}
   }
   #panel .eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-dark);font-weight:700;margin-bottom:6px;}
@@ -287,6 +348,14 @@
     <button id="closePanel">✕</button>
     <div id="panelBody"></div>
   </div>
+</div>
+
+<!-- kept outside #hud on purpose: #hud is a fixed, z-indexed element and forms its
+     own stacking context, which trapped the menu's z-index below it, capping it at
+     #hud's z-index no matter what value the menu itself had — as a sibling here, its
+     z-index is compared directly against #overlay's, so it can render above it -->
+<div id="stationMenu">
+  <div class="station-menu-title">Explore</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -2844,6 +2913,71 @@
   var stationOrder = ['welcome','care','services','life','team','testimonials','tour','faq'];
   var autoOpenLock = {welcome:false, care:false, services:false, life:false, team:false, testimonials:false, tour:false, faq:true};
   var autopilotIndex = 0;
+  var gotoTarget = null; // when set (via the nav menu), only this station is allowed to auto-open —
+                          // any other stations the cart happens to pass along the way stay quiet
+  var reverseToTarget = false; // true when the nav-menu jump found the target closer behind
+                                // the cart than ahead of it, so it backs up instead of looping around
+  var gotoTargetArc = null;      // fixed lane-arc position of the current goto destination
+  var gotoRemainingArc = Infinity; // live distance-to-go along the direction of travel, updated each frame
+
+  // ── vertical nav menu: lets the visitor jump straight to any section at any time,
+  // instead of only waiting for the cart to reach it on its own ──
+  var stationIcons = {welcome:'🏠', care:'💚', services:'📋', life:'🌿', team:'🤝', testimonials:'⭐', tour:'📅', faq:'❓'};
+  var stationMenuEl = document.getElementById('stationMenu');
+  var stationMenuItems = {};
+  stationOrder.forEach(function(key){
+    var btn = document.createElement('button');
+    btn.className = 'station-menu-item';
+    btn.type = 'button';
+    btn.id = 'navItem-' + key;
+    btn.innerHTML = "<span class='icon'>" + (stationIcons[key]||'•') + "</span><span class='lbl'>" + labelText[key] + "</span><span class='check'>✓</span>";
+    btn.addEventListener('click', function(){ goToStation(key); });
+    stationMenuEl.appendChild(btn);
+    stationMenuItems[key] = btn;
+  });
+  function updateStationMenu(){
+    var targetKey = stationOrder[autopilotIndex % stationOrder.length];
+    for (var i=0;i<stationOrder.length;i++){
+      var k = stationOrder[i];
+      var el = stationMenuItems[k];
+      if (!el) continue;
+      el.classList.toggle('active', k === targetKey);
+      el.classList.toggle('visited', !!visited[k]);
+    }
+  }
+  function goToStation(key){
+    var idx = stationOrder.indexOf(key);
+    if (idx === -1) return;
+    closePanel();
+
+    // how many stations back (in visiting order) the target sits from wherever
+    // the cart was already headed — reversing is only worth it for a short hop
+    var fromIdx = autopilotIndex % stationOrder.length;
+    var N = stationOrder.length;
+    var stepsBack = (fromIdx - idx + N) % N;
+
+    // drive there from wherever the cart currently is — steer the autopilot at this
+    // station directly. Any stations passed along the way stay quiet (see gotoTarget
+    // in updateCart) so only the requested stop opens when the cart arrives.
+    gotoTarget = key;
+    autopilotIndex = idx;
+    autoOpenLock[key] = false;
+    driveMode = 'auto';
+
+    // if the target sits closer behind the cart along the lane than ahead of it,
+    // it's quicker to back straight up to it than to loop all the way around —
+    // but only bother backing up for a short hop (2 stations max); anything
+    // farther back is still driven forward, all the way around the loop
+    var curArc = nearestArcOnLane(cart.position.x, cart.position.z).arc;
+    var tgtArc = nearestArcOnLane(stationLanePt[key][0], stationLanePt[key][1]).arc;
+    var total = laneSampler.total;
+    var fwdDist = ((tgtArc - curArc) % total + total) % total;
+    var bwdDist = total - fwdDist;
+    reverseToTarget = stepsBack >= 1 && stepsBack <= 2 && bwdDist < fwdDist;
+    gotoTargetArc = tgtArc;
+
+    updateStationMenu();
+  }
 
   function normalizeAngle(a){
     while (a > Math.PI) a -= Math.PI*2;
@@ -2858,6 +2992,10 @@
     var dz0 = sp[1] - cart.position.z;
     var dist = Math.hypot(dx0, dz0); // still used for the slow-down-near-station logic below
 
+    // +1 drives toward increasing lane arc as usual; -1 backs the cart up toward
+    // decreasing lane arc, used when goToStation found the target closer behind
+    var dir = reverseToTarget ? -1 : 1;
+
     // steer toward a look-ahead point along the actual lane curve rather than straight
     // at the (possibly far away) next station — following the curve's shape as it's
     // driven, instead of cutting a chord across it, is what keeps the cart from
@@ -2865,17 +3003,32 @@
     var nearestLane = nearestArcOnLane(cart.position.x, cart.position.z);
     var lookAheadDist = 2 + Math.min(1,Math.abs(speed)/MAX_SPEED)*2; // look further ahead at speed
     lookAheadDist = Math.min(lookAheadDist, Math.max(0.4, dist*0.55));
-    var lookPt = laneSampler.getPointAt(nearestLane.arc + lookAheadDist);
+    var lookPt = laneSampler.getPointAt(nearestLane.arc + dir*lookAheadDist);
+
+    // how far is left to travel to the actual goto destination (not the next
+    // skipped station) along whichever direction we're driving — used to ease
+    // the doubled skip-speed back down to normal on approach, see updateCart
+    if (gotoTarget){
+      var total2 = laneSampler.total;
+      gotoRemainingArc = dir === 1
+        ? ((gotoTargetArc - nearestLane.arc) % total2 + total2) % total2
+        : ((nearestLane.arc - gotoTargetArc) % total2 + total2) % total2;
+    } else {
+      gotoRemainingArc = Infinity;
+    }
 
     // steer straight to the road's own tangent direction at the look-ahead point —
     // aiming at the point itself (rather than its tangent) is what caused the cart
     // to cut across the lane at an angle instead of running parallel to it; the
     // lane-centering correction in updateCart handles pulling it onto the lane
-    // laterally, so heading only needs to track the road direction
+    // laterally, so heading only needs to track the road direction. The lane's
+    // tangent always points the "forward" way round the loop, even while backing
+    // up, since the cart's nose keeps facing that way in reverse — dir cancels
+    // out the reverse-steering flip applied to negative speed in updateCart.
     var angleToTarget = lookPt.heading;
     var diff = normalizeAngle(angleToTarget - heading);
 
-    var turnTarget = Math.max(-1, Math.min(1, diff * 1.6));
+    var turnTarget = Math.max(-1, Math.min(1, diff * 1.6)) * dir;
     // ease toward the desired turn instead of snapping to it, so steering
     // input changes smoothly frame to frame rather than jumping — exponential
     // ease stays consistent even if a frame runs long (no more clipping to an
@@ -2884,7 +3037,7 @@
     input.turn += (turnTarget - input.turn) * turnEase;
 
     var slowRadius = 14;
-    var speedTarget = Math.max(0.32, Math.min(1, dist / slowRadius));
+    var speedTarget = Math.max(0.32, Math.min(1, dist / slowRadius)) * dir;
     // ease off turning sharpness at low speed so it doesn't spin in place
     var fwdEase = 1 - Math.exp(-4*dt);
     input.fwd += (speedTarget - input.fwd) * fwdEase;
@@ -2925,7 +3078,20 @@
     // Math.exp(-rate*dt) instead of a linear dt*factor keeps the same feel
     // regardless of frame rate (a stutter or a fast frame no longer changes
     // how "snappy" the acceleration feels, which is what read as jerky before)
-    var targetSpeed = input.fwd * MAX_SPEED;
+    // when the nav menu sends the cart straight to a specific station, any other
+    // stations it passes along the way get skipped (see gotoTarget/allowedToOpen
+    // below) — drive that skipped stretch at double speed, then smoothly ease
+    // back down to normal speed over the last station's worth of distance so it
+    // arrives at a normal pace instead of screeching in at 2x
+    var skipSpeedMult = 1;
+    if (gotoTarget){
+      var oneStationDist = laneSampler.total / stationOrderXY.length;
+      var ramp = Math.max(0, Math.min(1, gotoRemainingArc / oneStationDist));
+      ramp = ramp*ramp*(3 - 2*ramp); // smoothstep for a gentle ease rather than a linear taper
+      skipSpeedMult = 1 + ramp; // 2x while far out, eases to 1x approaching the destination
+    }
+    var effMaxSpeed = MAX_SPEED * skipSpeedMult;
+    var targetSpeed = input.fwd * effMaxSpeed;
     if (Math.abs(input.fwd) > 0.01){
       var accelEase = 1 - Math.exp(-ACCEL*0.45*dt);
       speed += (targetSpeed - speed) * accelEase;
@@ -2933,7 +3099,7 @@
       speed -= Math.sign(speed) * FRICTION * dt;
       if (Math.abs(speed) < 0.05) speed = 0;
     }
-    speed = Math.max(-MAX_SPEED*0.5, Math.min(MAX_SPEED, speed));
+    speed = Math.max(-effMaxSpeed*0.5, Math.min(effMaxSpeed, speed));
 
     // ease the actual heading rate itself (on top of the input.turn easing already
     // done in updateAutopilot) so steering ramps in and out smoothly rather than
@@ -3015,10 +3181,12 @@
     if (closest){
       bubble.textContent = 'Arriving at ' + labelText[closest] + '...';
       bubble.classList.add('show');
-      if (closestExact <= AUTO_OPEN_DIST && !autoOpenLock[closest] && !overlay.classList.contains('open')){
+      var allowedToOpen = gotoTarget ? (closest === gotoTarget) : true;
+      if (allowedToOpen && closestExact <= AUTO_OPEN_DIST && !autoOpenLock[closest] && !overlay.classList.contains('open')){
         autoOpenLock[closest] = true;
         var idx = stationOrder.indexOf(closest);
         if (idx !== -1) autopilotIndex = (idx + 1) % stationOrder.length;
+        if (gotoTarget === closest){ gotoTarget = null; reverseToTarget = false; gotoTargetArc = null; gotoRemainingArc = Infinity; } // requested stop reached — resume normal drive-by behavior
         openPanel(closest);
       }
     } else {
@@ -3166,6 +3334,7 @@
     }
     updateCamera(dt);
     updateCompass();
+    updateStationMenu();
     drawMinimap();
 
     var t = clock.elapsedTime;
