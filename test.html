@@ -285,35 +285,6 @@
     #hint{font-size:.68rem; max-width:150px;}
   }
 
-  /* ── intro / welcome screen ── */
-  #introScreen{
-    position:fixed; inset:0; z-index:90;
-    background:linear-gradient(180deg,#F6D9A8 0%,#EDA96C 45%,#C97C4C 100%);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:24px;
-    transition:opacity .5s ease, visibility .5s ease;
-  }
-  #introScreen.hidden{opacity:0; visibility:hidden; pointer-events:none;}
-  #introSophie{width:min(46vw,220px); filter:drop-shadow(0 18px 30px rgba(31,58,46,0.3)); margin-bottom:6px;}
-  #introScreen h1{
-    font-family:'Playfair Display',Georgia,serif; color:var(--forest-dark);
-    font-size:clamp(1.7rem,5.5vw,2.7rem); margin:6px 0 4px; letter-spacing:.01em;
-  }
-  #introScreen .intro-sub{color:var(--clay-dark); font-size:.95rem; margin:0 0 26px; max-width:380px; line-height:1.5;}
-  #introScreen .intro-name{font-family:'Playfair Display',Georgia,serif; font-weight:700; color:var(--forest); font-style:italic;}
-  .mode-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; max-width:460px;}
-  .mode-card{
-    width:190px; padding:20px 16px; border-radius:20px; cursor:pointer; border:none;
-    background:rgba(255,253,247,0.75); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    border:1.5px solid rgba(255,255,255,0.7); box-shadow:0 10px 26px rgba(11,92,86,0.18);
-    font-family:Georgia,serif; transition:transform .15s ease, box-shadow .15s ease;
-  }
-  .mode-card:active{transform:scale(.96);}
-  .mode-card .mode-icon{font-size:1.8rem; margin-bottom:8px;}
-  .mode-card .mode-title{font-weight:700; color:var(--forest-dark); font-size:.95rem; margin-bottom:4px;}
-  .mode-card .mode-desc{font-size:.72rem; color:#5c6b5f; line-height:1.4;}
-  .mode-card.primary{background:linear-gradient(160deg,#C9772E,#9B5A1C); border-color:transparent;}
-  .mode-card.primary .mode-title, .mode-card.primary .mode-desc{color:#fff;}
 
 </style>
 
@@ -327,33 +298,6 @@
   <p>Hop in &amp; explore the grounds</p>
   <div class="loadbar"><div class="loadbar-fill" id="loadFill"></div></div>
   <p style="text-transform:none;letter-spacing:0;font-size:.82rem;margin-top:18px;opacity:.85;">👋 Sophie, your tour guide, is warming up the cart…</p>
-</div>
-
-<div id="introScreen" class="hidden">
-  <svg id="introSophie" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 100c2-20 15-30 44-30s42 10 44 30z" fill="#C9772E"/>
-    <rect x="42" y="60" width="16" height="18" rx="6" fill="#F3D9BE"/>
-    <path d="M18 42c0-19 12-32 32-32s32 13 32 32c0 7-1 13-4 18-1-9-4-15-9-15 2 5 0 8-4 7-8-2-13 1-18 6-3 3-4 7-4 11-5-4-8-10-8-16-4 3-7 0-9-11-3 4-6 4-8 0z" fill="#3B2416"/>
-    <circle cx="50" cy="46" r="24" fill="#F3D9BE"/>
-    <path d="M22 43c2-15 12-23 24-23s21 8 23 23c-4-5-9-8-15-6 1-4-2-5-5-3-6 3-12 2-16-2-2 3-2 7-1 10-5-1-8 1-10 1z" fill="#3B2416"/>
-    <path d="M32 40c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <path d="M53 39c3-2 6-2 9 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <circle cx="38" cy="46" r="3.2" fill="#3B2416"/>
-    <circle cx="39" cy="45" r="1" fill="#fff"/>
-    <path d="M55 46c2 2 6 2 8 0" stroke="#3B2416" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <circle cx="34" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-    <circle cx="61" cy="54" r="3.6" fill="#E8927A" opacity=".4"/>
-    <path d="M38 58c4 4 15 4 19 0" stroke="#9B5A1C" stroke-width="2" fill="none" stroke-linecap="round"/>
-  </svg>
-  <h1>Welcome to Autumn Hill Manor</h1>
-  <p class="intro-sub">Hi, I'm <span class="intro-name">Sophie</span> — I'll be your guide today. Sit back and let me drive you around the grounds.</p>
-  <div class="mode-row">
-    <button class="mode-card primary" id="selfDriveBtn">
-      <div class="mode-icon">🚍</div>
-      <div class="mode-title">Start the Tour</div>
-      <div class="mode-desc">Sit back — I'll drive you to every stop and tell you all about it.</div>
-    </button>
-  </div>
 </div>
 
 <div id="canvasHost"></div>
@@ -687,18 +631,19 @@
   // ───────────────────────────── three.js setup ─────────────────────────────
   var host = document.getElementById('canvasHost');
   var scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0xE9B888, 0.014);
+  scene.fog = new THREE.FogExp2(0xAEBAB4, 0.019);
 
   var camera = new THREE.PerspectiveCamera(58, window.innerWidth/window.innerHeight, 0.1, 500);
   var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance', stencil:false});
-  var MAX_DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+  var IS_MOBILE = window.matchMedia('(pointer: coarse)').matches || Math.min(window.innerWidth, window.innerHeight) <= 820;
+  var MAX_DPR = Math.min(window.devicePixelRatio || 1, IS_MOBILE ? 1.5 : 2.5);
   renderer.setPixelRatio(MAX_DPR);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = IS_MOBILE ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  renderer.toneMappingExposure = 1.0;
   var MAX_ANISO = renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 8;
   host.appendChild(renderer.domElement);
 
@@ -768,11 +713,11 @@
   // ── realistic gradient sky dome with soft sun glow ──
   var skyMat = new THREE.ShaderMaterial({
     uniforms:{
-      topColor:{value:new THREE.Color(0xE3A165)},
-      midColor:{value:new THREE.Color(0xF3C98B)},
-      botColor:{value:new THREE.Color(0x9FBE86)},
+      topColor:{value:new THREE.Color(0x8FA3A6)},
+      midColor:{value:new THREE.Color(0xB9C7BE)},
+      botColor:{value:new THREE.Color(0x7E9484)},
       sunPos:{value:new THREE.Vector3(30,42,18).normalize()},
-      sunColor:{value:new THREE.Color(0xFFF3D6)}
+      sunColor:{value:new THREE.Color(0xEFF2E9)}
     },
     vertexShader:"varying vec3 vWorldPos; void main(){ vec4 wp = modelMatrix*vec4(position,1.0); vWorldPos = normalize(wp.xyz); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }",
     fragmentShader:"varying vec3 vWorldPos; uniform vec3 topColor; uniform vec3 midColor; uniform vec3 botColor; uniform vec3 sunPos; uniform vec3 sunColor; void main(){ float h = clamp(vWorldPos.y*0.5+0.35, 0.0, 1.0); vec3 col = mix(botColor, midColor, smoothstep(0.0,0.45,h)); col = mix(col, topColor, smoothstep(0.45,1.0,h)); float sunAmt = max(dot(normalize(vWorldPos), normalize(sunPos)), 0.0); col += sunColor * pow(sunAmt, 42.0) * 0.9; col += sunColor * pow(sunAmt, 5.0) * 0.12; gl_FragColor = vec4(col, 1.0); }",
@@ -782,12 +727,12 @@
   scene.add(skyDome);
 
   // lights
-  var hemi = new THREE.HemisphereLight(0xFCE3B0, 0x3C5A3F, 0.85);
+  var hemi = new THREE.HemisphereLight(0xC3D0C8, 0x2E4A34, 0.9);
   scene.add(hemi);
-  var sun = new THREE.DirectionalLight(0xFFDFA8, 1.2);
+  var sun = new THREE.DirectionalLight(0xEDF0E6, 1.0);
   sun.position.set(30, 42, 18);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(4096,4096);
+  sun.shadow.mapSize.set(IS_MOBILE ? 1536 : 4096, IS_MOBILE ? 1536 : 4096);
   sun.shadow.camera.left = -60; sun.shadow.camera.right = 60;
   sun.shadow.camera.top = 60; sun.shadow.camera.bottom = -60;
   sun.shadow.camera.far = 150;
@@ -795,10 +740,10 @@
   sun.shadow.normalBias = 0.02;
   sun.shadow.radius = 2.5;
   scene.add(sun);
-  var fillLight = new THREE.DirectionalLight(0xBFD8FF, 0.3);
+  var fillLight = new THREE.DirectionalLight(0xA9C2CC, 0.32);
   fillLight.position.set(-24,20,-16);
   scene.add(fillLight);
-  var rimLight = new THREE.DirectionalLight(0xFFEACB, 0.22);
+  var rimLight = new THREE.DirectionalLight(0xD6E2D8, 0.18);
   rimLight.position.set(6,10,-40);
   scene.add(rimLight);
 
@@ -806,23 +751,28 @@
   function makeGrassTexture(){
     var c = document.createElement('canvas'); c.width = 1024; c.height = 1024;
     var ctx = c.getContext('2d');
-    ctx.fillStyle = '#71995C'; ctx.fillRect(0,0,1024,1024);
+    ctx.fillStyle = '#4F6E4A'; ctx.fillRect(0,0,1024,1024);
     for (var i=0;i<34000;i++){
       var gx = Math.random()*1024, gy = Math.random()*1024;
       var shade = Math.random();
-      ctx.fillStyle = shade<0.5 ? 'rgba(94,130,70,'+(0.25+shade*0.4)+')' : 'rgba(148,178,105,'+(0.2+shade*0.35)+')';
+      ctx.fillStyle = shade<0.5 ? 'rgba(60,92,54,'+(0.25+shade*0.4)+')' : 'rgba(110,140,84,'+(0.2+shade*0.35)+')';
       var len = 3+Math.random()*7;
       ctx.save(); ctx.translate(gx,gy); ctx.rotate((Math.random()-0.5)*0.5);
       ctx.fillRect(0,0, 1.6, len);
       ctx.restore();
     }
     for (var j=0;j<620;j++){
-      ctx.fillStyle = 'rgba(60,86,48,0.1)';
+      ctx.fillStyle = 'rgba(38,58,34,0.12)';
       ctx.beginPath(); ctx.arc(Math.random()*1024, Math.random()*1024, 12+Math.random()*40, 0, Math.PI*2); ctx.fill();
     }
     for (var k=0;k<200;k++){
-      ctx.fillStyle = 'rgba(205,222,150,0.08)';
+      ctx.fillStyle = 'rgba(150,180,110,0.08)';
       ctx.beginPath(); ctx.arc(Math.random()*1024, Math.random()*1024, 4+Math.random()*10, 0, Math.PI*2); ctx.fill();
+    }
+    // damp moss patches — deeper, cooler green blotches typical of shaded PNW lawns
+    for (var mm=0;mm<160;mm++){
+      ctx.fillStyle = 'rgba(52,84,58,'+(0.12+Math.random()*0.18)+')';
+      ctx.beginPath(); ctx.arc(Math.random()*1024, Math.random()*1024, 18+Math.random()*55, 0, Math.PI*2); ctx.fill();
     }
     var tex = new THREE.CanvasTexture(c);
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
@@ -942,7 +892,7 @@
     tex.anisotropy = MAX_ANISO;
     return tex;
   }
-  var ROAD_W = 6.4, CURB_W = 0.16, WALK_W = 1.7;
+  var ROAD_W = 8.0, CURB_W = 0.16, WALK_W = 1.7;
   function buildRoadNetwork(points){
     var group = new THREE.Group();
     var half = ROAD_W/2;
@@ -970,7 +920,12 @@
   // ── oval track: an ellipse road with each station tucked just off the roadside ──
   var TRACK_RX = 46, TRACK_RZ = 32;
   var STATION_OFFSET = ROAD_W/2 + CURB_W + WALK_W + 2.6;
-  var LANE_OFFSET = ROAD_W*0.32;
+  // centered exactly between the yellow dash and white edge line — see LANE_MIN/LANE_MAX
+  // in updateCart, whose midpoint is ROAD_W*0.2234375 regardless of cart width (the
+  // CART_HALF_W margins on each side cancel out). This used to be ROAD_W*0.32, which
+  // sat much closer to the white line than the middle — that's what was causing the
+  // cart to ride the outer edge instead of tracking the center of its lane.
+  var LANE_OFFSET = ROAD_W*0.275;
   var stationOrderXY = ['welcome','care','services','life','team','testimonials','tour','faq'];
   var stationPositions = {};
   var stationNormal = {};
@@ -999,6 +954,28 @@
   var sidewalkPathOuter = offsetPolygon(loopPts, ROAD_W/2 + CURB_W + WALK_W/2);
   var sidewalkPathInner = offsetPolygon(loopPts, -(ROAD_W/2 + CURB_W + WALK_W/2));
 
+  // ── the cart's actual driving lane as a path (not just the road centerline) — used
+  // to steer toward a look-ahead point along the curve instead of cutting a straight
+  // line at the next station, which is what caused the cart to swing wide on the
+  // ellipse's curves, clip the lane edge, and snap back over and over ──
+  var lanePath = offsetPolygon(loopPts, LANE_OFFSET);
+  var laneSampler = buildPathSampler(lanePath);
+  function nearestArcOnLane(px, pz){
+    var pts = laneSampler.points, cum = laneSampler.cum;
+    var best = Infinity, bestArc = 0;
+    for (var i=0;i<pts.length;i++){
+      var a = pts[i], b = pts[(i+1)%pts.length];
+      var abx=b[0]-a[0], abz=b[1]-a[1];
+      var segLenSq = abx*abx+abz*abz+1e-6;
+      var t = ((px-a[0])*abx + (pz-a[1])*abz) / segLenSq;
+      t = Math.max(0,Math.min(1,t));
+      var cx = a[0]+abx*t, cz = a[1]+abz*t;
+      var d = Math.hypot(px-cx, pz-cz);
+      if (d < best){ best = d; bestArc = cum[i] + Math.sqrt(segLenSq-1e-6)*t; }
+    }
+    return {arc:bestArc, dist:best};
+  }
+
   // ── pedestrians strolling the sidewalks ──
   function buildPathSampler(points){
     var n = points.length;
@@ -1010,6 +987,8 @@
     }
     return {
       total: total,
+      points: points,
+      cum: cum,
       getPointAt: function(dist){
         dist = ((dist % total) + total) % total;
         var idx = 0;
@@ -1068,7 +1047,7 @@
     [0x6E4A6B,0x2C2C30,0xE0A375], [0xA33B3B,0x30302E,0xF0C8A0]
   ];
   var pedestrians = [];
-  var PED_COUNT = 22;
+  var PED_COUNT = IS_MOBILE ? 22 : 42;
   for (var pi=0; pi<PED_COUNT; pi++){
     var palette = pedestrianPalettes[pi % pedestrianPalettes.length];
     var pmesh = makePedestrian(palette[0], palette[1], palette[2]);
@@ -1156,17 +1135,40 @@
     var ocMesh = makeOtherCar(ocColor);
     var ocStart = (oi/OTHER_CAR_COUNT) * otherCarSampler.total + Math.random()*5;
     var ocDir = OTHER_CAR_DIR;
-    var ocSpeed = OTHER_CAR_SPEED;
+    // each car eases toward a slightly different cruising speed rather than snapping
+    // straight to it, and drifts gently around that speed so the traffic reads as
+    // driven rather than mechanically constant
+    var ocBaseSpeed = OTHER_CAR_SPEED * (0.94 + Math.random()*0.12);
     scene.add(ocMesh);
-    otherCars.push({mesh:ocMesh, dist:ocStart, dir:ocDir, speed:ocSpeed});
+    otherCars.push({
+      mesh:ocMesh, dist:ocStart, dir:ocDir,
+      speed:0, baseSpeed:ocBaseSpeed, heading:0, headingInit:false,
+      bobPhase:Math.random()*Math.PI*2
+    });
   }
   function updateOtherCars(t, dt){
     for (var oj=0; oj<otherCars.length; oj++){
       var oc = otherCars[oj];
+      // ease actual speed toward the car's cruising speed (with a slow gentle drift)
+      // instead of moving at a fixed constant, so starts/variation feel smooth, not abrupt
+      var targetSpeed = oc.baseSpeed * (1 + Math.sin(t*0.15 + oc.bobPhase)*0.035);
+      oc.speed += (targetSpeed - oc.speed) * Math.min(1, dt*1.2);
       oc.dist += oc.dir*oc.speed*dt;
       var pt = otherCarSampler.getPointAt(oc.dist);
-      oc.mesh.position.set(pt.x, 0, pt.z);
-      oc.mesh.rotation.y = oc.dir>0 ? pt.heading : pt.heading+Math.PI;
+      oc.mesh.position.y = Math.sin(t*7 + oc.bobPhase)*0.008; // faint suspension bob
+      oc.mesh.position.x = pt.x; oc.mesh.position.z = pt.z;
+      var targetHeading = oc.dir>0 ? pt.heading : pt.heading+Math.PI;
+      if (!oc.headingInit){ oc.heading = targetHeading; oc.headingInit = true; }
+      // shortest-path angle smoothing so the car eases through corners instead of
+      // snapping its heading at each path vertex — reads as a smooth, driven turn
+      var dh = targetHeading - oc.heading;
+      dh = ((dh + Math.PI) % (Math.PI*2)) - Math.PI;
+      if (dh < -Math.PI) dh += Math.PI*2;
+      var turnRate = Math.min(1, dt*6);
+      oc.heading += dh*turnRate;
+      oc.mesh.rotation.y = oc.heading;
+      // a light bank into turns, proportional to how fast the heading is changing
+      oc.mesh.rotation.z = Math.max(-0.09, Math.min(0.09, -dh*turnRate*3));
       var wheelSpin = (oc.dist/(2*Math.PI*OTHER_WHEEL_R)) * Math.PI*2 * oc.dir;
       for (var wk=0; wk<oc.mesh.userData.wheels.length; wk++){
         oc.mesh.userData.wheels[wk].rotation.x = wheelSpin;
@@ -1274,9 +1276,9 @@
   function makeBarkTexture(){
     var c = document.createElement('canvas'); c.width = 128; c.height = 256;
     var ctx = c.getContext('2d');
-    ctx.fillStyle = '#5A3E28'; ctx.fillRect(0,0,128,256);
+    ctx.fillStyle = '#453427'; ctx.fillRect(0,0,128,256);
     for (var i=0;i<650;i++){
-      ctx.strokeStyle = 'rgba('+(30+Math.random()*40)+','+(18+Math.random()*24)+','+(10+Math.random()*14)+',0.5)';
+      ctx.strokeStyle = 'rgba('+(24+Math.random()*28)+','+(17+Math.random()*20)+','+(10+Math.random()*12)+',0.5)';
       ctx.lineWidth = 0.7+Math.random()*2;
       var x0 = Math.random()*128;
       ctx.beginPath(); ctx.moveTo(x0,0); ctx.lineTo(x0+(Math.random()-0.5)*22,256); ctx.stroke();
@@ -1285,44 +1287,336 @@
       ctx.fillStyle = 'rgba(0,0,0,0.15)';
       ctx.beginPath(); ctx.ellipse(Math.random()*128, Math.random()*256, 2+Math.random()*3, 6+Math.random()*10, 0, 0, Math.PI*2); ctx.fill();
     }
+    // damp moss climbing the north side of the trunk — classic PNW rainforest look
+    for (var m=0;m<34;m++){
+      var mossY = Math.random()*Math.random()*220;
+      ctx.fillStyle = 'rgba('+(70+Math.random()*30)+','+(95+Math.random()*35)+','+(60+Math.random()*22)+','+(0.14+Math.random()*0.26)+')';
+      ctx.beginPath(); ctx.ellipse(Math.random()*128, mossY, 5+Math.random()*9, 12+Math.random()*22, 0, 0, Math.PI*2); ctx.fill();
+    }
     var tex = new THREE.CanvasTexture(c);
     tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2,1);
     tex.anisotropy = MAX_ANISO;
     return tex;
   }
   var barkTexShared = null;
-  function makeTree(x,z,scale){
+  // reddish, fibrous, vertically-shredded bark — western red cedar's signature trunk,
+  // distinct from the flatter grey-brown plated bark used for firs/spruce/hemlock
+  function makeCedarBarkTexture(){
+    var c = document.createElement('canvas'); c.width = 128; c.height = 256;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#8A5138'; ctx.fillRect(0,0,128,256);
+    // long vertical fiber strips — cedar bark shreds into ribbons rather than plating
+    for (var i=0;i<90;i++){
+      var x0 = Math.random()*128;
+      var shade = 100+Math.random()*70;
+      ctx.strokeStyle = 'rgba('+shade+','+(shade*0.58)+','+(shade*0.38)+','+(0.35+Math.random()*0.35)+')';
+      ctx.lineWidth = 1+Math.random()*2.4;
+      ctx.beginPath();
+      ctx.moveTo(x0,0);
+      ctx.bezierCurveTo(x0+(Math.random()-0.5)*10,85, x0+(Math.random()-0.5)*10,170, x0+(Math.random()-0.5)*16,256);
+      ctx.stroke();
+    }
+    for (var j=0;j<45;j++){
+      ctx.fillStyle = 'rgba('+(60+Math.random()*24)+','+(32+Math.random()*16)+','+(20+Math.random()*10)+','+(0.25+Math.random()*0.3)+')';
+      ctx.beginPath(); ctx.ellipse(Math.random()*128, Math.random()*256, 1.5+Math.random()*2.5, 8+Math.random()*16, 0, 0, Math.PI*2); ctx.fill();
+    }
+    // damp moss at the base, same as the generic bark
+    for (var m=0;m<24;m++){
+      var mossY = Math.random()*Math.random()*220;
+      ctx.fillStyle = 'rgba('+(70+Math.random()*30)+','+(95+Math.random()*35)+','+(60+Math.random()*22)+','+(0.16+Math.random()*0.26)+')';
+      ctx.beginPath(); ctx.ellipse(Math.random()*128, mossY, 5+Math.random()*9, 12+Math.random()*22, 0, 0, Math.PI*2); ctx.fill();
+    }
+    var tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2,1);
+    tex.anisotropy = MAX_ANISO;
+    return tex;
+  }
+  var cedarBarkShared = null;
+  // fall foliage palettes for PNW deciduous species — each is a spread of tones so a
+  // single canopy reads as variegated autumn color rather than one flat hue
+  var FALL_PALETTES = {
+    bigleaf_maple:   [0xE8A23A,0xD9822B,0xF2BE55,0xC96A1F], // big-leaf maple: classic gold-orange
+    vine_maple:      [0xC13A2E,0xE0512E,0x9E2A22,0xEB7A3C], // vine maple: fiery scarlet understory color
+    red_alder:       [0xD8B23A,0xC79A2E,0xE6C662,0xAE8624], // red alder: soft amber-yellow
+    aspen:           [0xF0D33E,0xF7E066,0xD9B82A,0xFCE98A], // quaking aspen: brilliant clear yellow
+    garry_oak:       [0x7A3B2E,0x8F4A30,0x5E2C22,0xA65B34], // garry oak: deep russet-maroon, holds color longest
+    pacific_dogwood: [0xB9C97A,0xA3B860,0xCBD98F,0x8FA652], // pacific dogwood: pale yellow-green, papery leaves
+    madrone:         [0x35502E,0x40603A,0x2B4126,0x4E6B47]  // madrone: broadleaf evergreen, stays deep glossy green
+  };
+  var DECIDUOUS_SPECS = {
+    bigleaf_maple:   {trunkH:[3.4,5.6], trunkR:[0.21,0.39], branch:true,  blobCount:[9,13], blobR:[0.9,1.35],  canopyFrac:0.42, spread:1.15, bark:'dark'},
+    vine_maple:      {trunkH:[2.0,3.2], trunkR:[0.11,0.21], branch:true,  blobCount:[6,9],  blobR:[0.65,1.0],  canopyFrac:0.30, spread:1.35, bark:'dark', multiStem:true},
+    red_alder:       {trunkH:[3.8,5.8], trunkR:[0.16,0.26], branch:false, blobCount:[7,9],  blobR:[0.85,1.15], canopyFrac:0.55, spread:0.85, bark:'alder'},
+    aspen:           {trunkH:[4.2,6.2], trunkR:[0.13,0.21], branch:false, blobCount:[6,8],  blobR:[0.7,1.05],  canopyFrac:0.60, spread:0.7,  bark:'aspen'},
+    garry_oak:       {trunkH:[2.6,3.8], trunkR:[0.29,0.47], branch:true,  blobCount:[10,14],blobR:[1.0,1.45],  canopyFrac:0.40, spread:1.3,  bark:'dark'},
+    pacific_dogwood: {trunkH:[2.2,3.4], trunkR:[0.13,0.23], branch:true,  blobCount:[7,9],  blobR:[0.55,0.85], canopyFrac:0.40, spread:0.95, bark:'dark'},
+    madrone:         {trunkH:[2.8,4.2], trunkR:[0.23,0.39], branch:true,  blobCount:[8,11], blobR:[0.8,1.1],   canopyFrac:0.38, spread:1.05, bark:'madrone'}
+  };
+  var DECIDUOUS_TYPES = ['bigleaf_maple','vine_maple','red_alder','aspen','garry_oak','pacific_dogwood','madrone'];
+  // pale, papery bark with dark horizontal scars — quaking aspen's signature trunk
+  function makeAspenBarkTexture(){
+    var c = document.createElement('canvas'); c.width = 128; c.height = 256;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#D9D3C5'; ctx.fillRect(0,0,128,256);
+    for (var i=0;i<40;i++){
+      ctx.strokeStyle = 'rgba('+(178+Math.random()*40)+','+(176+Math.random()*35)+','+(162+Math.random()*30)+',0.35)';
+      ctx.lineWidth = 0.5+Math.random()*1.2;
+      var x0 = Math.random()*128;
+      ctx.beginPath(); ctx.moveTo(x0,0); ctx.lineTo(x0+(Math.random()-0.5)*10,256); ctx.stroke();
+    }
+    for (var k=0;k<16;k++){
+      ctx.fillStyle = 'rgba('+(32+Math.random()*20)+','+(30+Math.random()*18)+','+(26+Math.random()*15)+','+(0.55+Math.random()*0.3)+')';
+      var kx = Math.random()*128, ky = Math.random()*256;
+      ctx.beginPath(); ctx.ellipse(kx,ky, 3+Math.random()*3, 1.4+Math.random()*1.6, 0, 0, Math.PI*2); ctx.fill();
+    }
+    var tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2,1);
+    tex.anisotropy = MAX_ANISO;
+    return tex;
+  }
+  var aspenBarkShared = null;
+  // pale grey-white bark mottled with dark lichen blotches — red alder's smooth,
+  // birch-like trunk as shown in the botanical reference (distinct from aspen's warmer tone)
+  function makeAlderBarkTexture(){
+    var c = document.createElement('canvas'); c.width = 128; c.height = 256;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#B7B9AE'; ctx.fillRect(0,0,128,256);
+    for (var i=0;i<26;i++){
+      ctx.strokeStyle = 'rgba('+(150+Math.random()*30)+','+(153+Math.random()*28)+','+(142+Math.random()*24)+',0.3)';
+      ctx.lineWidth = 0.5+Math.random()*1.4;
+      var x0 = Math.random()*128;
+      ctx.beginPath(); ctx.moveTo(x0,0); ctx.lineTo(x0+(Math.random()-0.5)*14,256); ctx.stroke();
+    }
+    // dark blotchy lichen patches — alder's most recognizable trunk feature
+    for (var j=0;j<26;j++){
+      ctx.fillStyle = 'rgba('+(40+Math.random()*18)+','+(42+Math.random()*18)+','+(38+Math.random()*16)+','+(0.35+Math.random()*0.35)+')';
+      var jx = Math.random()*128, jy = Math.random()*256;
+      ctx.beginPath(); ctx.ellipse(jx,jy, 4+Math.random()*7, 6+Math.random()*10, Math.random()*Math.PI, 0, Math.PI*2); ctx.fill();
+    }
+    for (var k=0;k<14;k++){
+      ctx.fillStyle = 'rgba(90,95,80,0.25)';
+      var kx = Math.random()*128, ky = Math.random()*256;
+      ctx.beginPath(); ctx.ellipse(kx,ky, 2+Math.random()*3, 3+Math.random()*5, 0, 0, Math.PI*2); ctx.fill();
+    }
+    var tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2,1);
+    tex.anisotropy = MAX_ANISO;
+    return tex;
+  }
+  var alderBarkShared = null;
+  // smooth reddish-orange bark with peeling curls — madrone's signature trunk
+  function makeMadroneBarkTexture(){
+    var c = document.createElement('canvas'); c.width = 128; c.height = 256;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#A8552E'; ctx.fillRect(0,0,128,256);
+    for (var i=0;i<50;i++){
+      ctx.fillStyle = 'rgba('+(150+Math.random()*50)+','+(80+Math.random()*35)+','+(35+Math.random()*20)+','+(0.25+Math.random()*0.35)+')';
+      var ix = Math.random()*128, iy = Math.random()*256;
+      ctx.beginPath(); ctx.ellipse(ix,iy, 4+Math.random()*8, 3+Math.random()*6, Math.random()*Math.PI, 0, Math.PI*2); ctx.fill();
+    }
+    // dark peeling-bark curls where the papery outer layer has flaked away
+    for (var j=0;j<22;j++){
+      ctx.fillStyle = 'rgba('+(60+Math.random()*20)+','+(30+Math.random()*14)+','+(14+Math.random()*8)+','+(0.4+Math.random()*0.3)+')';
+      var jx = Math.random()*128, jy = Math.random()*256;
+      ctx.beginPath(); ctx.ellipse(jx,jy, 3+Math.random()*5, 8+Math.random()*14, (Math.random()-0.5)*0.6, 0, Math.PI*2); ctx.fill();
+    }
+    var tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2,1);
+    tex.anisotropy = MAX_ANISO;
+    return tex;
+  }
+  var madroneBarkShared = null;
+  // deep evergreen palettes tuned per species from botanical reference:
+  // grand fir reads as a solid, tightly-packed dark green pyramid; engelmann spruce
+  // is narrower with a cooler blue-green cast and a gappier, more irregular crown
+  var CONIFER_SPECS = {
+    grand_fir: {
+      palette: [0x24462B,0x2C5233,0x1E3B25,0x335C3B], // deep, fairly uniform dark green
+      tiers:[9,12], tierOverlap:2.15, gap:0, baseR:[1.08,1.55], jitter:0.08, taperPow:1.05
+    },
+    engelmann_spruce: {
+      palette: [0x35564F,0x3F6259,0x2C463F,0x4A6E63], // cooler blue-green
+      tiers:[6,8], tierOverlap:1.55, gap:0.1, baseR:[0.74,1.08], jitter:0.22, taperPow:1.35
+    },
+    douglas_fir: {
+      palette: [0x2E4A34,0x35573D,0x263D2C,0x3C5F42], // classic mid-dark green, slightly softer than grand fir
+      tiers:[8,10], tierOverlap:1.9, gap:0.04, baseR:[1.0,1.4], jitter:0.14, taperPow:1.15
+    },
+    western_red_cedar: {
+      palette: [0x3C5A34,0x46683F,0x33502D,0x536F44], // warmer olive-green, drapes rather than points
+      tiers:[7,9], tierOverlap:2.5, gap:0, baseR:[0.85,1.2], jitter:0.26, taperPow:0.85 // low taperPow = columnar, less pointed
+    },
+    pacific_silver_fir: {
+      palette: [0x3E5D4C,0x4A6D5A,0x355140,0x577C65], // cool silvery-green
+      tiers:[8,11], tierOverlap:2.0, gap:0.02, baseR:[0.94,1.3], jitter:0.1, taperPow:1.1
+    },
+    sitka_spruce: {
+      palette: [0x2A4A48,0x335956,0x213D3B,0x3D655F], // dark blue-green, sharp narrow crown
+      tiers:[7,9], tierOverlap:1.7, gap:0.08, baseR:[0.66,0.95], jitter:0.16, taperPow:1.5
+    },
+    western_hemlock: {
+      palette: [0x2E4A3A,0x3A5A46,0x263F30,0x466B52], // feathery mid-green with a drooping leader
+      tiers:[7,9], tierOverlap:1.65, gap:0.12, baseR:[0.8,1.1], jitter:0.3, taperPow:1.4
+    },
+    alpine_larch: {
+      // a deciduous conifer — needles turn gold in fall, and the crown is sparse and
+      // open (fewer, thinner tiers with big gaps) rather than a solid green mass
+      palette: [0xE0B93E,0xF0CE5A,0xC79A2E,0xF7DC7C],
+      tiers:[5,6], tierOverlap:0.95, gap:0.35, baseR:[0.5,0.72], jitter:0.34, taperPow:1.6
+    }
+  };
+  function makeTree(x,z,scale,species){
+    species = species || 'grand_fir';
+    var spec = CONIFER_SPECS[species];
     var g = new THREE.Group();
     if (!barkTexShared) barkTexShared = makeBarkTexture();
+    if (!cedarBarkShared) cedarBarkShared = makeCedarBarkTexture();
+    var barkTex = species === 'western_red_cedar' ? cedarBarkShared : barkTexShared;
+    var trunkH = 3.2 + Math.random()*2.0;
     var trunk = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.16,0.26,1.5,12),
-      new THREE.MeshStandardMaterial({map:barkTexShared, color:0xffffff, roughness:0.95})
+      new THREE.CylinderGeometry(0.12+Math.random()*0.04, 0.30+Math.random()*0.10, trunkH, 9),
+      new THREE.MeshStandardMaterial({map:barkTex, color:0xffffff, roughness:0.96})
     );
-    trunk.position.y = 0.75; trunk.castShadow = true;
+    trunk.position.y = trunkH/2; trunk.castShadow = true;
     g.add(trunk);
-    var leafPalettes = [
-      [0xC9772E,0xE0A23B,0x9B5A1C], [0xE0A23B,0xEDBE63,0xB85C2E],
-      [0x8FAE45,0xC9772E,0x6E8A3A], [0xB85C2E,0xD98D3E,0x8F4A22]
-    ];
-    var palette = leafPalettes[Math.floor(Math.random()*leafPalettes.length)];
-    var clusters = 3 + Math.floor(Math.random()*2);
-    for (var i=0;i<clusters;i++){
-      var r = 0.62 + Math.random()*0.45;
-      var leaf = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(r, 1),
-        new THREE.MeshStandardMaterial({color: palette[i%palette.length], roughness:0.85, flatShading:true})
+
+    // a tapering stack of cone tiers reads as a realistic conifer silhouette — grand fir's
+    // tiers overlap tightly into one solid pyramid, spruce's sit with visible gaps so the
+    // trunk peeks through and the crown reads narrower and more open
+    var palette = spec.palette;
+    var tiers = spec.tiers[0] + Math.floor(Math.random()*(spec.tiers[1]-spec.tiers[0]+1));
+    var foliageBaseY = trunkH * 0.34;
+    var foliageSpan = trunkH * 1.05;
+    var baseR = spec.baseR[0] + Math.random()*(spec.baseR[1]-spec.baseR[0]);
+    for (var i=0;i<tiers;i++){
+      var tFrac = i/(tiers-1);
+      var r = Math.max(0.08, baseR * (1 - Math.pow(tFrac,spec.taperPow)*0.9));
+      var tierH = (foliageSpan/tiers) * spec.tierOverlap;
+      var y = foliageBaseY + tFrac*foliageSpan*(1+spec.gap*0.15);
+      var cone = new THREE.Mesh(
+        new THREE.ConeGeometry(r, tierH, 8, 1),
+        new THREE.MeshStandardMaterial({color: palette[i%palette.length], roughness:0.94, flatShading:true})
       );
-      var ang = (i/clusters)*Math.PI*2 + Math.random()*0.6;
-      var rad = i===0 ? 0 : 0.35+Math.random()*0.35;
-      leaf.position.set(Math.cos(ang)*rad, 1.75 + Math.random()*0.75, Math.sin(ang)*rad);
-      leaf.scale.set(1, 0.82+Math.random()*0.2, 1);
-      leaf.rotation.y = Math.random()*Math.PI;
-      leaf.castShadow = true;
-      g.add(leaf);
+      cone.position.set((Math.random()-0.5)*spec.jitter, y, (Math.random()-0.5)*spec.jitter);
+      cone.rotation.y = Math.random()*Math.PI;
+      cone.castShadow = true;
+      g.add(cone);
     }
+    // a fine spire tip so the crown doesn't look blunt
+    var tip = new THREE.Mesh(
+      new THREE.ConeGeometry(baseR*0.09, trunkH*0.22, 6, 1),
+      new THREE.MeshStandardMaterial({color: palette[palette.length-1], roughness:0.94, flatShading:true})
+    );
+    tip.position.y = foliageBaseY + foliageSpan + trunkH*0.05;
+    tip.castShadow = true;
+    g.add(tip);
+
+    // wispy hanging moss on the damp, shaded species (fir/cedar/hemlock) — thin drooping
+    // strands hung from the lower trunk, the single most recognizable PNW rainforest cue
+    if ((species==='grand_fir' || species==='western_red_cedar' || species==='western_hemlock') && Math.random()<0.55){
+      var mossMat = new THREE.MeshStandardMaterial({color:0x8A9A6E, roughness:1, side:THREE.DoubleSide, transparent:true, opacity:0.85});
+      var mossCount = 2+Math.floor(Math.random()*3);
+      for (var mi=0; mi<mossCount; mi++){
+        var mLen = 0.3+Math.random()*0.45;
+        var mAng = Math.random()*Math.PI*2;
+        var mY = trunkH*(0.35+Math.random()*0.4);
+        var mossShape = new THREE.PlaneGeometry(0.05, mLen, 1, 4);
+        // sag the strand's bottom vertices outward/down for a drooping curve
+        var pos = mossShape.attributes.position;
+        for (var vi=0; vi<pos.count; vi++){
+          var vy = pos.getY(vi);
+          var frac = (vy + mLen/2) / mLen; // 0 at bottom, 1 at top
+          frac = Math.min(1, Math.max(0, frac)); // clamp — floating-point rounding can push this a hair past 0/1, and Math.pow of a negative base is NaN
+          pos.setZ(vi, Math.pow(1-frac,1.6) * mLen*0.28);
+        }
+        pos.needsUpdate = true;
+        var strand = new THREE.Mesh(mossShape, mossMat);
+        strand.position.set(Math.cos(mAng)*baseR*0.35, mY, Math.sin(mAng)*baseR*0.35);
+        strand.rotation.y = -mAng;
+        g.add(strand);
+      }
+    }
+
     g.position.set(x,0,z);
     g.rotation.y = Math.random()*Math.PI*2;
     g.scale.setScalar(scale);
+    g.userData.treeType = species;
+    return g;
+  }
+  // deciduous PNW hardwoods in full fall color — big-leaf maple, vine maple, red alder,
+  // quaking aspen, garry oak — built from a leaning trunk/branch skeleton with clustered
+  // low-poly foliage blobs colored from a multi-tone autumn palette
+  function makeDeciduousTree(x,z,scale,type){
+    var g = new THREE.Group();
+    var spec = DECIDUOUS_SPECS[type];
+    var palette = FALL_PALETTES[type];
+    if (!barkTexShared) barkTexShared = makeBarkTexture();
+    if (!aspenBarkShared) aspenBarkShared = makeAspenBarkTexture();
+    if (!alderBarkShared) alderBarkShared = makeAlderBarkTexture();
+    if (!madroneBarkShared) madroneBarkShared = makeMadroneBarkTexture();
+    var barkTex = spec.bark === 'aspen' ? aspenBarkShared : (spec.bark === 'alder' ? alderBarkShared : (spec.bark === 'madrone' ? madroneBarkShared : barkTexShared));
+
+    var trunkH = spec.trunkH[0] + Math.random()*(spec.trunkH[1]-spec.trunkH[0]);
+    var trunkRBase = spec.trunkR[0] + Math.random()*(spec.trunkR[1]-spec.trunkR[0]);
+
+    var stemCount = spec.multiStem ? (2+Math.floor(Math.random()*2)) : 1;
+    for (var s=0;s<stemCount;s++){
+      var lean = spec.multiStem ? (Math.random()-0.5)*0.22 : (Math.random()-0.5)*0.06;
+      var stemH = trunkH * (spec.multiStem ? (0.75+Math.random()*0.35) : 1);
+      var trunk = new THREE.Mesh(
+        new THREE.CylinderGeometry(trunkRBase*0.55, trunkRBase*(spec.multiStem?0.8:1), stemH, 7),
+        new THREE.MeshStandardMaterial({map:barkTex, color:0xffffff, roughness:0.92})
+      );
+      trunk.position.y = stemH/2;
+      trunk.rotation.z = lean;
+      trunk.position.x = Math.sin(lean)*stemH*0.3;
+      trunk.castShadow = true;
+      g.add(trunk);
+    }
+
+    // a few hand-placed branch stubs so the larger species read with real silhouette
+    if (spec.branch){
+      var branchCount = 3+Math.floor(Math.random()*3);
+      for (var b=0;b<branchCount;b++){
+        var bh = trunkH*(0.45+Math.random()*0.4);
+        var bang = Math.random()*Math.PI*2;
+        var blen = trunkRBase*(4+Math.random()*3);
+        var branch = new THREE.Mesh(
+          new THREE.CylinderGeometry(trunkRBase*0.28, trunkRBase*0.5, blen, 5),
+          new THREE.MeshStandardMaterial({map:barkTex, color:0xffffff, roughness:0.92})
+        );
+        branch.position.set(Math.cos(bang)*blen*0.35, bh, Math.sin(bang)*blen*0.35);
+        branch.rotation.z = Math.PI/2 - 0.5 - Math.random()*0.5;
+        branch.rotation.y = bang;
+        branch.castShadow = true;
+        g.add(branch);
+      }
+    }
+
+    // clustered low-poly foliage blobs in mixed fall tones — reads as a painterly,
+    // variegated autumn canopy rather than one flat color
+    var blobCount = spec.blobCount[0] + Math.floor(Math.random()*(spec.blobCount[1]-spec.blobCount[0]+1));
+    var canopyY = trunkH*spec.canopyFrac + trunkH*0.5;
+    for (var i=0;i<blobCount;i++){
+      var br = spec.blobR[0] + Math.random()*(spec.blobR[1]-spec.blobR[0]);
+      var bx = (Math.random()-0.5)*spec.spread*2;
+      var bz = (Math.random()-0.5)*spec.spread*2;
+      var by = canopyY + (Math.random()-0.5)*trunkH*0.3 + br*0.3;
+      var color = palette[Math.floor(Math.random()*palette.length)];
+      var blob = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(br, 0),
+        new THREE.MeshStandardMaterial({color:color, roughness:0.88, flatShading:true})
+      );
+      blob.position.set(bx, by, bz);
+      blob.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
+      blob.castShadow = (i%2===0); // alternate shadow casting to keep the denser canopy cheap
+      g.add(blob);
+    }
+
+    g.position.set(x,0,z);
+    g.rotation.y = Math.random()*Math.PI*2;
+    g.scale.setScalar(scale);
+    g.userData.treeType = type;
     return g;
   }
   function distToPolyline(px, pz, points){
@@ -1359,10 +1653,36 @@
     }
     return {point:bestPt, normal:bestNormal, dist:best};
   }
+  // species mix for the treeline: conifers stay the majority for the old-growth PNW
+  // backdrop (7 species from the reference sheet), with a full spread of deciduous
+  // hardwoods mixed through — most in fall color, madrone staying evergreen-green
+  var CONIFER_TYPES = ['grand_fir','engelmann_spruce','douglas_fir','western_red_cedar','pacific_silver_fir','sitka_spruce','western_hemlock','alpine_larch'];
+  var CONIFER_WEIGHTS = [0.22,0.16,0.20,0.12,0.12,0.09,0.07,0.02]; // grand fir & douglas fir most common; alpine larch rare (subalpine species)
+  function pickTreeType(){
+    var r = Math.random();
+    if (r < 0.58){ // conifers ~58% of the mix
+      var cw = Math.random(), acc = 0;
+      for (var i=0;i<CONIFER_TYPES.length;i++){
+        acc += CONIFER_WEIGHTS[i];
+        if (cw < acc) return CONIFER_TYPES[i];
+      }
+      return 'grand_fir';
+    }
+    var r2 = Math.random();
+    if (r2 < 0.22) return 'bigleaf_maple';
+    if (r2 < 0.38) return 'vine_maple';
+    if (r2 < 0.54) return 'red_alder';
+    if (r2 < 0.66) return 'aspen';
+    if (r2 < 0.78) return 'garry_oak';
+    if (r2 < 0.90) return 'pacific_dogwood';
+    return 'madrone';
+  }
   var treeGroup = new THREE.Group();
   var ROAD_CLEAR = ROAD_W/2 + CURB_W + WALK_W + 1.4;
-  for (var t=0;t<46;t++){
-    var ang = Math.random()*Math.PI*2, rad = 32 + Math.random()*46;
+  var FOREST_OUT_R = 92; // pushed out from 88 so the hand-built (fully detailed) treeline runs deeper before the cheap backdrop layer takes over
+  var TREE_COUNT = IS_MOBILE ? 480 : 1250; // thick old-growth wall — up from 340/900
+  for (var t=0;t<TREE_COUNT;t++){
+    var ang = Math.random()*Math.PI*2, rad = 30 + Math.random()*(FOREST_OUT_R-30);
     var tx = Math.cos(ang)*rad, tz = Math.sin(ang)*rad;
     var tooClose = false;
     for (var key in stationPositions){
@@ -1372,9 +1692,444 @@
     if (Math.hypot(tx,tz) < 14) tooClose = true;
     if (distToPolyline(tx,tz,loopPts) < ROAD_CLEAR) tooClose = true;
     if (tooClose) { t--; continue; }
-    treeGroup.add(makeTree(tx,tz, 0.8+Math.random()*0.7));
+    // bias toward the outer treeline so the manor grounds still read as open lawn,
+    // with a denser wall of trees further back — misty PNW forest edge ablaze with fall color
+    var edgeFrac = (rad-30)/(FOREST_OUT_R-30);
+    var s = 0.65 + edgeFrac*1.35 + Math.random()*0.55;
+    var kind = pickTreeType();
+    if (CONIFER_SPECS[kind]){
+      treeGroup.add(makeTree(tx,tz, s, kind));
+    } else {
+      treeGroup.add(makeDeciduousTree(tx,tz, s*0.85, kind));
+    }
   }
   scene.add(treeGroup);
+
+  // ── low-brush understory scattered beneath the treeline — small clumpy shrubs that
+  // sit near ground level and break up the bare-lawn look right at the forest edge ──
+  // shared unit geometries reused across every fern/salal instance — only the
+  // per-instance matrix (position/rotation/scale) varies, so the whole understory
+  // renders as a handful of InstancedMesh draw calls instead of thousands of meshes
+  var fernBladeUnitGeo = (function(){
+    var geo = new THREE.PlaneGeometry(0.06, 1, 1, 6);
+    var pos = geo.attributes.position;
+    for (var vi=0; vi<pos.count; vi++){
+      var vy = pos.getY(vi);
+      var frac = vy + 0.5; // 0 base, 1 tip
+      frac = Math.min(1, Math.max(0, frac)); // clamp against the same floating-point edge case as the moss strands
+      pos.setX(vi, pos.getX(vi) * (1-frac*0.85));
+      pos.setZ(vi, Math.pow(frac,1.6) * 0.35);
+    }
+    pos.needsUpdate = true;
+    geo.translate(0,0.5,0); // pivot at the base so instance Y-scale grows from the ground
+    return geo;
+  })();
+  var salalLeafUnitGeo = new THREE.SphereGeometry(1,6,5);
+  var salalStemUnitGeo = (function(){
+    var geo = new THREE.CylinderGeometry(1,1,1,4);
+    geo.translate(0,0.5,0); // pivot at the base
+    return geo;
+  })();
+
+  (function buildUnderstory(){
+    var brushGeo = new THREE.IcosahedronGeometry(1, 0);
+    var brushPalette = [0x3A5238,0x445E3F,0x30442E,0x4C6142,0x59462A];
+    var count = IS_MOBILE ? 160 : 400;
+    var brushGroup = new THREE.Group();
+    var fernMatrices = [], salalLeafMatrices = [], salalStemMatrices = [];
+    var pm = new THREE.Matrix4(), lm = new THREE.Matrix4();
+    var dummyPlant = new THREE.Object3D(), dummyPart = new THREE.Object3D();
+
+    for (var i=0;i<count;i++){
+      var ang = Math.random()*Math.PI*2, rad = 26 + Math.random()*(FOREST_OUT_R-26);
+      var bx = Math.cos(ang)*rad, bz = Math.sin(ang)*rad;
+      if (Math.hypot(bx,bz) < 14) continue;
+      if (distToPolyline(bx,bz,loopPts) < ROAD_CLEAR - 0.6) continue;
+      var tooClose = false;
+      for (var key in stationPositions){
+        var sp = stationPositions[key];
+        if (Math.hypot(bx-sp[0], bz-sp[1]) < 8) tooClose = true;
+      }
+      if (tooClose) continue;
+
+      var plantS = 0.7+Math.random()*0.8;
+      var plantRotY = Math.random()*Math.PI*2;
+      dummyPlant.position.set(bx,0,bz);
+      dummyPlant.rotation.set(0,plantRotY,0);
+      dummyPlant.scale.setScalar(plantS);
+      dummyPlant.updateMatrix();
+      pm.copy(dummyPlant.matrix);
+
+      var pick = Math.random();
+      if (pick < 0.36){
+        // sword fern: a fan of blades radiating from the crown, each a scaled/rotated
+        // instance of the single shared blade geometry
+        var bladeCount = 9+Math.floor(Math.random()*6);
+        for (var bI=0; bI<bladeCount; bI++){
+          var len = 0.42+Math.random()*0.3;
+          var bAng = (bI/bladeCount)*Math.PI*2 + (Math.random()-0.5)*0.3;
+          dummyPart.position.set(0,0,0);
+          dummyPart.rotation.set(-1.2-Math.random()*0.25, bAng, 0);
+          dummyPart.scale.set(0.9+Math.random()*0.3, len, 1);
+          dummyPart.updateMatrix();
+          lm.multiplyMatrices(pm, dummyPart.matrix);
+          fernMatrices.push(lm.clone());
+        }
+      } else if (pick < 0.62){
+        // salal: a few woody stems, each carrying a loose cluster of broad oval leaves
+        var stemCount = 3+Math.floor(Math.random()*3);
+        for (var sI=0; sI<stemCount; sI++){
+          var stemH = 0.25+Math.random()*0.2;
+          var sAng = Math.random()*Math.PI*2, sRad = Math.random()*0.15;
+          var stemX = Math.cos(sAng)*sRad, stemZ = Math.sin(sAng)*sRad;
+          dummyPart.position.set(stemX,0,stemZ);
+          dummyPart.rotation.set(0,0,(Math.random()-0.5)*0.4);
+          dummyPart.scale.set(0.01,stemH,0.01);
+          dummyPart.updateMatrix();
+          lm.multiplyMatrices(pm, dummyPart.matrix);
+          salalStemMatrices.push(lm.clone());
+
+          var leafCount = 4+Math.floor(Math.random()*4);
+          for (var lI=0; lI<leafCount; lI++){
+            var lw = 0.09+Math.random()*0.05, lh = 0.13+Math.random()*0.06;
+            var lAng = Math.random()*Math.PI*2;
+            dummyPart.position.set(stemX+Math.cos(lAng)*0.06, stemH*(0.5+Math.random()*0.6), stemZ+Math.sin(lAng)*0.06);
+            dummyPart.rotation.set(Math.random()*0.6, lAng, Math.PI/2+(Math.random()-0.5)*0.5);
+            dummyPart.scale.set(lw, lh, lw*0.35);
+            dummyPart.updateMatrix();
+            lm.multiplyMatrices(pm, dummyPart.matrix);
+            salalLeafMatrices.push(lm.clone());
+          }
+        }
+      } else {
+        var bush = new THREE.Group();
+        var clumps = 2+Math.floor(Math.random()*3);
+        for (var c=0;c<clumps;c++){
+          var r = 0.35+Math.random()*0.5;
+          var mesh = new THREE.Mesh(brushGeo, new THREE.MeshStandardMaterial({
+            color: brushPalette[Math.floor(Math.random()*brushPalette.length)],
+            roughness:0.95, flatShading:true
+          }));
+          mesh.position.set((Math.random()-0.5)*0.8,(r*0.6)+(Math.random()*0.15),(Math.random()-0.5)*0.8);
+          mesh.scale.set(r, r*(0.7+Math.random()*0.4), r);
+          mesh.rotation.y = Math.random()*Math.PI;
+          mesh.castShadow = false;
+          bush.add(mesh);
+        }
+        bush.position.set(bx,0,bz);
+        bush.rotation.y = plantRotY;
+        bush.scale.setScalar(plantS);
+        brushGroup.add(bush);
+      }
+    }
+    scene.add(brushGroup);
+
+    if (fernMatrices.length){
+      var fernMat = new THREE.MeshStandardMaterial({color:0x2E4A2C, roughness:0.85, side:THREE.DoubleSide});
+      var fernMesh = new THREE.InstancedMesh(fernBladeUnitGeo, fernMat, fernMatrices.length);
+      for (var fi=0; fi<fernMatrices.length; fi++) fernMesh.setMatrixAt(fi, fernMatrices[fi]);
+      fernMesh.instanceMatrix.needsUpdate = true;
+      fernMesh.castShadow = false;
+      scene.add(fernMesh);
+    }
+    if (salalLeafMatrices.length){
+      var salalLeafMat = new THREE.MeshStandardMaterial({color:0x35502E, roughness:0.55, side:THREE.DoubleSide});
+      var salalLeafMesh = new THREE.InstancedMesh(salalLeafUnitGeo, salalLeafMat, salalLeafMatrices.length);
+      for (var si2=0; si2<salalLeafMatrices.length; si2++) salalLeafMesh.setMatrixAt(si2, salalLeafMatrices[si2]);
+      salalLeafMesh.instanceMatrix.needsUpdate = true;
+      salalLeafMesh.castShadow = false;
+      scene.add(salalLeafMesh);
+    }
+    if (salalStemMatrices.length){
+      var salalStemMat = new THREE.MeshStandardMaterial({color:0x4A3A28, roughness:0.9});
+      var salalStemMesh = new THREE.InstancedMesh(salalStemUnitGeo, salalStemMat, salalStemMatrices.length);
+      for (var si3=0; si3<salalStemMatrices.length; si3++) salalStemMesh.setMatrixAt(si3, salalStemMatrices[si3]);
+      salalStemMesh.instanceMatrix.needsUpdate = true;
+      salalStemMesh.castShadow = false;
+      scene.add(salalStemMesh);
+    }
+  })();
+
+  // ── distant forest backdrop — cheap InstancedMesh walls of simplified conifer
+  // silhouettes (trunk + cone) ringing the grounds far beyond the hand-built treeline,
+  // so the horizon reads as an unbroken dense forest instead of stopping abruptly ──
+  (function buildFarForest(){
+    var innerR = FOREST_OUT_R - 6, outerR = 210;
+    var totalCount = IS_MOBILE ? 380 : 1400;
+    var coneShades = [0x33493A,0x2C4133,0x3B5541,0x2A3D2E];
+    var trunkGeo = new THREE.CylinderGeometry(0.05,0.09,1,5);
+    var trunkMat = new THREE.MeshStandardMaterial({color:0x3E3226, roughness:1, flatShading:true});
+    var coneGeo = new THREE.ConeGeometry(0.62,1,7,1);
+    var far = new THREE.Group();
+    // split the population across a few color variants (rather than per-instance color,
+    // which needs a newer three.js build) so the wall still reads as varied, not flat
+    var perShade = Math.ceil(totalCount/coneShades.length);
+    var dummy = new THREE.Object3D();
+    var placed = 0;
+    coneShades.forEach(function(shade){
+      var n = Math.min(perShade, totalCount-placed);
+      if (n<=0) return;
+      var coneMat = new THREE.MeshStandardMaterial({color:shade, roughness:1, flatShading:true});
+      var trunkMesh = new THREE.InstancedMesh(trunkGeo, trunkMat, n);
+      var coneMesh = new THREE.InstancedMesh(coneGeo, coneMat, n);
+      trunkMesh.castShadow = false; trunkMesh.receiveShadow = false;
+      coneMesh.castShadow = false; coneMesh.receiveShadow = false;
+      for (var i=0;i<n;i++){
+        var ang = Math.random()*Math.PI*2;
+        var rad = innerR + Math.pow(Math.random(),0.6)*(outerR-innerR);
+        var x = Math.cos(ang)*rad, z = Math.sin(ang)*rad;
+        var h = 5 + Math.random()*9 + (rad-innerR)*0.02;
+        var trunkH = h*0.22, coneH = h*0.82;
+        var rScale = 0.85+Math.random()*0.6;
+        dummy.position.set(x, trunkH/2, z);
+        dummy.rotation.set(0,Math.random()*Math.PI*2,0);
+        dummy.scale.set(rScale, trunkH, rScale);
+        dummy.updateMatrix();
+        trunkMesh.setMatrixAt(i, dummy.matrix);
+        dummy.position.set(x, trunkH*0.75, z);
+        dummy.scale.set(rScale, coneH, rScale);
+        dummy.updateMatrix();
+        coneMesh.setMatrixAt(i, dummy.matrix);
+      }
+      trunkMesh.instanceMatrix.needsUpdate = true;
+      coneMesh.instanceMatrix.needsUpdate = true;
+      far.add(trunkMesh); far.add(coneMesh);
+      placed += n;
+    });
+    scene.add(far);
+  })();
+
+  // ── woodland wildlife — deer, rabbits, snakes, and squirrels scattered through the
+  // grounds and forest edge, well clear of the road and buildings ──
+  var wildlife = { deer: [], rabbits: [], snakes: [], squirrels: [] };
+  function findWildlifeSpot(minR, maxR, minClear){
+    for (var attempt=0; attempt<24; attempt++){
+      var ang = Math.random()*Math.PI*2, rad = minR + Math.random()*(maxR-minR);
+      var x = Math.cos(ang)*rad, z = Math.sin(ang)*rad;
+      if (distToPolyline(x,z,loopPts) < (minClear || ROAD_CLEAR)) continue;
+      var tooClose = false;
+      for (var key in stationPositions){
+        var sp = stationPositions[key];
+        if (Math.hypot(x-sp[0], z-sp[1]) < 8) { tooClose = true; break; }
+      }
+      if (tooClose) continue;
+      return {x:x, z:z, heading:Math.random()*Math.PI*2};
+    }
+    return null;
+  }
+
+  // deer — slim body, thin legs, small head with tiny antlers on bucks; a gentle
+  // head-down/up graze motion is added in the animate loop
+  function makeDeer(isBuck){
+    var g = new THREE.Group();
+    var coatMat = new THREE.MeshStandardMaterial({color:0x7A5A3E, roughness:0.85});
+    var bellyMat = new THREE.MeshStandardMaterial({color:0xD9C9A8, roughness:0.85});
+    var antlerMat = new THREE.MeshStandardMaterial({color:0x5C4A34, roughness:0.7});
+
+    var body = new THREE.Mesh(new THREE.SphereGeometry(0.2,8,7), coatMat);
+    body.scale.set(1.7,0.85,0.85); body.position.set(0,0.62,0); body.castShadow = true;
+    g.add(body);
+    var belly = new THREE.Mesh(new THREE.SphereGeometry(0.14,8,6), bellyMat);
+    belly.position.set(0,0.52,0); belly.scale.set(1.4,0.7,0.9);
+    g.add(belly);
+
+    var neck = new THREE.Group(); neck.position.set(0.28,0.72,0);
+    var neckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.12,0.32,7), coatMat);
+    neckMesh.rotation.z = -0.7; neckMesh.position.set(0.08,0.1,0); neckMesh.castShadow = true;
+    neck.add(neckMesh);
+    var head = new THREE.Mesh(new THREE.ConeGeometry(0.09,0.26,7), coatMat);
+    head.rotation.z = -1.65; head.position.set(0.24,0.22,0); head.castShadow = true;
+    neck.add(head);
+    if (isBuck){
+      for (var a=0;a<2;a++){
+        var antler = new THREE.Mesh(new THREE.CylinderGeometry(0.008,0.016,0.18,4), antlerMat);
+        antler.position.set(0.3, 0.34, (a===0?-1:1)*0.05);
+        antler.rotation.set(0,0,-0.3+(a===0?0.15:-0.15));
+        neck.add(antler);
+      }
+    }
+    g.add(neck);
+    g.userData.neck = neck;
+
+    var legGeo = new THREE.CylinderGeometry(0.028,0.035,0.55,5);
+    var legXZ = [[-0.16,0.09],[-0.16,-0.09],[0.15,0.09],[0.15,-0.09]];
+    var legs = [];
+    for (var l=0;l<4;l++){
+      var leg = new THREE.Mesh(legGeo, coatMat);
+      leg.position.set(legXZ[l][0], 0.32, legXZ[l][1]); leg.castShadow = true;
+      g.add(leg); legs.push(leg);
+    }
+    g.userData.legs = legs;
+
+    var tail = new THREE.Mesh(new THREE.ConeGeometry(0.05,0.14,6), bellyMat);
+    tail.position.set(-0.34,0.66,0); tail.rotation.z = 1.5;
+    g.add(tail);
+    return g;
+  }
+
+  // rabbit — small crouched body, long upright ears, tiny cotton tail
+  function makeRabbit(){
+    var g = new THREE.Group();
+    var furMat = new THREE.MeshStandardMaterial({color:0x8A7358, roughness:0.9});
+    var tailMat = new THREE.MeshStandardMaterial({color:0xEDE6D8, roughness:0.9});
+    var body = new THREE.Mesh(new THREE.SphereGeometry(0.11,8,7), furMat);
+    body.position.y = 0.12; body.scale.set(1,0.9,1.3); body.castShadow = true;
+    g.add(body);
+    var head = new THREE.Mesh(new THREE.SphereGeometry(0.07,8,7), furMat);
+    head.position.set(0,0.19,0.13); head.castShadow = true;
+    g.add(head);
+    var earGeo = new THREE.CylinderGeometry(0.012,0.02,0.11,6);
+    var earL = new THREE.Mesh(earGeo, furMat); earL.position.set(-0.03,0.3,0.12); earL.rotation.z = 0.15;
+    var earR = new THREE.Mesh(earGeo, furMat); earR.position.set(0.03,0.3,0.12); earR.rotation.z = -0.15;
+    g.add(earL); g.add(earR);
+    g.userData.earL = earL; g.userData.earR = earR;
+    var tail = new THREE.Mesh(new THREE.SphereGeometry(0.045,6,6), tailMat);
+    tail.position.set(0,0.13,-0.16);
+    g.add(tail);
+    return g;
+  }
+
+  // snake — an S-curved body lying flat on the ground, built from a short chain of
+  // oriented, tapering cylinder segments rather than TubeGeometry: a Frenet-frame tube
+  // following a curve that's confined to a flat plane (constant Y here) is a known
+  // three.js edge case that produces NaN normals, so we sidestep it entirely
+  function makeSnake(){
+    var palette = [0x4A5C2E,0x5C4A2E,0x33402A];
+    var color = palette[Math.floor(Math.random()*palette.length)];
+    var mat = new THREE.MeshStandardMaterial({color:color, roughness:0.75});
+    var len = 0.55+Math.random()*0.35;
+    var pts = [
+      new THREE.Vector3(0,0.022,0),
+      new THREE.Vector3(len*0.28, 0.022, len*0.22),
+      new THREE.Vector3(len*0.55, 0.022, -len*0.12),
+      new THREE.Vector3(len*0.8, 0.022, len*0.15),
+      new THREE.Vector3(len, 0.022, 0)
+    ];
+    var g = new THREE.Group();
+    var segCount = pts.length-1;
+    for (var i=0;i<segCount;i++){
+      var a = pts[i], b = pts[i+1];
+      var mid = new THREE.Vector3().addVectors(a,b).multiplyScalar(0.5);
+      var segLen = a.distanceTo(b);
+      if (segLen < 1e-5) continue; // guard against a degenerate zero-length segment
+      // taper the body slightly toward the tail end
+      var rStart = 0.032 * (1 - (i/segCount)*0.55);
+      var rEnd = 0.032 * (1 - ((i+1)/segCount)*0.55);
+      var seg = new THREE.Mesh(new THREE.CylinderGeometry(rEnd, rStart, segLen, 7), mat);
+      seg.position.copy(mid);
+      // orient the cylinder's local Y axis to point from a to b
+      var dir = new THREE.Vector3().subVectors(b,a).normalize();
+      seg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir);
+      seg.castShadow = true;
+      g.add(seg);
+    }
+    // a slightly raised head with two eye flecks
+    var head = new THREE.Mesh(new THREE.SphereGeometry(0.032,6,6), mat);
+    head.position.set(0,0.025,0);
+    g.add(head);
+    return g;
+  }
+
+  // squirrel — small perched body with a big curled tail, usually near a tree trunk
+  function makeSquirrel(){
+    var g = new THREE.Group();
+    var furMat = new THREE.MeshStandardMaterial({color:0x6E5638, roughness:0.9});
+    var bellyMat = new THREE.MeshStandardMaterial({color:0xCDBB9C, roughness:0.9});
+    var body = new THREE.Mesh(new THREE.SphereGeometry(0.075,8,7), furMat);
+    body.position.y = 0.1; body.scale.set(1,1.1,0.95); body.castShadow = true;
+    g.add(body);
+    var head = new THREE.Mesh(new THREE.SphereGeometry(0.05,7,6), furMat);
+    head.position.set(0,0.19,0.03); head.castShadow = true;
+    g.add(head);
+    var tail = new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.05,0.16,6), furMat);
+    tail.position.set(0,0.22,-0.11); tail.rotation.x = -0.9;
+    g.add(tail);
+    g.userData.tail = tail;
+    return g;
+  }
+
+  var DEER_COUNT = (IS_MOBILE ? 4 : 9) * 10; // 10x — herds grazing right along the road/sidewalk
+  var deerPlaced = 0;
+  var deerAttempts = 0;
+  while (deerPlaced < DEER_COUNT && deerAttempts < DEER_COUNT*6){
+    deerAttempts++;
+    // small herds clustered close to the road and walking path so they're easy to spot
+    // from the cart — just past the sidewalk edge instead of deep in the treeline
+    var herdSpot = findWildlifeSpot(6, FOREST_OUT_R-4, ROAD_CLEAR - 0.9);
+    if (!herdSpot) continue;
+    var herdSize = Math.min(DEER_COUNT-deerPlaced, (Math.random()<0.4) ? 2 : 1);
+    for (var hj=0; hj<herdSize; hj++){
+      var dx = herdSpot.x + (Math.random()-0.5)*4, dz = herdSpot.z + (Math.random()-0.5)*4;
+      var mesh = makeDeer(Math.random()<0.35);
+      mesh.position.set(dx,0,dz);
+      mesh.rotation.y = Math.random()*Math.PI*2;
+      mesh.scale.setScalar(0.85+Math.random()*0.3);
+      scene.add(mesh);
+      wildlife.deer.push({mesh:mesh, phase:Math.random()*Math.PI*2});
+      deerPlaced++;
+    }
+  }
+
+  var RABBIT_COUNT = IS_MOBILE ? 10 : 26;
+  for (var ri=0; ri<RABBIT_COUNT; ri++){
+    var rs = findWildlifeSpot(20, FOREST_OUT_R, ROAD_CLEAR - 0.4);
+    if (!rs) continue;
+    var mesh = makeRabbit();
+    mesh.position.set(rs.x,0,rs.z);
+    mesh.rotation.y = rs.heading;
+    mesh.scale.setScalar(0.8+Math.random()*0.4);
+    scene.add(mesh);
+    wildlife.rabbits.push({mesh:mesh, phase:Math.random()*Math.PI*2});
+  }
+
+  var SNAKE_COUNT = IS_MOBILE ? 6 : 14;
+  for (var si=0; si<SNAKE_COUNT; si++){
+    var ss = findWildlifeSpot(20, FOREST_OUT_R, ROAD_CLEAR - 0.2);
+    if (!ss) continue;
+    var mesh = makeSnake();
+    mesh.position.set(ss.x,0,ss.z);
+    mesh.rotation.y = Math.random()*Math.PI*2;
+    mesh.scale.setScalar(0.85+Math.random()*0.5);
+    scene.add(mesh);
+    wildlife.snakes.push({mesh:mesh, phase:Math.random()*Math.PI*2});
+  }
+
+  var SQUIRREL_COUNT = IS_MOBILE ? 8 : 20;
+  for (var qi=0; qi<SQUIRREL_COUNT; qi++){
+    var qs = findWildlifeSpot(20, FOREST_OUT_R, ROAD_CLEAR - 0.4);
+    if (!qs) continue;
+    var mesh = makeSquirrel();
+    mesh.position.set(qs.x,0,qs.z);
+    mesh.rotation.y = Math.random()*Math.PI*2;
+    mesh.scale.setScalar(0.85+Math.random()*0.35);
+    scene.add(mesh);
+    wildlife.squirrels.push({mesh:mesh, phase:Math.random()*Math.PI*2});
+  }
+
+  function updateWildlife(t, dt){
+    for (var i=0;i<wildlife.deer.length;i++){
+      var d = wildlife.deer[i];
+      d.mesh.userData.neck.rotation.x = Math.sin(t*0.5 + d.phase)*0.12 - 0.05;
+      var step = Math.sin(t*1.1 + d.phase)*0.06;
+      var legs = d.mesh.userData.legs;
+      legs[0].rotation.x = step; legs[3].rotation.x = step;
+      legs[1].rotation.x = -step; legs[2].rotation.x = -step;
+    }
+    for (var j=0;j<wildlife.rabbits.length;j++){
+      var r = wildlife.rabbits[j];
+      var twitch = Math.sin(t*3 + r.phase);
+      r.mesh.userData.earL.rotation.x = Math.max(0,twitch)*0.25;
+      r.mesh.userData.earR.rotation.x = Math.max(0,-twitch)*0.25;
+    }
+    for (var k=0;k<wildlife.snakes.length;k++){
+      var sn = wildlife.snakes[k];
+      sn.mesh.rotation.z = Math.sin(t*0.7+sn.phase)*0.05;
+    }
+    for (var m=0;m<wildlife.squirrels.length;m++){
+      var sq = wildlife.squirrels[m];
+      sq.mesh.userData.tail.rotation.z = Math.sin(t*2.2+sq.phase)*0.15;
+    }
+  }
 
   // ── center island garden (roundabout-style landscaped centerpiece) ──
   function buildCenterGarden(){
@@ -1434,11 +2189,17 @@
       }
     });
 
-    var gardenTreeCount = 7;
+    var gardenTreeCount = 10;
+    var gardenAccentTypes = ['bigleaf_maple','vine_maple','garry_oak','pacific_dogwood','red_alder'];
     for (var j=0;j<gardenTreeCount;j++){
       var tAng = (j/gardenTreeCount)*Math.PI*2 + 0.3;
       var tRad = R*0.42;
-      var gt = makeTree(Math.cos(tAng)*tRad, Math.sin(tAng)*tRad, 0.5+Math.random()*0.2);
+      var gx = Math.cos(tAng)*tRad, gz = Math.sin(tAng)*tRad;
+      // every third garden tree is a fall-color accent so the roundabout reads as a
+      // deliberate splash of autumn color right at the manor's front door
+      var gt = (j%3===0)
+        ? makeDeciduousTree(gx, gz, 0.42+Math.random()*0.16, gardenAccentTypes[Math.floor(Math.random()*gardenAccentTypes.length)])
+        : makeTree(gx, gz, 0.5+Math.random()*0.2);
       g.add(gt);
     }
 
@@ -1494,6 +2255,57 @@
         g.add(leg2);
       });
     }
+
+    // a few people out enjoying the garden — strolling near the benches and paths
+    var gardenPeopleCount = 6;
+    for (var gp=0; gp<gardenPeopleCount; gp++){
+      var gpAng = (gp/gardenPeopleCount)*Math.PI*2 + Math.random()*0.5;
+      var gpRad = R*(0.3+Math.random()*0.4);
+      var gpx = Math.cos(gpAng)*gpRad, gpz = Math.sin(gpAng)*gpRad;
+      var gpPalette = pedestrianPalettes[Math.floor(Math.random()*pedestrianPalettes.length)];
+      var gpMesh = makePedestrian(gpPalette[0], gpPalette[1], gpPalette[2]);
+      gpMesh.position.set(gpx, 0.26, gpz);
+      gpMesh.rotation.y = Math.random()*Math.PI*2;
+      gpMesh.scale.setScalar(0.92+Math.random()*0.18);
+      g.add(gpMesh);
+    }
+
+    // colorful balloon bunches — a couple tied near the benches, one bigger bunch by
+    // the plaza — bright party colors for a festive, welcoming pop of color
+    var balloonColors = [0xE8425A, 0xF2C230, 0x4FC1E9, 0x7ED957, 0xFF8FB1, 0xB4E61D, 0xFF9F45, 0xC97CE0, 0xFFFFFF, 0x5FD3C4];
+    function makeBalloonBunch(bx, bz, tieY, count){
+      var bunch = new THREE.Group();
+      var stringMat = new THREE.MeshStandardMaterial({color:0xEDE6D8, roughness:0.8});
+      for (var bi=0; bi<count; bi++){
+        var by = tieY + 0.9 + Math.random()*0.5;
+        var ox = (Math.random()-0.5)*0.45, oz = (Math.random()-0.5)*0.45;
+        var color = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+        var balloon = new THREE.Mesh(new THREE.SphereGeometry(0.22,10,9), new THREE.MeshStandardMaterial({
+          color:color, roughness:0.35, metalness:0.05, emissive:color, emissiveIntensity:0.12
+        }));
+        balloon.scale.set(0.88,1.15,0.88);
+        balloon.position.set(ox, by, oz);
+        balloon.castShadow = true;
+        bunch.add(balloon);
+        var knot = new THREE.Mesh(new THREE.ConeGeometry(0.035,0.06,6), stringMat);
+        knot.position.set(ox, by-0.26, oz); knot.rotation.x = Math.PI;
+        bunch.add(knot);
+        var stringLen = by - 0.06 - tieY;
+        var string = new THREE.Mesh(new THREE.CylinderGeometry(0.006,0.006,stringLen,4), stringMat);
+        string.position.set(ox*0.5, tieY + stringLen/2, oz*0.5);
+        bunch.add(string);
+      }
+      bunch.position.set(bx, 0, bz);
+      return bunch;
+    }
+    // tied to two of the benches
+    for (var bb=0; bb<spokeCount; bb+=2){
+      var bbAng = (bb/spokeCount)*Math.PI*2 + Math.PI/4 + Math.PI/spokeCount;
+      var bbRad = R*0.6;
+      g.add(makeBalloonBunch(Math.cos(bbAng)*bbRad, Math.sin(bbAng)*bbRad, 0.5, 3+Math.floor(Math.random()*2)));
+    }
+    // a bigger bunch by the plaza, near the lamp post
+    g.add(makeBalloonBunch(1.6, 1.2, 0.27, 5));
 
     return g;
   }
@@ -1551,6 +2363,74 @@
     }
     return false;
   }
+
+  // ── roadside photo banners — real Autumn Hill Manor (AFH) photos on wooden frames ──
+  var ROADSIDE_BANNERS = [
+    ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80","Autumn Hill Manor"],
+    ["https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?w=900&q=80","Garden Courtyard"],
+    ["https://images.unsplash.com/photo-1463320726281-696a485928c7?w=900&q=80","Garden Blooms"],
+    ["https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80","The Great Room"],
+    ["https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80","Private Suites"],
+    ["https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=80","Daily Wellness"]
+  ];
+  function makeCaptionTexture(text){
+    var c = document.createElement('canvas'); c.width=512; c.height=100;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#FAF6ED'; ctx.fillRect(0,0,512,100);
+    ctx.strokeStyle = '#C9772E'; ctx.lineWidth = 4; ctx.strokeRect(4,4,504,92);
+    ctx.fillStyle = '#1F3A2E';
+    ctx.font = '700 42px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 256, 52);
+    var tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = MAX_ANISO;
+    return tex;
+  }
+  var bannerTextureLoader = new THREE.TextureLoader();
+  if (bannerTextureLoader.setCrossOrigin) bannerTextureLoader.setCrossOrigin('anonymous');
+  function makeRoadBanner(imgUrl, captionText){
+    var g = new THREE.Group();
+    var POST_H = 3.3, FRAME_W = 2.6, FRAME_H = 1.9;
+    var postMat = new THREE.MeshStandardMaterial({color:0x5A3D26, roughness:0.85});
+    var postGeo = new THREE.CylinderGeometry(0.065,0.08,POST_H,8);
+    [-1,1].forEach(function(side){
+      var post = new THREE.Mesh(postGeo, postMat);
+      post.position.set(side*(FRAME_W/2+0.12), POST_H/2, 0);
+      post.castShadow = true; post.receiveShadow = true;
+      g.add(post);
+    });
+    var frameCenterY = POST_H - FRAME_H/2 - 0.18;
+    var frameMat = new THREE.MeshStandardMaterial({color:0xEAD3A0, roughness:0.6});
+    var frame = new THREE.Mesh(new THREE.BoxGeometry(FRAME_W+0.16, FRAME_H+0.16, 0.09), frameMat);
+    frame.position.set(0, frameCenterY, 0);
+    frame.castShadow = true; frame.receiveShadow = true;
+    g.add(frame);
+
+    // photo plane — starts as a soft placeholder tint, swapped for the real photo once it loads
+    var picMat = new THREE.MeshStandardMaterial({color:0xC9C4B6, roughness:0.9, side:THREE.DoubleSide});
+    var pic = new THREE.Mesh(new THREE.PlaneGeometry(FRAME_W, FRAME_H), picMat);
+    pic.position.set(0, frameCenterY, 0.052);
+    g.add(pic);
+    bannerTextureLoader.load(imgUrl, function(tex){
+      tex.encoding = THREE.sRGBEncoding;
+      tex.anisotropy = MAX_ANISO;
+      picMat.map = tex; picMat.color.set(0xffffff); picMat.needsUpdate = true;
+    }, undefined, function(){ /* photo failed to load — keep the placeholder tint */ });
+
+    var plaqueMat = new THREE.MeshStandardMaterial({map: makeCaptionTexture(captionText), roughness:0.7, side:THREE.DoubleSide});
+    var plaque = new THREE.Mesh(new THREE.PlaneGeometry(FRAME_W*0.85, 0.32), plaqueMat);
+    plaque.position.set(0, frameCenterY - FRAME_H/2 - 0.26, 0.052);
+    g.add(plaque);
+
+    var baseMat = new THREE.MeshStandardMaterial({color:0x1F1F1F, roughness:0.6});
+    [-1,1].forEach(function(side){
+      var base = new THREE.Mesh(new THREE.CylinderGeometry(0.13,0.15,0.12,8), baseMat);
+      base.position.set(side*(FRAME_W/2+0.12), 0.06, 0);
+      base.receiveShadow = true;
+      g.add(base);
+    });
+    return g;
+  }
   var LAMP_RING = offsetPolygon(loopPts, ROAD_W/2 + CURB_W + WALK_W + 0.55);
   var FLOWER_RING_OUT = offsetPolygon(loopPts, ROAD_W/2 + CURB_W + WALK_W + 0.28);
   var FLOWER_RING_IN = offsetPolygon(loopPts, -(ROAD_W/2 + CURB_W + WALK_W + 0.28));
@@ -1576,6 +2456,22 @@
       roadsideDecor.add(bed);
     }
   });
+
+  var BANNER_RING = offsetPolygon(loopPts, -(ROAD_W/2 + CURB_W + WALK_W + 1.7));
+  var bannerStep = Math.max(6, Math.floor(loopPts.length / ROADSIDE_BANNERS.length));
+  var bannerIdx = 0;
+  for (var bi=0; bi<loopPts.length && bannerIdx<ROADSIDE_BANNERS.length; bi+=bannerStep){
+    var bp = BANNER_RING[bi];
+    if (nearAnyStation(bp[0], bp[1], 7)) continue;
+    var bannerData = ROADSIDE_BANNERS[bannerIdx];
+    var banner = makeRoadBanner(bannerData[0], bannerData[1]);
+    banner.position.set(bp[0], 0, bp[1]);
+    var loopPt = loopPts[bi];
+    var bTowardRoad = new THREE.Vector2(loopPt[0]-bp[0], loopPt[1]-bp[1]).normalize(); // face back toward the road centerline
+    banner.rotation.y = Math.atan2(-bTowardRoad.y, bTowardRoad.x);
+    roadsideDecor.add(banner);
+    bannerIdx++;
+  }
   scene.add(roadsideDecor);
 
 
@@ -1774,6 +2670,50 @@
     buildingMeshes[key2] = b;
   }
 
+  // ── a person waiting at each stand — standing on the plinth near the bench,
+  // facing out toward the road as if waiting for the cart to come by ──
+  for (var key2b in stationPositions){
+    var wn = stationNormal[key2b];
+    var wp = stationPositions[key2b];
+    var wPalette = pedestrianPalettes[Math.floor(Math.random()*pedestrianPalettes.length)];
+    var waiter = makePedestrian(wPalette[0], wPalette[1], wPalette[2]);
+    // stand just off-center on the plinth, toward the road-facing edge
+    waiter.position.set(wp[0] - wn[0]*0.9, 0.2, wp[1] - wn[1]*0.9);
+    waiter.rotation.y = Math.atan2(-wn[0], -wn[1]) + (Math.random()-0.5)*0.4;
+    waiter.scale.setScalar(0.95+Math.random()*0.14);
+    // idle stance — arms resting rather than mid-stride
+    waiter.userData.armL.rotation.x = -0.08;
+    waiter.userData.armR.rotation.x = 0.08;
+    scene.add(waiter);
+  }
+
+  // ── small groups of people out along the sidewalk between stations ──
+  function makePeopleGroup(){
+    var g = new THREE.Group();
+    [-0.95, 0.95].forEach(function(hx){
+      var palette = pedestrianPalettes[Math.floor(Math.random()*pedestrianPalettes.length)];
+      var person = makePedestrian(palette[0], palette[1], palette[2]);
+      person.position.set(hx, 0, 0);
+      person.scale.setScalar(0.94+Math.random()*0.12);
+      person.rotation.y = (Math.random()-0.5)*0.5;
+      g.add(person);
+    });
+    return g;
+  }
+  for (var pgi=0; pgi<4; pgi++){
+    // tuck each pair into a gap between two stations, just off the sidewalk
+    var pgAng = -Math.PI/2 + (pgi*2 + 1)*(Math.PI*2/stationOrderXY.length);
+    var pgpx = TRACK_RX*Math.cos(pgAng), pgpz = TRACK_RZ*Math.sin(pgAng);
+    var pgnx0 = Math.cos(pgAng)/TRACK_RX, pgnz0 = Math.sin(pgAng)/TRACK_RZ;
+    var pgnl = Math.hypot(pgnx0,pgnz0);
+    var pgnx = pgnx0/pgnl, pgnz = pgnz0/pgnl;
+    var pgOffset = ROAD_W/2 + CURB_W + WALK_W + 1.1;
+    var pgGroup = makePeopleGroup();
+    pgGroup.position.set(pgpx + pgnx*pgOffset, 0, pgpz + pgnz*pgOffset);
+    pgGroup.rotation.y = Math.atan2(-pgnx, -pgnz);
+    scene.add(pgGroup);
+  }
+
   // signposts (simple thin box + sprite label via canvas texture)
   function makeLabelSprite(text){
     var canvas = document.createElement('canvas');
@@ -1865,14 +2805,14 @@
   var lowerBody = new THREE.Mesh(new THREE.BoxGeometry(1.82,0.5,4.3), paintMat);
   lowerBody.position.y = 0.42; lowerBody.castShadow = true; lowerBody.receiveShadow = true;
   cart.add(lowerBody);
-  var noseWedge = new THREE.Mesh(new THREE.BoxGeometry(1.82,0.28,0.5), paintMat);
-  noseWedge.position.set(0,0.56,-2.15); noseWedge.rotation.x = -0.18; noseWedge.castShadow = true;
+  var noseWedge = new THREE.Mesh(new THREE.BoxGeometry(1.82,0.28,1.5), paintMat);
+  noseWedge.position.set(0,0.56,-1.65); noseWedge.castShadow = true;
   cart.add(noseWedge);
 
   // racing stripe down the centerline — hood, roof, and rear deck
   var stripeMat = new THREE.MeshStandardMaterial({color:0xF5F1E6, roughness:0.35, metalness:0.1});
   var stripeHood = new THREE.Mesh(new THREE.BoxGeometry(0.34,0.02,2.2), stripeMat);
-  stripeHood.position.set(0,0.685,-1.35); stripeHood.rotation.x = -0.18;
+  stripeHood.position.set(0,0.685,-1.35);
   cart.add(stripeHood);
   var stripeRear = new THREE.Mesh(new THREE.BoxGeometry(0.34,0.02,1.7), stripeMat);
   stripeRear.position.set(0,0.685,1.75);
@@ -1882,11 +2822,11 @@
   var cabin = new THREE.Mesh(new THREE.BoxGeometry(1.5,0.5,2.05), glassMatCar);
   cabin.position.set(0,0.86,0.15); cabin.castShadow = true;
   cart.add(cabin);
-  var windshield = new THREE.Mesh(new THREE.BoxGeometry(1.44,0.06,1.0), glassMatCar);
-  windshield.position.set(0,0.95,-0.92); windshield.rotation.x = 1.0;
+  var windshield = new THREE.Mesh(new THREE.BoxGeometry(1.44,0.06,0.41), glassMatCar);
+  windshield.position.set(0,0.915,-0.92); windshield.rotation.x = Math.PI/2;
   cart.add(windshield);
-  var rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.44,0.06,1.15), glassMatCar);
-  rearGlass.position.set(0,0.9,1.25); rearGlass.rotation.x = -0.85;
+  var rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.44,0.06,0.41), glassMatCar);
+  rearGlass.position.set(0,0.915,1.25); rearGlass.rotation.x = -Math.PI/2;
   cart.add(rearGlass);
 
   var trimMat = new THREE.MeshStandardMaterial({color:0x14161A, roughness:0.55, metalness:0.4});
@@ -2005,12 +2945,27 @@
   var hubMat = new THREE.MeshStandardMaterial({color:0xffffff, map: hubTex, roughness:0.35, metalness:0.5});
   var wheelMat = [tireMat, hubMat, hubMat];
   var wheels = [];
-  [[-0.92,0.36,1.32],[0.92,0.36,1.32],[-0.92,0.36,-1.32],[0.92,0.36,-1.32]].forEach(function(p){
+  var frontWheelPivots = [];
+  [[-0.92,0.36,1.32],[0.92,0.36,1.32],[-0.92,0.36,-1.32],[0.92,0.36,-1.32]].forEach(function(p, idx){
     var wheel = new THREE.Mesh(wheelGeo, wheelMat);
     wheel.rotation.z = Math.PI/2;
-    wheel.position.set(p[0],p[1],p[2]);
     wheel.castShadow = true;
-    cart.add(wheel);
+    var isFront = p[2] > 0;
+    if (isFront){
+      // steering pivot: sits at the wheel's position, holds the wheel at local
+      // origin, so rotating the pivot on Y turns the tire in place without
+      // touching the wheel's own rolling rotation (which stays on wheel.rotation.x)
+      // or the car body's heading
+      var pivot = new THREE.Object3D();
+      pivot.position.set(p[0], p[1], p[2]);
+      wheel.position.set(0,0,0);
+      pivot.add(wheel);
+      cart.add(pivot);
+      frontWheelPivots.push(pivot);
+    } else {
+      wheel.position.set(p[0],p[1],p[2]);
+      cart.add(wheel);
+    }
     wheels.push(wheel);
   });
 
@@ -2025,6 +2980,7 @@
   // ───────────────────────────── physics ─────────────────────────────
   // tour starts parked at FAQ (the last stop on the loop) and heads to Welcome Home next
   var speed = 0, heading = Math.atan2(stationLanePt.welcome[0]-stationLanePt.faq[0], stationLanePt.welcome[1]-stationLanePt.faq[1]);
+  var appliedTurnRate = 0; // eased actual heading rate, smoothed on top of input.turn
   cart.rotation.y = heading;
   var MAX_SPEED = 9, ACCEL = 10, FRICTION = 6, TURN_RATE = 2.0;
   var WORLD_LIMIT = 84;
@@ -2041,20 +2997,43 @@
     return a;
   }
 
-  function updateAutopilot(){
+  function updateAutopilot(dt){
     var targetKey = stationOrder[autopilotIndex % stationOrder.length];
     var sp = stationLanePt[targetKey];
-    var dx = sp[0] - cart.position.x;
-    var dz = sp[1] - cart.position.z;
-    var dist = Math.hypot(dx, dz);
-    var angleToTarget = Math.atan2(dx, dz);
+    var dx0 = sp[0] - cart.position.x;
+    var dz0 = sp[1] - cart.position.z;
+    var dist = Math.hypot(dx0, dz0); // still used for the slow-down-near-station logic below
+
+    // steer toward a look-ahead point along the actual lane curve rather than straight
+    // at the (possibly far away) next station — following the curve's shape as it's
+    // driven, instead of cutting a chord across it, is what keeps the cart from
+    // swinging wide into the lane edge on turns and needing a correction to snap back
+    var nearestLane = nearestArcOnLane(cart.position.x, cart.position.z);
+    var lookAheadDist = 2 + Math.min(1,Math.abs(speed)/MAX_SPEED)*2; // look further ahead at speed
+    lookAheadDist = Math.min(lookAheadDist, Math.max(0.4, dist*0.55));
+    var lookPt = laneSampler.getPointAt(nearestLane.arc + lookAheadDist);
+
+    // steer straight to the road's own tangent direction at the look-ahead point —
+    // aiming at the point itself (rather than its tangent) is what caused the cart
+    // to cut across the lane at an angle instead of running parallel to it; the
+    // lane-centering correction in updateCart handles pulling it onto the lane
+    // laterally, so heading only needs to track the road direction
+    var angleToTarget = lookPt.heading;
     var diff = normalizeAngle(angleToTarget - heading);
 
-    input.turn = Math.max(-1, Math.min(1, diff * 1.4));
+    var turnTarget = Math.max(-1, Math.min(1, diff * 1.6));
+    // ease toward the desired turn instead of snapping to it, so steering
+    // input changes smoothly frame to frame rather than jumping — exponential
+    // ease stays consistent even if a frame runs long (no more clipping to an
+    // instant snap on a lag spike, which read as a jerky steering flick)
+    var turnEase = 1 - Math.exp(-6*dt);
+    input.turn += (turnTarget - input.turn) * turnEase;
+
     var slowRadius = 14;
     var speedTarget = Math.max(0.32, Math.min(1, dist / slowRadius));
     // ease off turning sharpness at low speed so it doesn't spin in place
-    input.fwd = speedTarget;
+    var fwdEase = 1 - Math.exp(-4*dt);
+    input.fwd += (speedTarget - input.fwd) * fwdEase;
   }
 
   function getCompassTarget(){
@@ -2088,17 +3067,28 @@
   }
 
   function updateCart(dt){
+    // frame-rate independent exponential ease toward the target speed — using
+    // Math.exp(-rate*dt) instead of a linear dt*factor keeps the same feel
+    // regardless of frame rate (a stutter or a fast frame no longer changes
+    // how "snappy" the acceleration feels, which is what read as jerky before)
     var targetSpeed = input.fwd * MAX_SPEED;
     if (Math.abs(input.fwd) > 0.01){
-      speed += (targetSpeed - speed) * Math.min(1, ACCEL*dt/MAX_SPEED*4);
+      var accelEase = 1 - Math.exp(-ACCEL*0.45*dt);
+      speed += (targetSpeed - speed) * accelEase;
     } else {
       speed -= Math.sign(speed) * FRICTION * dt;
       if (Math.abs(speed) < 0.05) speed = 0;
     }
     speed = Math.max(-MAX_SPEED*0.5, Math.min(MAX_SPEED, speed));
 
+    // ease the actual heading rate itself (on top of the input.turn easing already
+    // done in updateAutopilot) so steering ramps in and out smoothly rather than
+    // tracking the raw target turn 1:1 every frame
     var speedFactor = Math.min(1, Math.abs(speed)/3);
-    heading += input.turn * TURN_RATE * dt * (0.3 + 0.7*speedFactor) * (speed<0?-1:1);
+    var targetTurnRate = input.turn * TURN_RATE * (0.3 + 0.7*speedFactor) * (speed<0?-1:1);
+    var turnRateEase = 1 - Math.exp(-8*dt);
+    appliedTurnRate += (targetTurnRate - appliedTurnRate) * turnRateEase;
+    heading += appliedTurnRate * dt;
 
     var vx = Math.sin(heading) * speed * dt;
     var vz = Math.cos(heading) * speed * dt;
@@ -2111,15 +3101,29 @@
     var nearest = nearestOnLoop(nx, nz);
     var laneNx = nearest.normal[0], laneNz = nearest.normal[1];
     var lateral = (nx-nearest.point[0])*laneNx + (nz-nearest.point[1])*laneNz; // + = outward, - = inward
-    // yellow dash spans ±0.2m from centerline; solid white edge line starts at 2.66m.
+    // yellow dash spans a fixed fraction of the road width from centerline; solid white
+    // edge line starts a fixed fraction in from the outer edge — both scale with ROAD_W.
     // The cart body is ~1.82m wide (0.91m half-width), so keep its CENTER far enough
     // from each line that its edges never touch either one.
     var CART_HALF_W = 0.91;
-    var LANE_MIN = 0.2 + CART_HALF_W + 0.05;   // clears the yellow dash
-    var LANE_MAX = 2.66 - CART_HALF_W - 0.05;  // clears the white edge line
+    var LANE_MIN = ROAD_W*0.03125 + CART_HALF_W + 0.05;   // clears the yellow dash
+    var LANE_MAX = ROAD_W*0.415625 - CART_HALF_W - 0.05;  // clears the white edge line
+    // continuously ease the whole lane band toward LANE_OFFSET (the true center between
+    // the yellow dash and the white edge line) rather than only correcting once the cart
+    // gets near one of the two lines — this is what keeps it riding the middle of the
+    // lane as a matter of course, with the hard clamp below only as a last-resort net
+    var centerEase = 1 - Math.exp(-2.2*dt);
+    var centerDelta = (LANE_OFFSET - lateral) * centerEase;
+    nx += laneNx*centerDelta;
+    nz += laneNz*centerDelta;
+    lateral += centerDelta;
     if (lateral < LANE_MIN || lateral > LANE_MAX){
       var clampedLateral = Math.max(LANE_MIN, Math.min(LANE_MAX, lateral));
-      var laneDelta = clampedLateral - lateral;
+      // ease back toward the lane over a few frames instead of snapping the
+      // whole correction in one frame — that instant teleport-back was the
+      // most visible source of jerkiness, especially coming out of curves
+      var correctionEase = 1 - Math.exp(-10*dt);
+      var laneDelta = (clampedLateral - lateral) * correctionEase;
       nx += laneNx*laneDelta;
       nz += laneNz*laneDelta;
     }
@@ -2134,6 +3138,13 @@
     cart.rotation.y = heading;
 
     wheels.forEach(function(w){ w.rotation.x -= speed*dt*2.2; });
+
+    // steer the front tires visually to match the current turn input, while the
+    // body itself keeps tracking the smoothed heading above — this keeps the car
+    // looking straight/parallel to the lane, with only the tires showing the turn
+    var MAX_STEER_ANGLE = 0.5; // radians, ~29°
+    var steerAngle = Math.max(-1, Math.min(1, input.turn)) * MAX_STEER_ANGLE;
+    frontWheelPivots.forEach(function(pivot){ pivot.rotation.y = steerAngle; });
 
     // proximity check
     var AUTO_OPEN_DIST = 3.5;
@@ -2169,6 +3180,7 @@
   var GARDEN_LOOK = new THREE.Vector3(0, 3, 0);
   var INTRO_FLIGHT_MS = 4200;
   var introFlightT0 = null;
+  var smoothLook = null; // eased look-at point, so the camera's gaze doesn't snap frame to frame
   function easeInOutCubic(x){ return x<0.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; }
   function updateCamera(dt){
     var forwardDir = new THREE.Vector3(Math.sin(heading), 0, Math.cos(heading));
@@ -2197,10 +3209,13 @@
         GARDEN_LOOK.z + (lookTarget.z - GARDEN_LOOK.z) * fe
       );
       if (ft >= 1) introFlightT0 = null;
+      smoothLook = lookTarget.clone();
       return;
     }
     camera.position.lerp(desired, Math.min(1, dt*4));
-    camera.lookAt(lookTarget);
+    if (smoothLook === null) smoothLook = lookTarget.clone();
+    smoothLook.lerp(lookTarget, Math.min(1, dt*5));
+    camera.lookAt(smoothLook);
   }
 
   // minimap
@@ -2285,9 +3300,7 @@
   // at FAQ, then starts driving — looping all the way around through Welcome Home and
   // back to FAQ again — see the autopilot lock below, which keeps the FAQ panel from
   // popping up until the cart actually arrives back there.
-  var introScreen = document.getElementById('introScreen');
   function startExperience(mode){
-    introScreen.classList.add('hidden');
     document.body.classList.add('started');
     camera.position.copy(GARDEN_VIEW);
     introFlightT0 = performance.now();
@@ -2298,17 +3311,15 @@
       if (gt) gt.textContent = "Sit back and relax — I'll drive you around the grounds.";
     }, INTRO_FLIGHT_MS + 200);
   }
-  document.getElementById('selfDriveBtn').addEventListener('click', function(){ startExperience('auto'); });
-
   // ───────────────────────────── day / night toggle ─────────────────────────────
   var dayPreset = {
-    top:0xE3A165, mid:0xF3C98B, bot:0x9FBE86, sunGlow:0xFFF3D6,
-    fogColor:0xE9B888, fogDensity:0.014,
-    hemiColor:0xFCE3B0, hemiGround:0x3C5A3F, hemiIntensity:0.85,
-    sunColor:0xFFDFA8, sunIntensity:1.2,
-    fillColor:0xBFD8FF, fillIntensity:0.3,
-    rimColor:0xFFEACB, rimIntensity:0.22,
-    exposure:1.12, lampIntensity:1.3
+    top:0x8FA3A6, mid:0xB9C7BE, bot:0x7E9484, sunGlow:0xEFF2E9,
+    fogColor:0xAEBAB4, fogDensity:0.019,
+    hemiColor:0xC3D0C8, hemiGround:0x2E4A34, hemiIntensity:0.9,
+    sunColor:0xEDF0E6, sunIntensity:1.0,
+    fillColor:0xA9C2CC, fillIntensity:0.32,
+    rimColor:0xD6E2D8, rimIntensity:0.18,
+    exposure:1.0, lampIntensity:1.3
   };
   var nightPreset = {
     top:0x060B18, mid:0x0E1A30, bot:0x131E1A, sunGlow:0xAFC4FF,
@@ -2356,7 +3367,7 @@
     requestAnimationFrame(animate);
     var dt = Math.min(0.05, clock.getDelta());
     if (driveMode === 'auto' && !topView){
-      updateAutopilot();
+      updateAutopilot(dt);
     }
     if (driveMode && !overlay.classList.contains('open') && !topView){
       updateCart(dt);
@@ -2367,6 +3378,7 @@
 
     var t = clock.elapsedTime;
     updatePedestrians(t, dt);
+    updateWildlife(t, dt);
     for (var i=0;i<LEAF_COUNT;i++){
       var d = leafData[i];
       d.y -= d.speed*dt*2;
@@ -2422,8 +3434,8 @@
       clearInterval(loadTimer);
       setTimeout(function(){
         document.getElementById('loadScreen').classList.add('hidden');
-        document.getElementById('introScreen').classList.remove('hidden');
         animate();
+        startExperience('auto');
       }, 260);
     }
     fill.style.width = pct + '%';
