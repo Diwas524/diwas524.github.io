@@ -88,25 +88,6 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 
 /* ── PRICING TABLE ── */
 .price-bg{background:var(--blush)}
-.price-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:44px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 44px rgba(30,58,47,.1)}
-.price-table th{background:var(--forest);color:#fff;text-align:left;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:18px 22px}
-.price-table th:last-child,.price-table td:last-child{text-align:right}
-.price-table td{padding:20px 22px;border-bottom:1px solid var(--border);font-size:.92rem;vertical-align:top}
-.price-table tr:last-child td{border-bottom:none}
-.price-table tr:nth-child(even) td{background:var(--mint-pale)}
-.pt-level{font-family:var(--fd);font-weight:700;color:var(--ink);font-size:1rem;display:block;margin-bottom:2px}
-.pt-desc{color:var(--sub);font-size:.82rem}
-.pt-rate{font-weight:700;color:var(--forest);white-space:nowrap}
-@media(max-width:700px){
-  .price-table{display:block;overflow-x:hidden}
-  .price-table thead{display:none}
-  .price-table,.price-table tbody,.price-table tr,.price-table td{display:block;width:100%}
-  .price-table tr{padding:18px 20px;border-bottom:1px solid var(--border)}
-  .price-table tr:nth-child(even){background:var(--mint-pale)}
-  .price-table td{padding:2px 0;border:none!important;background:none!important}
-  .price-table td:last-child{text-align:left;margin-top:8px}
-}
-
 .admit-card{margin-top:28px;background:var(--forest);border-radius:20px;padding:36px 40px;color:#fff;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
 .admit-fee{text-align:center;flex-shrink:0}
 .admit-fee .af-n{font-family:var(--fd);font-size:2.4rem;font-weight:700;color:var(--mint)}
@@ -138,9 +119,11 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;back
 .faq-grid{display:flex;flex-direction:column;gap:14px;margin-top:44px}
 .faq-item{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:border-color .2s}
 .faq-item.open{border-color:var(--moss)}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:22px 24px;cursor:pointer;user-select:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:22px 24px;cursor:pointer;user-select:none;flex-wrap:wrap}
+.faq-q-text{flex:1;min-width:200px}
 .faq-q-text strong{display:block;font-family:var(--fd);font-size:1.08rem;font-weight:700;color:var(--ink)}
 .faq-q-text span{font-size:.8rem;color:var(--sub)}
+.faq-rate{flex-shrink:0;background:var(--mint-pale);color:var(--forest);font-weight:700;font-size:.82rem;padding:7px 16px;border-radius:100px;white-space:nowrap}
 .faq-q .faq-icon{width:30px;height:30px;border-radius:50%;background:var(--mint-pale);color:var(--forest);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:transform .3s,background .2s}
 .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--forest);color:#fff}
 .faq-a{display:none;padding:0 24px 24px}
@@ -203,7 +186,7 @@ footer{background:var(--ink);padding:28px 24px}
   .hamburger{display:flex}
   .pg-head{padding:132px 20px 64px}
   .intro-grid{grid-template-columns:1fr;gap:32px}
-  .intro-grid img{height:260px}
+  .intro-grid img{height:260px;order:-1}
   .promise-inner{grid-template-columns:1fr 1fr}
   .inc-grid{grid-template-columns:1fr 1fr}
   .admit-card{padding:28px 24px}
@@ -282,25 +265,55 @@ footer{background:var(--ink);padding:28px 24px}
   </div>
 </section>
 
-<!-- PRICING TABLE -->
+<!-- PRICING + LEVELS OF CARE (combined) -->
 <section class="sec price-bg" id="pricing">
   <div class="wrap">
-    <div class="ew rv">Monthly Care Rates</div>
-    <h2 class="h2 rv">Levels of Care <i>at a Glance</i></h2>
-    <p class="lead rv">Estimated monthly rates by level of care. Your RN assessment will determine which level best fits your loved one's needs.</p>
+    <div class="ew rv">Monthly Care Rates &amp; What Each Level Includes</div>
+    <h2 class="h2 rv">Our <i>Levels of Care</i></h2>
+    <p class="lead rv">Estimated monthly rate by level, with what's typically included. Your RN assessment will determine which level best fits your loved one's needs — tap a level for details.</p>
 
-    <table class="price-table rv">
-      <thead>
-        <tr><th>Level of Care</th><th>Estimated Monthly Rate</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><span class="pt-level">Level 1 — Independent Living</span><span class="pt-desc">Largely independent, benefits from a supportive home environment</span></td><td class="pt-rate">Starting at $8,000/mo</td></tr>
-        <tr><td><span class="pt-level">Level 2 — Assisted Independence</span><span class="pt-desc">Occasional assistance and wellness oversight</span></td><td class="pt-rate">$8,500 – $9,000/mo</td></tr>
-        <tr><td><span class="pt-level">Level 3 — Daily Personal Assistance</span><span class="pt-desc">Routine hands-on assistance throughout the day</span></td><td class="pt-rate">$9,000 – $10,000/mo</td></tr>
-        <tr><td><span class="pt-level">Level 4 — Comprehensive Care</span><span class="pt-desc">Extensive physical, cognitive, or medical support</span></td><td class="pt-rate">$10,000 – $12,000/mo</td></tr>
-        <tr><td><span class="pt-level">Level 5 — Hospice &amp; Comfort Care</span><span class="pt-desc">Coordinated with a licensed hospice agency</span></td><td class="pt-rate">Individualized</td></tr>
-      </tbody>
-    </table>
+    <div class="faq-grid rv">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-text"><strong>Level 1 — Independent Living</strong><span>Largely independent, benefits from a supportive home environment</span></div>
+          <span class="faq-rate">Starting at $8,000/mo</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Designed for residents who are largely independent but benefit from living in a supportive home environment.</p><ul><li>Meals and snacks</li><li>Housekeeping</li><li>Laundry</li><li>Activities</li><li>Minimal caregiver assistance</li></ul></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-text"><strong>Level 2 — Assisted Independence</strong><span>Occasional assistance and wellness oversight</span></div>
+          <span class="faq-rate">$8,500 – $9,000/mo</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Residents remain fairly independent but benefit from occasional assistance and oversight.</p><ul><li>Medication management</li><li>Health monitoring</li><li>Occasional assistance with bathing or dressing</li><li>Mobility assistance</li><li>Wellness supervision</li></ul></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-text"><strong>Level 3 — Daily Personal Assistance</strong><span>Routine hands-on assistance throughout the day</span></div>
+          <span class="faq-rate">$9,000 – $10,000/mo</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Residents require routine hands-on assistance throughout the day.</p><ul><li>Bathing and dressing assistance</li><li>Grooming and hygiene</li><li>Medication administration</li><li>Meal assistance</li><li>Incontinence care</li><li>Memory cueing</li><li>Increased supervision</li></ul></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-text"><strong>Level 4 — Comprehensive Care</strong><span>Extensive physical, cognitive, or medical support</span></div>
+          <span class="faq-rate">$10,000 – $12,000/mo</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Residents require extensive physical, cognitive, or medical support.</p><ul><li>Total assistance with activities of daily living</li><li>Hoyer lift assistance</li><li>Advanced dementia care</li><li>Behavioral support &amp; wandering prevention</li><li>Diabetes management</li><li>Catheter and ostomy care</li><li>Feeding tubes &amp; wound care</li><li>Nurse Delegation services</li><li>Complex medication management</li><li>Frequent nighttime assistance</li></ul></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-text"><strong>Level 5 — Hospice &amp; Comfort Care</strong><span>Coordinated with a licensed hospice agency</span></div>
+          <span class="faq-rate">Individualized</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Residents nearing the end of life may continue living in the comfort of our home while receiving hospice services. Hospice services are provided through a licensed hospice agency, while our caregivers continue providing personalized daily care, comfort, and support in partnership with the hospice team.</p><p>Our team works closely with hospice providers, physicians, and families to ensure care remains focused on comfort, dignity, and quality of life.</p></div>
+      </div>
+    </div>
 
     <div class="admit-card rv">
       <div class="admit-fee">
@@ -362,53 +375,6 @@ footer{background:var(--ink);padding:28px 24px}
       <li>Behavioral support and redirection</li>
       <li>Overall caregiver time and supervision required</li>
     </ul>
-  </div>
-</section>
-
-<!-- LEVELS ACCORDION -->
-<section class="sec" id="levels">
-  <div class="wrap">
-    <div class="ew rv">The Details</div>
-    <h2 class="h2 rv">Our <i>Levels of Care</i></h2>
-    <p class="lead rv">Tap a level to see the kind of support it typically includes.</p>
-
-    <div class="faq-grid rv">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <div class="faq-q-text"><strong>Level 1 — Independent Living</strong><span>Starting at $8,000/month</span></div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a"><p>Designed for residents who are largely independent but benefit from living in a supportive home environment.</p><ul><li>Meals and snacks</li><li>Housekeeping</li><li>Laundry</li><li>Activities</li><li>Minimal caregiver assistance</li></ul></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <div class="faq-q-text"><strong>Level 2 — Assisted Independence</strong><span>$8,500 – $9,000/month</span></div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a"><p>Residents remain fairly independent but benefit from occasional assistance and oversight.</p><ul><li>Medication management</li><li>Health monitoring</li><li>Occasional assistance with bathing or dressing</li><li>Mobility assistance</li><li>Wellness supervision</li></ul></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <div class="faq-q-text"><strong>Level 3 — Daily Personal Assistance</strong><span>$9,000 – $10,000/month</span></div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a"><p>Residents require routine hands-on assistance throughout the day.</p><ul><li>Bathing and dressing assistance</li><li>Grooming and hygiene</li><li>Medication administration</li><li>Meal assistance</li><li>Incontinence care</li><li>Memory cueing</li><li>Increased supervision</li></ul></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <div class="faq-q-text"><strong>Level 4 — Comprehensive Care</strong><span>$10,000 – $12,000/month</span></div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a"><p>Residents require extensive physical, cognitive, or medical support.</p><ul><li>Total assistance with activities of daily living</li><li>Hoyer lift assistance</li><li>Advanced dementia care</li><li>Behavioral support &amp; wandering prevention</li><li>Diabetes management</li><li>Catheter and ostomy care</li><li>Feeding tubes &amp; wound care</li><li>Nurse Delegation services</li><li>Complex medication management</li><li>Frequent nighttime assistance</li></ul></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <div class="faq-q-text"><strong>Level 5 — Hospice &amp; Comfort Care</strong><span>Individualized based on care needs</span></div>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a"><p>Residents nearing the end of life may continue living in the comfort of our home while receiving hospice services. Hospice services are provided through a licensed hospice agency, while our caregivers continue providing personalized daily care, comfort, and support in partnership with the hospice team.</p><p>Our team works closely with hospice providers, physicians, and families to ensure care remains focused on comfort, dignity, and quality of life.</p></div>
-      </div>
-    </div>
   </div>
 </section>
 
